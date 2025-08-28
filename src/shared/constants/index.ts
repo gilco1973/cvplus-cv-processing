@@ -1,0 +1,53 @@
+/**
+ * Shared constants for CV processing
+ * 
+ * This module exports constants that are shared between frontend and backend:
+ * - Processing configuration
+ * - API endpoints
+ * - Default values
+ */
+
+// Processing configuration constants
+export const PROCESSING_CONFIG = {
+  MAX_FILE_SIZE: 10 * 1024 * 1024, // 10MB
+  MAX_CONTENT_LENGTH: 50000, // 50k characters
+  DEFAULT_TIMEOUT: 30000, // 30 seconds
+  RETRY_ATTEMPTS: 3,
+  SUPPORTED_FILE_TYPES: ['.pdf', '.doc', '.docx', '.txt'],
+  DEFAULT_AI_MODEL: 'claude-3-sonnet-20240229'
+} as const;
+
+// API endpoint constants
+export const API_ENDPOINTS = {
+  ANALYZE_CV: '/api/cv/analyze',
+  GENERATE_CV: '/api/cv/generate', 
+  PROCESS_CV: '/api/cv/process',
+  GET_CV_STATUS: '/api/cv/status',
+  UPDATE_CV: '/api/cv/update'
+} as const;
+
+// Error messages
+export const ERROR_MESSAGES = {
+  FILE_TOO_LARGE: 'File size exceeds the maximum limit',
+  UNSUPPORTED_FILE_TYPE: 'File type is not supported',
+  PROCESSING_FAILED: 'CV processing failed',
+  INVALID_CV_DATA: 'Invalid CV data provided',
+  NETWORK_ERROR: 'Network error occurred',
+  TIMEOUT_ERROR: 'Request timeout'
+} as const;
+
+// Default values
+export const DEFAULT_VALUES = {
+  PROCESSING_LANGUAGE: 'en',
+  CV_TEMPLATE: 'modern',
+  AI_TEMPERATURE: 0.7,
+  MAX_TOKENS: 4000
+} as const;
+
+// Feature flags
+export const FEATURE_FLAGS = {
+  ENABLE_AI_ENHANCEMENT: true,
+  ENABLE_BATCH_PROCESSING: true,
+  ENABLE_REAL_TIME_UPDATES: true,
+  ENABLE_ADVANCED_ANALYTICS: true
+} as const;
