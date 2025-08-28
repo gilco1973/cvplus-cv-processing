@@ -11,6 +11,8 @@
 // Export created hooks
 export * from './useCVUpload';
 export * from './useCVProcessing';
+export * from './useAchievementAnalysis';
+export * from './useCVComparison';
 
 // Hooks will be exported here as they are created/migrated
 // export * from './useCVAnalysis';

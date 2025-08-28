@@ -27,10 +27,10 @@
     "noUncheckedIndexedAccess": true,
     "jsx": "react-jsx",
     "paths": {
-      "@cvplus/core": ["../core/src"],
-      "@cvplus/core/*": ["../core/src/*"],
-      "@cvplus/auth": ["../auth/src"],
-      "@cvplus/auth/*": ["../auth/src/*"],
+      "@cvplus/core": ["../core/dist"],
+      "@cvplus/core/*": ["../core/dist/*"],
+      "@cvplus/auth": ["../auth/dist"],
+      "@cvplus/auth/*": ["../auth/dist/*"],
       "@/*": ["./src/*"]
     }
   },

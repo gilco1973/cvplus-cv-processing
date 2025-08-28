@@ -7,7 +7,9 @@
  * - AI-powered CV enhancement
  */
 
-// Core CV Processing Functions
+// =============================================================================
+// CORE CV PROCESSING FUNCTIONS
+// =============================================================================
 export * from './generateCV';
 export * from './processCV';
 export * from './analyzeCV';
@@ -15,10 +17,22 @@ export * from './generateCVPreview';
 export * from './initiateCVGeneration';
 export * from './enhancedAnalyzeCV';
 export * from './updateCVData';
+export * from './processCV.enhanced';
 
-// CV Optimization Functions
+// =============================================================================
+// CV OPTIMIZATION FUNCTIONS
+// =============================================================================
 export * from './atsOptimization';
 export * from './skillsVisualization';
 
-// Additional CV processing functions will be exported here
-// as they are migrated from the root functions directory
+// =============================================================================
+// CV ENHANCEMENT FUNCTIONS
+// =============================================================================
+export * from './achievementHighlighting';
+export * from './enrichCVWithExternalData';
+export * from './generateTimeline';
+export * from './industryOptimization';
+export * from './languageProficiency';
+export * from './personalityInsights';
+export * from './predictSuccess';
+export * from './regionalOptimization';
