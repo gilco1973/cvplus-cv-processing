@@ -54,8 +54,8 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.24.3",
-    "@cvplus/auth": "*",
-    "@cvplus/core": "*",
+    "@cvplus/auth": "file:../auth",
+    "@cvplus/core": "file:../core",
     "canvas": "^2.11.2",
     "firebase": "^10.12.0",
     "firebase-admin": "^12.1.0",
