@@ -36,3 +36,4 @@ export * from './languageProficiency';
 export * from './personalityInsights';
 export * from './predictSuccess';
 export * from './regionalOptimization';
+export * from './advancedPredictions';
