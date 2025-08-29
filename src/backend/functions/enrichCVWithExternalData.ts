@@ -115,7 +115,7 @@ export const enrichCVWithExternalData = onCall<EnrichCVRequest>(
       }
       
       // Orchestrate external data fetching
-      const result: OrchestrationResult = await externalDataOrchestrator.orchestrate(
+      const result: OrchestrationResult = await externalDataOrchestrator.orchestrateDataEnrichment(
         orchestrationRequest
       );
       

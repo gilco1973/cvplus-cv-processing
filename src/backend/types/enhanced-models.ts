@@ -5,8 +5,10 @@ import { CVData } from '@cvplus/core/types';
 
 export interface EnhancedJob {
   id: string;
+  userId: string;
   title: string;
   company: string;
+  industry?: string;
   startDate: Date;
   endDate?: Date;
   description: string;
@@ -17,6 +19,8 @@ export interface EnhancedJob {
   location?: string;
   remote?: boolean;
   contractType?: 'full-time' | 'part-time' | 'contract' | 'freelance' | 'internship';
+  parsedData?: CVData;
+  enhancedFeatures?: EnhancedFeatures;
 }
 
 export interface EnhancedCVData extends CVData {
@@ -45,6 +49,7 @@ export interface AchievementHighlighting {
   metrics?: AchievementMetrics;
   category: 'career' | 'education' | 'project' | 'certification' | 'volunteer';
   confidence: number;
+  significance: number;
   suggestions?: string[];
 }
 
@@ -54,6 +59,7 @@ export interface AchievementMetrics {
   relevanceScore: number;
   originalText: string;
   enhancedText: string;
+  length: number;
 }
 
 export interface SkillVisualization {
@@ -104,6 +110,7 @@ export interface IndustryTrend {
 
 export interface ATSOptimization {
   score: number;
+  overall: number;
   keywordMatches: KeywordMatch[];
   formatOptimization: FormatOptimization;
   recommendations: ATSRecommendation[];

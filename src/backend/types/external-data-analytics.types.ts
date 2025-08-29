@@ -545,6 +545,7 @@ export interface ResponseError {
 export interface ExternalDataUsageEvent {
   id: string;
   userId: string;
+  cvId?: string;
   timestamp: Date;
   dataSource: string;
   requestType: string;

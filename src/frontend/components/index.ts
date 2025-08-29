@@ -6,16 +6,40 @@
  * - CV editing components
  * - CV preview components
  * - Processing status components
+ * - CV analysis and display components
+ * - CV comparison and enhancement components
  */
 
-// Export existing components
+// Core CV Components
 export * from './CVPreview';
 export * from './FileUpload';
 export * from './CVUpload';
 export * from './ProcessingStatus';
+export * from './CVAnalysisResults';
+export * from './GeneratedCVDisplay';
+export * from './GeneratedCVDisplayLazy';
+export * from './LivePreview';
 
-// Components will be exported here as they are created/migrated
-// export * from './CVEditor';
+// CV Preview Module
+export * from './cv-preview';
 
-// Placeholder exports to prevent build errors
-export const CV_PROCESSING_COMPONENTS_VERSION = '1.0.0';
+// CV Comparison Module  
+export * from './cv-comparison';
+
+// Editors
+export * from './editors/QRCodeEditor';
+export * from './editors/SectionEditor';
+
+// Enhancement Components
+export * from './enhancement/CVPreviewPanel';
+export * from './enhancement/ProgressVisualization';
+
+// Display Components
+export * from './display/CVContentDisplay';
+
+// Common CV Components
+export * from './common/CVPreviewLayout';
+export * from './common/CVPreviewSkeleton';
+
+// Version identifier
+export const CV_PROCESSING_COMPONENTS_VERSION = '2.0.0';

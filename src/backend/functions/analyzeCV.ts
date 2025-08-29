@@ -6,7 +6,7 @@ export const analyzeCV = onCall(
   {
     timeoutSeconds: 120,
     memory: '512MiB',
-    cors: corsOptions,
+    cors: true,
     secrets: ['ANTHROPIC_API_KEY']
   },
   async (request) => {

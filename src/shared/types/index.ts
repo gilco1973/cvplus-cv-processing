@@ -51,7 +51,7 @@ export interface ProcessingResponse {
   success: boolean;
   data?: any;
   error?: string;
-  metadata?: ProcessingMetadata;
+  metadata?: BaseProcessingMetadata;
 }
 
 export interface ProcessingOptions {
@@ -61,7 +61,7 @@ export interface ProcessingOptions {
   customOptions?: Record<string, any>;
 }
 
-export interface ProcessingMetadata {
+export interface BaseProcessingMetadata {
   processingTime?: number;
   tokensUsed?: number;
   version?: string;

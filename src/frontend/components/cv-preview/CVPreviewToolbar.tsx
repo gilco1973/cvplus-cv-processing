@@ -1,187 +1,173 @@
-/**
- * CVPlus CV Processing - CV Preview Toolbar Component
- * 
- * Toolbar component for CV preview with actions like zoom, export, and edit modes.
- * 
- * @author Gil Klainert
- * @version 1.0.0
- */
-
 import React from 'react';
-import { cn } from '@cvplus/core/utils';
-
-// ============================================================================
-// TYPES
-// ============================================================================
-
-export interface CVPreviewToolbarProps {
-  onZoomIn: () => void;
-  onZoomOut: () => void;
-  onResetZoom: () => void;
-  onToggleEditMode: () => void;
-  onExport: () => void;
-  onPrint: () => void;
-  zoom: number;
-  isEditMode: boolean;
-  isExporting?: boolean;
-  className?: string;
-}
-
-// ============================================================================
-// COMPONENT
-// ============================================================================
+import { Edit3, Save, X, Eye, EyeOff } from 'lucide-react';
+import type { CVPreviewToolbarProps } from '../../types/cv-preview';
 
 export const CVPreviewToolbar: React.FC<CVPreviewToolbarProps> = ({
-  onZoomIn,
-  onZoomOut,
-  onResetZoom,
-  onToggleEditMode,
-  onExport,
-  onPrint,
-  zoom,
-  isEditMode,
-  isExporting = false,
-  className,
+  isEditing,
+  showFeaturePreviews,
+  autoSaveEnabled,
+  hasUnsavedChanges,
+  lastSaved,
+  selectedTemplate,
+  showPreviewBanner,
+  appliedImprovements,
+  onToggleEditing,
+  onToggleFeaturePreviews,
+  onToggleAutoSave,
+  onExpandAllSections,
+  onCollapseAllSections,
+  onCloseBanner
 }) => {
   return (
-    <div className={cn(
-      'flex items-center gap-2 p-2 bg-white border-b border-gray-200',
-      className
-    )}>
-      {/* Zoom Controls */}
-      <div className="flex items-center gap-1 border-r border-gray-200 pr-2">
-        <button
-          onClick={onZoomOut}
-          disabled={zoom <= 0.5}
-          className={cn(
-            'p-2 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed',
-            'focus:outline-none focus:ring-2 focus:ring-blue-500'
-          )}
-          title="Zoom Out"
-        >
-          <ZoomOutIcon className="w-4 h-4" />
-        </button>
+    <div className="cv-preview-toolbar-wrapper">
+      {/* Improvements Applied Banner */}
+      {appliedImprovements && showPreviewBanner && (
+        <div className="bg-gradient-to-r from-green-50 to-blue-50 border-l-4 border-green-400 p-4 mb-6 rounded-lg">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <div className="flex-shrink-0">
+                <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                  <span className="text-green-600 text-lg">✨</span>
+                </div>
+              </div>
+              <div>
+                <h3 className="text-sm font-medium text-green-900">
+                  AI Improvements Applied
+                </h3>
+                <p className="text-sm text-green-700">
+                  Your CV content has been enhanced with AI-powered improvements. The preview below shows your optimized CV.
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={onCloseBanner}
+              className="text-green-400 hover:text-green-600 transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Live Preview Section - Enhanced Design */}
+      <div className="bg-gradient-to-r from-slate-50 via-white to-slate-50 rounded-xl border border-slate-200/80 shadow-lg shadow-slate-500/5 mb-6">
+        {/* Header Section */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 pb-4 border-b border-slate-100">
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/20">
+                <Eye className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-slate-800 flex items-center gap-3">
+                  Live Preview
+                  {hasUnsavedChanges && (
+                    <span className="inline-flex items-center gap-1.5 text-xs bg-gradient-to-r from-orange-400/20 to-amber-400/20 text-orange-600 px-3 py-1.5 rounded-full border border-orange-200 animate-pulse font-medium">
+                      <div className="w-1.5 h-1.5 bg-orange-500 rounded-full animate-ping" />
+                      {autoSaveEnabled ? 'Auto-saving...' : 'Unsaved'}
+                    </span>
+                  )}
+                  {lastSaved && !hasUnsavedChanges && (
+                    <span className="inline-flex items-center gap-1.5 text-xs bg-gradient-to-r from-emerald-400/20 to-green-400/20 text-emerald-600 px-3 py-1.5 rounded-full border border-emerald-200 font-medium">
+                      <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />
+                      Saved {lastSaved.toLocaleTimeString()}
+                    </span>
+                  )}
+                </h3>
+                <p className="text-sm text-slate-500 mt-0.5">Interactive preview of your enhanced CV</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="flex items-center gap-3">
+            <span className="inline-flex items-center gap-2 text-sm bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-700 px-4 py-2 rounded-lg border border-blue-200/60 font-medium shadow-sm">
+              <div className="w-2 h-2 bg-blue-500 rounded-full" />
+              {selectedTemplate.charAt(0).toUpperCase() + selectedTemplate.slice(1)} Template
+            </span>
+          </div>
+        </div>
         
-        <button
-          onClick={onResetZoom}
-          className={cn(
-            'px-3 py-1 text-sm font-mono bg-gray-50 rounded hover:bg-gray-100',
-            'focus:outline-none focus:ring-2 focus:ring-blue-500'
-          )}
-          title="Reset Zoom"
-        >
-          {Math.round(zoom * 100)}%
-        </button>
-        
-        <button
-          onClick={onZoomIn}
-          disabled={zoom >= 2}
-          className={cn(
-            'p-2 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed',
-            'focus:outline-none focus:ring-2 focus:ring-blue-500'
-          )}
-          title="Zoom In"
-        >
-          <ZoomInIcon className="w-4 h-4" />
-        </button>
-      </div>
-
-      {/* Edit Mode Toggle */}
-      <button
-        onClick={onToggleEditMode}
-        className={cn(
-          'flex items-center gap-2 px-3 py-2 rounded text-sm font-medium',
-          'focus:outline-none focus:ring-2 focus:ring-blue-500',
-          isEditMode
-            ? 'bg-blue-100 text-blue-700 hover:bg-blue-200'
-            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-        )}
-      >
-        <EditIcon className="w-4 h-4" />
-        {isEditMode ? 'Exit Edit' : 'Edit Mode'}
-      </button>
-
-      {/* Spacer */}
-      <div className="flex-1" />
-
-      {/* Action Buttons */}
-      <div className="flex items-center gap-2">
-        <button
-          onClick={onPrint}
-          className={cn(
-            'flex items-center gap-2 px-3 py-2 text-sm font-medium',
-            'bg-gray-100 text-gray-700 rounded hover:bg-gray-200',
-            'focus:outline-none focus:ring-2 focus:ring-blue-500'
-          )}
-        >
-          <PrintIcon className="w-4 h-4" />
-          Print
-        </button>
-
-        <button
-          onClick={onExport}
-          disabled={isExporting}
-          className={cn(
-            'flex items-center gap-2 px-3 py-2 text-sm font-medium',
-            'bg-blue-600 text-white rounded hover:bg-blue-700',
-            'focus:outline-none focus:ring-2 focus:ring-blue-500',
-            'disabled:opacity-50 disabled:cursor-not-allowed'
-          )}
-        >
-          {isExporting ? (
-            <>
-              <LoadingIcon className="w-4 h-4 animate-spin" />
-              Exporting...
-            </>
-          ) : (
-            <>
-              <ExportIcon className="w-4 h-4" />
-              Export
-            </>
-          )}
-        </button>
+        {/* Controls Section */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-6 pt-4">
+          {/* Secondary Controls Group */}
+          <div className="flex items-center gap-3">
+            {/* Auto-save Toggle */}
+            <button
+              onClick={onToggleAutoSave}
+              className={`inline-flex items-center gap-2 px-4 h-12 rounded-lg text-sm font-medium transition-all duration-200 hover:scale-105 ${
+                autoSaveEnabled
+                  ? 'bg-gradient-to-r from-emerald-500/20 to-green-500/20 text-emerald-700 border border-emerald-300/50 shadow-sm hover:shadow-emerald-500/20'
+                  : 'bg-slate-100 text-slate-600 border border-slate-200 hover:bg-slate-200 hover:shadow-sm'
+              }`}
+              title={autoSaveEnabled ? 'Auto-save enabled' : 'Auto-save disabled'}
+            >
+              <div className={`w-2.5 h-2.5 rounded-full transition-colors ${
+                autoSaveEnabled ? 'bg-emerald-500 shadow-sm shadow-emerald-500/50' : 'bg-slate-400'
+              }`} />
+              Auto-save
+            </button>
+            
+            {/* Section Controls */}
+            <div className="flex items-center h-12 bg-slate-100 rounded-lg border border-slate-200 overflow-hidden">
+              <button
+                onClick={onExpandAllSections}
+                className="flex items-center gap-1.5 px-4 h-full text-sm font-medium text-slate-600 hover:bg-slate-200 hover:text-slate-800 transition-all"
+                title="Expand all sections"
+              >
+                <span className="text-xs">▼</span>
+                All
+              </button>
+              <div className="w-px h-6 bg-slate-300" />
+              <button
+                onClick={onCollapseAllSections}
+                className="flex items-center gap-1.5 px-4 h-full text-sm font-medium text-slate-600 hover:bg-slate-200 hover:text-slate-800 transition-all"
+                title="Collapse all sections"
+              >
+                <span className="text-xs">▶</span>
+                All
+              </button>
+            </div>
+            
+            {/* Preview Toggle */}
+            <button
+              onClick={onToggleFeaturePreviews}
+              className={`inline-flex items-center gap-2 px-4 h-12 rounded-lg text-sm font-medium transition-all duration-200 hover:scale-105 ${
+                showFeaturePreviews
+                  ? 'bg-gradient-to-r from-cyan-500 to-blue-500 text-white shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/40'
+                  : 'bg-slate-200 text-slate-700 hover:bg-slate-300 hover:shadow-sm border border-slate-300'
+              }`}
+            >
+              {showFeaturePreviews ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+              {showFeaturePreviews ? 'Hide' : 'Show'} Previews
+            </button>
+          </div>
+          
+          {/* Primary Action - Edit CV Button */}
+          <button
+            onClick={onToggleEditing}
+            className={`inline-flex items-center gap-2.5 px-6 h-12 rounded-xl text-base font-semibold transition-all duration-200 hover:scale-105 transform ${
+              isEditing
+                ? 'bg-gradient-to-r from-emerald-500 to-green-500 text-white shadow-xl shadow-emerald-500/30 hover:shadow-emerald-500/40 hover:from-emerald-600 hover:to-green-600'
+                : 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow-xl shadow-blue-500/30 hover:shadow-blue-500/40 hover:from-blue-700 hover:to-cyan-700'
+            }`}
+          >
+            <div className="relative">
+              {isEditing ? (
+                <>
+                  <Save className="w-5 h-5" />
+                  <div className="absolute inset-0 bg-white/20 rounded-full animate-ping" />
+                </>
+              ) : (
+                <Edit3 className="w-5 h-5" />
+              )}
+            </div>
+            {isEditing ? 'Save Changes' : 'Edit CV'}
+            {!isEditing && (
+              <div className="w-2 h-2 bg-white/30 rounded-full animate-pulse" />
+            )}
+          </button>
+        </div>
       </div>
     </div>
   );
 };
-
-// ============================================================================
-// ICONS
-// ============================================================================
-
-const ZoomInIcon: React.FC<{ className?: string }> = ({ className }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-  </svg>
-);
-
-const ZoomOutIcon: React.FC<{ className?: string }> = ({ className }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM13 10H7" />
-  </svg>
-);
-
-const EditIcon: React.FC<{ className?: string }> = ({ className }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-  </svg>
-);
-
-const PrintIcon: React.FC<{ className?: string }> = ({ className }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
-  </svg>
-);
-
-const ExportIcon: React.FC<{ className?: string }> = ({ className }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-  </svg>
-);
-
-const LoadingIcon: React.FC<{ className?: string }> = ({ className }) => (
-  <svg className={className} fill="none" viewBox="0 0 24 24">
-    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-    <path className="opacity-75" fill="currentColor" d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-  </svg>
-);

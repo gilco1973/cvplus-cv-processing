@@ -152,6 +152,7 @@ export const externalDataService = new ExternalDataServiceImpl();
 export interface OrchestrationRequest {
   userId: string;
   cvData: any;
+  cvId?: string;
   dataTypes: string[];
   priority?: 'low' | 'medium' | 'high';
   maxCost?: number;
@@ -159,32 +160,41 @@ export interface OrchestrationRequest {
 
 export interface OrchestrationResult {
   success: boolean;
+  status: 'success' | 'error' | 'partial';
   data: any;
   cost: number;
   sources: string[];
   errors?: string[];
   warnings?: string[];
+  fetchDuration: number;
 }
 
 export class ExternalDataOrchestrator {
   async orchestrateDataEnrichment(request: OrchestrationRequest): Promise<OrchestrationResult> {
+    const startTime = Date.now();
     try {
       const response = await externalDataService.enrichCV(request.userId, request.cvData);
+      const fetchDuration = Date.now() - startTime;
       
       return {
         success: response.status === 'success',
+        status: response.status as 'success' | 'error' | 'partial',
         data: response.data,
         cost: response.metadata?.cost || 0,
         sources: response.metadata?.sources || [],
-        errors: response.errors?.map(e => e.message) || []
+        errors: response.errors?.map(e => e.message) || [],
+        fetchDuration
       };
     } catch (error) {
+      const fetchDuration = Date.now() - startTime;
       return {
         success: false,
+        status: 'error',
         data: null,
         cost: 0,
         sources: [],
-        errors: [error instanceof Error ? error.message : 'Unknown error']
+        errors: [error instanceof Error ? error.message : 'Unknown error'],
+        fetchDuration
       };
     }
   }
