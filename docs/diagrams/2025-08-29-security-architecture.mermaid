@@ -1,0 +1,77 @@
+graph TB
+    subgraph "Current Security Issues"
+        A1[API Keys in Environment Variables]
+        A2[Plain Text Logging]
+        A3[No Input Validation]
+        A4[Extreme Timeouts 540s]
+        A5[Excessive Memory 2GiB]
+        A6[Inconsistent Rate Limiting]
+        
+        A1 --> |Exposes| SEC1[Security Breach Risk]
+        A2 --> |Leaks| SEC1
+        A3 --> |Enables| SEC2[Code Injection Risk]
+        A4 --> |Causes| PERF1[Resource Exhaustion]
+        A5 --> |Causes| PERF1
+        A6 --> |Enables| SEC3[DoS Attack Risk]
+    end
+    
+    subgraph "Target Security Architecture"
+        B1[Firebase Secrets Manager]
+        B2[Secure Logging Wrapper]
+        B3[Input Validation Middleware]
+        B4[Standardized Timeouts]
+        B5[Optimized Memory Allocation]
+        B6[Unified Rate Limiting]
+        
+        B1 --> |Secures| SEC4[API Key Protection]
+        B2 --> |Prevents| SEC5[Information Disclosure]
+        B3 --> |Blocks| SEC6[Malicious Input]
+        B4 --> |Ensures| PERF2[Predictable Performance]
+        B5 --> |Optimizes| PERF3[Resource Efficiency]
+        B6 --> |Prevents| SEC7[Abuse Protection]
+    end
+    
+    subgraph "Implementation Phases"
+        PHASE1[Phase 1: Security Hardening]
+        PHASE2[Phase 2: Configuration Normalization]
+        
+        PHASE1 --> |6-8 hours| TASK1[API Key Security]
+        PHASE1 --> |2 hours| TASK2[Input Validation]
+        PHASE1 --> |2 hours| TASK3[Error Boundaries]
+        
+        PHASE2 --> |2 hours| TASK4[Timeout Standardization]
+        PHASE2 --> |2 hours| TASK5[Memory Optimization]
+        PHASE2 --> |2 hours| TASK6[Rate Limiting]
+    end
+    
+    subgraph "Validation Gates"
+        GATE1[Security Validation]
+        GATE2[Performance Validation]
+        GATE3[Configuration Validation]
+        
+        GATE1 --> |Pass| DEPLOY[Production Ready]
+        GATE2 --> |Pass| DEPLOY
+        GATE3 --> |Pass| DEPLOY
+        
+        GATE1 --> |Fail| ROLLBACK[Automatic Rollback]
+        GATE2 --> |Fail| ROLLBACK
+        GATE3 --> |Fail| ROLLBACK
+    end
+    
+    subgraph "Monitoring & Alerting"
+        MON1[Security Monitoring]
+        MON2[Performance Monitoring]
+        MON3[Cost Monitoring]
+        
+        MON1 --> |Detects| ALERT1[Security Incidents]
+        MON2 --> |Tracks| ALERT2[Performance Issues]
+        MON3 --> |Monitors| ALERT3[Cost Overruns]
+    end
+    
+    classDef critical fill:#ff9999,stroke:#ff0000,stroke-width:3px
+    classDef secure fill:#99ff99,stroke:#00ff00,stroke-width:2px
+    classDef performance fill:#9999ff,stroke:#0000ff,stroke-width:2px
+    
+    class A1,A2,A3,A4,A5,A6,SEC1,SEC2,SEC3,PERF1 critical
+    class B1,B2,B3,B6,SEC4,SEC5,SEC6,SEC7 secure
+    class B4,B5,PERF2,PERF3 performance

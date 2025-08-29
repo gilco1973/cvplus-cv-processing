@@ -1,0 +1,140 @@
+graph TB
+    subgraph "Current Architecture Issues"
+        ISSUE1[Tight Coupling<br/>Hard dependencies everywhere]
+        ISSUE2[Missing Service Layer<br/>Business logic scattered]
+        ISSUE3[No Dependency Injection<br/>Impossible to unit test]
+        ISSUE4[Inconsistent Error Handling<br/>Unpredictable behavior]
+        ISSUE5[Poor Separation of Concerns<br/>Mixed responsibilities]
+        
+        ISSUE1 --> |Creates| PROB1[Testing Difficulties]
+        ISSUE2 --> |Creates| PROB2[Code Duplication]
+        ISSUE3 --> |Creates| PROB3[Maintenance Nightmare]
+        ISSUE4 --> |Creates| PROB4[User Experience Issues]
+        ISSUE5 --> |Creates| PROB5[Development Slowdown]
+    end
+    
+    subgraph "Target Clean Architecture"
+        LAYER1[Presentation Layer<br/>React Components, API Routes, Firebase Functions]
+        LAYER2[Application Layer<br/>Use Cases, Commands, Queries]
+        LAYER3[Domain Layer<br/>Entities, Domain Services, Repository Interfaces]
+        LAYER4[Infrastructure Layer<br/>Firebase Repository, Anthropic Client, External APIs]
+        
+        LAYER1 --> |Depends on| LAYER2
+        LAYER2 --> |Depends on| LAYER3
+        LAYER4 --> |Implements| LAYER3
+        LAYER1 -.-> |Can use| LAYER4
+    end
+    
+    subgraph "Dependency Injection System"
+        CONTAINER[IoC Container<br/>Service Registration & Resolution]
+        TOKENS[Service Tokens<br/>Symbolic identifiers]
+        FACTORY[Service Factories<br/>Creation logic]
+        SCOPE[Service Scopes<br/>Singleton vs Transient]
+        
+        CONTAINER --> |Uses| TOKENS
+        CONTAINER --> |Executes| FACTORY
+        CONTAINER --> |Manages| SCOPE
+        
+        TOKENS --> |Identifies| SERVICE1[AI Services]
+        TOKENS --> |Identifies| SERVICE2[Storage Services]
+        TOKENS --> |Identifies| SERVICE3[Validation Services]
+    end
+    
+    subgraph "Service Abstraction Layer"
+        BASE[BaseService<br/>Common functionality]
+        CVPROC[CV Processing Service<br/>Core business logic]
+        ANALYSIS[Analysis Service<br/>AI-powered analysis]
+        VALID[Validation Service<br/>Input validation]
+        
+        CVPROC --> |Extends| BASE
+        ANALYSIS --> |Extends| BASE
+        VALID --> |Extends| BASE
+        
+        BASE --> |Provides| ERRORH[Error Handling]
+        BASE --> |Provides| LOGGING[Logging]
+        BASE --> |Provides| METRICS[Metrics Collection]
+    end
+    
+    subgraph "Domain Model"
+        ENTITY1[CV Entity<br/>Core domain object]
+        ENTITY2[Analysis Result Entity<br/>Processing output]
+        VO1[CV Content Value Object<br/>Immutable content]
+        VO2[CV Metadata Value Object<br/>Metadata info]
+        
+        ENTITY1 --> |Contains| VO1
+        ENTITY1 --> |Contains| VO2
+        ENTITY2 --> |References| ENTITY1
+        
+        REPO1[ICVRepository<br/>Persistence interface]
+        REPO2[IAnalysisRepository<br/>Analysis storage interface]
+        
+        ENTITY1 --> |Persisted by| REPO1
+        ENTITY2 --> |Persisted by| REPO2
+    end
+    
+    subgraph "Event-Driven Architecture"
+        EVENTS[Domain Events<br/>CVProcessingStarted, CVProcessingCompleted]
+        EVENTBUS[Event Bus<br/>Publisher/Subscriber pattern]
+        HANDLERS[Event Handlers<br/>Notification, Analytics, Audit]
+        
+        EVENTS --> |Published to| EVENTBUS
+        EVENTBUS --> |Delivers to| HANDLERS
+        
+        HANDLERS --> |Triggers| ACTION1[User Notifications]
+        HANDLERS --> |Triggers| ACTION2[Analytics Tracking]
+        HANDLERS --> |Triggers| ACTION3[Audit Logging]
+    end
+    
+    subgraph "Implementation Phases"
+        PHASE1[Phase 1: Foundation<br/>Days 8-10<br/>IoC Container + Domain Model]
+        PHASE2[Phase 2: Application Layer<br/>Days 10-12<br/>Use Cases + Events]
+        PHASE3[Phase 3: Infrastructure<br/>Days 13-14<br/>Repositories + External Services]
+        
+        PHASE1 --> |Enables| RES1[Dependency Injection Working]
+        PHASE1 --> |Enables| RES2[Domain Entities Defined]
+        
+        PHASE2 --> |Delivers| RES3[CQRS Pattern Implemented]
+        PHASE2 --> |Delivers| RES4[Event-Driven Architecture]
+        
+        PHASE3 --> |Provides| RES5[Repository Pattern]
+        PHASE3 --> |Provides| RES6[Circuit Breaker Resilience]
+    end
+    
+    subgraph "Quality Improvements"
+        BENEFIT1[90% Testing Improvement<br/>Easy to mock dependencies]
+        BENEFIT2[60% Maintenance Reduction<br/>Loose coupling achieved]
+        BENEFIT3[40% Development Speed<br/>Clear separation of concerns]
+        BENEFIT4[Horizontal Scalability<br/>Architecture supports scaling]
+        
+        RES5 --> |Enables| BENEFIT1
+        RES4 --> |Enables| BENEFIT2
+        RES3 --> |Enables| BENEFIT3
+        RES6 --> |Enables| BENEFIT4
+    end
+    
+    subgraph "Validation Gates"
+        GATE1[Architecture Quality<br/>Clean dependency graph]
+        GATE2[Development Velocity<br/>40% improvement]
+        GATE3[Code Quality<br/>Reduced complexity]
+        GATE4[System Reliability<br/>70% fewer bugs]
+        
+        GATE1 --> |Passes| SUCCESS[Modern Architecture Achieved]
+        GATE2 --> |Passes| SUCCESS
+        GATE3 --> |Passes| SUCCESS
+        GATE4 --> |Passes| SUCCESS
+        
+        GATE1 --> |Fails| ROLLBACK[Incremental Rollback]
+        GATE2 --> |Fails| ROLLBACK
+        GATE3 --> |Fails| ROLLBACK
+        GATE4 --> |Fails| ROLLBACK
+    end
+    
+    classDef issue fill:#ff9999,stroke:#ff0000,stroke-width:3px
+    classDef architecture fill:#99ff99,stroke:#00ff00,stroke-width:2px
+    classDef process fill:#9999ff,stroke:#0000ff,stroke-width:2px
+    classDef benefit fill:#ffff99,stroke:#ffaa00,stroke-width:2px
+    
+    class ISSUE1,ISSUE2,ISSUE3,ISSUE4,ISSUE5,PROB1,PROB2,PROB3,PROB4,PROB5 issue
+    class LAYER1,LAYER2,LAYER3,LAYER4,CONTAINER,BASE,ENTITY1,ENTITY2,SUCCESS architecture
+    class PHASE1,PHASE2,PHASE3,EVENTBUS,HANDLERS process
+    class BENEFIT1,BENEFIT2,BENEFIT3,BENEFIT4 benefit

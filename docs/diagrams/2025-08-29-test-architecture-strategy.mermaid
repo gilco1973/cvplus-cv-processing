@@ -1,0 +1,134 @@
+graph TB
+    subgraph "Current Test Coverage Crisis"
+        CRISIS1[3/92 Files Tested<br/>3.3% Coverage]
+        CRISIS2[0/18 Firebase Functions<br/>0% Backend Coverage]
+        CRISIS3[0/10 Service Classes<br/>0% Business Logic Coverage]
+        CRISIS4[0/2 Security Middleware<br/>0% Security Coverage]
+        CRISIS5[2/40 Components<br/>5% Frontend Coverage]
+        
+        CRISIS1 --> |Creates| RISK1[Production Risk]
+        CRISIS2 --> |Creates| RISK2[Function Failures]
+        CRISIS3 --> |Creates| RISK3[Business Logic Bugs]
+        CRISIS4 --> |Creates| RISK4[Security Vulnerabilities]
+        CRISIS5 --> |Creates| RISK5[UI Regression]
+    end
+    
+    subgraph "Target Test Architecture"
+        ARCH1[Test Infrastructure Layer]
+        ARCH2[Unit Test Layer]
+        ARCH3[Integration Test Layer]
+        ARCH4[E2E Test Layer]
+        
+        ARCH1 --> |Provides| INFRA1[Firebase Emulator Setup]
+        ARCH1 --> |Provides| INFRA2[AI API Mocking]
+        ARCH1 --> |Provides| INFRA3[Test Data Factory]
+        ARCH1 --> |Provides| INFRA4[Common Utilities]
+        
+        ARCH2 --> |Tests| UNIT1[Individual Functions]
+        ARCH2 --> |Tests| UNIT2[Service Classes]
+        ARCH2 --> |Tests| UNIT3[Components]
+        ARCH2 --> |Tests| UNIT4[Hooks & Utils]
+        
+        ARCH3 --> |Validates| INT1[API Workflows]
+        ARCH3 --> |Validates| INT2[Service Integration]
+        ARCH3 --> |Validates| INT3[Database Operations]
+        
+        ARCH4 --> |Confirms| E2E1[Complete User Journeys]
+        ARCH4 --> |Confirms| E2E2[Cross-System Integration]
+    end
+    
+    subgraph "Implementation Phases"
+        PHASE1[Phase 1: Critical Backend<br/>Days 1-3<br/>Functions + Services + Middleware]
+        PHASE2[Phase 2: Security Testing<br/>Day 4<br/>Auth + Premium Guards]
+        PHASE3[Phase 3: Frontend Testing<br/>Days 5-6<br/>Components + Hooks]
+        PHASE4[Phase 4: Integration<br/>Day 7<br/>E2E + Performance]
+        
+        PHASE1 --> |Achieves| COV1[85% Function Coverage]
+        PHASE1 --> |Achieves| COV2[90% Service Coverage]
+        PHASE1 --> |Achieves| COV3[95% Middleware Coverage]
+        
+        PHASE2 --> |Ensures| SEC1[Security Validation]
+        PHASE2 --> |Ensures| SEC2[Auth Flow Testing]
+        
+        PHASE3 --> |Provides| FE1[80% Component Coverage]
+        PHASE3 --> |Provides| FE2[Hook Testing]
+        
+        PHASE4 --> |Delivers| FINAL[75% Overall Coverage]
+    end
+    
+    subgraph "Test Types & Strategies"
+        UT[Unit Tests]
+        IT[Integration Tests]
+        CT[Component Tests]
+        PT[Performance Tests]
+        ST[Security Tests]
+        
+        UT --> |Covers| UT1[Pure Functions<br/>Business Logic<br/>Edge Cases<br/>Error Handling]
+        
+        IT --> |Covers| IT1[API Endpoints<br/>Database Flows<br/>External Services<br/>Async Operations]
+        
+        CT --> |Covers| CT1[User Interactions<br/>State Changes<br/>Prop Validation<br/>Accessibility]
+        
+        PT --> |Covers| PT1[Load Testing<br/>Concurrent Requests<br/>Memory Usage<br/>Response Times]
+        
+        ST --> |Covers| ST1[Auth Validation<br/>Input Sanitization<br/>Access Control<br/>Data Protection]
+    end
+    
+    subgraph "Quality Gates"
+        GATE1[Coverage Gate: 75% overall]
+        GATE2[Performance Gate: <30s runtime]
+        GATE3[Reliability Gate: <1% flake rate]
+        GATE4[Security Gate: All paths tested]
+        
+        GATE1 --> |Passes| DEPLOY[Production Ready]
+        GATE2 --> |Passes| DEPLOY
+        GATE3 --> |Passes| DEPLOY
+        GATE4 --> |Passes| DEPLOY
+        
+        GATE1 --> |Fails| BLOCK[Deployment Blocked]
+        GATE2 --> |Fails| BLOCK
+        GATE3 --> |Fails| BLOCK
+        GATE4 --> |Fails| BLOCK
+    end
+    
+    subgraph "Test Infrastructure Tools"
+        TOOL1[Jest/Vitest - Test Runner]
+        TOOL2[Firebase Emulator Suite]
+        TOOL3[React Testing Library]
+        TOOL4[Supertest - API Testing]
+        TOOL5[Mock Service Worker]
+        TOOL6[Playwright - E2E]
+        
+        TOOL1 --> |Enables| FEAT1[Fast Test Execution]
+        TOOL2 --> |Enables| FEAT2[Local Firebase Testing]
+        TOOL3 --> |Enables| FEAT3[User-Centric Testing]
+        TOOL4 --> |Enables| FEAT4[API Integration Testing]
+        TOOL5 --> |Enables| FEAT5[External Service Mocking]
+        TOOL6 --> |Enables| FEAT6[End-to-End Validation]
+    end
+    
+    subgraph "Success Metrics"
+        MET1[85% Backend Function Coverage]
+        MET2[90% Service Coverage]
+        MET3[80% Component Coverage]
+        MET4[75% Overall Coverage]
+        MET5[Zero Critical Production Bugs]
+        MET6[<1% Test Flake Rate]
+        
+        DEPLOY --> MET1
+        DEPLOY --> MET2
+        DEPLOY --> MET3
+        DEPLOY --> MET4
+        DEPLOY --> MET5
+        DEPLOY --> MET6
+    end
+    
+    classDef crisis fill:#ff9999,stroke:#ff0000,stroke-width:3px
+    classDef architecture fill:#99ff99,stroke:#00ff00,stroke-width:2px
+    classDef process fill:#9999ff,stroke:#0000ff,stroke-width:2px
+    classDef success fill:#ffff99,stroke:#ffaa00,stroke-width:2px
+    
+    class CRISIS1,CRISIS2,CRISIS3,CRISIS4,CRISIS5,RISK1,RISK2,RISK3,RISK4,RISK5,BLOCK crisis
+    class ARCH1,ARCH2,ARCH3,ARCH4,INFRA1,INFRA2,INFRA3,INFRA4,DEPLOY architecture
+    class PHASE1,PHASE2,PHASE3,PHASE4,UT,IT,CT,PT,ST process
+    class MET1,MET2,MET3,MET4,MET5,MET6,FEAT1,FEAT2,FEAT3,FEAT4,FEAT5,FEAT6 success

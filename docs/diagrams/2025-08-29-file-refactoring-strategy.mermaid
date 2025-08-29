@@ -1,0 +1,91 @@
+graph TB
+    subgraph "Current State - File Size Violations"
+        A1[CVAnalysisResults.tsx<br/>1,280 lines - 540% over]
+        A2[advancedPredictions.ts<br/>693 lines - 247% over]
+        A3[regionalOptimization.ts<br/>684 lines - 242% over]
+        A4[EditablePlaceholder.test.tsx<br/>585 lines - 193% over]
+        A5[34 Total Files >200 lines]
+        
+        A1 --> |Monolithic| PROB1[Unmaintainable Code]
+        A2 --> |Mixed Concerns| PROB2[Poor Modularity]
+        A3 --> |Tight Coupling| PROB3[Hard to Test]
+        A4 --> |Oversized Tests| PROB4[Slow Feedback]
+        A5 --> |Technical Debt| PROB5[Development Velocity Loss]
+    end
+    
+    subgraph "Refactoring Strategy - Modular Architecture"
+        B1[Component Decomposition<br/>8 focused components<br/>~150 lines each]
+        B2[Algorithm Separation<br/>4 prediction modules<br/>~180 lines each]
+        B3[Geographic Modules<br/>4 regional modules<br/>~190 lines each]
+        B4[Test Suite Refactoring<br/>Organized test categories<br/>~100 lines each]
+        
+        B1 --> |Creates| SOL1[Maintainable Components]
+        B2 --> |Enables| SOL2[Algorithm Modularity]
+        B3 --> |Provides| SOL3[Regional Flexibility]
+        B4 --> |Ensures| SOL4[Fast, Focused Tests]
+    end
+    
+    subgraph "Refactoring Patterns"
+        PATTERN1[React Component Decomposition]
+        PATTERN2[Service Layer Separation]
+        PATTERN3[Algorithm Extraction]
+        PATTERN4[Test Suite Organization]
+        
+        PATTERN1 --> |Implements| COMP[Custom Hooks + Sub-components]
+        PATTERN2 --> |Creates| SERV[Domain Services + Base Classes]
+        PATTERN3 --> |Produces| ALG[Algorithm Registry + Interfaces]
+        PATTERN4 --> |Generates| TEST[Unit + Integration + E2E]
+    end
+    
+    subgraph "Implementation Phases"
+        PHASE1[Phase 1: Extreme Violations<br/>Days 1-3<br/>1,280+693+684 = 2,657 lines]
+        PHASE2[Phase 2: Severe Violations<br/>Days 4-5<br/>300-500 line files]
+        PHASE3[Phase 3: Moderate Violations<br/>Days 6-7<br/>200-300 line files]
+        
+        PHASE1 --> |Refactors| RESULT1[Top 3 files compliant]
+        PHASE2 --> |Addresses| RESULT2[All severe violations fixed]
+        PHASE3 --> |Completes| RESULT3[100% file size compliance]
+    end
+    
+    subgraph "Quality Gates"
+        GATE1[File Size: All ≤200 lines]
+        GATE2[Complexity: Max 10 per function]
+        GATE3[Duplication: <5% code duplication]
+        GATE4[Coverage: Maintain existing levels]
+        
+        GATE1 --> |Passes| SUCCESS[Modular Architecture]
+        GATE2 --> |Passes| SUCCESS
+        GATE3 --> |Passes| SUCCESS
+        GATE4 --> |Passes| SUCCESS
+        
+        GATE1 --> |Fails| ROLLBACK[Revert Changes]
+        GATE2 --> |Fails| ROLLBACK
+        GATE3 --> |Fails| ROLLBACK
+        GATE4 --> |Fails| ROLLBACK
+    end
+    
+    subgraph "Benefits"
+        BEN1[50% faster bug fixes]
+        BEN2[75% faster feature development]
+        BEN3[90% fewer merge conflicts]
+        BEN4[Easy developer onboarding]
+        BEN5[Better test isolation]
+        BEN6[Improved hot reload]
+        
+        SUCCESS --> BEN1
+        SUCCESS --> BEN2
+        SUCCESS --> BEN3
+        SUCCESS --> BEN4
+        SUCCESS --> BEN5
+        SUCCESS --> BEN6
+    end
+    
+    classDef critical fill:#ff9999,stroke:#ff0000,stroke-width:3px
+    classDef target fill:#99ff99,stroke:#00ff00,stroke-width:2px
+    classDef process fill:#9999ff,stroke:#0000ff,stroke-width:2px
+    classDef benefit fill:#ffff99,stroke:#ffaa00,stroke-width:2px
+    
+    class A1,A2,A3,A4,A5,PROB1,PROB2,PROB3,PROB4,PROB5 critical
+    class B1,B2,B3,B4,SOL1,SOL2,SOL3,SOL4,SUCCESS target
+    class PATTERN1,PATTERN2,PATTERN3,PATTERN4,PHASE1,PHASE2,PHASE3 process
+    class BEN1,BEN2,BEN3,BEN4,BEN5,BEN6 benefit
