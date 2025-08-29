@@ -11,7 +11,7 @@
 import React, { useState, useCallback } from 'react';
 import { FileUpload } from './FileUpload';
 import { ProcessingStatus, ProcessingStep } from './ProcessingStatus';
-import { cn } from '@cvplus/core/utils';
+import { cn } from '../utils/autonomous-utils';
 
 export interface CVUploadProps {
   /** Callback when CV upload and processing is completed */

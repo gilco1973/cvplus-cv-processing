@@ -9,7 +9,7 @@ import { onCall, CallableRequest, HttpsError } from 'firebase-functions/v2/https
 import { logger } from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import { FieldValue } from 'firebase-admin/firestore';
-import { corsOptions } from '@cvplus/core/config';
+import { corsOptions } from '../config/cors';
 import { UpdateCVDataRequest, UpdateCVDataResponse } from '../../types';
 
 export const updateCVData = onCall(

@@ -1,0 +1,243 @@
+graph TB
+    subgraph "PARENT CVPLUS APPLICATION"
+        PA[CVPlus Main Application<br/>React 19.1.0 + Vite<br/>200+ Components<br/>Monolithic Architecture]
+        
+        subgraph "Parent Services"
+            PS1[Authentication Service<br/>Firebase Auth]
+            PS2[Configuration Manager<br/>Environment Config]
+            PS3[Global State Store<br/>Application State]
+            PS4[Module Loader<br/>Dynamic Imports]
+        end
+        
+        PA --> PS1
+        PA --> PS2
+        PA --> PS3
+        PA --> PS4
+    end
+
+    subgraph "CV-PROCESSING AUTONOMOUS FRONTEND"
+        subgraph "PRESENTATION LAYER"
+            subgraph "Dashboard Components"
+                DC1[CVProcessingDashboard<br/>&lt;200 lines<br/>Main interface]
+                DC2[DashboardHeader<br/>&lt;200 lines<br/>Navigation & status]
+                DC3[DashboardSidebar<br/>&lt;200 lines<br/>Module navigation]
+            end
+            
+            subgraph "Analysis Components"
+                AC1[CVAnalysisResults<br/>&lt;50 lines<br/>Main coordinator]
+                AC2[AnalysisHeader<br/>&lt;200 lines<br/>Results header]
+                AC3[AnalysisContent<br/>&lt;200 lines<br/>Main content]
+                AC4[AnalysisActions<br/>&lt;200 lines<br/>Action buttons]
+                AC5[AnalysisFooter<br/>&lt;200 lines<br/>Metadata display]
+                AC6[AnalysisProgress<br/>&lt;200 lines<br/>Progress indicator]
+                AC7[AnalysisResults<br/>&lt;200 lines<br/>Results renderer]
+            end
+            
+            subgraph "Preview Components"
+                PC1[CVPreview<br/>&lt;200 lines<br/>Main preview]
+                PC2[LivePreview<br/>&lt;200 lines<br/>Real-time updates]
+                PC3[PreviewControls<br/>&lt;200 lines<br/>Control panel]
+                PC4[PreviewSkeleton<br/>&lt;200 lines<br/>Loading states]
+            end
+            
+            subgraph "Upload Components"
+                UC1[FileUpload<br/>&lt;200 lines<br/>Upload interface]
+                UC2[UploadProgress<br/>&lt;200 lines<br/>Progress tracking]
+                UC3[UploadValidator<br/>&lt;200 lines<br/>File validation]
+            end
+            
+            subgraph "Common Components"
+                CC1[ErrorBoundary<br/>&lt;200 lines<br/>Error handling]
+                CC2[LoadingSpinner<br/>&lt;200 lines<br/>Loading states]
+                CC3[Modal<br/>&lt;200 lines<br/>Modal dialogs]
+            end
+        end
+
+        subgraph "BUSINESS LOGIC LAYER"
+            subgraph "Custom Hooks"
+                CH1[useCVProcessing<br/>&lt;200 lines<br/>Main processing logic]
+                CH2[useAutonomousAuth<br/>&lt;200 lines<br/>Authentication hook]
+                CH3[useServiceStatus<br/>&lt;200 lines<br/>Service monitoring]
+                CH4[useParentIntegration<br/>&lt;200 lines<br/>Parent communication]
+            end
+            
+            subgraph "State Management"
+                SM1[ProcessingContext<br/>CV processing state]
+                SM2[AuthContext<br/>Authentication state]
+                SM3[ConfigContext<br/>Configuration state]
+                SM4[ServiceContext<br/>Service registry state]
+            end
+        end
+
+        subgraph "SERVICE LAYER"
+            subgraph "Core Services"
+                AS1[AutonomousAuthService<br/>&lt;200 lines<br/>Independent authentication]
+                AS2[AutonomousAPIService<br/>&lt;200 lines<br/>Backend communication]
+                AS3[AutonomousStorageService<br/>&lt;200 lines<br/>File storage management]
+                AS4[AutonomousCacheService<br/>&lt;200 lines<br/>Caching layer]
+                AS5[AutonomousConfigService<br/>&lt;200 lines<br/>Configuration management]
+            end
+            
+            subgraph "Support Services"
+                SS1[LoggerService<br/>&lt;200 lines<br/>Logging system]
+                SS2[MonitoringService<br/>&lt;200 lines<br/>Health monitoring]
+                SS3[ServiceContainer<br/>&lt;200 lines<br/>Dependency injection]
+            end
+        end
+
+        subgraph "INTEGRATION LAYER"
+            subgraph "Parent Communication"
+                IC1[IntegrationBridge<br/>&lt;200 lines<br/>Main integration point]
+                IC2[EventBridge<br/>&lt;200 lines<br/>Event communication]
+                IC3[ParentCommunicator<br/>&lt;200 lines<br/>Message handling]
+                IC4[ConfigManager<br/>&lt;200 lines<br/>Runtime configuration]
+            end
+            
+            subgraph "Integration Services"
+                IS1[ParentAuthBridge<br/>Auth synchronization]
+                IS2[StateSync<br/>State synchronization]
+                IS3[ConfigSync<br/>Config synchronization]
+                IS4[EventRouter<br/>Event routing]
+            end
+        end
+
+        subgraph "INFRASTRUCTURE LAYER"
+            subgraph "Build System"
+                BS1[Vite Configuration<br/>Development server]
+                BS2[Rollup Configuration<br/>Production builds]
+                BS3[TypeScript Config<br/>Type checking]
+                BS4[Bundle Optimizer<br/>Code splitting]
+            end
+            
+            subgraph "Testing Framework"
+                TF1[Vitest<br/>Unit testing]
+                TF2[React Testing Library<br/>Component testing]
+                TF3[Playwright<br/>E2E testing]
+                TF4[Bundle Analyzer<br/>Performance testing]
+            end
+        end
+    end
+
+    subgraph "EXTERNAL SERVICES"
+        ES1[Firebase Backend<br/>Authentication<br/>Storage<br/>Functions]
+        ES2[Anthropic API<br/>CV Analysis<br/>AI Processing]
+        ES3[CDN Services<br/>Asset Delivery<br/>Caching]
+    end
+
+    %% Component relationships
+    DC1 --> AC1
+    DC1 --> PC1
+    DC1 --> UC1
+    
+    AC1 --> AC2
+    AC1 --> AC3
+    AC1 --> AC4
+    AC1 --> AC5
+    AC1 --> AC6
+    AC1 --> AC7
+
+    %% Hook relationships
+    AC1 --> CH1
+    AC2 --> CH2
+    IC1 --> CH4
+    SS2 --> CH3
+
+    %% State management connections
+    CH1 --> SM1
+    CH2 --> SM2
+    CH4 --> SM3
+    SS3 --> SM4
+
+    %% Service layer connections
+    AS1 --> SS3
+    AS2 --> SS3
+    AS3 --> SS3
+    AS4 --> SS3
+    AS5 --> SS3
+    SS1 --> SS3
+    SS2 --> SS3
+
+    %% Integration connections
+    IC1 --> IC2
+    IC1 --> IC3
+    IC1 --> IC4
+    
+    IC2 --> IS1
+    IC2 --> IS2
+    IC2 --> IS3
+    IC2 --> IS4
+
+    %% External service connections
+    AS1 --> ES1
+    AS2 --> ES1
+    AS2 --> ES2
+    AS3 --> ES1
+
+    %% Parent integration
+    PS4 -.->|Loads Module| DC1
+    PS1 -.->|Auth Sync| IS1
+    PS2 -.->|Config Sync| IS3
+    PS3 -.->|State Sync| IS2
+
+    %% Error boundary wrapping
+    CC1 -.->|Wraps| AC1
+    CC1 -.->|Wraps| PC1
+    CC1 -.->|Wraps| UC1
+
+    subgraph "AUTONOMOUS OPERATION FEATURES"
+        AO1[Independent Startup<br/>No parent dependencies required]
+        AO2[Self-contained Services<br/>All functionality autonomous]
+        AO3[Graceful Integration<br/>Enhanced when parent available]
+        AO4[Fallback Mechanisms<br/>Degraded operation modes]
+    end
+
+    subgraph "PERFORMANCE OPTIMIZATION"
+        PO1[Code Splitting<br/>Lazy loading components]
+        PO2[Bundle Analysis<br/>Size optimization &lt;200KB]
+        PO3[Caching Strategy<br/>Smart caching layer]
+        PO4[Memory Management<br/>Efficient resource usage]
+    end
+
+    subgraph "QUALITY ASSURANCE"
+        QA1[File Compliance<br/>All files &lt;200 lines]
+        QA2[Type Safety<br/>100% TypeScript coverage]
+        QA3[Test Coverage<br/>90%+ automated testing]
+        QA4[Accessibility<br/>WCAG 2.1 AA compliance]
+    end
+
+    %% Feature connections
+    SS3 --> AO1
+    AS1 --> AO2
+    IC1 --> AO3
+    AS1 --> AO4
+
+    %% Performance connections
+    BS4 --> PO1
+    TF4 --> PO2
+    AS4 --> PO3
+    SS2 --> PO4
+
+    %% Quality connections
+    AC1 --> QA1
+    BS3 --> QA2
+    TF1 --> QA3
+    TF3 --> QA4
+
+    %% Styling
+    classDef parentApp fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    classDef presentation fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef businessLogic fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+    classDef service fill:#e8f5e8,stroke:#388e3c,stroke-width:2px
+    classDef integration fill:#fff8e1,stroke:#fbc02d,stroke-width:2px
+    classDef infrastructure fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    classDef external fill:#f1f8e9,stroke:#689f38,stroke-width:2px
+    classDef features fill:#e0f2f1,stroke:#00796b,stroke-width:2px
+
+    class PA,PS1,PS2,PS3,PS4 parentApp
+    class DC1,DC2,DC3,AC1,AC2,AC3,AC4,AC5,AC6,AC7,PC1,PC2,PC3,PC4,UC1,UC2,UC3,CC1,CC2,CC3 presentation
+    class CH1,CH2,CH3,CH4,SM1,SM2,SM3,SM4 businessLogic
+    class AS1,AS2,AS3,AS4,AS5,SS1,SS2,SS3 service
+    class IC1,IC2,IC3,IC4,IS1,IS2,IS3,IS4 integration
+    class BS1,BS2,BS3,BS4,TF1,TF2,TF3,TF4 infrastructure
+    class ES1,ES2,ES3 external
+    class AO1,AO2,AO3,AO4,PO1,PO2,PO3,PO4,QA1,QA2,QA3,QA4 features

@@ -6,7 +6,7 @@ import { onCall, HttpsError, CallableRequest } from 'firebase-functions/v2/https
 import * as admin from 'firebase-admin';
 import { skillsVisualizationService } from '../services/skills-visualization.service';
 import { EnhancedJob, ParsedCV } from '../../types/enhanced-models';
-import { corsOptions } from '@cvplus/core/config';
+import { corsOptions } from '../config/cors';
 import { SkillsVisualizationRequest, SkillsVisualizationResponse } from '../../types';
 
 interface GenerateVisualizationRequest {

@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import type { CVPreviewProps } from '@cvplus/cv-processing/types';
-import type { CVParsedData } from '@cvplus/core/types';
+import type { CVPreviewProps } from '../../types/autonomous-cv.types';
+import type { CVParsedData } from '../../types/autonomous-core';
 import { useCVPreview } from '../hooks/useCVPreview';
 import { useAutoSave } from '../hooks/useAutoSave';
 import { useAchievementAnalysis } from '../hooks/useAchievementAnalysis';
 import { useKeyboardShortcuts } from '../../shared/utils/keyboardShortcuts';
 import { useHasComparison } from '../hooks/useCVComparison';
-import { isObject } from '@cvplus/core/utils/error-handling';
+import { isObject } from '../../utils/autonomous-utils';
 import { CVPreviewToolbar } from './cv-preview/CVPreviewToolbar';
 import { CVPreviewContent } from './cv-preview/CVPreviewContent';
 import { CVComparisonView } from './cv-comparison/CVComparisonView';

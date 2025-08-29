@@ -1,7 +1,7 @@
 import { onCall } from 'firebase-functions/v2/https';
 import * as admin from 'firebase-admin';
 import { FieldValue } from 'firebase-admin/firestore';
-import { corsOptions } from '@cvplus/core/config';
+import { corsOptions } from '../config/cors';
 import { CVInitiationRequest, CVInitiationResponse } from '../../types';
 
 // Import the core CV generation logic for background processing

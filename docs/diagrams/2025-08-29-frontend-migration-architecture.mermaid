@@ -1,0 +1,138 @@
+graph TD
+    subgraph "Current State"
+        A[CVPlus Frontend<br/>200+ Components<br/>67 Dependencies] 
+        B[CV-Processing Submodule<br/>8 Basic Components<br/>Minimal Frontend]
+        A -.->|Tight Coupling| B
+    end
+    
+    subgraph "Target Architecture"
+        subgraph "Autonomous CV-Processing Frontend"
+            C[Frontend Entry Point<br/>./dist/frontend/index.js]
+            
+            subgraph "Component Layer"
+                D[CVProcessingDashboard]
+                E[CVAnalysisResults]
+                F[CVPreview] 
+                G[GeneratedCVDisplay]
+                H[LivePreview]
+                I[ProcessingStatus]
+            end
+            
+            subgraph "Service Layer"
+                J[AutonomousAuthService]
+                K[AutonomousAPIService]
+                L[AutonomousStorageService]
+                M[AutonomousCacheService]
+                N[LoggerService]
+            end
+            
+            subgraph "Integration Layer"
+                O[CVProcessingModule<br/>Parent Integration]
+                P[Communication Bridge]
+                Q[Configuration API]
+                R[Event System]
+            end
+        end
+        
+        subgraph "CVPlus Parent App"
+            S[Main Application]
+            T[Module Loader]
+            U[Shared Configuration]
+        end
+    end
+    
+    subgraph "Migration Phases"
+        subgraph "Phase 1: Infrastructure"
+            V[Dependency Analysis]
+            W[Build System Setup]
+            X[Service Architecture]
+        end
+        
+        subgraph "Phase 2: Components" 
+            Y[Component Migration]
+            Z[Component Refactoring]
+            AA[State Management]
+        end
+        
+        subgraph "Phase 3: Integration"
+            BB[Service Implementation]
+            CC[Parent Integration]
+        end
+        
+        subgraph "Phase 4: Production"
+            DD[Testing Framework]
+            EE[Deployment Strategy]
+        end
+    end
+    
+    %% Current state relationships
+    A -->|Extract Components| Y
+    B -->|Enhance & Expand| C
+    
+    %% Component relationships
+    C --> D
+    C --> E
+    C --> F
+    C --> G
+    C --> H
+    C --> I
+    
+    %% Service relationships
+    D --> J
+    D --> K
+    E --> L
+    F --> M
+    G --> N
+    
+    %% Integration relationships
+    O --> P
+    O --> Q
+    O --> R
+    S --> T
+    T -->|Load Module| C
+    U -->|Configure| Q
+    
+    %% Migration flow
+    V --> W
+    W --> X
+    X --> Y
+    Y --> Z
+    Z --> AA
+    AA --> BB
+    BB --> CC
+    CC --> DD
+    DD --> EE
+    
+    %% Service Registry
+    subgraph "Service Registry Pattern"
+        FF[ServiceRegistry<br/>Central Service Management]
+        FF --> J
+        FF --> K
+        FF --> L
+        FF --> M
+        FF --> N
+    end
+    
+    %% Build System
+    subgraph "Independent Build System"
+        GG[Vite Configuration<br/>Frontend-specific]
+        HH[TypeScript Config<br/>tsconfig.frontend.json]
+        II[Testing Setup<br/>Vitest + React Testing Library]
+        JJ[Production Build<br/>Optimized Bundles]
+    end
+    
+    GG --> C
+    HH --> C
+    II --> DD
+    JJ --> EE
+    
+    %% Styling
+    classDef currentState fill:#ffcccc
+    classDef targetState fill:#ccffcc
+    classDef migrationPhase fill:#ffffcc
+    classDef infrastructure fill:#ccccff
+    
+    class A,B currentState
+    class C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U targetState
+    class V,W,X,Y,Z,AA,BB,CC,DD,EE migrationPhase
+    class FF,GG,HH,II,JJ infrastructure

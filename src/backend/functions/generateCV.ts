@@ -9,7 +9,7 @@
  */
 
 import { onCall } from 'firebase-functions/v2/https';
-import { corsOptions } from '@cvplus/core/config';
+import { corsOptions } from '../config/cors';
 import { CVGenerationService } from '../services/cv-generation.service';
 import { EnhancementProcessingService } from '../services/enhancement-processing.service';
 import { ServiceRegistry } from '../../shared/utils/service-registry';

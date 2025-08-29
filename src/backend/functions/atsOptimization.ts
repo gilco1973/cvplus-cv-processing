@@ -6,7 +6,7 @@ import { onCall, HttpsError, CallableRequest } from 'firebase-functions/v2/https
 import * as admin from 'firebase-admin';
 import { atsOptimizationService } from '../services/ats-optimization.service';
 import { EnhancedJob } from '../../types/enhanced-models';
-import { corsOptions } from '@cvplus/core/config';
+import { corsOptions } from '../config/cors';
 import { ATSAnalysisRequest, ATSAnalysisResponse } from '../../types';
 
 /**

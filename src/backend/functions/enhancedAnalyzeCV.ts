@@ -1,6 +1,6 @@
 import { onCall } from 'firebase-functions/v2/https';
 import { getFirestore } from 'firebase-admin/firestore';
-import { corsOptions } from '@cvplus/core/config';
+import { corsOptions } from '../config/cors';
 import { EnhancedATSAnalysisService } from '../services/enhanced-ats-analysis.service';
 import { EnhancedAnalysisRequest, EnhancedAnalysisResponse } from '../../types';
 

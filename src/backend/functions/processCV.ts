@@ -4,8 +4,8 @@ import { FieldValue } from 'firebase-admin/firestore';
 import { CVParser } from '../services/cv-parser.service';
 import { PIIDetector } from '../services/pii-detector.service';
 import { PolicyEnforcementService } from '../services/policy-enforcement.service';
-import { corsOptions } from '@cvplus/core/config';
-import { requireGoogleAuth, updateUserLastLogin } from '@cvplus/auth/services';
+import { corsOptions } from '../config/cors';
+import { AutonomousAuthService } from '../services/autonomous-auth.service';
 import { CVProcessingRequest, CVProcessingResponse } from '../../types';
 
 export const processCV = onCall(
@@ -18,11 +18,11 @@ export const processCV = onCall(
   async (request) => {
     
     // Require Google authentication
-    const user = await requireGoogleAuth(request);
+    const user = await AutonomousAuthService.requireGoogleAuth(request);
     // PII REMOVED: Email logging removed for security compliance
     
     // Update user login tracking
-    await updateUserLastLogin(user.uid, user.email, user.name, user.picture);
+    await AutonomousAuthService.updateUserLastLogin(user.uid, user.email, user.name, user.picture);
 
     const { jobId, fileUrl, mimeType, isUrl, fileName, fileSize } = request.data;
     

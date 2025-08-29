@@ -1,0 +1,236 @@
+graph TB
+    subgraph "SERVICE CONTAINER & DEPENDENCY INJECTION"
+        SC[ServiceContainer<br/>📦 Central registry<br/>🔧 Lifecycle management<br/>⚡ Lazy initialization<br/>🔍 Health monitoring]
+        
+        subgraph "Service Registry Pattern"
+            SR1[Service Registration<br/>• Interface binding<br/>• Singleton management<br/>• Factory patterns<br/>• Configuration injection]
+            
+            SR2[Dependency Resolution<br/>• Constructor injection<br/>• Property injection<br/>• Method injection<br/>• Circular dependency detection]
+            
+            SR3[Service Lifecycle<br/>• Initialization<br/>• Configuration<br/>• Health checks<br/>• Graceful shutdown]
+        end
+        
+        SC --> SR1
+        SC --> SR2
+        SC --> SR3
+    end
+
+    subgraph "CORE AUTONOMOUS SERVICES"
+        subgraph "AutonomousAuthService"
+            AS1[Authentication Core<br/>✅ &lt;200 lines<br/>🔐 Firebase Auth integration<br/>🎫 JWT token management<br/>👤 User session handling]
+            
+            AS2[Parent Integration<br/>• Parent auth detection<br/>• Token synchronization<br/>• Session sharing<br/>• Fallback mechanisms]
+            
+            AS3[Security Features<br/>• Token validation<br/>• Session expiry<br/>• Refresh token handling<br/>• Security event logging]
+        end
+        
+        subgraph "AutonomousAPIService"  
+            API1[HTTP Client Core<br/>✅ &lt;200 lines<br/>🌐 RESTful API client<br/>📡 Request/response handling<br/>🔄 Retry mechanisms]
+            
+            API2[Caching Integration<br/>• Response caching<br/>• Cache invalidation<br/>• ETags support<br/>• Offline support]
+            
+            API3[Error Handling<br/>• Error classification<br/>• Retry strategies<br/>• Circuit breaker<br/>• Fallback responses]
+        end
+        
+        subgraph "AutonomousStorageService"
+            ST1[File Management<br/>✅ &lt;200 lines<br/>📁 Firebase Storage<br/>📤 Upload handling<br/>📊 Progress tracking]
+            
+            ST2[Storage Optimization<br/>• File compression<br/>• Format conversion<br/>• CDN integration<br/>• Bandwidth optimization]
+            
+            ST3[Security & Validation<br/>• File type validation<br/>• Size limits<br/>• Security scanning<br/>• Access control]
+        end
+        
+        subgraph "AutonomousCacheService"
+            CS1[Memory Cache<br/>✅ &lt;200 lines<br/>💾 In-memory storage<br/>⏰ TTL management<br/>🔄 Cache invalidation]
+            
+            CS2[Persistent Cache<br/>• Local storage<br/>• IndexedDB<br/>• Cache persistence<br/>• Cross-session cache]
+            
+            CS3[Cache Strategies<br/>• LRU eviction<br/>• Cache warming<br/>• Batch operations<br/>• Cache statistics]
+        end
+        
+        subgraph "AutonomousConfigService"
+            CF1[Configuration Management<br/>✅ &lt;200 lines<br/>⚙️ Environment config<br/>🔧 Runtime config<br/>🔄 Hot reloading]
+            
+            CF2[Config Sources<br/>• Environment variables<br/>• Config files<br/>• Remote config<br/>• Parent integration]
+            
+            CF3[Config Validation<br/>• Schema validation<br/>• Type checking<br/>• Constraint validation<br/>• Default values]
+        end
+    end
+
+    subgraph "SUPPORT SERVICES"
+        subgraph "LoggerService"
+            LS1[Logging Core<br/>✅ &lt;200 lines<br/>📝 Structured logging<br/>📊 Log levels<br/>🎯 Log filtering]
+            
+            LS2[Log Transport<br/>• Console output<br/>• File logging<br/>• Remote logging<br/>• Error reporting]
+            
+            LS3[Log Processing<br/>• Log formatting<br/>• Log aggregation<br/>• Performance metrics<br/>• Debug information]
+        end
+        
+        subgraph "MonitoringService"
+            MS1[Health Monitoring<br/>✅ &lt;200 lines<br/>💓 Service health<br/>📊 Performance metrics<br/>🚨 Alert system]
+            
+            MS2[Metrics Collection<br/>• Performance data<br/>• Error rates<br/>• Usage statistics<br/>• Resource utilization]
+            
+            MS3[Alerting System<br/>• Threshold monitoring<br/>• Alert notifications<br/>• Escalation rules<br/>• Recovery tracking]
+        end
+    end
+
+    subgraph "SERVICE COMMUNICATION PATTERNS"
+        subgraph "Event-Driven Architecture"
+            ED1[Service Events<br/>📡 Event emission<br/>👂 Event listening<br/>🔄 Event routing<br/>📊 Event analytics]
+            
+            ED2[Inter-Service Communication<br/>• Publish/Subscribe<br/>• Event bus<br/>• Message queues<br/>• Service discovery]
+            
+            ED3[Event Processing<br/>• Event validation<br/>• Event transformation<br/>• Event persistence<br/>• Event replay]
+        end
+        
+        subgraph "Service Contracts"
+            SC1[Interface Definitions<br/>• Service interfaces<br/>• Data contracts<br/>• Error contracts<br/>• Versioning strategy]
+            
+            SC2[Service Discovery<br/>• Service registration<br/>• Service lookup<br/>• Health checking<br/>• Load balancing]
+            
+            SC3[Service Composition<br/>• Service orchestration<br/>• Service choreography<br/>• Transaction management<br/>• Compensation patterns]
+        end
+    end
+
+    subgraph "INTEGRATION LAYER SERVICES"
+        subgraph "Parent Integration Services"
+            PI1[EventBridge Service<br/>✅ &lt;200 lines<br/>🌉 Parent-child events<br/>📨 Message routing<br/>🔄 State sync]
+            
+            PI2[Configuration Bridge<br/>• Config synchronization<br/>• Environment detection<br/>• Feature flag sync<br/>• A/B test integration]
+            
+            PI3[State Synchronization<br/>• State sharing<br/>• Conflict resolution<br/>• State persistence<br/>• State validation]
+        end
+        
+        subgraph "Module Integration Services"
+            MI1[Module Loader<br/>• Dynamic loading<br/>• Module registration<br/>• Dependency resolution<br/>• Module lifecycle]
+            
+            MI2[API Exposure<br/>• External API<br/>• Method exposure<br/>• Event exposure<br/>• Configuration API]
+            
+            MI3[Integration Monitoring<br/>• Connection health<br/>• Message tracking<br/>• Performance monitoring<br/>• Error tracking]
+        end
+    end
+
+    subgraph "SERVICE INITIALIZATION & LIFECYCLE"
+        IL1[Bootstrap Process<br/>1. Container initialization<br/>2. Service registration<br/>3. Dependency injection<br/>4. Health verification]
+        
+        IL2[Service Dependencies<br/>Logger → Config → Cache →<br/>Auth → Storage → API →<br/>Monitor → Integration]
+        
+        IL3[Graceful Shutdown<br/>1. Stop accepting requests<br/>2. Complete pending operations<br/>3. Clean up resources<br/>4. Service deregistration]
+        
+        IL1 --> IL2 --> IL3
+    end
+
+    subgraph "ERROR HANDLING & RESILIENCE"
+        EH1[Error Classification<br/>• System errors<br/>• Business errors<br/>• Integration errors<br/>• User errors]
+        
+        EH2[Resilience Patterns<br/>• Circuit breaker<br/>• Retry with backoff<br/>• Bulkhead isolation<br/>• Timeout handling]
+        
+        EH3[Recovery Strategies<br/>• Automatic recovery<br/>• Manual intervention<br/>• Graceful degradation<br/>• Fallback mechanisms]
+        
+        EH1 --> EH2 --> EH3
+    end
+
+    subgraph "PERFORMANCE OPTIMIZATION"
+        PO1[Service Caching<br/>• Method-level caching<br/>• Response caching<br/>• Query caching<br/>• Computed value caching]
+        
+        PO2[Resource Management<br/>• Connection pooling<br/>• Memory management<br/>• CPU optimization<br/>• I/O optimization]
+        
+        PO3[Performance Monitoring<br/>• Response time tracking<br/>• Throughput measurement<br/>• Resource utilization<br/>• Bottleneck identification]
+        
+        PO1 --> PO2 --> PO3
+    end
+
+    subgraph "SECURITY & COMPLIANCE"
+        SEC1[Security Services<br/>• Input validation<br/>• Output sanitization<br/>• Access control<br/>• Audit logging]
+        
+        SEC2[Data Protection<br/>• Encryption at rest<br/>• Encryption in transit<br/>• Key management<br/>• PII protection]
+        
+        SEC3[Compliance Monitoring<br/>• Security scanning<br/>• Vulnerability assessment<br/>• Compliance reporting<br/>• Security metrics]
+        
+        SEC1 --> SEC2 --> SEC3
+    end
+
+    %% Service Container connections
+    SC --> AS1
+    SC --> API1
+    SC --> ST1
+    SC --> CS1
+    SC --> CF1
+    SC --> LS1
+    SC --> MS1
+
+    %% Service interdependencies
+    AS1 --> API1
+    API1 --> CS1
+    ST1 --> AS1
+    CF1 --> AS1
+    LS1 --> MS1
+
+    %% Parent integration connections
+    AS1 --> AS2
+    CF1 --> PI2
+    SC --> PI1
+
+    %% Event-driven connections
+    AS1 --> ED1
+    API1 --> ED1
+    ST1 --> ED1
+    ED1 --> PI1
+
+    %% Error handling connections
+    API1 --> EH1
+    ST1 --> EH2
+    MS1 --> EH3
+
+    %% Performance connections
+    CS1 --> PO1
+    MS1 --> PO3
+    API1 --> PO2
+
+    %% Security connections
+    AS1 --> SEC1
+    API1 --> SEC2
+    LS1 --> SEC3
+
+    %% Lifecycle connections
+    SC --> IL1
+    IL2 --> AS1
+    IL2 --> API1
+    IL2 --> ST1
+
+    subgraph "SERVICE QUALITY METRICS"
+        QM1[Availability Metrics<br/>• Service uptime 99.9%<br/>• Error rate &lt;0.1%<br/>• Response time &lt;200ms<br/>• Recovery time &lt;30s]
+        
+        QM2[Performance Metrics<br/>• Memory usage &lt;50MB<br/>• CPU usage &lt;10%<br/>• Cache hit rate &gt;80%<br/>• Throughput &gt;1000 req/s]
+        
+        QM3[Quality Metrics<br/>• Code coverage &gt;90%<br/>• Cyclomatic complexity &lt;10<br/>• File size &lt;200 lines<br/>• Documentation 100%]
+    end
+
+    %% Quality connections
+    MS1 --> QM1
+    PO3 --> QM2
+    LS1 --> QM3
+
+    %% Styling
+    classDef container fill:#e3f2fd,stroke:#1976d2,stroke-width:3px
+    classDef coreService fill:#e8f5e8,stroke:#388e3c,stroke-width:2px
+    classDef supportService fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+    classDef communication fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef integration fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    classDef lifecycle fill:#f1f8e9,stroke:#689f38,stroke-width:2px
+    classDef errorHandling fill:#ffebee,stroke:#d32f2f,stroke-width:2px
+    classDef performance fill:#e0f2f1,stroke:#00796b,stroke-width:2px
+    classDef security fill:#fff8e1,stroke:#fbc02d,stroke-width:2px
+    classDef quality fill:#e4f5e4,stroke:#2e7d32,stroke-width:2px
+
+    class SC,SR1,SR2,SR3 container
+    class AS1,AS2,AS3,API1,API2,API3,ST1,ST2,ST3,CS1,CS2,CS3,CF1,CF2,CF3 coreService
+    class LS1,LS2,LS3,MS1,MS2,MS3 supportService
+    class ED1,ED2,ED3,SC1,SC2,SC3 communication
+    class PI1,PI2,PI3,MI1,MI2,MI3 integration
+    class IL1,IL2,IL3 lifecycle
+    class EH1,EH2,EH3 errorHandling
+    class PO1,PO2,PO3 performance
+    class SEC1,SEC2,SEC3 security
+    class QM1,QM2,QM3 quality

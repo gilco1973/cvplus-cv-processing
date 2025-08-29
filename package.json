@@ -50,14 +50,15 @@
     "test": "vitest",
     "test:watch": "vitest --watch",
     "test:ci": "vitest run",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "validate-dependencies": "./scripts/validate-dependencies.sh"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.24.3",
-    "@cvplus/auth": "file:../auth",
-    "@cvplus/core": "file:../core",
     "@types/react-dropzone": "^4.2.2",
+    "@types/node": "^20.0.0",
     "canvas": "^2.11.2",
+    "clsx": "^2.1.1",
     "firebase": "^10.12.0",
     "firebase-admin": "^12.1.0",
     "firebase-functions": "^5.0.1",
@@ -65,7 +66,8 @@
     "pdf-lib": "^1.17.1",
     "pdfkit": "^0.15.0",
     "react-dropzone": "^14.3.8",
-    "sharp": "^0.32.6"
+    "sharp": "^0.32.6",
+    "tailwind-merge": "^2.6.0"
   },
   "peerDependencies": {
     "react": ">=18.0.0",

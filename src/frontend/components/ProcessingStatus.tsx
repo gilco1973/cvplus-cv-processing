@@ -10,7 +10,7 @@
 
 import React from 'react';
 import { AlertCircle, CheckCircle2, Clock, FileText, Loader2 } from 'lucide-react';
-import { cn } from '@cvplus/core/utils';
+import { cn } from '../utils/autonomous-utils';
 
 export interface ProcessingStep {
   id: string;

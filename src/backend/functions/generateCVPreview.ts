@@ -1,6 +1,6 @@
 import { onCall } from 'firebase-functions/v2/https';
 import * as admin from 'firebase-admin';
-import { corsOptions } from '@cvplus/core/config';
+import { corsOptions } from '../config/cors';
 import { CVPreviewRequest, CVPreviewResponse } from '../../types';
 
 /**

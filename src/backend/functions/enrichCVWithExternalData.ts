@@ -22,7 +22,6 @@ import { getFirestore, FieldValue } from 'firebase-admin/firestore';
 import { ExternalDataUsageEvent } from '../types/external-data-analytics.types';
 
 // TEMPORARILY DISABLED FOR DEPLOYMENT
-// import { getUserSubscriptionInternal } from '@cvplus/payments/backend/functions';
 
 // Temporary placeholder function for deployment
 const getUserSubscriptionInternal = async (userId: string) => {

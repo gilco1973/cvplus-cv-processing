@@ -9,7 +9,7 @@ import { CallableRequest } from 'firebase-functions/v2/https';
 import { PredictionModelService, PredictionRequest } from '../services/prediction-model.service';
 // import { MLPipelineService } from '../services/ml-pipeline.service';
 import { corsOptions } from '../config/cors';
-import { AdminAccessService } from '@cvplus/admin/services';
+import { AdminAccessService } from '../services/autonomous-admin.service';
 import * as admin from 'firebase-admin';
 import { FieldValue } from 'firebase-admin/firestore';
 
@@ -346,7 +346,7 @@ export const getModelMetrics = onCall(
       const userDoc = await db.collection('users').doc(auth.uid).get();
       const userData = userDoc.data();
       
-      // Use centralized admin access service
+      // Use autonomous admin access service
       await AdminAccessService.requireAdminAccess(auth.uid);
 
       // Get model performance metrics

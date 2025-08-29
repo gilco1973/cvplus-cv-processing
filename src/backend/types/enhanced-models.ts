@@ -1,7 +1,7 @@
 /**
  * Enhanced Models for CV Processing
  */
-import { CVData } from '@cvplus/core/types';
+import { CVData } from '../../types/autonomous-cv.types';
 
 export interface EnhancedJob {
   id: string;

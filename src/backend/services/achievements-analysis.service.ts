@@ -1,342 +1,550 @@
 /**
- * Achievements Analysis Service for CV Processing
+ * Achievements Analysis Service
+ * Extracts and analyzes key achievements from CV data
  */
-import { AchievementHighlighting, AchievementMetrics } from '../types/enhanced-models';
-// Temporarily use local types until core package is properly built
-interface CVData {
-  id?: string;
-  personalInfo?: any;
-  experience?: any[];
-  education?: any[];
-  skills?: string[];
-  projects?: any[];
-  summary?: string;
-  metadata?: any;
-}
 
-export interface AchievementAnalysisRequest {
-  cvData: CVData;
-  targetRole?: string;
-  industry?: string;
-}
+import { ParsedCV } from '../types/enhanced-models';
+import OpenAI from 'openai';
+import { config } from '../config/environment';
 
-export interface AchievementAnalysisResult {
-  achievements: AchievementHighlighting[];
-  overallScore: number;
-  recommendations: string[];
-  processingTime: number;
+interface Achievement {
+  title: string;
+  description: string;
+  impact: string;
+  company: string;
+  timeframe: string;
+  category: 'leadership' | 'technical' | 'business' | 'innovation' | 'team' | 'project';
+  metrics?: string[];
+  significance: number; // 1-10 scale
 }
 
 export class AchievementsAnalysisService {
-  constructor() {}
+  private openai: OpenAI;
 
-  /**
-   * Analyze CV content to identify and highlight achievements
-   */
-  async analyzeAchievements(request: AchievementAnalysisRequest): Promise<AchievementAnalysisResult> {
-    const startTime = Date.now();
-    
-    try {
-      const achievements = await this.extractAchievements(request.cvData);
-      const scoredAchievements = await this.scoreAchievements(achievements, request.targetRole);
-      const enhancedAchievements = await this.enhanceAchievements(scoredAchievements);
-      
-      const overallScore = this.calculateOverallScore(enhancedAchievements);
-      const recommendations = this.generateRecommendations(enhancedAchievements);
-
-      return {
-        achievements: enhancedAchievements,
-        overallScore,
-        recommendations,
-        processingTime: Date.now() - startTime
-      };
-    } catch (error) {
-      console.error('Achievement analysis failed:', error);
-      throw new Error('Failed to analyze achievements');
-    }
-  }
-
-  /**
-   * Extract potential achievements from CV data
-   */
-  private async extractAchievements(cvData: CVData): Promise<AchievementHighlighting[]> {
-    const achievements: AchievementHighlighting[] = [];
-    let achievementId = 1;
-
-    // Analyze work experience for achievements
-    if (cvData.experience) {
-      for (const job of cvData.experience) {
-        if (job.achievements && Array.isArray(job.achievements)) {
-          for (const achievement of job.achievements) {
-            achievements.push({
-              id: `work-${achievementId++}`,
-              title: job.position || 'Work Achievement',
-              description: typeof achievement === 'string' ? achievement : achievement.description || '',
-              impact: this.extractImpact(typeof achievement === 'string' ? achievement : achievement.description || ''),
-              category: 'career',
-              confidence: 0.8,
-              suggestions: []
-            });
-          }
-        }
-
-        // Extract achievements from job descriptions
-        if (job.description) {
-          const extractedAchievements = this.extractAchievementsFromText(job.description);
-          for (const achievement of extractedAchievements) {
-            achievements.push({
-              id: `extracted-${achievementId++}`,
-              title: job.position || 'Career Achievement',
-              description: achievement,
-              impact: this.extractImpact(achievement),
-              category: 'career',
-              confidence: 0.6,
-              suggestions: []
-            });
-          }
-        }
-      }
-    }
-
-    // Analyze education for achievements
-    if (cvData.education) {
-      for (const edu of cvData.education) {
-        if (edu.achievements && Array.isArray(edu.achievements)) {
-          for (const achievement of edu.achievements) {
-            achievements.push({
-              id: `edu-${achievementId++}`,
-              title: edu.degree || 'Educational Achievement',
-              description: achievement,
-              impact: this.extractImpact(achievement),
-              category: 'education',
-              confidence: 0.7,
-              suggestions: []
-            });
-          }
-        }
-      }
-    }
-
-    // Analyze projects for achievements
-    if (cvData.projects) {
-      for (const project of cvData.projects) {
-        achievements.push({
-          id: `proj-${achievementId++}`,
-          title: project.name,
-          description: project.description,
-          impact: this.extractImpact(project.description),
-          category: 'project',
-          confidence: 0.7,
-          suggestions: []
-        });
-      }
-    }
-
-    return achievements;
-  }
-
-  /**
-   * Extract impact statement from achievement text
-   */
-  private extractImpact(text: string): string {
-    const impactKeywords = ['increased', 'improved', 'reduced', 'achieved', 'delivered', 'generated', 'saved', 'grew', 'built', 'created'];
-    const sentences = text.split(/[.!?]+/);
-    
-    for (const sentence of sentences) {
-      const lowerSentence = sentence.toLowerCase();
-      if (impactKeywords.some(keyword => lowerSentence.includes(keyword))) {
-        return sentence.trim();
-      }
-    }
-    
-    return text.substring(0, 100) + (text.length > 100 ? '...' : '');
-  }
-
-  /**
-   * Extract achievements from text using pattern matching
-   */
-  private extractAchievementsFromText(text: string): string[] {
-    const achievements: string[] = [];
-    const achievementPatterns = [
-      /(?:achieved|accomplished|delivered|generated|increased|improved|reduced|saved|grew|built|created|led|managed|developed)\s+[^.!?]*[0-9%$]+[^.!?]*[.!?]/gi,
-      /(?:responsible for|resulted in|contributed to)\s+[^.!?]*(?:increase|improvement|reduction|growth|development)[^.!?]*[.!?]/gi
-    ];
-
-    for (const pattern of achievementPatterns) {
-      const matches = text.match(pattern);
-      if (matches) {
-        achievements.push(...matches.map(match => match.trim()));
-      }
-    }
-
-    return achievements;
-  }
-
-  /**
-   * Score achievements based on impact and relevance
-   */
-  private async scoreAchievements(
-    achievements: AchievementHighlighting[], 
-    targetRole?: string
-  ): Promise<AchievementHighlighting[]> {
-    // TODO: Use targetRole for relevance scoring in future iteration
-    void targetRole; // Mark as used
-    
-    return achievements.map(achievement => {
-      const metrics = this.calculateMetrics(achievement);
-      return {
-        ...achievement,
-        metrics,
-        confidence: metrics.relevanceScore * 0.7 + metrics.impactScore * 0.3
-      };
+  constructor() {
+    this.openai = new OpenAI({
+      apiKey: config.openai?.apiKey || process.env.OPENAI_API_KEY || ''
     });
   }
 
   /**
-   * Calculate metrics for an achievement
+   * Extract key achievements from parsed CV data
    */
-  private calculateMetrics(achievement: AchievementHighlighting): AchievementMetrics {
-    const text = achievement.description;
-    const hasNumbers = /\d/.test(text);
-    const hasPercent = /%/.test(text);
-    const hasCurrency = /[$€£¥]/.test(text);
-    const hasActionWords = /(?:increased|improved|reduced|achieved|delivered|generated|saved|grew|built|created|led|managed|developed)/i.test(text);
+  async extractKeyAchievements(cv: ParsedCV): Promise<Achievement[]> {
+    const achievements: Achievement[] = [];
 
-    const impactScore = (
-      (hasNumbers ? 0.3 : 0) +
-      (hasPercent ? 0.2 : 0) +
-      (hasCurrency ? 0.2 : 0) +
-      (hasActionWords ? 0.3 : 0)
-    );
+    try {
+      // Extract from work experience
+      if (cv.experience && cv.experience.length > 0) {
+        for (const job of cv.experience) {
+          try {
+            const jobAchievements = await this.extractFromExperience(job);
+            achievements.push(...jobAchievements);
+          } catch (error) {
+            // Continue with next job rather than failing completely
+          }
+        }
+      }
 
-    const relevanceScore = achievement.category === 'career' ? 0.9 : 0.7;
+      // Extract from description/summary
+      if (cv.personalInfo?.summary) {
+        try {
+          const summaryAchievements = await this.extractFromSummary(cv.personalInfo.summary);
+          achievements.push(...summaryAchievements);
+        } catch (error) {
+          // Continue with existing achievements
+        }
+      }
 
+      // Sort by significance and return top achievements
+      const sortedAchievements = achievements
+        .filter(achievement => achievement && achievement.title) // Filter out invalid achievements
+        .sort((a, b) => b.significance - a.significance)
+        .slice(0, 5); // Return top 5 achievements
+
+      return sortedAchievements;
+
+    } catch (error) {
+      // Return empty array rather than throwing to allow graceful degradation
+      return [];
+    }
+  }
+
+  /**
+   * Extract achievements from a single work experience
+   */
+  private async extractFromExperience(experience: any): Promise<Achievement[]> {
+    if (!this.openai.apiKey) {
+      return this.fallbackExperienceExtraction(experience);
+    }
+
+    try {
+      const prompt = `
+IMPORTANT: You MUST respond with valid JSON only. Do not include any explanatory text or markdown formatting.
+
+Analyze this work experience and extract specific, quantifiable achievements. Focus on REAL accomplishments with measurable impact.
+
+Position: ${experience.position}
+Company: ${experience.company}
+Duration: ${experience.duration || experience.startDate + ' - ' + (experience.endDate || 'Present')}
+Description: ${experience.description || ''}
+Achievements: ${experience.achievements?.join(', ') || 'None listed'}
+
+Extract achievements that show:
+1. Leadership impact
+2. Technical innovation
+3. Business results
+4. Team development
+5. Process improvements
+
+REQUIRED JSON FORMAT (no additional text):
+{
+  "achievements": [
+    {
+      "title": "Brief achievement title",
+      "description": "Detailed description of what was accomplished",
+      "impact": "Specific impact or benefit delivered",
+      "metrics": ["quantifiable results if any"],
+      "category": "leadership",
+      "significance": 8
+    }
+  ]
+}
+
+Category must be one of: leadership, technical, business, innovation, team, project
+Significance must be a number from 1-10
+Only include real, substantive achievements. Skip generic responsibilities.
+`;
+
+      const response = await this.openai.chat.completions.create({
+        model: 'gpt-4',
+        messages: [{ role: 'user', content: prompt }],
+        temperature: 0.3,
+        max_tokens: 1000
+      });
+
+      const responseContent = response.choices[0].message.content || '';
+      const result = this.parseAIResponse(responseContent, 'experience extraction');
+      
+      if (!result || !Array.isArray(result.achievements)) {
+        return this.fallbackExperienceExtraction(experience);
+      }
+      
+      // Validate and clean each achievement
+      const validAchievements = result.achievements
+        .map((ach: any) => this.validateAndCleanAchievement(ach))
+        .filter((ach: Achievement | null) => ach !== null)
+        .map((ach: any) => ({
+          ...ach,
+          company: experience.company,
+          timeframe: experience.duration || `${experience.startDate} - ${experience.endDate || 'Present'}`
+        }));
+
+      return validAchievements;
+
+    } catch (error) {
+      return this.fallbackExperienceExtraction(experience);
+    }
+  }
+
+  /**
+   * Extract achievements from summary/description
+   */
+  private async extractFromSummary(summary: string): Promise<Achievement[]> {
+    if (!this.openai.apiKey) {
+      return [];
+    }
+
+    try {
+      const prompt = `
+IMPORTANT: You MUST respond with valid JSON only. Do not include any explanatory text or markdown formatting.
+
+Analyze this professional summary and extract key career achievements:
+
+Summary: ${summary}
+
+Extract high-level achievements that demonstrate:
+- Career progression
+- Leadership experience  
+- Technical expertise
+- Industry impact
+- Notable accomplishments
+
+REQUIRED JSON FORMAT (no additional text):
+{
+  "achievements": [
+    {
+      "title": "Achievement title",
+      "description": "What was accomplished", 
+      "impact": "The result or benefit",
+      "category": "leadership",
+      "significance": 7
+    }
+  ]
+}
+
+Category must be one of: leadership, technical, business, innovation, team, project
+Significance must be a number from 1-10
+Focus on concrete achievements, not generic statements.
+`;
+
+      const response = await this.openai.chat.completions.create({
+        model: 'gpt-4',
+        messages: [{ role: 'user', content: prompt }],
+        temperature: 0.3,
+        max_tokens: 600
+      });
+
+      const responseContent = response.choices[0].message.content || '';
+      const result = this.parseAIResponse(responseContent, 'summary extraction');
+      
+      if (!result || !Array.isArray(result.achievements)) {
+        return [];
+      }
+      
+      // Validate and clean each achievement
+      const validAchievements = result.achievements
+        .map((ach: any) => this.validateAndCleanAchievement(ach))
+        .filter((ach: Achievement | null) => ach !== null)
+        .map((ach: any) => ({
+          ...ach,
+          company: 'Career Overview',
+          timeframe: 'Career span'
+        }));
+
+      return validAchievements;
+
+    } catch (error) {
+      return [];
+    }
+  }
+
+  /**
+   * Validate and clean an achievement object
+   */
+  private validateAndCleanAchievement(ach: any): Achievement | null {
+    if (!ach || typeof ach !== 'object') {
+      return null;
+    }
+
+    // Required fields validation
+    if (!ach.title || typeof ach.title !== 'string') {
+      return null;
+    }
+
+    if (!ach.description || typeof ach.description !== 'string') {
+      return null;
+    }
+
+    // Validate category
+    const validCategories: Achievement['category'][] = ['leadership', 'technical', 'business', 'innovation', 'team', 'project'];
+    const category = validCategories.includes(ach.category) ? ach.category : 'project';
+
+    // Validate significance
+    let significance = parseInt(ach.significance) || 5;
+    significance = Math.max(1, Math.min(10, significance));
+
+    // Clean and validate fields
     return {
-      quantifiable: hasNumbers || hasPercent || hasCurrency,
-      impactScore: Math.min(impactScore, 1.0),
-      relevanceScore,
-      originalText: text,
-      enhancedText: text // Will be enhanced in the next step
+      title: ach.title.trim().substring(0, 100), // Limit title length
+      description: ach.description.trim().substring(0, 500), // Limit description length
+      impact: (ach.impact || 'Contributed to organizational objectives').trim().substring(0, 300),
+      company: ach.company || 'Unknown Company',
+      timeframe: ach.timeframe || 'Not specified',
+      category,
+      metrics: Array.isArray(ach.metrics) ? ach.metrics.filter(m => typeof m === 'string') : [],
+      significance
     };
   }
 
   /**
-   * Enhance achievements with suggestions
+   * Safely parse AI response with proper error handling and validation
    */
-  private async enhanceAchievements(achievements: AchievementHighlighting[]): Promise<AchievementHighlighting[]> {
-    return achievements.map(achievement => {
-      const suggestions = this.generateSuggestions(achievement);
-      return {
-        ...achievement,
-        suggestions
-      };
-    });
+  private parseAIResponse(responseContent: string, context: string): any {
+    if (!responseContent || typeof responseContent !== 'string') {
+      return null;
+    }
+
+    // Clean the response content - remove any markdown formatting
+    let cleanContent = responseContent.trim();
+    
+    // Remove markdown code blocks if present
+    if (cleanContent.startsWith('```json')) {
+      cleanContent = cleanContent.replace(/^```json\s*/, '').replace(/\s*```$/, '');
+    } else if (cleanContent.startsWith('```')) {
+      cleanContent = cleanContent.replace(/^```\s*/, '').replace(/\s*```$/, '');
+    }
+
+    // Handle malformed responses that start with text before JSON
+    // Look for common AI response patterns like "The provided..." or "Based on..."
+    if (cleanContent.match(/^(The provided|Based on|Here is|Here are|I'll analyze)/i)) {
+      // Try to find JSON pattern in the text
+      const jsonMatch = cleanContent.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        cleanContent = jsonMatch[0];
+      } else {
+        return null;
+      }
+    }
+
+    // Try to extract JSON from text if the response is not pure JSON
+    if (!cleanContent.startsWith('{') && !cleanContent.startsWith('[')) {
+      // Look for JSON pattern in the text with more flexible matching
+      const jsonPatterns = [
+        /\{[\s\S]*?\}/g,  // Multiple JSON objects
+        /\[[\s\S]*?\]/g,  // JSON arrays
+        /\{[^}]*"achievements"[^}]*\}/g  // JSON with achievements key
+      ];
+      
+      let found = false;
+      for (const pattern of jsonPatterns) {
+        const matches = cleanContent.match(pattern);
+        if (matches && matches.length > 0) {
+          // Use the longest match which is likely the most complete
+          cleanContent = matches.reduce((longest, current) => 
+            current.length > longest.length ? current : longest
+          );
+          found = true;
+          break;
+        }
+      }
+      
+      if (!found) {
+        return null;
+      }
+    }
+
+    // Additional cleaning for common JSON issues
+    cleanContent = cleanContent
+      .replace(/,\s*}/g, '}')  // Remove trailing commas before closing braces
+      .replace(/,\s*]/g, ']')  // Remove trailing commas before closing brackets
+      .replace(/\n/g, ' ')     // Replace newlines with spaces
+      .replace(/\s+/g, ' ');   // Normalize whitespace
+
+    try {
+      const parsed = JSON.parse(cleanContent);
+      
+      // Validate the structure
+      if (typeof parsed !== 'object' || parsed === null) {
+        return null;
+      }
+
+      // Ensure achievements array exists
+      if (!parsed.achievements) {
+        parsed.achievements = [];
+      }
+
+      // Validate achievements array structure
+      if (!Array.isArray(parsed.achievements)) {
+        parsed.achievements = [];
+      }
+
+      return parsed;
+    } catch (parseError) {
+      console.error(`JSON parsing failed for ${context}:`, {
+        error: parseError instanceof Error ? parseError.message : 'Unknown error',
+        contentStart: cleanContent.substring(0, 200),
+        originalStart: responseContent.substring(0, 200)
+      });
+      
+      // Try one more time with more aggressive cleaning
+      try {
+        // Remove any non-JSON characters at the beginning and end
+        const jsonStartIndex = cleanContent.indexOf('{');
+        const jsonEndIndex = cleanContent.lastIndexOf('}');
+        
+        if (jsonStartIndex !== -1 && jsonEndIndex !== -1 && jsonEndIndex > jsonStartIndex) {
+          const finalAttempt = cleanContent.substring(jsonStartIndex, jsonEndIndex + 1);
+          const lastAttemptParsed = JSON.parse(finalAttempt);
+          
+          if (!lastAttemptParsed.achievements) {
+            lastAttemptParsed.achievements = [];
+          }
+          
+          return lastAttemptParsed;
+        }
+      } catch (finalError) {
+      }
+      
+      return null;
+    }
   }
 
   /**
-   * Generate suggestions for improving achievements
+   * Fallback extraction when OpenAI is not available
    */
-  private generateSuggestions(achievement: AchievementHighlighting): string[] {
-    const suggestions: string[] = [];
-    
-    if (!achievement.metrics?.quantifiable) {
-      suggestions.push('Add specific numbers, percentages, or metrics to quantify the impact');
+  private fallbackExperienceExtraction(experience: any): Achievement[] {
+    const achievements: Achievement[] = [];
+
+    if (experience.achievements && experience.achievements.length > 0) {
+      experience.achievements.forEach((achievement: string, index: number) => {
+        achievements.push({
+          title: `Key Achievement ${index + 1}`,
+          description: achievement,
+          impact: 'Contributed to team and organizational success',
+          company: experience.company,
+          timeframe: experience.duration || `${experience.startDate} - ${experience.endDate || 'Present'}`,
+          category: this.categorizeAchievement(achievement),
+          significance: this.calculateSignificance(achievement)
+        });
+      });
     }
-    
-    if (achievement.confidence < 0.7) {
-      suggestions.push('Provide more context about the achievement and its significance');
-    }
-    
-    if (!achievement.description.match(/(?:increased|improved|reduced|achieved|delivered|generated|saved|grew|built|created|led|managed|developed)/i)) {
-      suggestions.push('Use strong action verbs to describe the achievement');
-    }
-    
-    return suggestions;
+
+    return achievements;
   }
 
   /**
-   * Calculate overall achievement score
+   * Categorize achievement based on keywords
    */
-  private calculateOverallScore(achievements: AchievementHighlighting[]): number {
-    if (achievements.length === 0) return 0;
+  private categorizeAchievement(text: string): Achievement['category'] {
+    const lowerText = text.toLowerCase();
     
-    const totalScore = achievements.reduce((sum, achievement) => sum + achievement.confidence, 0);
-    const averageScore = totalScore / achievements.length;
+    if (lowerText.includes('lead') || lowerText.includes('manage') || lowerText.includes('direct')) {
+      return 'leadership';
+    }
+    if (lowerText.includes('develop') || lowerText.includes('architect') || lowerText.includes('implement')) {
+      return 'technical';
+    }
+    if (lowerText.includes('revenue') || lowerText.includes('cost') || lowerText.includes('efficiency')) {
+      return 'business';
+    }
+    if (lowerText.includes('innovat') || lowerText.includes('new') || lowerText.includes('first')) {
+      return 'innovation';
+    }
+    if (lowerText.includes('team') || lowerText.includes('mentor') || lowerText.includes('hire')) {
+      return 'team';
+    }
     
-    // Bonus for having multiple quantified achievements
-    const quantifiedCount = achievements.filter(a => a.metrics?.quantifiable).length;
-    const quantifiedBonus = Math.min(quantifiedCount * 0.1, 0.3);
-    
-    return Math.min(averageScore + quantifiedBonus, 1.0);
+    return 'project';
   }
 
   /**
-   * Generate recommendations for improving achievements
+   * Calculate significance based on achievement content
    */
-  private generateRecommendations(achievements: AchievementHighlighting[]): string[] {
-    const recommendations: string[] = [];
+  private calculateSignificance(text: string): number {
+    let score = 5; // Base score
     
-    const quantifiedCount = achievements.filter(a => a.metrics?.quantifiable).length;
-    const totalCount = achievements.length;
+    const lowerText = text.toLowerCase();
     
-    if (quantifiedCount < totalCount * 0.5) {
-      recommendations.push('Add more quantifiable metrics to your achievements (numbers, percentages, dollar amounts)');
-    }
+    // Boost for quantifiable metrics
+    if (/\d+%|\$\d+|\d+x|million|billion/.test(lowerText)) score += 2;
     
-    if (totalCount < 3) {
-      recommendations.push('Include more achievements to demonstrate your impact and value');
-    }
+    // Boost for leadership terms
+    if (/lead|manage|direct|head|vp|director/.test(lowerText)) score += 1;
     
-    const lowConfidenceCount = achievements.filter(a => a.confidence < 0.7).length;
-    if (lowConfidenceCount > totalCount * 0.3) {
-      recommendations.push('Strengthen weak achievements with more specific details and context');
-    }
+    // Boost for impact terms
+    if (/improve|increase|reduce|save|deliver|launch/.test(lowerText)) score += 1;
     
-    return recommendations;
+    // Boost for scale terms  
+    if (/enterprise|global|organization|company-wide/.test(lowerText)) score += 1;
+    
+    return Math.min(10, score);
   }
 
   /**
-   * Extract key achievements from CV data (method expected by achievementHighlighting function)
+   * Generate achievement display HTML
    */
-  async extractKeyAchievements(cvData: CVData): Promise<AchievementHighlighting[]> {
-    const result = await this.analyzeAchievements({ cvData });
-    return result.achievements;
-  }
-
-  /**
-   * Generate achievements HTML for display (method expected by achievementHighlighting function)
-   */
-  async generateAchievementsHTML(achievements: AchievementHighlighting[]): Promise<string> {
-    if (achievements.length === 0) {
-      return '<div class="no-achievements">No achievements identified</div>';
+  generateAchievementsHTML(achievements: Achievement[]): string {
+    if (!achievements.length) {
+      return '<p>No key achievements extracted from CV data.</p>';
     }
-
-    const achievementsHTML = achievements.map(achievement => `
-      <div class="achievement" data-confidence="${achievement.confidence}">
-        <h3 class="achievement-title">${achievement.title}</h3>
-        <p class="achievement-description">${achievement.description}</p>
-        <div class="achievement-impact">${achievement.impact}</div>
-        ${achievement.metrics?.quantifiable ? '<span class="quantified-badge">Quantified</span>' : ''}
-        ${achievement.suggestions && achievement.suggestions.length > 0 ? `
-          <div class="suggestions">
-            <h4>Suggestions for improvement:</h4>
-            <ul>
-              ${achievement.suggestions.map(s => `<li>${s}</li>`).join('')}
-            </ul>
-          </div>
-        ` : ''}
-      </div>
-    `).join('');
 
     return `
-      <div class="achievements-container">
-        <h2>Key Achievements</h2>
-        ${achievementsHTML}
-        <div class="achievements-summary">
-          <p>Overall Achievement Score: ${Math.round(this.calculateOverallScore(achievements) * 100)}%</p>
-          <p>Quantified Achievements: ${achievements.filter(a => a.metrics?.quantifiable).length}/${achievements.length}</p>
-        </div>
+      <div class="key-achievements">
+        ${achievements.map(achievement => `
+          <div class="achievement-item">
+            <div class="achievement-icon">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <path d="M16 2L20 12H30L22 18L26 28L16 22L6 28L10 18L2 12H12L16 2Z" fill="#FFD700"/>
+              </svg>
+            </div>
+            <div class="achievement-content">
+              <h4 class="achievement-title">${achievement.title}</h4>
+              <p class="achievement-description">${achievement.description}</p>
+              <div class="achievement-meta">
+                <span class="achievement-company">${achievement.company}</span>
+                <span class="achievement-timeframe">${achievement.timeframe}</span>
+                <span class="achievement-category">${achievement.category.toUpperCase()}</span>
+              </div>
+              ${achievement.impact ? `<p class="achievement-impact"><strong>Impact:</strong> ${achievement.impact}</p>` : ''}
+              ${achievement.metrics && achievement.metrics.length > 0 ? 
+                `<div class="achievement-metrics">
+                  ${achievement.metrics.map(metric => `<span class="metric-badge">${metric}</span>`).join('')}
+                </div>` : ''}
+            </div>
+          </div>
+        `).join('')}
       </div>
+      
+      <style>
+        .key-achievements {
+          margin: 20px 0;
+        }
+        .achievement-item {
+          display: flex;
+          align-items: flex-start;
+          margin-bottom: 20px;
+          padding: 15px;
+          border-left: 4px solid #2563eb;
+          background: #f8fafc;
+          border-radius: 8px;
+        }
+        .achievement-icon {
+          margin-right: 15px;
+          flex-shrink: 0;
+        }
+        .achievement-content {
+          flex: 1;
+        }
+        .achievement-title {
+          margin: 0 0 8px 0;
+          color: #1e40af;
+          font-size: 16px;
+          font-weight: 600;
+        }
+        .achievement-description {
+          margin: 0 0 10px 0;
+          color: #374151;
+          line-height: 1.5;
+        }
+        .achievement-meta {
+          display: flex;
+          gap: 10px;
+          margin-bottom: 8px;
+          flex-wrap: wrap;
+        }
+        .achievement-company,
+        .achievement-timeframe,
+        .achievement-category {
+          font-size: 12px;
+          color: #6b7280;
+          background: #e5e7eb;
+          padding: 2px 8px;
+          border-radius: 12px;
+        }
+        .achievement-category {
+          background: #dbeafe;
+          color: #1d4ed8;
+        }
+        .achievement-impact {
+          margin: 8px 0;
+          color: #059669;
+          font-size: 14px;
+        }
+        .achievement-metrics {
+          display: flex;
+          gap: 6px;
+          flex-wrap: wrap;
+        }
+        .metric-badge {
+          background: #fef3c7;
+          color: #92400e;
+          font-size: 11px;
+          padding: 2px 6px;
+          border-radius: 10px;
+          font-weight: 500;
+        }
+      </style>
     `;
   }
 }

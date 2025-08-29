@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { useDropzone, FileRejection } from 'react-dropzone';
 import { Upload, FileText, AlertCircle } from 'lucide-react';
-import { cn } from '@cvplus/core/utils';
+import { cn } from '../utils/autonomous-utils';
 
 interface FileUploadProps {
   onFileSelect: (file: File) => void;

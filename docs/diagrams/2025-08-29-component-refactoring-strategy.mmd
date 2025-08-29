@@ -1,0 +1,196 @@
+flowchart TD
+    subgraph "CURRENT NON-COMPLIANT COMPONENTS"
+        A[CVAnalysisResults.tsx<br/>📊 1,281 lines<br/>❌ 6.4x over limit<br/>🔧 Multiple responsibilities]
+        B[SectionEditor.tsx<br/>📊 533 lines<br/>❌ 2.7x over limit<br/>🔧 Complex editing logic]
+        C[LivePreview.tsx<br/>📊 510 lines<br/>❌ 2.6x over limit<br/>🔧 Real-time processing]
+        D[EditablePlaceholder.tsx<br/>📊 509 lines<br/>❌ 2.5x over limit<br/>🔧 State management]
+        E[Other Components<br/>📊 37 components<br/>✅ Already compliant<br/>🔧 Minor enhancements needed]
+        
+        A -.->|Biggest Priority| A1[Critical Refactoring Required]
+        B -.->|High Priority| B1[Major Refactoring]
+        C -.->|High Priority| C1[Major Refactoring]
+        D -.->|High Priority| D1[Major Refactoring]
+    end
+
+    subgraph "REFACTORING ANALYSIS PROCESS"
+        F[Component Analysis<br/>• Line count analysis<br/>• Responsibility mapping<br/>• Dependency identification<br/>• Performance bottlenecks]
+        
+        G[Responsibility Extraction<br/>• Single Responsibility Principle<br/>• Identify cohesive units<br/>• Map component relationships<br/>• Define interfaces]
+        
+        H[Dependency Mapping<br/>• External dependency audit<br/>• Service injection points<br/>• State flow analysis<br/>• Props drilling detection]
+        
+        I[Performance Analysis<br/>• Render frequency<br/>• Memory usage<br/>• Bundle size impact<br/>• Optimization opportunities]
+        
+        F --> G --> H --> I
+    end
+
+    subgraph "CVANALYSISRESULTS DECOMPOSITION STRATEGY"
+        subgraph "Original Monolithic Component (1,281 lines)"
+            J[CVAnalysisResults<br/>❌ 1,281 lines<br/>• Header rendering (200 lines)<br/>• Content management (300 lines)<br/>• Action handling (250 lines)<br/>• Footer display (150 lines)<br/>• State management (200 lines)<br/>• Error handling (181 lines)]
+        end
+        
+        subgraph "Target Component Architecture (7 Components)"
+            K1[CVAnalysisResults<br/>✅ 45 lines<br/>Main coordinator component<br/>Orchestrates sub-components]
+            
+            K2[AnalysisHeader<br/>✅ 180 lines<br/>• Title and metadata<br/>• Status indicators<br/>• Action buttons]
+            
+            K3[AnalysisContent<br/>✅ 190 lines<br/>• Results rendering<br/>• Section navigation<br/>• Content filtering]
+            
+            K4[AnalysisActions<br/>✅ 170 lines<br/>• Edit functionality<br/>• Export options<br/>• Share controls]
+            
+            K5[AnalysisFooter<br/>✅ 160 lines<br/>• Metadata display<br/>• Performance metrics<br/>• Timestamps]
+            
+            K6[AnalysisProgress<br/>✅ 150 lines<br/>• Progress visualization<br/>• Status updates<br/>• Loading states]
+            
+            K7[AnalysisResults<br/>✅ 195 lines<br/>• Data visualization<br/>• Interactive elements<br/>• Export functionality]
+        end
+        
+        J -.->|Decompose| K1
+        J -.->|Extract| K2
+        J -.->|Extract| K3
+        J -.->|Extract| K4
+        J -.->|Extract| K5
+        J -.->|Extract| K6
+        J -.->|Extract| K7
+    end
+
+    subgraph "COMPONENT RELATIONSHIPS & DATA FLOW"
+        K1 --> K2
+        K1 --> K3
+        K1 --> K4
+        K1 --> K5
+        K1 --> K6
+        K1 --> K7
+        
+        L[Shared State<br/>useCVAnalysis hook<br/>Central state management<br/>Event coordination]
+        
+        M[Service Integration<br/>AutonomousAPIService<br/>Data fetching<br/>Error handling]
+        
+        N[Component Communication<br/>Props drilling elimination<br/>Event-based updates<br/>Context providers]
+        
+        K1 --> L
+        L --> M
+        L --> N
+        
+        K2 -.->|Events| N
+        K3 -.->|Events| N
+        K4 -.->|Events| N
+        K5 -.->|Events| N
+        K6 -.->|Events| N
+        K7 -.->|Events| N
+    end
+
+    subgraph "OTHER COMPONENT REFACTORING STRATEGIES"
+        subgraph "SectionEditor (533 → 3 components)"
+            O1[SectionEditor<br/>✅ 50 lines<br/>Main coordinator]
+            O2[EditorToolbar<br/>✅ 190 lines<br/>Editing tools]
+            O3[EditorContent<br/>✅ 185 lines<br/>Content area]
+            O4[EditorPreview<br/>✅ 108 lines<br/>Live preview]
+            
+            O1 --> O2
+            O1 --> O3
+            O1 --> O4
+        end
+        
+        subgraph "LivePreview (510 → 3 components)"
+            P1[LivePreview<br/>✅ 60 lines<br/>Main coordinator]
+            P2[PreviewRenderer<br/>✅ 195 lines<br/>Rendering engine]
+            P3[PreviewControls<br/>✅ 160 lines<br/>Control interface]
+            P4[PreviewSync<br/>✅ 95 lines<br/>Real-time sync]
+            
+            P1 --> P2
+            P1 --> P3
+            P1 --> P4
+        end
+        
+        subgraph "EditablePlaceholder (509 → 3 components)"
+            Q1[EditablePlaceholder<br/>✅ 55 lines<br/>Main coordinator]
+            Q2[PlaceholderEditor<br/>✅ 185 lines<br/>Edit functionality]
+            Q3[PlaceholderValidator<br/>✅ 175 lines<br/>Validation logic]
+            Q4[PlaceholderPreview<br/>✅ 94 lines<br/>Preview display]
+            
+            Q1 --> Q2
+            Q1 --> Q3
+            Q1 --> Q4
+        end
+    end
+
+    subgraph "REFACTORING IMPLEMENTATION PROCESS"
+        R1[Phase 1: Analysis<br/>• Component audit<br/>• Responsibility mapping<br/>• Dependency analysis<br/>• Interface design]
+        
+        R2[Phase 2: Extraction<br/>• Create sub-components<br/>• Extract logic<br/>• Establish interfaces<br/>• Implement communication]
+        
+        R3[Phase 3: Integration<br/>• Service integration<br/>• State management<br/>• Event handling<br/>• Error boundaries]
+        
+        R4[Phase 4: Validation<br/>• Line count validation<br/>• Functionality testing<br/>• Performance testing<br/>• Integration testing]
+        
+        R1 --> R2 --> R3 --> R4
+    end
+
+    subgraph "QUALITY ASSURANCE MEASURES"
+        S1[Line Count Validation<br/>• Automated checking<br/>• Build-time enforcement<br/>• CI/CD integration<br/>• Pre-commit hooks]
+        
+        S2[Responsibility Testing<br/>• Single responsibility validation<br/>• Coupling analysis<br/>• Cohesion measurement<br/>• Interface clarity]
+        
+        S3[Performance Validation<br/>• Render performance<br/>• Memory usage<br/>• Bundle size impact<br/>• Loading times]
+        
+        S4[Functional Testing<br/>• Unit test coverage<br/>• Integration testing<br/>• E2E workflows<br/>• Error handling]
+    end
+
+    subgraph "COMPONENT PATTERNS & BEST PRACTICES"
+        T1[Coordinator Pattern<br/>• Main component &lt;50 lines<br/>• Orchestrates sub-components<br/>• Minimal logic<br/>• Pure composition]
+        
+        T2[Service Integration<br/>• Dependency injection<br/>• Service abstraction<br/>• Error boundaries<br/>• Graceful degradation]
+        
+        T3[State Management<br/>• Custom hooks<br/>• Context providers<br/>• Event-driven updates<br/>• Immutable patterns]
+        
+        T4[Performance Optimization<br/>• React.memo usage<br/>• useMemo for expensive calculations<br/>• useCallback for handlers<br/>• Lazy loading]
+    end
+
+    subgraph "SUCCESS METRICS"
+        U1[Compliance Success<br/>✅ All 41 components &lt;200 lines<br/>✅ CVAnalysisResults: 1,281 → 7×&lt;200<br/>✅ Zero compliance violations<br/>✅ Automated enforcement]
+        
+        U2[Performance Success<br/>✅ 30% bundle size reduction<br/>✅ 50% faster component loading<br/>✅ 40% memory usage reduction<br/>✅ Improved render performance]
+        
+        U3[Maintainability Success<br/>✅ Single responsibility per component<br/>✅ Clear component interfaces<br/>✅ Reduced coupling<br/>✅ Improved testability]
+        
+        U4[Development Success<br/>✅ Faster feature development<br/>✅ Easier debugging<br/>✅ Better code reusability<br/>✅ Enhanced team productivity]
+    end
+
+    %% Process flow connections
+    I --> R1
+    R4 --> S1
+    R4 --> S2
+    R4 --> S3
+    R4 --> S4
+    
+    %% Pattern application
+    K1 --> T1
+    M --> T2
+    L --> T3
+    K2 --> T4
+    
+    %% Success measurement
+    S1 --> U1
+    S3 --> U2
+    S2 --> U3
+    S4 --> U4
+
+    %% Styling
+    classDef nonCompliant fill:#ffebee,stroke:#d32f2f,stroke-width:3px
+    classDef analysis fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef refactoring fill:#e8f5e8,stroke:#388e3c,stroke-width:2px
+    classDef compliant fill:#e4f5e4,stroke:#2e7d32,stroke-width:2px
+    classDef process fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+    classDef quality fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    classDef patterns fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    classDef success fill:#e0f2f1,stroke:#00796b,stroke-width:2px
+
+    class A,B,C,D,J nonCompliant
+    class F,G,H,I analysis
+    class O1,O2,O3,O4,P1,P2,P3,P4,Q1,Q2,Q3,Q4 refactoring
+    class E,K1,K2,K3,K4,K5,K6,K7 compliant
+    class R1,R2,R3,R4 process
+    class S1,S2,S3,S4 quality
+    class T1,T2,T3,T4 patterns
+    class U1,U2,U3,U4 success

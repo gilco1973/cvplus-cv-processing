@@ -2,7 +2,7 @@
  * Enhanced ATS Analysis Service
  * Provides advanced ATS analysis and optimization capabilities
  */
-import { CVData } from '@cvplus/core/types';
+import { CVData } from '../../types/autonomous-cv.types';
 
 export interface EnhancedATSAnalysisResult {
   currentScore: number;

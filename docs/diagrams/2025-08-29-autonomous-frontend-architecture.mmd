@@ -1,0 +1,390 @@
+# CV-Processing Autonomous Frontend Architecture Diagrams
+
+## System Overview
+
+```mermaid
+graph TB
+    subgraph "Parent CVPlus Application"
+        PA[Parent App]
+        PAuth[Parent Auth]
+        PConfig[Parent Config]
+    end
+    
+    subgraph "CV-Processing Autonomous Frontend"
+        subgraph "Integration Layer"
+            IM[Integration Module]
+            EB[Event Bridge]
+            PC[Parent Communicator]
+        end
+        
+        subgraph "Service Layer"
+            SC[Service Container]
+            AuthS[Autonomous Auth Service]
+            APIs[Autonomous API Service]
+            StorS[Autonomous Storage Service]
+            CacheS[Autonomous Cache Service]
+            ConfigS[Autonomous Config Service]
+            LogS[Logger Service]
+            MonS[Monitoring Service]
+        end
+        
+        subgraph "Component Layer"
+            subgraph "Analysis Components"
+                CAR[CV Analysis Results]
+                AH[Analysis Header]
+                AC[Analysis Content]
+                AA[Analysis Actions]
+                AF[Analysis Footer]
+            end
+            
+            subgraph "Preview Components"
+                CVP[CV Preview]
+                LP[Live Preview]
+                PRC[Preview Controls]
+                PS[Preview Skeleton]
+            end
+            
+            subgraph "Upload Components"
+                FU[File Upload]
+                UP[Upload Progress]
+                UV[Upload Validator]
+            end
+            
+            subgraph "Dashboard Components"
+                CPD[CV Processing Dashboard]
+                DH[Dashboard Header]
+                DS[Dashboard Sidebar]
+            end
+        end
+        
+        subgraph "Utilities Layer"
+            EH[Error Handling]
+            Val[Validation]
+            Fmt[Formatting]
+            CK[Cache Keys]
+        end
+    end
+    
+    subgraph "External Services"
+        FB[Firebase]
+        AnthS[Anthropic API]
+        Storage[Firebase Storage]
+    end
+    
+    %% Integration connections
+    PA --> IM
+    PAuth --> EB
+    PConfig --> PC
+    
+    %% Service layer connections
+    IM --> SC
+    SC --> AuthS
+    SC --> APIs
+    SC --> StorS
+    SC --> CacheS
+    SC --> ConfigS
+    SC --> LogS
+    SC --> MonS
+    
+    %% Component connections
+    AuthS --> CAR
+    APIs --> CVP
+    StorS --> FU
+    ConfigS --> CPD
+    
+    %% External service connections
+    AuthS --> FB
+    APIs --> AnthS
+    StorS --> Storage
+    
+    %% Utility connections
+    EH --> CAR
+    Val --> FU
+    Fmt --> CVP
+    CK --> CacheS
+    
+style PA fill:#e1f5fe
+style IM fill:#f3e5f5
+style SC fill:#e8f5e8
+style CAR fill:#fff3e0
+style FB fill:#ffebee
+```
+
+## Service Architecture Detail
+
+```mermaid
+classDiagram
+    class ServiceContainer {
+        -services: Map~string, Service~
+        -initialized: boolean
+        +initialize(config: ServiceConfig): Promise~void~
+        +get~T~(serviceKey: string): T
+        +dispose(): Promise~void~
+    }
+    
+    class AutonomousAuthService {
+        -firebaseAuth: Auth
+        -sessionCache: Map~string, AuthSession~
+        -parentAuthBridge: ParentAuthBridge
+        +authenticate(credentials: AuthCredentials): Promise~AuthResult~
+        +validateSession(token: string): Promise~SessionValidationResult~
+        +onAuthStateChange(callback: AuthStateChangeCallback): Function
+    }
+    
+    class AutonomousAPIService {
+        -httpClient: HttpClient
+        -cache: AutonomousCacheService
+        -retryConfig: RetryConfig
+        +processCV(cvData: CVProcessingRequest): Promise~CVProcessingResult~
+        +generatePreview(cvId: string): Promise~PreviewData~
+        +uploadFile(file: File): Promise~UploadResult~
+    }
+    
+    class AutonomousStorageService {
+        -storage: FirebaseStorage
+        -uploadTasks: Map~string, UploadTask~
+        +uploadFile(file: File, path: string): Promise~UploadResult~
+        +getUploadProgress(taskId: string): UploadProgress
+        +deleteFile(path: string): Promise~void~
+    }
+    
+    class AutonomousCacheService {
+        -cache: Map~string, CacheEntry~
+        -maxSize: number
+        -defaultTTL: number
+        +get~T~(key: string): Promise~T~
+        +set(key: string, value: any, options: CacheOptions): Promise~void~
+        +invalidate(pattern: string): Promise~void~
+    }
+    
+    class AutonomousConfigService {
+        -config: AutonomousConfig
+        -watchers: Set~ConfigChangeCallback~
+        +get~T~(key: string, defaultValue: T): T
+        +set(key: string, value: any): void
+        +update(partialConfig: Partial~AutonomousConfig~): void
+        +watch(callback: ConfigChangeCallback): Function
+    }
+    
+    ServiceContainer --> AutonomousAuthService
+    ServiceContainer --> AutonomousAPIService
+    ServiceContainer --> AutonomousStorageService
+    ServiceContainer --> AutonomousCacheService
+    ServiceContainer --> AutonomousConfigService
+    AutonomousAPIService --> AutonomousCacheService
+```
+
+## Component Refactoring Strategy
+
+```mermaid
+graph TD
+    subgraph "Before: Non-Compliant Components"
+        CAR_OLD["CVAnalysisResults.tsx<br/>1,280 lines ⚠️"]
+        SE_OLD["SectionEditor.tsx<br/>533 lines ⚠️"]
+        LP_OLD["LivePreview.tsx<br/>510 lines ⚠️"]
+        EP_OLD["EditablePlaceholder.tsx<br/>509 lines ⚠️"]
+    end
+    
+    subgraph "After: Compliant Component Architecture"
+        subgraph "Analysis Components (~50 lines each)"
+            CAR_NEW["CVAnalysisResults.tsx<br/>45 lines ✅"]
+            AH["AnalysisHeader.tsx<br/>180 lines ✅"]
+            AC["AnalysisContent.tsx<br/>195 lines ✅"]
+            AA["AnalysisActions.tsx<br/>160 lines ✅"]
+            AF["AnalysisFooter.tsx<br/>120 lines ✅"]
+            AP["AnalysisProgress.tsx<br/>140 lines ✅"]
+            AR["AnalysisResults.tsx<br/>190 lines ✅"]
+        end
+        
+        subgraph "Editor Components (~180 lines each)"
+            SE_NEW["SectionEditor.tsx<br/>185 lines ✅"]
+            SEH["SectionEditorHeader.tsx<br/>90 lines ✅"]
+            SEC["SectionEditorContent.tsx<br/>175 lines ✅"]
+        end
+        
+        subgraph "Preview Components (~170 lines each)"
+            LP_NEW["LivePreview.tsx<br/>170 lines ✅"]
+            LPM["LivePreviewManager.tsx<br/>180 lines ✅"]
+            LPU["LivePreviewUpdater.tsx<br/>160 lines ✅"]
+        end
+        
+        subgraph "Placeholder Components (~170 lines each)"
+            EP_NEW["EditablePlaceholder.tsx<br/>170 lines ✅"]
+            PI["PlaceholderInput.tsx<br/>150 lines ✅"]
+            PB["PlaceholderBanner.tsx<br/>140 lines ✅"]
+        end
+    end
+    
+    CAR_OLD -.->|"Refactor<br/>Break Down"| CAR_NEW
+    CAR_OLD -.-> AH
+    CAR_OLD -.-> AC
+    CAR_OLD -.-> AA
+    CAR_OLD -.-> AF
+    CAR_OLD -.-> AP
+    CAR_OLD -.-> AR
+    
+    SE_OLD -.-> SE_NEW
+    SE_OLD -.-> SEH
+    SE_OLD -.-> SEC
+    
+    LP_OLD -.-> LP_NEW
+    LP_OLD -.-> LPM
+    LP_OLD -.-> LPU
+    
+    EP_OLD -.-> EP_NEW
+    EP_OLD -.-> PI
+    EP_OLD -.-> PB
+    
+style CAR_OLD fill:#ffcdd2
+style SE_OLD fill:#ffcdd2
+style LP_OLD fill:#ffcdd2
+style EP_OLD fill:#ffcdd2
+style CAR_NEW fill:#c8e6c9
+style AH fill:#c8e6c9
+style AC fill:#c8e6c9
+style AA fill:#c8e6c9
+style AF fill:#c8e6c9
+style AP fill:#c8e6c9
+style AR fill:#c8e6c9
+```
+
+## Integration Layer Architecture
+
+```mermaid
+sequenceDiagram
+    participant PA as Parent App
+    participant IM as Integration Module
+    participant EB as Event Bridge
+    participant SC as Service Container
+    participant Comp as Components
+    
+    Note over PA,Comp: Initialization Phase
+    PA->>IM: initialize(config)
+    IM->>SC: initialize(serviceConfig)
+    SC->>SC: Initialize all services
+    IM->>EB: setup event bridge
+    EB->>PA: Register message handlers
+    
+    Note over PA,Comp: Runtime Phase
+    PA->>IM: mount(container, props)
+    IM->>Comp: Render React app
+    Comp->>SC: Use services
+    
+    Note over PA,Comp: Event Communication
+    Comp->>EB: emit('status:changed', data)
+    EB->>PA: postMessage(event)
+    PA->>EB: postMessage(parentEvent)
+    EB->>Comp: forward parent event
+    
+    Note over PA,Comp: Configuration Updates
+    PA->>IM: updateConfig(newConfig)
+    IM->>EB: emit('config:updated')
+    EB->>Comp: apply new configuration
+    
+    Note over PA,Comp: Cleanup Phase
+    PA->>IM: unmount()
+    IM->>Comp: Unmount React app
+    IM->>EB: cleanup event handlers
+    SC->>SC: Dispose services
+```
+
+## Bundle Architecture
+
+```mermaid
+graph TB
+    subgraph "Build Targets"
+        subgraph "Main Package (~100KB)"
+            MainEntry["index.js<br/>Main entry point"]
+            MainESM["index.esm.js<br/>ESM bundle"]
+        end
+        
+        subgraph "Frontend Package (~80KB)"
+            FrontEntry["frontend/index.js<br/>Frontend entry"]
+            FrontESM["frontend/index.esm.js<br/>Frontend ESM"]
+            FrontUMD["frontend/cv-processing.umd.js<br/>Browser bundle"]
+        end
+        
+        subgraph "Chunk Analysis"
+            Vendor["Vendor Chunk<br/>React + core deps<br/>~60KB"]
+            Components["Components Chunk<br/>All UI components<br/>~50KB"]
+            Services["Services Chunk<br/>Service layer<br/>~30KB"]
+            Utils["Utils Chunk<br/>Utilities & helpers<br/>~15KB"]
+        end
+    end
+    
+    subgraph "Bundle Optimization"
+        TreeShake["Tree Shaking<br/>Remove unused code"]
+        CodeSplit["Code Splitting<br/>Lazy load components"]
+        Minify["Minification<br/>Terser optimization"]
+        Gzip["Compression<br/>Gzip encoding"]
+    end
+    
+    subgraph "Performance Targets"
+        InitialLoad["Initial Load<br/>&lt; 50KB"]
+        TotalSize["Total Bundle<br/>&lt; 200KB"]
+        LoadTime["Load Time<br/>&lt; 2s"]
+        Interaction["Interaction<br/>&lt; 100ms"]
+    end
+    
+    MainEntry --> Vendor
+    FrontEntry --> Components
+    FrontUMD --> Services
+    
+    TreeShake --> InitialLoad
+    CodeSplit --> TotalSize
+    Minify --> LoadTime
+    Gzip --> Interaction
+    
+style Vendor fill:#e3f2fd
+style Components fill:#f3e5f5
+style Services fill:#e8f5e8
+style Utils fill:#fff8e1
+style InitialLoad fill:#c8e6c9
+style TotalSize fill:#c8e6c9
+style LoadTime fill:#c8e6c9
+style Interaction fill:#c8e6c9
+```
+
+## Development Workflow
+
+```mermaid
+flowchart TD
+    Start(["Start Development"]) --> Check{"File Compliance<br/>Check"}
+    
+    Check -->|"Files > 200 lines"| Refactor["Refactor Components<br/>Break down large files"]
+    Check -->|"All files compliant"| Develop["Component Development"]
+    
+    Refactor --> Validate["Validate Refactoring<br/>Test functionality"]
+    Validate --> Develop
+    
+    Develop --> Test["Run Test Suite<br/>Unit + Integration"]
+    Test -->|"Tests fail"| Debug["Debug & Fix<br/>Iterative fixes"]
+    Test -->|"Tests pass"| Bundle["Bundle Analysis<br/>Size validation"]
+    
+    Debug --> Test
+    
+    Bundle -->|"Size exceeded"| Optimize["Bundle Optimization<br/>Code splitting"]
+    Bundle -->|"Size OK"| Performance["Performance Testing<br/>Load time validation"]
+    
+    Optimize --> Bundle
+    
+    Performance -->|"Performance issues"| Perf_Fix["Performance Optimization<br/>Component optimization"]
+    Performance -->|"Performance OK"| Quality["Quality Gate<br/>Final validation"]
+    
+    Perf_Fix --> Performance
+    
+    Quality -->|"Quality issues"| Review["Code Review<br/>Fix issues"]
+    Quality -->|"Quality passed"| Deploy["Deploy to Testing<br/>Integration validation"]
+    
+    Review --> Quality
+    
+    Deploy --> End(["Development Complete"])
+    
+style Start fill:#e8f5e8
+style End fill:#e8f5e8
+style Check fill:#fff3e0
+style Refactor fill:#ffecb3
+style Test fill:#f3e5f5
+style Bundle fill:#e1f5fe
+style Quality fill:#c8e6c9
+```
