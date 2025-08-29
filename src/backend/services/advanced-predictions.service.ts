@@ -34,6 +34,17 @@ export interface JobData {
   postedDate?: Date;
 }
 
+export interface AdvancedPredictionRequest {
+  userId: string;
+  cvData: CVData;
+  jobData?: JobData;
+  targetRole?: string;
+  options?: {
+    includeConfidence?: boolean;
+    includeSalaryPrediction?: boolean;
+  };
+}
+
 export class AdvancedPredictionsService {
   async predictJobSuccess(cvData: CVData, jobData: JobData): Promise<PredictionMetrics> {
     // This is a stub implementation - the actual service logic would go here
