@@ -52,6 +52,7 @@ export function useKeyboardShortcuts(shortcuts: ShortcutMap, enabled = true) {
       document.addEventListener('keydown', handleKeyDown);
       return () => document.removeEventListener('keydown', handleKeyDown);
     }
+    return undefined;
   }, [handleKeyDown, enabled]);
 }
 

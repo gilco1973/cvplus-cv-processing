@@ -284,16 +284,12 @@ export interface CVProcessingContext {
   };
 }
 
-// Service Interface Type
-export interface ServiceInterface {
-  getServiceInfo(): {
-    name: string;
-    version: string;
-    uptime: number;
-  };
-}
+// Service Interface Type moved to shared/utils/service-registry.ts to avoid duplication
 
-// ParsedCV Type
+// Enhanced models
+export * from './enhanced-models';
+
+// ParsedCV Type (also exported as CVParsedData for compatibility)
 export interface ParsedCV {
   personalInfo: {
     name: string;
@@ -351,3 +347,6 @@ export interface ParsedCV {
     contact: string;
   }>;
 }
+
+// Export CVParsedData as alias for compatibility
+export type CVParsedData = ParsedCV;

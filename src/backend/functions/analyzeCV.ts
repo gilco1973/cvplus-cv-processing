@@ -1,12 +1,12 @@
 import { onCall } from 'firebase-functions/v2/https';
-import { corsOptions } from '@cvplus/core/config';
+import { corsOptions } from '../config/cors';
 import { CVAnalysisRequest, CVAnalysisResponse } from '../../types';
 
 export const analyzeCV = onCall(
   {
     timeoutSeconds: 120,
     memory: '512MiB',
-    ...corsOptions,
+    cors: corsOptions,
     secrets: ['ANTHROPIC_API_KEY']
   },
   async (request) => {

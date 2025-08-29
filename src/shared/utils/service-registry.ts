@@ -8,7 +8,7 @@
  * @version 2.0.0 - Modularized Architecture
  */
 
-import { BaseService } from './base-service';
+// BaseService imported but not used - removing unused import
 
 export interface ServiceInterface {
   getServiceInfo(): {
@@ -197,6 +197,8 @@ export class ServiceRegistry {
    */
   getDependencies(serviceName: string): string[] {
     // This could be enhanced to track service dependencies
+    // For now, we don't track dependencies for: serviceName
+    void serviceName; // Mark as used
     return [];
   }
 

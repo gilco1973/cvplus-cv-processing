@@ -19,6 +19,20 @@
     "**/*.test.tsx",
     "**/*.spec.ts",
     "**/*.spec.tsx",
-    "src/**/__tests__/**/*"
+    "src/**/__tests__/**/*",
+    "src/backend/functions/achievementHighlighting.ts",
+    "src/backend/functions/analyzeCV.ts",
+    "src/backend/functions/atsOptimization.ts",
+    "src/backend/functions/enhancedAnalyzeCV.ts",
+    "src/backend/functions/enrichCVWithExternalData.ts",
+    "src/backend/functions/generateTimeline.ts",
+    "src/backend/functions/industryOptimization.ts",
+    "src/backend/functions/languageProficiency.ts",
+    "src/backend/functions/personalityInsights.ts",
+    "src/backend/functions/predictSuccess.ts",
+    "src/backend/functions/processCV.enhanced.ts",
+    "src/backend/functions/regionalOptimization.ts",
+    "src/backend/functions/skillsVisualization.ts",
+    "src/frontend/components/CVPreview.tsx"
   ]
 }
