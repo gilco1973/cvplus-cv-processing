@@ -137,7 +137,7 @@ export class PersonalBrandingFeature implements CVFeature {
     
     // Check skills for communication-related abilities
     const allSkills = [...(skills.technical || []), ...(skills.soft || []), ...(skills.languages || [])];
-    const communicationSkills = allSkills.filter(skill => 
+    const communicationSkills = allSkills.filter((skill: any) => 
       skill && (
         skill.toLowerCase().includes('communication') ||
         skill.toLowerCase().includes('presentation') ||
@@ -176,7 +176,7 @@ export class PersonalBrandingFeature implements CVFeature {
     }
     
     // Check for technical skills that indicate innovation capacity
-    const techSkills = (skills.technical || []).filter(skill => 
+    const techSkills = (skills.technical || []).filter((skill: any) => 
       skill && (
         skill.toLowerCase().includes('javascript') ||
         skill.toLowerCase().includes('python') ||
@@ -215,7 +215,7 @@ export class PersonalBrandingFeature implements CVFeature {
     
     // Check for analytical skills
     const allSkills = [...(skills.technical || []), ...(skills.soft || [])];
-    const analyticalSkills = allSkills.filter(skill => 
+    const analyticalSkills = allSkills.filter((skill: any) => 
       skill && (
         skill.toLowerCase().includes('analysis') ||
         skill.toLowerCase().includes('problem') ||

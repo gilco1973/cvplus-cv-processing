@@ -493,7 +493,7 @@ export class RecommendationService {
     
     // Collect dates from education
     if (parsedCV.education) {
-      parsedCV.education.forEach(edu => {
+      parsedCV.education.forEach((edu: any) => {
         if (edu.startDate) dates.push(edu.startDate);
         if (edu.endDate) dates.push(edu.endDate);
       });
@@ -568,7 +568,7 @@ export class RecommendationService {
 
   private extractSkillsArray(skills: any): string[] {
     if (Array.isArray(skills)) {
-      return skills.map(skill => typeof skill === 'string' ? skill : skill.name || skill.skill || '');
+      return skills.map((skill: any) => typeof skill === 'string' ? skill : skill.name || skill.skill || '');
     }
     if (typeof skills === 'string') {
       return skills.split(/[,;|\n]/).map(s => s.trim()).filter(s => s.length > 0);

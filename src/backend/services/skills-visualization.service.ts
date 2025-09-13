@@ -97,7 +97,7 @@ export class SkillsVisualizationService {
         endorsed?: boolean;
       }> = [];
       
-      allSkills.forEach(skill => {
+      allSkills.forEach((skill: any) => {
         const skillLower = skill.toLowerCase();
         if (keywords.some(keyword => skillLower.includes(keyword))) {
           const skillData = {
@@ -132,7 +132,7 @@ export class SkillsVisualizationService {
     if (uncategorized.length > 0) {
       categories.push({
         name: 'Other Technical Skills',
-        skills: uncategorized.map(skill => ({
+        skills: uncategorized.map((skill: any) => ({
           name: skill,
           level: this.assessSkillLevel(skill, cv),
           yearsOfExperience: this.estimateYearsOfExperience(skill, cv)
@@ -170,7 +170,7 @@ export class SkillsVisualizationService {
         yearsOfExperience?: number;
       }> = [];
       
-      allSoftSkills.forEach(skill => {
+      allSoftSkills.forEach((skill: any) => {
         const skillLower = skill.toLowerCase();
         if (keywords.some(keyword => skillLower.includes(keyword))) {
           categorySkills.push({
@@ -211,7 +211,7 @@ export class SkillsVisualizationService {
     
     // Infer from education or certifications
     if (cv.education) {
-      cv.education.forEach(edu => {
+      cv.education.forEach((edu: any) => {
         const langMatch = edu.field?.match(/language|linguistics|translation/i);
         if (langMatch) {
           // Extract language from degree
@@ -653,7 +653,7 @@ Technical skills only (languages, frameworks, tools, platforms):`;
     // Collect all unique skills
     [...visualization.technical, ...visualization.soft].forEach(category => {
       categories.push(category.name);
-      category.skills.forEach(skill => allSkills.add(skill.name));
+      category.skills.forEach((skill: any) => allSkills.add(skill.name));
     });
     
     const labels = Array.from(allSkills);

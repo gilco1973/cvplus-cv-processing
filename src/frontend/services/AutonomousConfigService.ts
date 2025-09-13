@@ -205,7 +205,7 @@ export class AutonomousConfigService {
     if (typeof key === 'string' && key.includes('.')) {
       return this.getNestedValue(this.config, key);
     }
-    return this.config[key];
+    return (this.config as any)[key];
   }
 
   /**

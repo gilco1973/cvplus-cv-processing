@@ -109,7 +109,7 @@ export class ExternalDataServiceImpl implements ExternalDataService {
   async getSkillsDemand(skills: string[]): Promise<any> {
     // Mock skills demand data
     return {
-      topSkills: skills.map(skill => ({
+      topSkills: skills.map((skill: any) => ({
         skill,
         demand: Math.random() * 100,
         growth: Math.random() * 30 - 10, // -10% to +20%

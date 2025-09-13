@@ -224,7 +224,7 @@ export class ModernTemplate implements CVTemplate {
   private generateEducation(cv: ParsedCV): string {
     if (!cv.education || cv.education.length === 0) return '';
     
-    const educationItems = cv.education.map(edu => `
+    const educationItems = cv.education.map((edu: any) => `
         <div class="education-item">
             <div class="item-header">
                 <div>
@@ -250,7 +250,7 @@ export class ModernTemplate implements CVTemplate {
     let skillsContent = '';
     
     if (cv.skills.technical && cv.skills.technical.length > 0) {
-      const technicalSkills = cv.skills.technical.map(skill => 
+      const technicalSkills = cv.skills.technical.map((skill: any) => 
         `<span class="skill-item">${skill}</span>`
       ).join('');
       skillsContent += `
@@ -262,7 +262,7 @@ export class ModernTemplate implements CVTemplate {
     }
     
     if (cv.skills.soft && cv.skills.soft.length > 0) {
-      const softSkills = cv.skills.soft.map(skill => 
+      const softSkills = cv.skills.soft.map((skill: any) => 
         `<span class="skill-item">${skill}</span>`
       ).join('');
       skillsContent += `

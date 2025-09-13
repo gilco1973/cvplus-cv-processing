@@ -43,7 +43,7 @@ export function isEmpty(value: unknown): boolean {
 export function validateCV(data: unknown): data is CVData {
   if (!isObject(data)) return false;
   
-  const cv = data as CVData;
+  const cv = data as unknown as CVData;
   return !!(
     cv.id &&
     cv.personalInfo &&
@@ -225,7 +225,7 @@ export function mergeDeep<T extends Record<string, any>>(target: T, ...sources: 
     for (const key in source) {
       if (isObject(source[key])) {
         if (!target[key]) Object.assign(target, { [key]: {} });
-        mergeDeep(target[key], source[key]);
+        mergeDeep(target[key] as any, source[key] as any);
       } else {
         Object.assign(target, { [key]: source[key] });
       }

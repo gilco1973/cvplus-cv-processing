@@ -162,7 +162,7 @@ export const ProcessingStatus: React.FC<ProcessingStatusProps> = ({
         <div className="space-y-3 mb-6">
           <h4 className="text-sm font-medium text-gray-700">Processing Steps</h4>
           <div className="space-y-2">
-            {steps.map((step, index) => (
+            {steps.map((step) => (
               <div key={step.id} className="flex items-center gap-3 p-2 rounded">
                 {getStatusIcon(step.status)}
                 <div className="flex-1 min-w-0">

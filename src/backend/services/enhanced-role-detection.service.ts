@@ -17,9 +17,9 @@ import {
   KeywordMatch,
   RoleBasedRecommendation,
   CVSection
-} from '../types/role-profile.types';
+} from '@cvplus/core/types/role-profile.types';
 import { VerifiedClaudeService } from './verified-claude.service';
-import { RoleProfileService } from './role-profile.service';
+import { RoleProfileService } from '@cvplus/core/services/role-profile.service';
 
 export class EnhancedRoleDetectionService {
   private claudeService: VerifiedClaudeService;
@@ -234,7 +234,7 @@ Remember: Always suggest multiple roles (minimum 2, ideally 3-4) with realistic 
         details: 'Basic skill alignment analysis',
         reasoning: {
           contributionExplanation: 'Skills analysis based on profile requirements',
-          keywordMatches: profile.requiredSkills.slice(0, 3).map(skill => ({
+          keywordMatches: profile.requiredSkills.slice(0, 3).map((skill: any) => ({
             keyword: skill,
             found: true,
             matchType: 'fuzzy' as const,

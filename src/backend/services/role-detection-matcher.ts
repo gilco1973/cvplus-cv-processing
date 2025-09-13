@@ -11,7 +11,7 @@ import {
   RoleDetectionConfig,
   MatchingFactor,
   ExperienceLevel
-} from '../types/role-profile.types';
+} from '@cvplus/core/types/role-profile.types';
 import { FuzzyMatchingService } from './role-detection-fuzzy.service';
 import {
   FuzzyMatchConfig,
@@ -126,7 +126,7 @@ export class RoleDetectionMatcher {
         details: `Skills alignment: ${Math.round(skillsMatch * 100)}% match with required skills`,
         reasoning: {
           contributionExplanation: `Skills matching analysis`,
-          keywordMatches: cvSkillsArray.slice(0, 3).map(skill => ({
+          keywordMatches: cvSkillsArray.slice(0, 3).map((skill: any) => ({
             keyword: skill,
             found: true,
             matchType: 'fuzzy' as const,

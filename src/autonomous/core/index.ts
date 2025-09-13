@@ -54,8 +54,19 @@ export const createApiResponse = <T>(
 export const delay = (ms: number): Promise<void> => 
   new Promise(resolve => setTimeout(resolve, ms));
 
-export const formatDate = (date: Date): string => 
-  date.toISOString().split('T')[0];
+export const formatDate = (date: Date | string | undefined): string => {
+  if (!date) {
+    const defaultDate = new Date().toISOString().split('T')[0];
+    return defaultDate || '';
+  }
+  if (typeof date === 'string') {
+    const parsed = new Date(date);
+    const formattedDate = parsed.toISOString().split('T')[0];
+    return formattedDate || '';
+  }
+  const formattedDate = date.toISOString().split('T')[0];
+  return formattedDate || '';
+};
 
 // Validation utilities
 export const isValidEmail = (email: string): boolean => {

@@ -35,14 +35,14 @@ export interface AuthService {
 export interface AuthConfiguration {
   firebase: FirebaseConfig;
   parentAuth?: ParentAPI;
-  enableFallback?: boolean;
+  _enableFallback?: boolean;
 }
 
 export class AutonomousAuthService implements AuthService {
   private firebaseApp: FirebaseApp;
   private firebaseAuth: Auth;
   private parentAuth?: ParentAPI;
-  private enableFallback: boolean;
+  private _enableFallback: boolean;
   private currentUser: User | null = null;
 
   constructor(config: AuthConfiguration) {
@@ -50,7 +50,7 @@ export class AutonomousAuthService implements AuthService {
     this.firebaseApp = initializeApp(config.firebase);
     this.firebaseAuth = getAuth(this.firebaseApp);
     this.parentAuth = config.parentAuth;
-    this.enableFallback = config.enableFallback ?? true;
+    this._enableFallback = config._enableFallback ?? true;
 
     // Set up auth state listener
     this.setupAuthStateListener();
@@ -314,6 +314,6 @@ export function createAuthService(config: AuthConfiguration): AuthService {
 export function createDefaultAuthConfig(firebaseConfig: FirebaseConfig): AuthConfiguration {
   return {
     firebase: firebaseConfig,
-    enableFallback: true
+    _enableFallback: true
   };
 }

@@ -6,16 +6,38 @@
  */
 
 // Export frontend components and hooks
-export * from './frontend';
+export { 
+  CVPreview,
+  CVAnalysisDisplay,
+  CVProcessingProvider,
+  useCVProcessing,
+  useCVAnalysis,
+  useAchievementAnalysis
+} from './frontend';
 
-// Export backend functions and services
-export * from './backend';
+// Export backend functions
+export {
+  processCV,
+  generateCV,
+  analyzeCV
+} from './backend';
 
-// Export shared types and utilities
-export * from './shared';
+// Export shared utilities (avoiding type conflicts)
+export {
+  ServiceRegistry,
+  CVGenerationHelpers
+} from './shared';
 
-// Export package-specific types
-export * from './types';
+// Export core types (explicit to avoid conflicts)
+export type {
+  CVProcessingConfig,
+  ProcessingResult,
+  CVAnalysis,
+  AchievementHighlighting,
+  CVData,
+  Job,
+  User
+} from './types';
 
 // Package metadata
 export const CV_PROCESSING_VERSION = '1.0.0';

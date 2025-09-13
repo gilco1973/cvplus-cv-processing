@@ -6,7 +6,7 @@
 // Core CV Data Interfaces
 export interface PersonalInfo {
   name: string;
-  email?: string;
+  email: string; // Made required for consistency with ParsedCV
   phone?: string;
   location?: string;
   linkedin?: string;
@@ -21,11 +21,12 @@ export interface Experience {
   id: string;
   company: string;
   title: string;
+  position: string; // Added for ParsedCV compatibility
   location?: string;
-  startDate: Date;
-  endDate?: Date;
+  startDate: Date | string; // Allow both Date and string for flexibility
+  endDate?: Date | string; // Allow both Date and string for flexibility
   current?: boolean;
-  description: string;
+  description?: string; // Made optional for ParsedCV compatibility
   achievements?: string[];
   technologies?: string[];
   responsibilities?: string[];

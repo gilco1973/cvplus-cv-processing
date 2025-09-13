@@ -67,3 +67,103 @@ export interface BaseProcessingMetadata {
   version?: string;
   timestamp?: Date;
 }
+
+// Core data types
+export interface Experience {
+  company: string;
+  position: string;
+  startDate: string;
+  endDate?: string;
+  location?: string;
+  description?: string;
+  achievements?: string[];
+  technologies?: string[];
+}
+
+export interface ParsedCV {
+  personalInfo: {
+    name?: string;
+    email?: string;
+    phone?: string;
+    location?: string;
+  };
+  summary?: string;
+  experience: {
+    company: string;
+    position: string;
+    startDate?: string;
+    endDate?: string;
+    location?: string;
+    description?: string;
+    achievements?: string[];
+    technologies?: string[];
+  }[];
+  education: any[];
+  skills: string[];
+  languages?: string[];
+  certifications?: any[];
+  projects?: any[];
+}
+
+// Request/Response interfaces
+export interface IndustryOptimizationRequest {
+  cvData: CVData;
+  userId?: string;
+  targetIndustry?: string;
+  targetRole?: string;
+  experienceLevel?: string;
+  region?: string;
+}
+
+export interface RegionalOptimizationRequest {
+  cvData: CVData;
+  userId?: string;
+  targetRegion?: string;
+  targetCountry?: string;
+  industry?: string;
+}
+
+export interface PredictionRequest {
+  cvData: CVData;
+  userId?: string;
+  jobData?: {
+    title: string;
+    industry: string;
+    location: string;
+  };
+}
+
+// Result interfaces
+export interface ATSOptimizationResult {
+  score: number;
+  recommendations: string[];
+  insights: any;
+  optimizations: any[];
+  overall: {
+    score: number;
+    grade: string;
+    issues: string[];
+  };
+}
+
+export interface PersonalityInsights {
+  traits: PersonalityTrait[];
+  workStyle: WorkStyleProfile;
+  data?: {
+    traits: PersonalityTrait[];
+    workStyle: WorkStyleProfile;
+  };
+}
+
+export interface PersonalityTrait {
+  name: string;
+  score: number;
+  description: string;
+}
+
+export interface WorkStyleProfile {
+  leadership: number;
+  teamwork: number;
+  independence: number;
+  communication: number;
+}

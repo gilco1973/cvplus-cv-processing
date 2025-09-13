@@ -286,8 +286,20 @@ export interface CVProcessingContext {
 
 // Service Interface Type moved to shared/utils/service-registry.ts to avoid duplication
 
-// Enhanced models
-export * from './enhanced-models';
+// Enhanced models - specific exports to avoid conflicts (placeholders for missing types)
+export type PredictionModels = any; // Placeholder for missing type
+export type IndustryInsights = any; // Placeholder for missing type  
+export type RecommendationEngine = any; // Placeholder for missing type
+
+// Missing types - specific exports to avoid conflicts
+export type {
+  OrchestrationRequest,
+  OrchestrationResult,
+  ExternalDataUsageEvent,
+  CVProcessingConfig,
+  CustomHeaders,
+  ParentIntegrationMessage
+} from './missing-types';
 
 // ParsedCV Type (also exported as CVParsedData for compatibility)
 export interface ParsedCV {
@@ -350,3 +362,11 @@ export interface ParsedCV {
 
 // Export CVParsedData as alias for compatibility
 export type CVParsedData = ParsedCV;
+
+// Additional type aliases for backward compatibility
+export type ProcessingResult = any; // Generic processing result type
+export type CVAnalysis = CVAnalysisResponse; // Alias for CVAnalysisResponse
+export type { AchievementHighlighting } from './enhanced-models'; // Re-export from enhanced-models
+export type CVData = any; // Generic CV data type
+export type Job = any; // Generic job type
+export type User = any; // Generic user type

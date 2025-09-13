@@ -209,7 +209,7 @@ export class ClassicTemplate implements CVTemplate {
   private generateEducation(cv: ParsedCV): string {
     if (!cv.education || cv.education.length === 0) return '';
     
-    const educationItems = cv.education.map(edu => `
+    const educationItems = cv.education.map((edu: any) => `
         <div class="education-item">
             <div class="item-header">
                 <div class="degree">${edu.degree}</div>
@@ -245,7 +245,7 @@ export class ClassicTemplate implements CVTemplate {
     
     if (allSkills.length === 0) return '';
     
-    const skillsList = allSkills.map(skill => `<li>${skill}</li>`).join('');
+    const skillsList = allSkills.map((skill: any) => `<li>${skill}</li>`).join('');
     
     return `
         <section class="section">

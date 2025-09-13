@@ -6,8 +6,6 @@ import type {
   CVData, 
   CVParsedData, 
   ProcessingResult, 
-  APIConfig,
-  User,
   UploadResult
 } from '../types/autonomous-cv.types';
 import { CVProcessingError, retry } from '../utils/autonomous-utils';
@@ -26,7 +24,7 @@ export interface APIConfiguration {
   baseURL: string;
   timeout: number;
   retryAttempts: number;
-  enableFallback?: boolean;
+  _enableFallback?: boolean;
 }
 
 export class AutonomousAPIService implements APIService {
@@ -34,14 +32,14 @@ export class AutonomousAPIService implements APIService {
   private timeout: number;
   private retryAttempts: number;
   private authService: AuthService;
-  private enableFallback: boolean;
+  private _enableFallback: boolean;
 
   constructor(config: APIConfiguration, authService: AuthService) {
     this.baseURL = config.baseURL;
     this.timeout = config.timeout || 30000;
     this.retryAttempts = config.retryAttempts || 3;
     this.authService = authService;
-    this.enableFallback = config.enableFallback ?? true;
+    this._enableFallback = config._enableFallback ?? true;
   }
 
   async processCV(file: File, jobId?: string): Promise<ProcessingResult> {
@@ -302,8 +300,8 @@ export class AutonomousAPIService implements APIService {
       }
     }
 
-    const headers: HeadersInit = {
-      ...options.headers
+    const headers: Record<string, string> = {
+      ...(options.headers as Record<string, string> || {})
     };
 
     // Add auth header if token is available
@@ -357,6 +355,6 @@ export function createDefaultAPIConfig(baseURL?: string): APIConfiguration {
     baseURL: baseURL || process.env.VITE_API_BASE_URL || 'https://us-central1-cvplus-dev.cloudfunctions.net',
     timeout: 30000,
     retryAttempts: 3,
-    enableFallback: true
+    _enableFallback: true
   };
 }

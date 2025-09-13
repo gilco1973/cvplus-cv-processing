@@ -164,12 +164,12 @@ function detectChanges(original: CVParsedData, modified: CVParsedData): CVChange
   }
 
   // Compare work experience
-  const workExperienceChanges = compareArrays(
-    original.workExperience || [],
-    modified.workExperience || [],
-    'workExperience'
+  const experienceChanges = compareArrays(
+    original.experience || [],
+    modified.experience || [],
+    'experience'
   );
-  changes.push(...workExperienceChanges.map(c => ({ ...c, id: `change-${changeId++}` })));
+  changes.push(...experienceChanges.map(c => ({ ...c, id: `change-${changeId++}` })));
 
   // Compare education
   const educationChanges = compareArrays(
@@ -276,7 +276,7 @@ function compareArrays(
   return changes;
 }
 
-function determineImpact(field: string, changeType: CVChange['type']): CVChange['impact'] {
+function determineImpact(field: string, _changeType: CVChange['type']): CVChange['impact'] {
   const highImpactFields = ['name', 'email', 'phone', 'title', 'summary'];
   const mediumImpactFields = ['skills', 'certifications', 'languages'];
 

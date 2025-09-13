@@ -12,8 +12,8 @@ import {
   MatchingFactor,
   RoleBasedRecommendation,
   CVSection
-} from '../types/role-profile.types';
-import { RoleProfileService } from './role-profile.service';
+} from '@cvplus/core/types/role-profile.types';
+import { RoleProfileService } from '@cvplus/core/services/role-profile.service';
 
 export class RoleRecommendationsService {
   private roleProfileService: RoleProfileService;

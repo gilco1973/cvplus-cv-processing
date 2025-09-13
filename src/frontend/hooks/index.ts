@@ -14,6 +14,9 @@ export * from './useCVProcessing';
 export * from './useAchievementAnalysis';
 export * from './useCVComparison';
 
+// Alias for backward compatibility
+export { useAchievementAnalysis as useCVAnalysis } from './useAchievementAnalysis';
+
 // Hooks will be exported here as they are created/migrated
 // export * from './useCVAnalysis';
 // export * from './useCVGeneration';

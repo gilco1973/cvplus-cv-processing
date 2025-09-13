@@ -540,7 +540,7 @@ export class FormatOptimizationService {
     }
     
     if (parsedCV.education) {
-      parsedCV.education.forEach(edu => {
+      parsedCV.education.forEach((edu: any) => {
         if (edu.startDate) dates.push(edu.startDate);
         if (edu.endDate) dates.push(edu.endDate);
       });
@@ -575,7 +575,7 @@ export class FormatOptimizationService {
       });
     }
     if (cv.education) {
-      cv.education.forEach(edu => {
+      cv.education.forEach((edu: any) => {
         if (edu.degree) sections.push(edu.degree);
         if (edu.institution) sections.push(edu.institution);
       });

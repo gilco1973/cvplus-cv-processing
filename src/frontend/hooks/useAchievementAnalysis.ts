@@ -98,8 +98,8 @@ function extractAchievements(cvData: CVParsedData): string[] {
   const achievements: string[] = [];
   
   // Extract from work experience
-  if (cvData.workExperience) {
-    cvData.workExperience.forEach(job => {
+  if (cvData.experience) {
+    cvData.experience.forEach((job: any) => {
       if (job.achievements) {
         achievements.push(...job.achievements);
       }
@@ -115,7 +115,7 @@ function extractAchievements(cvData: CVParsedData): string[] {
       if (project.description) {
         achievements.push(project.description);
       }
-      if (project.achievements) {
+      if (project.achievements && Array.isArray(project.achievements)) {
         achievements.push(...project.achievements);
       }
     });

@@ -459,7 +459,7 @@ export class ATSScoringService {
       'software', 'system', 'platform', 'tool', 'technology', 'protocol'
     ];
 
-    const technicalSkills = skillsArray.filter(skill => 
+    const technicalSkills = skillsArray.filter((skill: any) => 
       technicalKeywords.some(keyword => 
         skill.toLowerCase().includes(keyword.toLowerCase())
       )

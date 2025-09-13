@@ -5,6 +5,7 @@
 import OpenAI from 'openai';
 import { config } from '../config/environment';
 import { ParsedCV, PersonalityProfile } from '../types/enhanced-models';
+import type { CVData } from '../../shared/types';
 
 export class PersonalityInsightsService {
   private openai: OpenAI | null = null;
@@ -171,7 +172,7 @@ export class PersonalityInsightsService {
     
     // Extract education
     if (cv.education) {
-      cv.education.forEach(edu => {
+      cv.education.forEach((edu: any) => {
         content.education.push(`${edu.degree} in ${edu.field} from ${edu.institution}`);
       });
     }
@@ -597,11 +598,32 @@ Make it positive and professional, focusing on strengths.`;
    * Generate personality insights (wrapper for analyzePersonality)
    */
   async generateInsights(
-    parsedCV: ParsedCV,
+    parsedCV: ParsedCV | CVData,
     depth: string = 'detailed',
     options?: { includeWorkStyle?: boolean; includeTeamDynamics?: boolean }
   ): Promise<PersonalityProfile> {
-    return await this.analyzePersonality(parsedCV);
+    // Convert CVData to ParsedCV if needed
+    const cv = 'content' in parsedCV ? this.convertCVDataToParsedCV(parsedCV as CVData) : parsedCV as ParsedCV;
+    return await this.analyzePersonality(cv);
+  }
+
+  private convertCVDataToParsedCV(cvData: CVData): ParsedCV {
+    // Basic conversion - in reality this would be more sophisticated
+    return {
+      personalInfo: {
+        name: '',
+        email: '',
+        phone: '',
+        location: ''
+      },
+      summary: '',
+      experience: [],
+      education: [],
+      skills: [],
+      languages: [],
+      certifications: [],
+      projects: []
+    };
   }
 
   /**

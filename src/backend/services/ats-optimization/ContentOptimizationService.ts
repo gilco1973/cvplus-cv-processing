@@ -572,7 +572,7 @@ export class ContentOptimizationService {
       });
     }
     if (cv.education) {
-      cv.education.forEach(edu => {
+      cv.education.forEach((edu: any) => {
         if (edu.degree) sections.push(edu.degree);
         if (edu.institution) sections.push(edu.institution);
       });
@@ -638,7 +638,7 @@ export class ContentOptimizationService {
     let score = 60;
     
     // Education completeness
-    const completeEntries = parsedCV.education.filter(edu => 
+    const completeEntries = parsedCV.education.filter((edu: any) => 
       edu.institution && edu.degree && edu.field
     ).length;
     score += Math.min(completeEntries * 15, 30);

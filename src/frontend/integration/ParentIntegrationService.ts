@@ -20,7 +20,7 @@ export interface ParentEvent {
 }
 
 export interface ModuleEvent {
-  type: 'job-started' | 'job-completed' | 'job-failed' | 'navigation-request';
+  type: 'job-started' | 'job-completed' | 'job-failed' | 'navigation-request' | 'request-config';
   payload: any;
 }
 

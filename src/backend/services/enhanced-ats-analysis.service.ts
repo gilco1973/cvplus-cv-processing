@@ -14,6 +14,8 @@ export interface EnhancedATSAnalysisResult {
     impact: 'high' | 'medium' | 'low';
     implementation: string;
   }>;
+  issues?: any[];
+  keywords?: string[];
   keywordAnalysis: {
     missing: string[];
     present: string[];

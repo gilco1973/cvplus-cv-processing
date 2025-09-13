@@ -205,7 +205,7 @@ export class ServiceRegistry {
   /**
    * Validate service registration
    */
-  private validateService(service: ServiceInterface): void {
+  private _validateService(service: ServiceInterface): void {
     if (!service.getServiceInfo) {
       throw new Error('Service must implement getServiceInfo method');
     }

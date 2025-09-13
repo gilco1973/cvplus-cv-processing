@@ -1,14 +1,14 @@
 import { ParsedCV } from '../types/job';
 import { VerifiedClaudeService } from './verified-claude.service';
-import { PlaceholderManager, PlaceholderInfo } from './placeholder-manager.service';
+import { PlaceholderManager, PlaceholderInfo } from '@cvplus/core/services/placeholder-manager.service';
 import { EnhancedRoleDetectionService } from './enhanced-role-detection.service';
-import { RoleProfileService } from './role-profile.service';
+import { RoleProfileService } from '@cvplus/core/services/role-profile.service';
 import {
   RoleProfile,
   RoleMatchResult,
   RoleProfileAnalysis,
   RoleBasedRecommendation
-} from '../types/role-profile.types';
+} from '@cvplus/core/types/role-profile.types';
 import { EnrichmentService, EnrichmentResult } from './external-data/enrichment/enrichment.service';
 import { EnrichedCVData } from './external-data/types';
 
@@ -848,7 +848,7 @@ Enhanced Summary:`;
     
     // Capture experience sections  
     if (cv.experience) {
-      cv.experience.forEach(exp => {
+      cv.experience.forEach((exp: any) => {
         const key = `Experience - ${exp.company}`;
         states[key] = exp.description || `${exp.position} at ${exp.company}`;
       });
@@ -1002,7 +1002,7 @@ Enhanced Summary:`;
     
     let applied = false;
     
-    cv.experience = cv.experience.map(exp => {
+    cv.experience = cv.experience.map((exp: any) => {
       // If targeting a specific company, only apply to that company
       if (targetCompany && !exp.company.toLowerCase().includes(targetCompany)) {
         return exp;
@@ -1080,7 +1080,7 @@ Enhanced Summary:`;
       
       // Add any remaining original skills that weren't categorized
       const allCategorizedSkills = Object.values(newSkillsStructure).flat();
-      const uncategorizedSkills = originalSkills.filter(skill => 
+      const uncategorizedSkills = originalSkills.filter((skill: any) => 
         !allCategorizedSkills.some(catSkill => 
           catSkill.toLowerCase().includes(skill.toLowerCase()) ||
           skill.toLowerCase().includes(catSkill.toLowerCase())
@@ -1160,7 +1160,7 @@ Enhanced Summary:`;
     if (Array.isArray(cv.skills)) {
       // Simple array format
       const currentSkills = cv.skills as string[];
-      const newSkills = skillsToAdd.filter(skill => 
+      const newSkills = skillsToAdd.filter((skill: any) => 
         !currentSkills.some(existing => 
           existing.toLowerCase() === skill.toLowerCase()
         )
@@ -1171,7 +1171,7 @@ Enhanced Summary:`;
       const skillsObj = cv.skills as { technical: string[]; soft: string[]; languages?: string[]; tools?: string[]; };
       if (!skillsObj.technical) skillsObj.technical = [];
       
-      const newSkills = skillsToAdd.filter(skill => 
+      const newSkills = skillsToAdd.filter((skill: any) => 
         !skillsObj.technical?.some(existing => 
           existing.toLowerCase() === skill.toLowerCase()
         )
@@ -1352,7 +1352,7 @@ Enhanced Summary:`;
     }
     
     let applied = false;
-    cv.education = cv.education.map(edu => {
+    cv.education = cv.education.map((edu: any) => {
       if (edu.description && edu.description.includes(recommendation.currentContent!)) {
         edu.description = edu.description.replace(
           recommendation.currentContent!,
@@ -1660,7 +1660,7 @@ Enhanced Summary:`;
     // Generate title based on top skills
     if (skills.length > 0) {
       // Look for programming languages and frameworks
-      const techSkills = skills.filter(skill => 
+      const techSkills = skills.filter((skill: any) => 
         ['javascript', 'python', 'react', 'node', 'java', 'typescript', 'angular', 'vue', 'php', 'c++', 'c#', 'ruby', 'go', 'rust', 'kotlin', 'swift'].some(tech => 
           skill.toLowerCase().includes(tech)
         )
@@ -1672,7 +1672,7 @@ Enhanced Summary:`;
       }
       
       // Look for other professional skills
-      const professionalSkills = skills.filter(skill =>
+      const professionalSkills = skills.filter((skill: any) =>
         ['marketing', 'sales', 'design', 'management', 'analysis', 'consulting', 'finance', 'operations'].some(domain =>
           skill.toLowerCase().includes(domain)
         )
@@ -1798,7 +1798,7 @@ Enhanced Summary:`;
     // Create a simplified CV summary for analysis
     const simplifiedCV = {
       summary: parsedCV.summary,
-      experience: parsedCV.experience?.slice(0, 3).map(exp => ({
+      experience: parsedCV.experience?.slice(0, 3).map((exp: any) => ({
         company: exp.company,
         title: exp.position,
         description: exp.description?.substring(0, 200) + '...'
@@ -2353,7 +2353,7 @@ Return JSON only: {"recommendations": [...]} with id, type, category, title, des
         detectedRole: primaryRoleResult,
         templates: {
           professionalSummary: roleProfile.enhancementTemplates.professionalSummary,
-          experienceEnhancements: roleProfile.enhancementTemplates.experienceEnhancements.map(exp => exp.bulletPointTemplate),
+          experienceEnhancements: roleProfile.enhancementTemplates.experienceEnhancements.map((exp: any) => exp.bulletPointTemplate),
           skillsOptimization: roleProfile.enhancementTemplates.keywordOptimization,
           achievementTemplates: roleProfile.enhancementTemplates.achievementTemplates
         }

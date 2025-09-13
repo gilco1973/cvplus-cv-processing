@@ -357,7 +357,7 @@ Provide concise feedback on accuracy and suggested improvements.`;
       });
     }
     if (cv.education) {
-      cv.education.forEach(edu => {
+      cv.education.forEach((edu: any) => {
         if (edu.degree) sections.push(edu.degree);
         if (edu.institution) sections.push(edu.institution);
       });

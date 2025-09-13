@@ -4,7 +4,7 @@
  * Synonym mappings, abbreviations, and indicators for role detection
  */
 
-import { ExperienceLevel } from '../types/role-profile.types';
+import { ExperienceLevel } from '@cvplus/core/types/role-profile.types';
 
 /**
  * Create synonym mappings for role keywords

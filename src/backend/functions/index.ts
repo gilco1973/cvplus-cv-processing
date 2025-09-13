@@ -10,6 +10,8 @@
 // =============================================================================
 // CORE CV PROCESSING FUNCTIONS
 // =============================================================================
+export * from './uploadCV';
+export * from './getCVStatus';
 export * from './generateCV';
 export * from './processCV';
 export * from './analyzeCV';

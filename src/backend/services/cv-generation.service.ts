@@ -294,7 +294,7 @@ export class CVGenerationService extends BaseService {
     
     let currentY = y + 25;
 
-    education.forEach(edu => {
+    education.forEach((edu: any) => {
       doc.fontSize(template.body.fontSize + 1)
          .fillColor(template.body.color)
          .text(`${edu.degree} - ${edu.school}`, template.margins.left, currentY);
@@ -318,7 +318,7 @@ export class CVGenerationService extends BaseService {
        .fillColor(template.section.color)
        .text('Skills', template.margins.left, y);
     
-    const skillsText = skills.map(skill => 
+    const skillsText = skills.map((skill: any) => 
       typeof skill === 'string' ? skill : skill.name || skill
     ).join(', ');
 

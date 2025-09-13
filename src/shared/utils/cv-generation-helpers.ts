@@ -398,3 +398,12 @@ export function extractCVMetrics(cvData: any): {
 
   return metrics;
 }
+
+// Export as namespace for backward compatibility
+export const CVGenerationHelpers = {
+  handleSpecialFeatures,
+  handleGenerationError,
+  validateCVData,
+  sanitizeCVData,
+  extractCVMetrics
+};

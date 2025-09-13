@@ -1,8 +1,18 @@
 import * as admin from 'firebase-admin';
 import { FieldValue } from 'firebase-admin/firestore';
-import { LLMIntegrationWrapperService, LLMIntegrationConfig } from './llm-integration-wrapper.service';
-import { llmVerificationConfig } from '../config/llm-verification.config';
+import { LLMVerificationService, VerificationResult } from '@cvplus/core/services/llm-verification.service';
+import { llmVerificationConfig } from '@cvplus/core/config/llm-verification.config';
 import { VerifiedCVParsingService, VerifiedParsingResult } from './verified-cv-parser.service';
+
+// Config interface for CV parsing
+export interface CVParsingConfig {
+  enableVerification: boolean;
+  serviceName: string;
+  defaultModel: string;
+  defaultTemperature: number;
+  defaultMaxTokens: number;
+  customValidationCriteria?: any;
+}
 
 // Performance tracking interface
 export interface CVParsingMetrics {
@@ -103,8 +113,8 @@ export interface ParsedCV {
 export class EnhancedCVParsingService {
   private db = admin.firestore();
   private verifiedParser?: VerifiedCVParsingService;
-  private llmWrapper?: LLMIntegrationWrapperService;
-  private config: LLMIntegrationConfig;
+  private llmVerification?: LLMVerificationService;
+  private config: CVParsingConfig;
   
   constructor() {
     // Initialize LLM verification if enabled
@@ -122,11 +132,10 @@ export class EnhancedCVParsingService {
     if (this.config.enableVerification && apiKey) {
       try {
         this.verifiedParser = new VerifiedCVParsingService();
-        this.llmWrapper = new LLMIntegrationWrapperService(this.config);
+        this.llmVerification = new LLMVerificationService();
       } catch (error) {
         // Continue with standard parsing if verification fails to initialize
       }
-    } else {
     }
   }
 

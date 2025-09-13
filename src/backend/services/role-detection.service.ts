@@ -11,9 +11,9 @@ import {
   RoleDetectionConfig,
   RoleProfileAnalysis,
   ExperienceLevel
-} from '../types/role-profile.types';
+} from '@cvplus/core/types/role-profile.types';
 import { VerifiedClaudeService } from './verified-claude.service';
-import { RoleProfileService } from './role-profile.service';
+import { RoleProfileService } from '@cvplus/core/services/role-profile.service';
 import { FuzzyMatchingService } from './role-detection-fuzzy.service';
 import { RoleDetectionAnalyzer } from './role-detection-analyzer';
 import { RoleDetectionMatcher } from './role-detection-matcher';

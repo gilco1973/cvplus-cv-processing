@@ -6,7 +6,19 @@
  */
 
 import * as admin from 'firebase-admin';
-import { SalaryPrediction, TimeToHirePrediction } from '../types/phase2-models';
+// import { SalaryPrediction, TimeToHirePrediction } from '../types/phase2-models'; // Module not found
+
+// Temporary placeholder types
+type SalaryPrediction = {
+  predictedSalary: number;
+  range: { min: number; max: number };
+  confidence: number;
+};
+
+type TimeToHirePrediction = {
+  predictedDays: number;
+  confidence: number;
+};
 import { ParsedCV } from '../types/job';
 
 // Initialize admin if not already done
@@ -474,7 +486,7 @@ export class AdvancedPredictionsService {
     if (education.length === 0) return 0.5;
     
     // Simple scoring based on degree level
-    const maxLevel = Math.max(...education.map(edu => this.getEducationLevel(edu.degree || '')));
+    const maxLevel = Math.max(...education.map((edu: any) => this.getEducationLevel(edu.degree || '')));
     return Math.min(1, maxLevel / 5); // Normalize to 0-1
   }
 

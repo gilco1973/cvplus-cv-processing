@@ -4,7 +4,7 @@
  * Utility functions for fuzzy matching, synonym detection, and seniority analysis
  */
 
-import { ExperienceLevel } from '../types/role-profile.types';
+import { ExperienceLevel } from '@cvplus/core/types/role-profile.types';
 import { ParsedCV } from '../types/job';
 
 export interface FuzzyMatchConfig {

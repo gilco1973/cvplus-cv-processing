@@ -55,7 +55,7 @@ export async function handleGenerationError(jobId: string, error: any): Promise<
         category: 'service_failure',
         retryable: isRetryableError(errorMessage),
         timestamp: new Date(),
-        stack: errorStack.substring(0, 1000),
+        stack: (errorStack || '').substring(0, 1000),
         version: '2.0.0'
       },
       updatedAt: FieldValue.serverTimestamp()

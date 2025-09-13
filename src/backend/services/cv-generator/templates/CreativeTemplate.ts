@@ -314,7 +314,7 @@ export class CreativeTemplate implements CVTemplate {
   private generateEducation(cv: ParsedCV): string {
     if (!cv.education || cv.education.length === 0) return '';
     
-    const educationItems = cv.education.map(edu => `
+    const educationItems = cv.education.map((edu: any) => `
         <div class="education-card">
             <div class="card-header">
                 <div>
@@ -340,7 +340,7 @@ export class CreativeTemplate implements CVTemplate {
     let skillsContent = '';
     
     if (cv.skills.technical && cv.skills.technical.length > 0) {
-      const technicalSkills = cv.skills.technical.map(skill => 
+      const technicalSkills = cv.skills.technical.map((skill: any) => 
         `<span class="skill-tag">${skill}</span>`
       ).join('');
       skillsContent += `
@@ -352,7 +352,7 @@ export class CreativeTemplate implements CVTemplate {
     }
     
     if (cv.skills.soft && cv.skills.soft.length > 0) {
-      const softSkills = cv.skills.soft.map(skill => 
+      const softSkills = cv.skills.soft.map((skill: any) => 
         `<span class="skill-tag">${skill}</span>`
       ).join('');
       skillsContent += `

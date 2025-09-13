@@ -20,8 +20,7 @@ export const corsConfig = {
  * CORS options for Firebase Functions v2 format
  */
 export const corsOptions = {
-  origin: corsConfig.origin,
-  credentials: corsConfig.credentials
+  cors: corsConfig.origin
 };
 
 /**

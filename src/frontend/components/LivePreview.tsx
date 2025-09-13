@@ -425,7 +425,7 @@ const CVPreviewRenderer: React.FC<CVPreviewRendererProps> = ({
           Skills
         </h2>
         <div className="flex flex-wrap gap-2">
-          {skillsArray.slice(0, 12).map((skill, index) => (
+          {skillsArray.slice(0, 12).map((skill) => (
             <span
               key={index}
               className={`px-2 py-1 rounded-full text-white ${responsiveClass === 'text-xs' ? 'text-xs' : 'text-sm'}`}
@@ -451,7 +451,7 @@ const CVPreviewRenderer: React.FC<CVPreviewRendererProps> = ({
           Education
         </h2>
         <div className="space-y-2">
-          {education.slice(0, 2).map((edu, index) => (
+          {education.slice(0, 2).map((edu) => (
             <div key={index}>
               <h3 className={`font-medium ${responsiveClass}`}>
                 {edu.degree || 'Degree'}

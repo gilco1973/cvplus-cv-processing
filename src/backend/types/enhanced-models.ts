@@ -1,3 +1,7 @@
+// Re-export ParsedCV from job types for compatibility
+export { ParsedCV } from "../../types/job";
+
+
 /**
  * Enhanced Models for CV Processing
  */
@@ -328,4 +332,63 @@ export interface OptimizationRecommendation {
   implementation: string;
   expectedImpact: number;
   category: string;
+}
+
+// Additional missing interfaces for ATS optimization
+export interface ATSOptimizationResult {
+  score: number;
+  recommendations: OptimizationRecommendation[];
+  keywordMatches: KeywordMatch[];
+  formatOptimization: FormatOptimization;
+  industryOptimization: IndustryOptimization;
+}
+
+export interface AdvancedATSScore {
+  overall: number;
+  keywords: number;
+  format: number;
+  experience: number;
+  skills: number;
+  education: number;
+  details: {
+    strengths: string[];
+    weaknesses: string[];
+    improvements: string[];
+  };
+}
+
+export interface SemanticKeywordAnalysis {
+  totalKeywords: number;
+  matchedKeywords: string[];
+  missingKeywords: string[];
+  keywordDensity: number;
+  semanticMatches: Array<{
+    keyword: string;
+    synonyms: string[];
+    relevance: number;
+  }>;
+}
+
+export interface CompetitorAnalysis {
+  averageScore: number;
+  topPerformers: Array<{
+    score: number;
+    keyFeatures: string[];
+  }>;
+  benchmarkGaps: string[];
+  recommendations: string[];
+}
+
+export interface PrioritizedRecommendation extends OptimizationRecommendation {
+  weight: number;
+  effort: 'low' | 'medium' | 'high';
+  timeline: string;
+}
+
+export interface ATSSystemSimulation {
+  systemType: string;
+  passRate: number;
+  failureReasons: string[];
+  simulatedScore: number;
+  recommendations: PrioritizedRecommendation[];
 }

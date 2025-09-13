@@ -14,8 +14,8 @@ import {
   RoleBasedRecommendation,
   CVSection,
   ExperienceLevel
-} from '../types/role-profile.types';
-import { RoleProfileService } from './role-profile.service';
+} from '../../../core/src/types/role-profile.types';
+import { RoleProfileService } from '../../../core/src/services/role-profile.service';
 import { RoleRecommendationsService } from './role-detection-recommendations';
 import {
   getCVFullText,
@@ -118,7 +118,7 @@ export class RoleDetectionAnalyzer {
         : Object.values(cv.skills).flat().filter(Boolean).map(s => s.toLowerCase());
       
       const requiredSkills = profile.requiredSkills.map(s => s.toLowerCase());
-      const matchingSkills = cvSkills.filter(skill => 
+      const matchingSkills = cvSkills.filter((skill: any) => 
         requiredSkills.some(req => skill.includes(req) || req.includes(skill))
       );
       

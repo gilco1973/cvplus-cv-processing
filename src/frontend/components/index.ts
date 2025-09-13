@@ -16,6 +16,8 @@ export * from './FileUpload';
 export * from './CVUpload';
 export * from './ProcessingStatus';
 export * from './CVAnalysisResults';
+export { CVAnalysisResults as CVAnalysisDisplay } from './CVAnalysisResults'; // Alias for backward compatibility
+export * from './CVProcessingProvider';
 export * from './GeneratedCVDisplay';
 export * from './GeneratedCVDisplayLazy';
 export * from './LivePreview';

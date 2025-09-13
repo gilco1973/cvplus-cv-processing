@@ -96,7 +96,7 @@ export class SkillsProficiencyService {
         // From job description
         if (job.description) {
           const extractedSkills = await this.extractSkillsFromText(job.description);
-          extractedSkills.forEach(skill => {
+          extractedSkills.forEach((skill: any) => {
             if (!skillMentions.has(skill)) skillMentions.set(skill, []);
             skillMentions.get(skill)!.push(jobContext + ' - Description');
           });
@@ -106,7 +106,7 @@ export class SkillsProficiencyService {
         if (job.achievements) {
           for (const achievement of job.achievements) {
             const extractedSkills = await this.extractSkillsFromText(achievement);
-            extractedSkills.forEach(skill => {
+            extractedSkills.forEach((skill: any) => {
               if (!skillMentions.has(skill)) skillMentions.set(skill, []);
               skillMentions.get(skill)!.push(jobContext + ' - Achievement');
             });
@@ -179,7 +179,7 @@ Return empty array if no technical skills found.
     ];
 
     const lowerText = text.toLowerCase();
-    return commonSkills.filter(skill => 
+    return commonSkills.filter((skill: any) => 
       lowerText.includes(skill.toLowerCase())
     );
   }
@@ -350,7 +350,7 @@ Return empty array if no technical skills found.
     return `
       <div class="skills-visualization">
         <h3>Skills Proficiency</h3>
-        ${allSkills.map(skill => `
+        ${allSkills.map((skill: any) => `
           <div class="skill-item">
             <div class="skill-header">
               <span class="skill-name">${skill.name}</span>
