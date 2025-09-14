@@ -19,6 +19,7 @@ export * from './CVUploadProcessing';
 export * from './FeatureSelection';
 export * from './JobDescriptionInput';
 export * from './ProcessingStatus';
+export * from './CVProcessor'; // T067 - Core CV Processing Orchestrator
 // CVAnalysisResults is exported from analysis module
 export * from './CVProcessingProvider';
 // Live Preview Module (T066) - Modular real-time CV preview system

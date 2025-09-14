@@ -1,11 +1,10 @@
 import { onRequest } from 'firebase-functions/v2/https';
-import { Request, Response } from 'firebase-functions';
+import { Request } from 'firebase-functions/v2/https';
+import { Response } from 'express';
 import * as admin from 'firebase-admin';
-import { getCVJob } from '../../models/cv-job.service';
-import { getProcessedCV } from '../../models/processed-cv.service';
-import { trackEvent } from '../../models/analytics.service';
-import { authenticateUser } from '../../middleware/auth.middleware';
-import { JobStatus } from '../../../../shared/types/cv-job';
+import { getCVJob, JobStatus } from '../../../models/cv-job.service';
+import { getProcessedCV } from '../../../models/processed-cv.service';
+import { authenticateUser } from '../../middleware/authGuard';
 
 interface CVDownloadResponse {
   success: boolean;
@@ -21,12 +20,7 @@ export const downloadProcessedCV = onRequest(
     timeoutSeconds: 60,
     memory: '1GiB',
     maxInstances: 100,
-    cors: {
-      origin: true,
-      methods: ['GET', 'OPTIONS'],
-      allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
-      credentials: true
-    }
+    cors: true
   },
   async (req: Request, res: Response) => {
     try {
@@ -185,18 +179,12 @@ export const downloadProcessedCV = onRequest(
         expires: expirationTime
       });
 
-      // Track download event
-      await trackEvent({
+      // TODO: Track download event when analytics module is properly integrated
+      console.log('CV download completed', {
         userId,
-        entityType: 'processed_cv',
-        entityId: processedCV.id,
-        eventType: 'cv_downloaded',
-        eventData: {
-          jobId,
-          format,
-          includeAnalytics,
-          fileSize: downloadResult.buffer.length
-        }
+        jobId,
+        format,
+        fileSize: downloadResult.buffer.length
       });
 
       // Set appropriate headers

@@ -50,7 +50,7 @@ export const getUserId = (req: AuthenticatedRequest): string => {
 export const requireAdmin = async (req: AuthenticatedRequest, res: functions.Response, next: () => void) => {
   try {
     await requireAuth(req, res, () => {});
-    
+
     if (!req.user) {
       res.status(401).json({ error: 'Unauthorized' });
       return;
@@ -68,3 +68,38 @@ export const requireAdmin = async (req: AuthenticatedRequest, res: functions.Res
     res.status(403).json({ error: 'Forbidden' });
   }
 };
+
+/**
+ * Authenticate user from request
+ * Returns authentication result with user ID
+ */
+export async function authenticateUser(req: functions.https.Request): Promise<{
+  success: boolean;
+  userId?: string;
+  error?: string;
+}> {
+  try {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader?.startsWith('Bearer ')) {
+      return {
+        success: false,
+        error: 'Missing or invalid authorization header'
+      };
+    }
+
+    const idToken = authHeader.substring(7);
+    const decodedToken = await admin.auth().verifyIdToken(idToken);
+
+    return {
+      success: true,
+      userId: decodedToken.uid
+    };
+  } catch (error) {
+    console.error('Authentication error:', error);
+    return {
+      success: false,
+      error: 'Invalid token'
+    };
+  }
+}

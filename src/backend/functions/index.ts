@@ -21,6 +21,12 @@ export * from './enhancedAnalyzeCV';
 export * from './updateCVData';
 export * from './processCV.enhanced';
 
+// CV API Functions (new structure)
+export * from './cv/upload';
+export * from './cv/download';
+export * from './cv/status';
+export * from './cv/url';
+
 // =============================================================================
 // CV OPTIMIZATION FUNCTIONS
 // =============================================================================

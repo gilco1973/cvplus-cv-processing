@@ -8,9 +8,9 @@ export { AutonomousAuthService } from './AutonomousAuthService';
 export { AutonomousAPIService } from './AutonomousAPIService';
 export { AutonomousConfigService } from './AutonomousConfigService';
 
-// T071 Enhanced CV Processing Service
-export { CVProcessingService, cvProcessingService } from './CVProcessingService';
-export * from './CVProcessingService';
+// T067 CV Processing Service
+export { CVProcessingService, cvProcessingService } from './cv-processing.service';
+export * from './cv-processing.service';
 
 export type { 
   AuthUser, 

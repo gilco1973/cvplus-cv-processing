@@ -292,7 +292,7 @@ export const useTemplates = (): UseTemplatesReturn => {
   }, [state.templates]);
 
   // Get template statistics
-  const getTemplateStats = useCallback() => {
+  const getTemplateStats = useCallback(() => {
     const stats = {
       total: state.templates.length,
       byCategory: {} as Record<string, number>,

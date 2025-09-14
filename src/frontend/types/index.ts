@@ -1,6 +1,6 @@
 /**
  * Frontend Types Index
- * 
+ *
  * Exports all frontend-specific types and interfaces.
  */
 
@@ -12,6 +12,9 @@ export * from './analysis';
 
 // Upload types
 export * from './upload';
+
+// CVProcessingService types (T071)
+export * from './CVProcessingService.types';
 
 // Re-export shared types for convenience
 export * from '../../shared/types';

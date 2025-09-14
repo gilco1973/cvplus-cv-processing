@@ -15,6 +15,10 @@ export * from './useCVProcessing';
 export * from './useAchievementAnalysis';
 export * from './useCVComparison';
 
+// T067 CV Processor hooks
+export * from './useCVProcessorLogic';
+export * from './useWebSocketUpdates';
+
 // Generated CV Display hooks (T065)
 export * from './useCVGeneration';
 export * from './useTemplates';
