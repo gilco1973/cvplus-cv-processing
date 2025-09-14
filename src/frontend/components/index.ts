@@ -21,7 +21,8 @@ export * from './JobDescriptionInput';
 export * from './ProcessingStatus';
 // CVAnalysisResults is exported from analysis module
 export * from './CVProcessingProvider';
-export * from './LivePreview';
+// Live Preview Module (T066) - Modular real-time CV preview system
+export * from './live-preview';
 
 // Generated CV Display System (T065)
 export * from './generated-cv-display';

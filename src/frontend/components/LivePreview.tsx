@@ -1,511 +1,161 @@
-import React, { useState } from 'react';
-import { Eye, Settings, Sparkles, Play, ZoomIn, ZoomOut, Monitor, Tablet, Smartphone, User, MapPin, Mail, Phone, Calendar, GraduationCap, Briefcase, Code } from 'lucide-react';
-import type { CVParsedData } from '../types/cvData';
-import type { Job } from '../types/job';
+/**
+ * LivePreview Component - T066 Implementation
+ *
+ * Real-time CV preview with split-screen editing, viewport simulation,
+ * and template comparison. Modular architecture under 200 lines.
+ */
 
-interface Template {
-  id: string;
-  name: string;
-  emoji: string;
-  description: string;
-  category: string;
-  isPremium: boolean;
-}
-
-interface LivePreviewProps {
-  selectedTemplate: Template | null;
-  selectedFeatures: Record<string, boolean>;
-  previewMode: 'template' | 'features' | 'final';
-  onPreviewModeChange: (mode: 'template' | 'features' | 'final') => void;
-  // New props for CV data
-  jobData?: Job | null;
-  cvData?: CVParsedData | null;
-}
+import React, { useState, useCallback, useMemo } from 'react';
+import type {
+  LivePreviewProps, ViewportMode, ZoomLevel, PreviewMode
+} from './LivePreview.types';
+import { LivePreviewViewportControls } from './LivePreview.ViewportControls';
+import { LivePreviewPanel } from './LivePreview.PreviewPanel';
+import { LivePreviewEditor } from './LivePreview.EditorPanel';
 
 export const LivePreview: React.FC<LivePreviewProps> = ({
-  selectedTemplate,
-  selectedFeatures,
-  previewMode,
-  onPreviewModeChange,
-  jobData,
-  cvData
+  cvData: initialCvData,
+  template: initialTemplate,
+  selectedFeatures = {},
+  onDataChange,
+  onTemplateChange,
+  className = ''
 }) => {
-  const [zoomLevel, setZoomLevel] = useState(75);
-  const [viewMode, setViewMode] = useState<'desktop' | 'tablet' | 'mobile'>('desktop');
+  // State management
+  const [cvData, setCvData] = useState(initialCvData || {});
+  const [viewportMode, setViewportMode] = useState<ViewportMode>('desktop');
+  const [previewMode, setPreviewMode] = useState<PreviewMode>('split');
+  const [zoomLevel, setZoomLevel] = useState<ZoomLevel>(75);
+  const [orientation, setOrientation] = useState<'portrait' | 'landscape'>('portrait');
 
-  const selectedCount = Object.values(selectedFeatures).filter(Boolean).length;
+  // Viewport configuration
+  const viewportConfig = useMemo(() => {
+    const dimensions = {
+      desktop: { width: 1920, height: 1080 },
+      tablet: { width: 768, height: 1024 },
+      mobile: { width: 375, height: 812 },
+      print: { width: 794, height: 1123 }
+    };
+    const { width, height } = dimensions[viewportMode];
+    return {
+      mode: viewportMode,
+      width: orientation === 'landscape' ? height : width,
+      height: orientation === 'landscape' ? width : height,
+      orientation
+    };
+  }, [viewportMode, orientation]);
 
-  // Get CV data from props with fallback to parsed data
-  const getCVData = (): CVParsedData | null => {
-    if (cvData) return cvData;
-    if (jobData?.parsedData && typeof jobData.parsedData === 'object') {
-      return jobData.parsedData as CVParsedData;
-    }
-    return null;
-  };
+  // Event handlers
+  const handleDataChange = useCallback((newData: any) => {
+    setCvData(newData);
+    onDataChange?.(newData);
+  }, [onDataChange]);
 
-  // Check if we have actual CV data to render
-  const hasValidCVData = () => {
-    const data = getCVData();
-    return data && (data.personalInfo || data.experience || data.education || data.skills);
-  };
+  const handleViewportChange = useCallback((mode: ViewportMode) => {
+    setViewportMode(mode);
+  }, []);
 
-  const getPreviewContent = () => {
+  const handleZoomChange = useCallback((zoom: ZoomLevel) => {
+    setZoomLevel(zoom);
+  }, []);
+
+  const handleOrientationToggle = useCallback(() => {
+    setOrientation(prev => prev === 'portrait' ? 'landscape' : 'portrait');
+  }, []);
+
+  // Render mode controls
+  const renderModeControls = () => (
+    <div className="flex space-x-2">
+      {['split', 'preview-only', 'editor-only'].map(mode => (
+        <button
+          key={mode}
+          onClick={() => setPreviewMode(mode as PreviewMode)}
+          className={`px-3 py-1 text-sm rounded transition-colors ${
+            previewMode === mode
+              ? 'bg-blue-100 text-blue-700'
+              : 'bg-gray-100 hover:bg-gray-200'
+          }`}
+        >
+          {mode.replace('-', ' ')}
+        </button>
+      ))}
+    </div>
+  );
+
+  // Render editor panel
+  const renderEditor = () => (
+    <LivePreviewEditor
+      cvData={cvData}
+      onDataChange={handleDataChange}
+    />
+  );
+
+  // Render preview with controls
+  const renderPreviewWithControls = () => (
+    <div className="flex flex-col h-full">
+      <LivePreviewViewportControls
+        viewportMode={viewportMode}
+        onViewportChange={handleViewportChange}
+        zoomLevel={zoomLevel}
+        onZoomChange={handleZoomChange}
+        orientation={orientation}
+        onOrientationToggle={handleOrientationToggle}
+      />
+      <LivePreviewPanel
+        cvData={cvData}
+        template={initialTemplate}
+        viewportConfig={viewportConfig}
+        zoomLevel={zoomLevel}
+      />
+    </div>
+  );
+
+  // Main content based on preview mode
+  const renderMainContent = () => {
     switch (previewMode) {
-      case 'template':
-        return {
-          title: selectedTemplate?.name || 'Select Template',
-          subtitle: 'Template Preview',
-          emoji: selectedTemplate?.emoji || '📄',
-          description: selectedTemplate?.description || 'Choose a template to preview'
-        };
-      case 'features':
-        return {
-          title: `${selectedCount} Features`,
-          subtitle: 'Features Preview',
-          emoji: '✨',
-          description: `${selectedCount} features will be applied to your CV`
-        };
-      case 'final':
-        return {
-          title: 'Complete Preview',
-          subtitle: 'Final Result',
-          emoji: '🎯',
-          description: 'Template + Features combined preview'
-        };
+      case 'split':
+        return (
+          <div className="flex h-full">
+            <div className="w-1/2 border-r">{renderEditor()}</div>
+            <div className="w-1/2">{renderPreviewWithControls()}</div>
+          </div>
+        );
+      case 'preview-only':
+        return renderPreviewWithControls();
+      case 'editor-only':
+        return renderEditor();
       default:
-        return {
-          title: 'Preview',
-          subtitle: 'Select mode',
-          emoji: '👁️',
-          description: 'Choose a preview mode'
-        };
-    }
-  };
-
-  const content = getPreviewContent();
-
-  const getViewModeClasses = () => {
-    switch (viewMode) {
-      case 'desktop':
-        return 'aspect-[3/4] max-w-full';
-      case 'tablet':
-        return 'aspect-[3/4] max-w-sm mx-auto';
-      case 'mobile':
-        return 'aspect-[4/3] max-w-xs mx-auto';
-      default:
-        return 'aspect-[3/4] max-w-full';
+        return renderPreviewWithControls();
     }
   };
 
   return (
-    <div className="bg-gray-800/50 rounded-xl p-6 border border-gray-700 sticky top-24">
-      {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center">
-            <Eye className="w-5 h-5 text-green-400" />
-          </div>
-          <div>
-            <h2 className="text-xl font-semibold text-gray-100">Live Preview</h2>
-            <p className="text-sm text-gray-400">See your CV come together</p>
-          </div>
-        </div>
-      </div>
-      
-      {/* Preview Mode Selector */}
-      <div className="flex mb-6 bg-gray-700/50 rounded-lg p-1">
-        {[
-          { id: 'template', label: 'Template', icon: Settings },
-          { id: 'features', label: 'Features', icon: Sparkles },
-          { id: 'final', label: 'Final', icon: Play }
-        ].map(({ id, label, icon: Icon }) => (
-          <button
-            key={id}
-            onClick={() => onPreviewModeChange(id as 'template' | 'features' | 'final')}
-            className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-all ${
-              previewMode === id
-                ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-400/30'
-                : 'text-gray-400 hover:text-gray-200 hover:bg-gray-600/50'
-            }`}
-          >
-            <Icon className="w-4 h-4" />
-            {label}
-          </button>
-        ))}
-      </div>
-      
-      {/* View Mode Controls */}
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-2">
-          {[
-            { id: 'desktop', icon: Monitor, label: 'Desktop' },
-            { id: 'tablet', icon: Tablet, label: 'Tablet' },
-            { id: 'mobile', icon: Smartphone, label: 'Mobile' }
-          ].map(({ id, icon: Icon, label }) => (
-            <button
-              key={id}
-              onClick={() => setViewMode(id as 'desktop' | 'tablet' | 'mobile')}
-              className={`p-2 rounded-lg transition-colors ${
-                viewMode === id
-                  ? 'bg-cyan-500/20 text-cyan-400'
-                  : 'text-gray-400 hover:text-gray-200 hover:bg-gray-700/50'
-              }`}
-              title={label}
-            >
-              <Icon className="w-4 h-4" />
-            </button>
-          ))}
-        </div>
-        
-        {/* Zoom Controls */}
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setZoomLevel(Math.max(50, zoomLevel - 25))}
-            disabled={zoomLevel <= 50}
-            className="p-2 text-gray-400 hover:text-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <ZoomOut className="w-4 h-4" />
-          </button>
-          <span className="text-xs text-gray-400 min-w-12 text-center">{zoomLevel}%</span>
-          <button
-            onClick={() => setZoomLevel(Math.min(125, zoomLevel + 25))}
-            disabled={zoomLevel >= 125}
-            className="p-2 text-gray-400 hover:text-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <ZoomIn className="w-4 h-4" />
-          </button>
-        </div>
-      </div>
-      
-      {/* Preview Canvas */}
-      <div className={`bg-gray-900/50 rounded-lg border border-gray-600 mb-4 transition-all ${getViewModeClasses()} overflow-hidden`}
-           style={{ transform: `scale(${zoomLevel / 100})`, transformOrigin: 'top center' }}>
-        {hasValidCVData() ? (
-          <CVPreviewRenderer 
-            cvData={getCVData()!}
-            selectedTemplate={selectedTemplate}
-            selectedFeatures={selectedFeatures}
-            previewMode={previewMode}
-            viewMode={viewMode}
-          />
-        ) : (
-          <div className="flex items-center justify-center min-h-[400px]">
-            <div className="text-center text-gray-400 p-8">
-              <div className="text-4xl mb-4 animate-pulse">
-                {content.emoji}
-              </div>
-              <div className="text-base font-medium text-gray-200 mb-2">
-                {content.title}
-              </div>
-              <div className="text-xs text-gray-500 mb-3">
-                {content.subtitle}
-              </div>
-              <div className="text-sm text-gray-400 leading-relaxed max-w-xs mx-auto">
-                {content.description}
-              </div>
-              
-              {/* Feature Indicators */}
-              {previewMode === 'features' && selectedCount > 0 && (
-                <div className="mt-4 flex flex-wrap justify-center gap-1">
-                  {Object.entries(selectedFeatures)
-                    .filter(([_, enabled]) => enabled)
-                    .slice(0, 6)
-                    .map(([featureId, _], index) => (
-                      <div
-                        key={featureId}
-                        className="w-2 h-2 bg-cyan-400/60 rounded-full animate-pulse"
-                        style={{ animationDelay: `${index * 0.1}s` }}
-                      />
-                    ))
-                  }
-                  {selectedCount > 6 && (
-                    <div className="text-xs text-cyan-400 ml-2">+{selectedCount - 6} more</div>
-                  )}
-                </div>
-              )}
+    <div className={`live-preview h-full flex flex-col bg-white ${className}`}>
+      {/* Header with title and mode controls */}
+      <div className="flex items-center justify-between p-4 border-b border-gray-200">
+        <div className="flex items-center space-x-4">
+          <h2 className="text-lg font-semibold text-gray-900">Live Preview</h2>
+          {initialTemplate && (
+            <div className="text-sm text-gray-600">
+              Template: {initialTemplate.name || 'Default'}
             </div>
-          </div>
-        )}
+          )}
+        </div>
+        {renderModeControls()}
       </div>
-      
-      {/* Preview Status */}
-      <div className="flex justify-between items-center text-sm">
-        <div className="text-gray-400">
-          {selectedCount} of {Object.keys(selectedFeatures).length} features
-        </div>
-        <div className="flex gap-2">
-          <div className={`px-2 py-1 rounded-md text-xs ${
-            previewMode === 'template'
-              ? 'bg-blue-500/20 text-blue-300'
-              : previewMode === 'features'
-              ? 'bg-purple-500/20 text-purple-300'
-              : 'bg-green-500/20 text-green-300'
-          }`}>
-            {content.subtitle}
-          </div>
-        </div>
+
+      {/* Main content area */}
+      <div className="flex-1 overflow-hidden">
+        {renderMainContent()}
       </div>
     </div>
   );
 };
 
-// CV Preview Renderer Component
-interface CVPreviewRendererProps {
-  cvData: CVParsedData;
-  selectedTemplate: Template | null;
-  selectedFeatures: Record<string, boolean>;
-  previewMode: 'template' | 'features' | 'final';
-  viewMode: 'desktop' | 'tablet' | 'mobile';
-}
+// Re-export types and helper components
+export type { LivePreviewProps, ViewportMode, ZoomLevel, PreviewMode } from './LivePreview.types';
+export { LivePreviewViewportControls } from './LivePreview.ViewportControls';
+export { LivePreviewPanel } from './LivePreview.PreviewPanel';
+export { LivePreviewEditor } from './LivePreview.EditorPanel';
 
-const CVPreviewRenderer: React.FC<CVPreviewRendererProps> = ({
-  cvData,
-  selectedTemplate,
-  selectedFeatures,
-  previewMode,
-  viewMode
-}) => {
-  const getTemplateStyles = () => {
-    if (!selectedTemplate) return {};
-    
-    // Template-specific styling
-    switch (selectedTemplate.id) {
-      case 'tech-innovation':
-        return {
-          primaryColor: '#3b82f6',
-          backgroundColor: '#f8fafc',
-          headerStyle: 'modern-tech'
-        };
-      case 'executive-authority':
-        return {
-          primaryColor: '#1e40af',
-          backgroundColor: '#ffffff',
-          headerStyle: 'executive'
-        };
-      case 'creative-showcase':
-        return {
-          primaryColor: '#8b5cf6',
-          backgroundColor: '#faf5ff',
-          headerStyle: 'creative'
-        };
-      case 'healthcare-professional':
-        return {
-          primaryColor: '#06b6d4',
-          backgroundColor: '#f0fdf4',
-          headerStyle: 'healthcare'
-        };
-      case 'financial-expert':
-        return {
-          primaryColor: '#059669',
-          backgroundColor: '#f7fafc',
-          headerStyle: 'financial'
-        };
-      case 'international-professional':
-        return {
-          primaryColor: '#0ea5e9',
-          backgroundColor: '#f0f9ff',
-          headerStyle: 'international'
-        };
-      default:
-        return {
-          primaryColor: '#6b7280',
-          backgroundColor: '#ffffff',
-          headerStyle: 'default'
-        };
-    }
-  };
-
-  const templateStyles = getTemplateStyles();
-  const responsiveClass = viewMode === 'mobile' ? 'text-xs' : viewMode === 'tablet' ? 'text-sm' : 'text-base';
-
-  const renderPersonalInfo = () => {
-    const personalInfo = cvData.personalInfo;
-    if (!personalInfo) return null;
-
-    return (
-      <div className={`p-6 mb-6 rounded-lg`} style={{ backgroundColor: templateStyles.backgroundColor }}>
-        <div className="text-center">
-          <h1 className={`font-bold mb-2 ${responsiveClass === 'text-xs' ? 'text-lg' : responsiveClass === 'text-sm' ? 'text-xl' : 'text-2xl'}`}
-              style={{ color: templateStyles.primaryColor }}>
-            {personalInfo.fullName || personalInfo.name || 'Professional Name'}
-          </h1>
-          {personalInfo.title && (
-            <p className={`text-gray-600 mb-4 ${responsiveClass}`}>
-              {personalInfo.title}
-            </p>
-          )}
-          <div className={`flex flex-wrap justify-center gap-4 ${responsiveClass}`}>
-            {personalInfo.email && (
-              <div className="flex items-center gap-1">
-                <Mail className="w-3 h-3" />
-                <span>{personalInfo.email}</span>
-              </div>
-            )}
-            {personalInfo.phone && (
-              <div className="flex items-center gap-1">
-                <Phone className="w-3 h-3" />
-                <span>{personalInfo.phone}</span>
-              </div>
-            )}
-            {(personalInfo.location || personalInfo.city) && (
-              <div className="flex items-center gap-1">
-                <MapPin className="w-3 h-3" />
-                <span>{personalInfo.location || personalInfo.city}</span>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  const renderSummary = () => {
-    const summary = cvData.summary || cvData.objective;
-    if (!summary) return null;
-
-    return (
-      <div className="mb-6">
-        <h2 className={`font-semibold mb-3 ${responsiveClass === 'text-xs' ? 'text-sm' : responsiveClass === 'text-sm' ? 'text-base' : 'text-lg'}`}
-            style={{ color: templateStyles.primaryColor }}>
-          Professional Summary
-        </h2>
-        <p className={`text-gray-700 leading-relaxed ${responsiveClass}`}>
-          {summary}
-        </p>
-      </div>
-    );
-  };
-
-  const renderExperience = () => {
-    const experience = cvData.experience;
-    if (!experience || experience.length === 0) return null;
-
-    return (
-      <div className="mb-6">
-        <h2 className={`font-semibold mb-3 ${responsiveClass === 'text-xs' ? 'text-sm' : responsiveClass === 'text-sm' ? 'text-base' : 'text-lg'}`}
-            style={{ color: templateStyles.primaryColor }}>
-          <Briefcase className="w-4 h-4 inline-block mr-2" />
-          Professional Experience
-        </h2>
-        <div className="space-y-4">
-          {experience.slice(0, 3).map((exp, index) => (
-            <div key={index} className="border-l-2 pl-4" style={{ borderColor: templateStyles.primaryColor }}>
-              <h3 className={`font-medium ${responsiveClass}`}>
-                {exp.title || exp.position || exp.role || 'Position Title'}
-              </h3>
-              <p className={`text-gray-600 ${responsiveClass === 'text-xs' ? 'text-xs' : 'text-sm'}`}>
-                {exp.company || 'Company Name'}
-                {exp.duration && ` • ${exp.duration}`}
-              </p>
-              {exp.description && (
-                <p className={`text-gray-700 mt-1 ${responsiveClass === 'text-xs' ? 'text-xs' : 'text-sm'}`}>
-                  {exp.description.substring(0, 150)}...
-                </p>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  };
-
-  const renderSkills = () => {
-    const skills = cvData.skills;
-    if (!skills) return null;
-
-    const skillsArray = skills.technical || skills.software || skills.categories?.technical || [];
-    if (skillsArray.length === 0) return null;
-
-    return (
-      <div className="mb-6">
-        <h2 className={`font-semibold mb-3 ${responsiveClass === 'text-xs' ? 'text-sm' : responsiveClass === 'text-sm' ? 'text-base' : 'text-lg'}`}
-            style={{ color: templateStyles.primaryColor }}>
-          <Code className="w-4 h-4 inline-block mr-2" />
-          Skills
-        </h2>
-        <div className="flex flex-wrap gap-2">
-          {skillsArray.slice(0, 12).map((skill) => (
-            <span
-              key={index}
-              className={`px-2 py-1 rounded-full text-white ${responsiveClass === 'text-xs' ? 'text-xs' : 'text-sm'}`}
-              style={{ backgroundColor: templateStyles.primaryColor }}
-            >
-              {skill}
-            </span>
-          ))}
-        </div>
-      </div>
-    );
-  };
-
-  const renderEducation = () => {
-    const education = cvData.education;
-    if (!education || education.length === 0) return null;
-
-    return (
-      <div className="mb-6">
-        <h2 className={`font-semibold mb-3 ${responsiveClass === 'text-xs' ? 'text-sm' : responsiveClass === 'text-sm' ? 'text-base' : 'text-lg'}`}
-            style={{ color: templateStyles.primaryColor }}>
-          <GraduationCap className="w-4 h-4 inline-block mr-2" />
-          Education
-        </h2>
-        <div className="space-y-2">
-          {education.slice(0, 2).map((edu) => (
-            <div key={index}>
-              <h3 className={`font-medium ${responsiveClass}`}>
-                {edu.degree || 'Degree'}
-                {edu.field && ` in ${edu.field}`}
-              </h3>
-              <p className={`text-gray-600 ${responsiveClass === 'text-xs' ? 'text-xs' : 'text-sm'}`}>
-                {edu.institution || 'Institution'}
-                {edu.year && ` • ${edu.year}`}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  };
-
-  const renderFeatureEnhancements = () => {
-    if (previewMode !== 'features' && previewMode !== 'final') return null;
-    
-    const enabledFeatures = Object.entries(selectedFeatures).filter(([_, enabled]) => enabled);
-    if (enabledFeatures.length === 0) return null;
-
-    return (
-      <div className="mt-6 p-4 bg-cyan-900/20 rounded-lg border border-cyan-500/30">
-        <h3 className={`font-medium text-cyan-300 mb-2 ${responsiveClass}`}>
-          <Sparkles className="w-4 h-4 inline-block mr-2" />
-          Enhanced Features Active
-        </h3>
-        <div className="flex flex-wrap gap-2">
-          {enabledFeatures.slice(0, 6).map(([featureId]) => (
-            <span key={featureId} className={`px-2 py-1 bg-cyan-500/20 text-cyan-300 rounded-full ${responsiveClass === 'text-xs' ? 'text-xs' : 'text-sm'}`}>
-              {featureId.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}
-            </span>
-          ))}
-          {enabledFeatures.length > 6 && (
-            <span className={`px-2 py-1 bg-cyan-500/20 text-cyan-300 rounded-full ${responsiveClass === 'text-xs' ? 'text-xs' : 'text-sm'}`}>
-              +{enabledFeatures.length - 6} more
-            </span>
-          )}
-        </div>
-      </div>
-    );
-  };
-
-  return (
-    <div className="h-full overflow-y-auto p-4 bg-white" style={{ backgroundColor: templateStyles.backgroundColor }}>
-      <div className="max-w-full mx-auto">
-        {renderPersonalInfo()}
-        {renderSummary()}
-        {renderExperience()}
-        {renderSkills()}
-        {renderEducation()}
-        {renderFeatureEnhancements()}
-      </div>
-    </div>
-  );
-};
+export default LivePreview;
