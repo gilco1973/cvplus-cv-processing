@@ -6,12 +6,16 @@
  */
 
 // Export frontend components and hooks
-export { 
+export {
+  CVUpload,
   CVPreview,
   CVAnalysisDisplay,
   CVProcessingProvider,
+  ProcessingStatus,
+  FileUpload,
   useCVProcessing,
   useCVAnalysis,
+  useCVUpload,
   useAchievementAnalysis
 } from './frontend';
 
@@ -38,6 +42,12 @@ export type {
   Job,
   User
 } from './types';
+
+// Export CVUpload specific types
+export type {
+  CVUploadProps,
+  CVProcessingFeature
+} from './frontend/components/CVUpload';
 
 // Package metadata
 export const CV_PROCESSING_VERSION = '1.0.0';

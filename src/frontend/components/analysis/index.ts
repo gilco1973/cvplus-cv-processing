@@ -4,6 +4,7 @@
  */
 
 export { CVAnalysisContainer } from './CVAnalysisContainer';
+export { CVAnalysisResults } from './CVAnalysisResults';
 export { AnalysisHeader } from './AnalysisHeader';
 export { ATSScoreCard } from './ATSScoreCard';
 export { RecommendationsList } from './RecommendationsList';
@@ -11,4 +12,8 @@ export { MagicTransformCard } from './MagicTransformCard';
 export { AnalysisActions } from './AnalysisActions';
 export { LoadingState } from './LoadingState';
 
+// Results sub-components
+export * from './results';
+
 export type { CVAnalysisContainerProps } from './CVAnalysisContainer';
+export type { CVAnalysisResultsProps } from './CVAnalysisResults';

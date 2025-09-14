@@ -14,13 +14,21 @@
 export * from './CVPreview';
 export * from './FileUpload';
 export * from './CVUpload';
+export * from './CVUploadIdle';
+export * from './CVUploadProcessing';
+export * from './FeatureSelection';
+export * from './JobDescriptionInput';
 export * from './ProcessingStatus';
-export * from './CVAnalysisResults';
-export { CVAnalysisResults as CVAnalysisDisplay } from './CVAnalysisResults'; // Alias for backward compatibility
+// CVAnalysisResults is exported from analysis module
 export * from './CVProcessingProvider';
+export * from './LivePreview';
+
+// Generated CV Display System (T065)
+export * from './generated-cv-display';
+
+// Legacy GeneratedCVDisplay components (for compatibility)
 export * from './GeneratedCVDisplay';
 export * from './GeneratedCVDisplayLazy';
-export * from './LivePreview';
 
 // CV Preview Module
 export * from './cv-preview';

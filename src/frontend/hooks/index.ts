@@ -10,16 +10,17 @@
 
 // Export created hooks
 export * from './useCVUpload';
+export * from './useCVUploadLogic';
 export * from './useCVProcessing';
 export * from './useAchievementAnalysis';
 export * from './useCVComparison';
 
+// Generated CV Display hooks (T065)
+export * from './useCVGeneration';
+export * from './useTemplates';
+
 // Alias for backward compatibility
 export { useAchievementAnalysis as useCVAnalysis } from './useAchievementAnalysis';
-
-// Hooks will be exported here as they are created/migrated
-// export * from './useCVAnalysis';
-// export * from './useCVGeneration';
 
 // Placeholder exports to prevent build errors
 export const CV_PROCESSING_HOOKS_VERSION = '1.0.0';
