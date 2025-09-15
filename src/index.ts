@@ -28,6 +28,21 @@ export {
   ServiceRegistry,
   CVGenerationHelpers
 } from './shared';
+
+// Export external-data functionality
+export {
+  ExternalDataOrchestrator,
+  GitHubAdapter,
+  LinkedInAdapter,
+  WebSearchAdapter,
+  WebsiteAdapter,
+  SkillsEnrichment,
+  CertificationEnrichment,
+  HobbiesEnrichment,
+  PortfolioEnrichment,
+  CacheService,
+  ValidationService
+} from './external-data';
 // Export core types (explicit to avoid conflicts)
 export type {
   CVProcessingConfig,
@@ -38,6 +53,22 @@ export type {
   Job,
   User
 } from './types';
+
+// Export external-data types
+export type {
+  ExternalDataRequest,
+  ExternalDataResponse,
+  OrchestrationRequest,
+  OrchestrationResult,
+  AdapterConfig,
+  EnrichmentConfig,
+  CacheConfig,
+  ValidationConfig,
+  GitHubData,
+  LinkedInData,
+  WebsiteData,
+  SearchResult
+} from './external-data/types';
 // Export CVUpload specific types
 export type {
   CVUploadProps,

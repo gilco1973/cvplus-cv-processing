@@ -1,20 +1,20 @@
 /**
  * Enrich CV with External Data Function
- * 
+ *
  * Firebase Function to enrich CVs with data from external sources
  * like GitHub, LinkedIn, web search, and personal websites
- * 
+ *
  * @author Gil Klainert
  * @created 2025-08-23
  * @version 1.0
  */
 import { onCall, HttpsError } from 'firebase-functions/v2/https';
 import { logger } from 'firebase-functions';
-import { 
-  externalDataOrchestrator,
+import {
+  ExternalDataOrchestrator,
   OrchestrationRequest,
   OrchestrationResult
-} from '../services/external-data';
+} from '../../external-data';
 import {
   ExternalDataUsageEvent,
   CVData
@@ -47,7 +47,7 @@ interface EnrichCVRequest {
 
 /**
  * Enrich CV with external data - Premium Feature
- * 
+ *
  * This function is protected by premium access controls and includes
  * usage tracking, rate limiting, and security audit logging.
  */
@@ -59,20 +59,20 @@ export const enrichCVWithExternalData = onCall<EnrichCVRequest>(
   },
   async (request) => {
     const startTime = Date.now();
-    
+
     try {
       // Check authentication
       if (!request.auth) {
         throw new HttpsError('unauthenticated', 'Authentication required');
       }
       const userId = request.auth.uid;
-      
+
       logger.info('[ENRICH-CV] Processing external data enrichment request', {
         userId,
         cvId: request.data.cvId,
         sources: request.data.sources
       });
-      
+
       // Validate request
       if (!request.data.cvId) {
         throw new HttpsError(
@@ -80,21 +80,21 @@ export const enrichCVWithExternalData = onCall<EnrichCVRequest>(
           'CV ID is required'
         );
       }
-      
+
       // Default sources if not specified
       const sources = request.data.sources || ['github', 'linkedin', 'web', 'website'];
-      
+
       // Validate sources
       const validSources = ['github', 'linkedin', 'web', 'website'];
       const invalidSources = sources.filter((s: string) => !validSources.includes(s));
-      
+
       if (invalidSources.length > 0) {
         throw new HttpsError(
           'invalid-argument',
           `Invalid sources: ${invalidSources.join(', ')}`
         );
       }
-      
+
       // Create orchestration request
       const orchestrationRequest: OrchestrationRequest = {
         userId,
@@ -104,7 +104,7 @@ export const enrichCVWithExternalData = onCall<EnrichCVRequest>(
         priority: request.data.options?.priority === 'high' ? 'high' : request.data.options?.priority === 'low' ? 'low' : 'medium',
         maxCost: request.data.options?.maxCost || 100
       };
-      
+
       // Store user hints in metadata if provided
       if (request.data.github || request.data.linkedin || request.data.website) {
         await storeUserHints(userId, {
@@ -114,16 +114,17 @@ export const enrichCVWithExternalData = onCall<EnrichCVRequest>(
           name: request.data.name
         });
       }
-      
+
       // Orchestrate external data fetching
-      const result: OrchestrationResult = await externalDataOrchestrator.orchestrateDataEnrichment(
+      const orchestrator = new ExternalDataOrchestrator();
+      const result: OrchestrationResult = await orchestrator.orchestrateDataEnrichment(
         orchestrationRequest
       );
-      
+
       // Get user subscription for tracking
       const subscription = await getUserSubscriptionInternal(userId);
       const premiumStatus = subscription?.lifetimeAccess === true;
-      
+
       // Track usage event
       const usageEvent: ExternalDataUsageEvent = {
         userId,
@@ -139,12 +140,12 @@ export const enrichCVWithExternalData = onCall<EnrichCVRequest>(
         premiumStatus,
         requestId: `req_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
       };
-      
+
       // Track usage asynchronously (don't wait for completion)
       trackUsageEventInternal(usageEvent).catch((error: any) => {
         logger.error('[ENRICH-CV] Failed to track usage event', { error, userId });
       });
-      
+
       // Log success metrics
       logger.info('[ENRICH-CV] External data enrichment completed', {
         userId,
@@ -155,7 +156,7 @@ export const enrichCVWithExternalData = onCall<EnrichCVRequest>(
         premiumStatus,
         requestId: usageEvent.requestId
       });
-      
+
       // Return enriched data
       return {
         success: result.success,
@@ -170,15 +171,15 @@ export const enrichCVWithExternalData = onCall<EnrichCVRequest>(
         },
         errors: result.errors?.map(e => typeof e === 'string' ? e : e) || []
       };
-      
+
     } catch (error) {
       const executionTime = Date.now() - startTime;
-      
+
       // Track failed usage event if we have user context
       if (request.auth?.uid) {
         const subscription = await getUserSubscriptionInternal(request.auth.uid).catch(() => null);
         const premiumStatus = subscription?.lifetimeAccess === true;
-        
+
         const failedUsageEvent: ExternalDataUsageEvent = {
           userId: request.auth.uid,
           cvId: request.data.cvId,
@@ -192,15 +193,15 @@ export const enrichCVWithExternalData = onCall<EnrichCVRequest>(
           errors: [error instanceof Error ? error.message : 'Unknown error'],
           premiumStatus
         };
-        
+
         trackUsageEventInternal(failedUsageEvent).catch((trackingError: any) => {
-          logger.error('[ENRICH-CV] Failed to track failed usage event', { 
-            trackingError, 
-            userId: request.auth?.uid || 'unknown' 
+          logger.error('[ENRICH-CV] Failed to track failed usage event', {
+            trackingError,
+            userId: request.auth?.uid || 'unknown'
           });
         });
       }
-      
+
       logger.error('[ENRICH-CV] External data enrichment failed', {
         error: error instanceof Error ? {
           message: error.message,
@@ -211,11 +212,11 @@ export const enrichCVWithExternalData = onCall<EnrichCVRequest>(
         cvId: request.data.cvId,
         executionTime
       });
-      
+
       if (error instanceof HttpsError) {
         throw error;
       }
-      
+
       throw new HttpsError(
         'internal',
         'Failed to enrich CV with external data',
@@ -240,7 +241,7 @@ async function storeUserHints(
   try {
     const { getFirestore } = await import('firebase-admin/firestore');
     const db = getFirestore();
-    
+
     await db
       .collection('user_external_profiles')
       .doc(userId)
@@ -251,7 +252,7 @@ async function storeUserHints(
         },
         { merge: true }
       );
-    
+
     logger.info('[ENRICH-CV] User hints stored', { userId, hints });
   } catch (error) {
     logger.error('[ENRICH-CV] Failed to store user hints', error);
@@ -268,7 +269,7 @@ async function trackUsageEventInternal(event: ExternalDataUsageEvent): Promise<v
     const db = getFirestore();
     const timestamp = new Date();
     const dateKey = timestamp.toISOString().split('T')[0] || timestamp.toISOString().substring(0, 10);
-    
+
     // Create batch for atomic operations
     const batch = db.batch();
 
@@ -278,7 +279,7 @@ async function trackUsageEventInternal(event: ExternalDataUsageEvent): Promise<v
       .doc(event.userId)
       .collection('events')
       .doc();
-    
+
     batch.set(eventRef, {
       ...event,
       timestamp: FieldValue.serverTimestamp(),
@@ -317,13 +318,13 @@ async function trackUsageEventInternal(event: ExternalDataUsageEvent): Promise<v
 
     // Execute batch
     await batch.commit();
-    
+
     logger.info('[TRACK-USAGE-INTERNAL] Usage event tracked successfully', {
       userId: event.userId,
       eventId: eventRef.id,
       success: event.success
     });
-    
+
   } catch (error) {
     logger.error('[TRACK-USAGE-INTERNAL] Failed to track usage event', {
       error: error instanceof Error ? error.message : error,

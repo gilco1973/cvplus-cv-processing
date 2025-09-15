@@ -24,7 +24,6 @@
     "src/backend/functions/analyzeCV.ts",
     "src/backend/functions/atsOptimization.ts",
     "src/backend/functions/enhancedAnalyzeCV.ts",
-    "src/backend/functions/enrichCVWithExternalData.ts",
     "src/backend/functions/generateTimeline.ts",
     "src/backend/functions/industryOptimization.ts",
     "src/backend/functions/languageProficiency.ts",

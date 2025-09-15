@@ -13,7 +13,7 @@ import {
   ExternalDataSecurityAudit,
   RateLimitStatus,
   ExternalDataUsageStats 
-} from '../../../types/external-data-analytics.types';
+} from '../external-data';
 
 export interface PolicyCheckRequest {
   userId: string;

@@ -30,6 +30,11 @@
       "import": "./dist/shared/index.esm.js",
       "require": "./dist/shared/index.js",
       "types": "./dist/shared/index.d.ts"
+    },
+    "./external-data": {
+      "import": "./dist/external-data/index.esm.js",
+      "require": "./dist/external-data/index.js",
+      "types": "./dist/external-data/index.d.ts"
     }
   },
   "files": [
@@ -55,21 +60,28 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.24.3",
+    "@cvplus/core": "file:../core",
     "@types/node": "^20.0.0",
     "@types/react-dropzone": "^4.2.2",
+    "axios": "^1.7.0",
     "canvas": "^2.11.2",
+    "cheerio": "^1.0.0",
     "clsx": "^2.1.1",
     "csv-parser": "^3.2.0",
     "firebase": "^10.12.0",
     "firebase-admin": "^12.1.0",
     "firebase-functions": "^5.0.1",
+    "jsdom": "^25.0.0",
     "lodash": "^4.17.21",
     "mammoth": "^1.10.0",
     "pdf-lib": "^1.17.1",
     "pdfkit": "^0.15.0",
+    "puppeteer": "^23.0.0",
     "react-dropzone": "^14.3.8",
     "sharp": "^0.32.6",
-    "tailwind-merge": "^2.6.0"
+    "tailwind-merge": "^2.6.0",
+    "xml2js": "^0.6.2",
+    "@cvplus/analytics": "*"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
@@ -81,22 +93,25 @@
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-typescript": "^12.1.1",
+    "@types/cheerio": "^0.22.35",
     "@types/jest": "^29.5.14",
+    "@types/jsdom": "^21.1.7",
     "@types/lodash": "^4.17.7",
     "@types/node": "^22.9.1",
     "@types/pdfkit": "^0.13.4",
     "@types/react": "^18.3.0",
     "@types/react-dom": "^18.3.0",
+    "@types/xml2js": "^0.4.14",
     "@typescript-eslint/eslint-plugin": "^8.15.0",
     "@typescript-eslint/parser": "^8.15.0",
     "@vitejs/plugin-react": "^4.3.1",
-    "@vitest/coverage-v8": "^2.1.5",
+    "@vitest/coverage-v8": "^1.6.1",
     "eslint": "^9.15.0",
     "rimraf": "^6.0.1",
     "rollup": "^4.27.4",
     "tslib": "^2.8.1",
     "typescript": "^5.6.3",
-    "vitest": "^2.1.5"
+    "vitest": "^1.6.1"
   },
   "publishConfig": {
     "access": "restricted"
@@ -122,6 +137,11 @@
     "pdf",
     "analysis",
     "generation",
+    "external-data",
+    "enrichment",
+    "linkedin",
+    "github",
+    "web-scraping",
     "cvplus"
   ]
 }

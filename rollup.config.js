@@ -116,5 +116,45 @@ export default [
       })
     ],
     external
+  },
+  // External-data specific build
+  {
+    input: 'src/external-data/index.ts',
+    output: [
+      {
+        file: 'dist/external-data/index.js',
+        format: 'cjs',
+        sourcemap: true
+      },
+      {
+        file: 'dist/external-data/index.esm.js',
+        format: 'esm',
+        sourcemap: true
+      }
+    ],
+    plugins: [
+      json(),
+      resolve({
+        preferBuiltins: true,
+        exportConditions: ['node']
+      }),
+      commonjs(),
+      typescript({
+        tsconfig: './tsconfig.build.json',
+        declaration: false,
+        declarationMap: false,
+        sourceMap: true
+      })
+    ],
+    external: [
+      ...external,
+      'axios',
+      'cheerio',
+      'jsdom',
+      'puppeteer',
+      'xml2js',
+      'csv-parser',
+      '@cvplus/core'
+    ]
   }
 ];
