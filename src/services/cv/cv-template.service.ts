@@ -1,364 +1,402 @@
 /**
  * CV Template Service
- * 
- * Handles template management, HTML generation, and template-specific logic.
- * 
+ *
+ * Core service for managing CV templates and template-based generation.
+ * Provides template selection, customization, and rendering functionality.
+ *
  * @author Gil Klainert
- * @version 1.0.0
+ * @version 2.0.0 - Modularized Architecture
  */
 
-import { BaseService } from '../shared/base-service';
-import { ServiceResult } from '../shared/service-types';
-import { CVGenerator } from '../../services/cvGenerator';
+import { CVProcessingContext, ServiceResult } from '../../types';
+import { BaseService } from '../../shared/utils/base-service';
+import * as admin from 'firebase-admin';
 
-export interface TemplateGenerationOptions {
-  templateId: string;
-  cvData: any;
-  features?: string[];
-  jobId?: string;
-  customizations?: Record<string, any>;
-}
-
-export interface TemplateGenerationResult {
-  html: string;
-  templateUsed: string;
-  generationTime: number;
-  metadata?: Record<string, any>;
-}
-
-export interface TemplateInfo {
+export interface CVTemplate {
   id: string;
   name: string;
   description: string;
-  category: string;
+  category: 'professional' | 'creative' | 'academic' | 'technical' | 'executive';
+  style: 'modern' | 'classic' | 'minimal' | 'bold' | 'elegant';
   features: string[];
-  requirements: string[];
-  preview?: string;
+  layout: {
+    columns: number;
+    sections: string[];
+    colorScheme: string;
+    fontFamily: string;
+  };
+  customization: {
+    colors: string[];
+    fonts: string[];
+    layouts: string[];
+  };
+  previewUrl?: string;
+  isActive: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface TemplateRenderOptions {
+  templateId: string;
+  data: any;
+  customizations?: {
+    colorScheme?: string;
+    fontFamily?: string;
+    layout?: string;
+    customColors?: { [key: string]: string };
+  };
+  format: 'html' | 'pdf' | 'docx';
+}
+
+export interface TemplateRenderResult {
+  format: string;
+  content?: string;
+  filePath?: string;
+  previewUrl?: string;
+  metadata: {
+    templateId: string;
+    renderTime: number;
+    fileSize?: number;
+  };
 }
 
 export class CVTemplateService extends BaseService {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  private cvGenerator!: typeof CVGenerator;
-  private templateCache = new Map<string, TemplateInfo>();
+  private db: admin.firestore.Firestore;
+  private storage: admin.storage.Storage;
 
   constructor() {
     super();
-    // Configuration: name: 'cv-template', version: '1.0.0'
+    this.db = admin.firestore();
+    this.storage = admin.storage();
   }
 
-  protected async onInitialize(): Promise<void> {
-    this.cvGenerator = CVGenerator;
-    await this.loadTemplateDefinitions();
-    this.logger.info('CV Template Service initialized');
+  /**
+   * Get all available CV templates
+   */
+  async getTemplates(category?: string): Promise<ServiceResult<CVTemplate[]>> {
+    try {
+      this.logInfo('Fetching CV templates', { category });
+
+      let query = this.db.collection('cv_templates').where('isActive', '==', true);
+
+      if (category) {
+        query = query.where('category', '==', category);
+      }
+
+      const snapshot = await query.get();
+      const templates: CVTemplate[] = [];
+
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        templates.push({
+          id: doc.id,
+          ...data,
+          createdAt: data.createdAt?.toDate() || new Date(),
+          updatedAt: data.updatedAt?.toDate() || new Date()
+        } as CVTemplate);
+      });
+
+      this.logInfo('Templates fetched successfully', { count: templates.length });
+
+      return {
+        success: true,
+        data: templates
+      };
+
+    } catch (error) {
+      this.logError('Failed to fetch templates', error as Error);
+      return {
+        success: false,
+        error: {
+          code: 'TEMPLATE_FETCH_FAILED',
+          message: `Failed to fetch templates: ${(error as Error).message}`
+        }
+      };
+    }
   }
 
-  protected async onCleanup(): Promise<void> {
-    this.templateCache.clear();
-    this.logger.info('CV Template Service cleaned up');
+  /**
+   * Get a specific template by ID
+   */
+  async getTemplate(templateId: string): Promise<ServiceResult<CVTemplate>> {
+    try {
+      this.logInfo('Fetching template', { templateId });
+
+      const doc = await this.db.collection('cv_templates').doc(templateId).get();
+
+      if (!doc.exists) {
+        return {
+          success: false,
+          error: {
+            code: 'TEMPLATE_NOT_FOUND',
+            message: `Template with ID ${templateId} not found`
+          }
+        };
+      }
+
+      const data = doc.data()!;
+      const template: CVTemplate = {
+        id: doc.id,
+        ...data,
+        createdAt: data.createdAt?.toDate() || new Date(),
+        updatedAt: data.updatedAt?.toDate() || new Date()
+      } as CVTemplate;
+
+      return {
+        success: true,
+        data: template
+      };
+
+    } catch (error) {
+      this.logError('Failed to fetch template', error as Error, { templateId });
+      return {
+        success: false,
+        error: {
+          code: 'TEMPLATE_FETCH_FAILED',
+          message: `Failed to fetch template: ${(error as Error).message}`
+        }
+      };
+    }
   }
 
-  protected async onHealthCheck(): Promise<{ metrics: any }> {
+  /**
+   * Render CV using a template
+   */
+  async renderWithTemplate(
+    options: TemplateRenderOptions,
+    context?: CVProcessingContext
+  ): Promise<ServiceResult<TemplateRenderResult>> {
+    try {
+      this.logInfo('Rendering CV with template', {
+        templateId: options.templateId,
+        format: options.format,
+        cvId: context?.cvId
+      });
+
+      const startTime = Date.now();
+
+      // Get template
+      const templateResult = await this.getTemplate(options.templateId);
+      if (!templateResult.success) {
+        return templateResult as ServiceResult<TemplateRenderResult>;
+      }
+
+      const template = templateResult.data!;
+
+      // Apply customizations
+      const finalTemplate = this.applyCustomizations(template, options.customizations);
+
+      // Render based on format
+      let result: TemplateRenderResult;
+
+      switch (options.format) {
+        case 'html':
+          result = await this.renderHTML(finalTemplate, options.data);
+          break;
+        case 'pdf':
+          result = await this.renderPDF(finalTemplate, options.data, context);
+          break;
+        case 'docx':
+          result = await this.renderDOCX(finalTemplate, options.data, context);
+          break;
+        default:
+          return {
+            success: false,
+            error: {
+              code: 'UNSUPPORTED_FORMAT',
+              message: `Format ${options.format} is not supported`
+            }
+          };
+      }
+
+      result.metadata = {
+        templateId: options.templateId,
+        renderTime: Date.now() - startTime,
+        ...result.metadata
+      };
+
+      this.logInfo('CV rendered successfully', {
+        templateId: options.templateId,
+        format: options.format,
+        renderTime: result.metadata.renderTime
+      });
+
+      return {
+        success: true,
+        data: result
+      };
+
+    } catch (error) {
+      this.logError('Template rendering failed', error as Error, {
+        templateId: options.templateId,
+        format: options.format
+      });
+      return {
+        success: false,
+        error: {
+          code: 'RENDER_FAILED',
+          message: `Template rendering failed: ${(error as Error).message}`
+        }
+      };
+    }
+  }
+
+  private applyCustomizations(template: CVTemplate, customizations?: any): CVTemplate {
+    if (!customizations) {
+      return template;
+    }
+
+    const customizedTemplate = { ...template };
+
+    if (customizations.colorScheme) {
+      customizedTemplate.layout.colorScheme = customizations.colorScheme;
+    }
+
+    if (customizations.fontFamily) {
+      customizedTemplate.layout.fontFamily = customizations.fontFamily;
+    }
+
+    return customizedTemplate;
+  }
+
+  private async renderHTML(template: CVTemplate, data: any): Promise<TemplateRenderResult> {
+    // Generate HTML content
+    const htmlContent = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>CV - ${data.personalInfo?.name || 'Professional CV'}</title>
+        <style>
+          body {
+            font-family: ${template.layout.fontFamily};
+            color: ${template.layout.colorScheme};
+            margin: 0;
+            padding: 20px;
+          }
+          .cv-container {
+            max-width: 800px;
+            margin: 0 auto;
+          }
+          .section {
+            margin-bottom: 20px;
+          }
+          .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-bottom: 2px solid ${template.layout.colorScheme};
+          }
+        </style>
+      </head>
+      <body>
+        <div class="cv-container">
+          ${this.generateHTMLSections(data, template)}
+        </div>
+      </body>
+      </html>
+    `;
+
     return {
-      metrics: {
-        templatesLoaded: this.templateCache.size,
-        generationsPerformed: 0
+      format: 'html',
+      content: htmlContent,
+      metadata: {
+        templateId: template.id,
+        renderTime: 0
       }
     };
   }
 
-  /**
-   * Generate HTML content using specified template
-   */
-  async generateHTML(
-    cvData: any,
-    templateId: string,
-    features?: string[],
-    jobId?: string
-  ): Promise<ServiceResult<TemplateGenerationResult>> {
-    try {
-      const startTime = Date.now();
+  private async renderPDF(template: CVTemplate, data: any, context?: CVProcessingContext): Promise<TemplateRenderResult> {
+    // For now, return a placeholder - full PDF generation would require additional libraries
+    const fileName = `cv_${context?.cvId || 'generated'}_${Date.now()}.pdf`;
+    const filePath = `/tmp/${fileName}`;
 
-      this.logger.info('Generating HTML with template', { 
-        templateId, 
-        jobId, 
-        features: features?.length || 0 
-      });
-
-      // Validate template exists
-      const templateInfo = await this.getTemplateInfo(templateId);
-      if (!templateInfo.success) {
-        return {
-          success: false,
-          error: templateInfo.error
-        };
+    return {
+      format: 'pdf',
+      filePath,
+      metadata: {
+        templateId: template.id,
+        renderTime: 0,
+        fileSize: 0
       }
-
-      // Generate HTML using CVGenerator
-      const html = await this.executeWithTimeout(
-        Promise.resolve('<html>Generated HTML content</html>'),
-        30000 // 30 second timeout
-      ) as string;
-
-      const generationTime = Date.now() - startTime;
-
-      const result: TemplateGenerationResult = {
-        html,
-        templateUsed: templateId,
-        generationTime,
-        metadata: {
-          features: features || [],
-          jobId,
-          generatedAt: new Date(),
-          cvDataHash: this.generateDataHash(cvData)
-        }
-      };
-
-      this.logger.info('HTML generation completed', { 
-        templateId, 
-        generationTime,
-        htmlLength: html.length 
-      });
-
-      return { success: true, data: result };
-
-    } catch (error) {
-      this.logger.error('HTML generation failed', { 
-        templateId, 
-        jobId, 
-        error 
-      });
-
-      return {
-        success: false,
-        error: error instanceof Error ? error.message : 'HTML generation failed'
-      };
-    }
+    };
   }
 
-  /**
-   * Get available templates
-   */
-  async getAvailableTemplates(): Promise<ServiceResult<TemplateInfo[]>> {
-    try {
-      const templates = Array.from(this.templateCache.values());
-      
-      return { 
-        success: true, 
-        data: templates.sort((a, b) => a.name.localeCompare(b.name))
-      };
+  private async renderDOCX(template: CVTemplate, data: any, context?: CVProcessingContext): Promise<TemplateRenderResult> {
+    // For now, return a placeholder - full DOCX generation would require additional libraries
+    const fileName = `cv_${context?.cvId || 'generated'}_${Date.now()}.docx`;
+    const filePath = `/tmp/${fileName}`;
 
-    } catch (error) {
-      return {
-        success: false,
-        error: error instanceof Error ? error.message : 'Failed to retrieve templates'
-      };
-    }
-  }
-
-  /**
-   * Get template information
-   */
-  async getTemplateInfo(templateId: string): Promise<ServiceResult<TemplateInfo>> {
-    try {
-      const template = this.templateCache.get(templateId);
-      
-      if (!template) {
-        // Try to use default template as fallback
-        const defaultTemplate = this.templateCache.get('modern');
-        if (defaultTemplate) {
-          this.logger.warn('Template not found, using default', { 
-            requestedTemplate: templateId, 
-            defaultTemplate: 'modern' 
-          });
-          
-          return { 
-            success: true, 
-            data: { ...defaultTemplate, id: templateId } 
-          };
-        }
-
-        return {
-          success: false,
-          error: `Template '${templateId}' not found`
-        };
+    return {
+      format: 'docx',
+      filePath,
+      metadata: {
+        templateId: template.id,
+        renderTime: 0,
+        fileSize: 0
       }
-
-      return { success: true, data: template };
-
-    } catch (error) {
-      return {
-        success: false,
-        error: error instanceof Error ? error.message : 'Failed to get template info'
-      };
-    }
+    };
   }
 
-  /**
-   * Validate template compatibility with features
-   */
-  async validateTemplateFeatureCompatibility(
-    templateId: string, 
-    features: string[]
-  ): Promise<ServiceResult<{ compatible: boolean, incompatibleFeatures: string[] }>> {
-    try {
-      const templateResult = await this.getTemplateInfo(templateId);
-      if (!templateResult.success) {
-        return {
-          success: false,
-          error: templateResult.error
-        };
-      }
+  private generateHTMLSections(data: any, template: CVTemplate): string {
+    const sections = [];
 
-      const template = templateResult.data!;
-      const incompatibleFeatures: string[] = [];
-
-      for (const feature of features) {
-        if (!this.isFeatureSupported(template, feature)) {
-          incompatibleFeatures.push(feature);
-        }
-      }
-
-      return {
-        success: true,
-        data: {
-          compatible: incompatibleFeatures.length === 0,
-          incompatibleFeatures
-        }
-      };
-
-    } catch (error) {
-      return {
-        success: false,
-        error: error instanceof Error ? error.message : 'Compatibility check failed'
-      };
-    }
-  }
-
-  /**
-   * Get template preview
-   */
-  async getTemplatePreview(templateId: string): Promise<ServiceResult<string>> {
-    try {
-      const templateResult = await this.getTemplateInfo(templateId);
-      if (!templateResult.success) {
-        return {
-          success: false,
-          error: templateResult.error
-        };
-      }
-
-      const template = templateResult.data!;
-      const preview = template.preview || this.generateDefaultPreview(template);
-
-      return { success: true, data: preview };
-
-    } catch (error) {
-      return {
-        success: false,
-        error: error instanceof Error ? error.message : 'Preview generation failed'
-      };
-    }
-  }
-
-  private async loadTemplateDefinitions(): Promise<void> {
-    // Define available templates
-    const templates: TemplateInfo[] = [
-      {
-        id: 'modern',
-        name: 'Modern Professional',
-        description: 'Clean, modern design with focus on readability',
-        category: 'professional',
-        features: ['skills-visualization', 'achievements-analysis', 'ats-optimization'],
-        requirements: ['personalInfo.name', 'experience']
-      },
-      {
-        id: 'classic',
-        name: 'Classic Traditional',
-        description: 'Traditional CV format suitable for conservative industries',
-        category: 'traditional',
-        features: ['ats-optimization', 'achievements-analysis'],
-        requirements: ['personalInfo.name', 'personalInfo.email', 'experience', 'education']
-      },
-      {
-        id: 'creative',
-        name: 'Creative Portfolio',
-        description: 'Visually appealing design for creative professionals',
-        category: 'creative',
-        features: ['skills-visualization', 'portfolio-gallery', 'achievements-analysis'],
-        requirements: ['personalInfo.name', 'skills']
-      },
-      {
-        id: 'executive',
-        name: 'Executive Leadership',
-        description: 'Sophisticated design for senior executives',
-        category: 'executive',
-        features: ['achievements-analysis', 'ats-optimization', 'leadership-metrics'],
-        requirements: ['personalInfo.name', 'experience', 'leadership']
-      },
-      {
-        id: 'tech',
-        name: 'Technology Focused',
-        description: 'Template optimized for technology professionals',
-        category: 'technology',
-        features: ['skills-visualization', 'portfolio-gallery', 'ats-optimization'],
-        requirements: ['personalInfo.name', 'skills', 'experience']
-      }
-    ];
-
-    // Load templates into cache
-    for (const template of templates) {
-      this.templateCache.set(template.id, template);
-    }
-
-    this.logger.info('Template definitions loaded', { 
-      count: templates.length 
-    });
-  }
-
-  private isFeatureSupported(template: TemplateInfo, feature: string): boolean {
-    return template.features.includes(feature) || 
-           this.getUniversalFeatures().includes(feature);
-  }
-
-  private getUniversalFeatures(): string[] {
-    // Features that work with all templates
-    return [
-      'privacy-mode',
-      'generate-podcast',
-      'language-proficiency',
-      'social-media-integration'
-    ];
-  }
-
-  private generateDataHash(cvData: any): string {
-    // Simple hash function for data integrity checking
-    const dataString = JSON.stringify(cvData);
-    let hash = 0;
-    
-    for (let i = 0; i < dataString.length; i++) {
-      const char = dataString.charCodeAt(i);
-      hash = ((hash << 5) - hash) + char;
-      hash = hash & hash; // Convert to 32-bit integer
-    }
-    
-    return hash.toString(36);
-  }
-
-  private generateDefaultPreview(template: TemplateInfo): string {
-    return `
-      <div class="template-preview ${template.category}">
-        <h3>${template.name}</h3>
-        <p>${template.description}</p>
-        <div class="features">
-          ${template.features.map(f => `<span class="feature">${f}</span>`).join('')}
+    // Personal Information
+    if (data.personalInfo) {
+      sections.push(`
+        <div class="section">
+          <div class="section-title">Personal Information</div>
+          <h1>${data.personalInfo.name || ''}</h1>
+          <p>${data.personalInfo.email || ''}</p>
+          <p>${data.personalInfo.phone || ''}</p>
+          <p>${data.personalInfo.location || ''}</p>
         </div>
-        <div class="sample-content">
-          <div class="header">John Doe</div>
-          <div class="section">Professional Experience</div>
-          <div class="section">Education</div>
-          <div class="section">Skills</div>
+      `);
+    }
+
+    // Experience
+    if (data.experience && Array.isArray(data.experience)) {
+      sections.push(`
+        <div class="section">
+          <div class="section-title">Experience</div>
+          ${data.experience.map((exp: any) => `
+            <div>
+              <h3>${exp.title || ''} at ${exp.company || ''}</h3>
+              <p>${exp.duration || ''}</p>
+              <p>${exp.description || ''}</p>
+            </div>
+          `).join('')}
         </div>
-      </div>
-    `;
+      `);
+    }
+
+    // Education
+    if (data.education && Array.isArray(data.education)) {
+      sections.push(`
+        <div class="section">
+          <div class="section-title">Education</div>
+          ${data.education.map((edu: any) => `
+            <div>
+              <h3>${edu.degree || ''}</h3>
+              <p>${edu.institution || ''} (${edu.year || ''})</p>
+            </div>
+          `).join('')}
+        </div>
+      `);
+    }
+
+    // Skills
+    if (data.skills && Array.isArray(data.skills)) {
+      sections.push(`
+        <div class="section">
+          <div class="section-title">Skills</div>
+          <ul>
+            ${data.skills.map((skill: any) => `<li>${skill.name || skill}</li>`).join('')}
+          </ul>
+        </div>
+      `);
+    }
+
+    return sections.join('');
   }
 }

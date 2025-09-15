@@ -1,355 +1,466 @@
 /**
  * CV Validation Service
- * 
- * Handles data validation, job access control, and CV data integrity checks.
- * 
+ *
+ * Core service for validating CV content, structure, and compliance.
+ * Provides comprehensive validation including content quality, format compliance,
+ * and professional standards.
+ *
  * @author Gil Klainert
- * @version 1.0.0
+ * @version 2.0.0 - Modularized Architecture
  */
 
-import { BaseService } from '../shared/base-service';
-import { ServiceResult } from '../shared/service-types';
-import * as admin from 'firebase-admin';
+import { CVProcessingContext, ServiceResult } from '../../types';
+import { BaseService } from '../../shared/utils/base-service';
 
-export interface JobValidationResult {
-  jobData: any;
-  cvData: any;
-  isValid: boolean;
-  errors: string[];
+export interface ValidationRule {
+  id: string;
+  name: string;
+  description: string;
+  category: 'content' | 'format' | 'structure' | 'compliance' | 'quality';
+  severity: 'error' | 'warning' | 'info';
+  required: boolean;
 }
 
-export interface CVDataValidationResult {
+export interface ValidationError {
+  ruleId: string;
+  field: string;
+  message: string;
+  severity: 'error' | 'warning' | 'info';
+  suggestions?: string[];
+  location?: {
+    section: string;
+    line?: number;
+    column?: number;
+  };
+}
+
+export interface CVValidationResult {
   isValid: boolean;
-  errors: string[];
-  warnings: string[];
-  completeness: number; // 0-100%
+  score: number; // 0-100
+  errors: ValidationError[];
+  warnings: ValidationError[];
+  info: ValidationError[];
+  summary: {
+    totalIssues: number;
+    criticalErrors: number;
+    warnings: number;
+    passedRules: number;
+    totalRules: number;
+  };
+  recommendations: string[];
+}
+
+export interface ValidationOptions {
+  includeContentValidation?: boolean;
+  includeFormatValidation?: boolean;
+  includeComplianceCheck?: boolean;
+  strict?: boolean;
+  targetRole?: string;
+  customRules?: ValidationRule[];
 }
 
 export class CVValidationService extends BaseService {
+  private validationRules: ValidationRule[] = [];
+
   constructor() {
     super();
-    // Configuration: name: 'cv-validation', version: '1.0.0'
-  }
-
-  protected async onInitialize(): Promise<void> {
-    this.logger.info('CV Validation Service initialized');
-  }
-
-  protected async onCleanup(): Promise<void> {
-    this.logger.info('CV Validation Service cleaned up');
-  }
-
-  protected async onHealthCheck(): Promise<{ metrics: any }> {
-    return {
-      metrics: {
-        validationsPerformed: 0,
-        errorRate: 0
-      }
-    };
+    this.initializeValidationRules();
   }
 
   /**
-   * Validate job access and ownership
+   * Validate CV content and structure
    */
-  async validateJobAccess(jobId: string, userId: string): Promise<ServiceResult<JobValidationResult>> {
+  async validateCV(
+    cvData: any,
+    options: ValidationOptions = {},
+    context?: CVProcessingContext
+  ): Promise<ServiceResult<CVValidationResult>> {
     try {
-      // Get job document
-      const jobDoc = await admin.firestore()
-        .collection('jobs')
-        .doc(jobId)
-        .get();
-      
-      if (!jobDoc.exists) {
-        return {
-          success: false,
-          error: 'Job not found'
-        };
-      }
+      this.logInfo('Starting CV validation', {
+        cvId: context?.cvId,
+        strict: options.strict,
+        targetRole: options.targetRole
+      });
 
-      const jobData = jobDoc.data()!;
-      
-      // Verify user ownership
-      if (jobData.userId !== userId) {
-        return {
-          success: false,
-          error: 'Unauthorized access to job'
-        };
-      }
+      const errors: ValidationError[] = [];
+      const warnings: ValidationError[] = [];
+      const info: ValidationError[] = [];
 
-      // Validate CV data exists
-      const parsedCV = jobData.parsedData;
-      if (!parsedCV) {
-        return {
-          success: false,
-          error: 'No parsed CV data found'
-        };
-      }
+      // Get applicable rules
+      const applicableRules = this.getApplicableRules(options);
 
-      // Determine which CV data to use (privacy version or original)
-      const cvData = this.selectCVData(jobData, jobData.selectedFeatures);
+      // Run validation rules
+      for (const rule of applicableRules) {
+        const ruleResults = await this.executeValidationRule(rule, cvData, options);
 
-      const result: JobValidationResult = {
-        jobData,
-        cvData,
-        isValid: true,
-        errors: []
-      };
-
-      return { success: true, data: result };
-
-    } catch (error) {
-      this.logger.error('Job validation failed', { jobId, userId, error });
-      
-      return {
-        success: false,
-        error: error instanceof Error ? error.message : 'Job validation failed'
-      };
-    }
-  }
-
-  /**
-   * Validate CV data structure and completeness
-   */
-  async validateCVData(cvData: any): Promise<ServiceResult<CVDataValidationResult>> {
-    try {
-      const errors: string[] = [];
-      const warnings: string[] = [];
-
-      // Required fields validation
-      const requiredFields = [
-        'personalInfo',
-        'experience',
-        'education',
-        'skills'
-      ];
-
-      for (const field of requiredFields) {
-        if (!cvData[field]) {
-          errors.push(`Missing required field: ${field}`);
-        }
-      }
-
-      // Personal info validation
-      if (cvData.personalInfo) {
-        if (!cvData.personalInfo.name) {
-          errors.push('Missing personal name');
-        }
-        if (!cvData.personalInfo.email) {
-          warnings.push('Missing email address');
-        }
-        if (!cvData.personalInfo.phone) {
-          warnings.push('Missing phone number');
-        }
-      }
-
-      // Experience validation
-      if (cvData.experience && Array.isArray(cvData.experience)) {
-        cvData.experience.forEach((exp: any, index: number) => {
-          if (!exp.company) {
-            errors.push(`Experience ${index + 1}: Missing company name`);
-          }
-          if (!exp.position) {
-            errors.push(`Experience ${index + 1}: Missing position title`);
-          }
-          if (!exp.startDate) {
-            warnings.push(`Experience ${index + 1}: Missing start date`);
+        ruleResults.forEach(result => {
+          switch (result.severity) {
+            case 'error':
+              errors.push(result);
+              break;
+            case 'warning':
+              warnings.push(result);
+              break;
+            case 'info':
+              info.push(result);
+              break;
           }
         });
       }
 
-      // Education validation
-      if (cvData.education && Array.isArray(cvData.education)) {
-        cvData.education.forEach((edu: any, index: number) => {
-          if (!edu.institution) {
-            errors.push(`Education ${index + 1}: Missing institution name`);
-          }
-          if (!edu.degree) {
-            warnings.push(`Education ${index + 1}: Missing degree information`);
-          }
-        });
-      }
+      // Calculate validation score
+      const score = this.calculateValidationScore(errors, warnings, applicableRules.length);
+      const isValid = options.strict ? errors.length === 0 : score >= 70;
 
-      // Skills validation
-      if (cvData.skills && Array.isArray(cvData.skills)) {
-        if (cvData.skills.length === 0) {
-          warnings.push('No skills listed');
-        }
-      }
+      // Generate recommendations
+      const recommendations = this.generateValidationRecommendations(errors, warnings);
 
-      // Calculate completeness score
-      const completeness = this.calculateCompleteness(cvData);
-
-      const result: CVDataValidationResult = {
-        isValid: errors.length === 0,
+      const result: CVValidationResult = {
+        isValid,
+        score,
         errors,
         warnings,
-        completeness
+        info,
+        summary: {
+          totalIssues: errors.length + warnings.length + info.length,
+          criticalErrors: errors.length,
+          warnings: warnings.length,
+          passedRules: applicableRules.length - errors.length - warnings.length,
+          totalRules: applicableRules.length
+        },
+        recommendations
       };
 
-      return { success: true, data: result };
+      this.logInfo('CV validation completed', {
+        cvId: context?.cvId,
+        isValid,
+        score,
+        errorCount: errors.length,
+        warningCount: warnings.length
+      });
+
+      return {
+        success: true,
+        data: result
+      };
 
     } catch (error) {
-      this.logger.error('CV data validation failed', { error });
-      
+      this.logError('CV validation failed', error as Error, { cvId: context?.cvId });
       return {
         success: false,
-        error: error instanceof Error ? error.message : 'CV data validation failed'
-      };
-    }
-  }
-
-  /**
-   * Validate template compatibility with CV data
-   */
-  async validateTemplateCompatibility(cvData: any, templateId: string): Promise<ServiceResult<boolean>> {
-    try {
-      // Template-specific validation rules
-      const templateRequirements = this.getTemplateRequirements(templateId);
-      
-      for (const requirement of templateRequirements) {
-        if (!this.checkRequirement(cvData, requirement)) {
-          return {
-            success: false,
-            error: `CV data is not compatible with template ${templateId}: Missing ${requirement.field}`
-          };
+        error: {
+          code: 'VALIDATION_FAILED',
+          message: `CV validation failed: ${(error as Error).message}`
         }
-      }
-
-      return { success: true, data: true };
-
-    } catch (error) {
-      return {
-        success: false,
-        error: error instanceof Error ? error.message : 'Template compatibility check failed'
       };
     }
   }
 
-  /**
-   * Validate feature requirements
-   */
-  async validateFeatureRequirements(cvData: any, features: string[]): Promise<ServiceResult<string[]>> {
-    try {
-      const incompatibleFeatures: string[] = [];
-      
-      for (const feature of features) {
-        const isCompatible = await this.checkFeatureCompatibility(cvData, feature);
-        if (!isCompatible) {
-          incompatibleFeatures.push(feature);
+  private initializeValidationRules(): void {
+    this.validationRules = [
+      // Required content rules
+      {
+        id: 'personal_info_required',
+        name: 'Personal Information Required',
+        description: 'CV must contain basic personal information',
+        category: 'content',
+        severity: 'error',
+        required: true
+      },
+      {
+        id: 'contact_email_required',
+        name: 'Contact Email Required',
+        description: 'CV must contain a valid email address',
+        category: 'content',
+        severity: 'error',
+        required: true
+      },
+      {
+        id: 'experience_required',
+        name: 'Work Experience Required',
+        description: 'CV must contain work experience information',
+        category: 'content',
+        severity: 'error',
+        required: true
+      },
+
+      // Content quality rules
+      {
+        id: 'experience_details',
+        name: 'Experience Details',
+        description: 'Work experience should include detailed descriptions',
+        category: 'quality',
+        severity: 'warning',
+        required: false
+      },
+      {
+        id: 'skills_list',
+        name: 'Skills List',
+        description: 'CV should include a comprehensive skills list',
+        category: 'quality',
+        severity: 'warning',
+        required: false
+      },
+      {
+        id: 'education_info',
+        name: 'Education Information',
+        description: 'CV should include education background',
+        category: 'quality',
+        severity: 'warning',
+        required: false
+      },
+
+      // Format rules
+      {
+        id: 'proper_formatting',
+        name: 'Proper Formatting',
+        description: 'CV should be properly formatted and structured',
+        category: 'format',
+        severity: 'warning',
+        required: false
+      },
+      {
+        id: 'length_appropriate',
+        name: 'Appropriate Length',
+        description: 'CV length should be appropriate for experience level',
+        category: 'format',
+        severity: 'info',
+        required: false
+      },
+
+      // Compliance rules
+      {
+        id: 'no_discriminatory_content',
+        name: 'No Discriminatory Content',
+        description: 'CV should not contain discriminatory information',
+        category: 'compliance',
+        severity: 'warning',
+        required: false
+      },
+      {
+        id: 'privacy_compliance',
+        name: 'Privacy Compliance',
+        description: 'CV should comply with privacy regulations',
+        category: 'compliance',
+        severity: 'info',
+        required: false
+      }
+    ];
+  }
+
+  private getApplicableRules(options: ValidationOptions): ValidationRule[] {
+    let rules = [...this.validationRules];
+
+    // Filter by options
+    if (options.includeContentValidation === false) {
+      rules = rules.filter(rule => rule.category !== 'content');
+    }
+
+    if (options.includeFormatValidation === false) {
+      rules = rules.filter(rule => rule.category !== 'format');
+    }
+
+    if (options.includeComplianceCheck === false) {
+      rules = rules.filter(rule => rule.category !== 'compliance');
+    }
+
+    // Add custom rules
+    if (options.customRules) {
+      rules.push(...options.customRules);
+    }
+
+    return rules;
+  }
+
+  private async executeValidationRule(
+    rule: ValidationRule,
+    cvData: any,
+    options: ValidationOptions
+  ): Promise<ValidationError[]> {
+    const errors: ValidationError[] = [];
+
+    switch (rule.id) {
+      case 'personal_info_required':
+        if (!cvData.personalInfo || !cvData.personalInfo.name) {
+          errors.push({
+            ruleId: rule.id,
+            field: 'personalInfo.name',
+            message: 'Name is required in personal information',
+            severity: rule.severity,
+            suggestions: ['Add your full name to the personal information section'],
+            location: { section: 'personalInfo' }
+          });
         }
+        break;
+
+      case 'contact_email_required':
+        if (!cvData.personalInfo?.email || !this.isValidEmail(cvData.personalInfo.email)) {
+          errors.push({
+            ruleId: rule.id,
+            field: 'personalInfo.email',
+            message: 'Valid email address is required',
+            severity: rule.severity,
+            suggestions: ['Add a valid email address to your contact information'],
+            location: { section: 'personalInfo' }
+          });
+        }
+        break;
+
+      case 'experience_required':
+        if (!cvData.experience || !Array.isArray(cvData.experience) || cvData.experience.length === 0) {
+          errors.push({
+            ruleId: rule.id,
+            field: 'experience',
+            message: 'Work experience is required',
+            severity: rule.severity,
+            suggestions: ['Add at least one work experience entry'],
+            location: { section: 'experience' }
+          });
+        }
+        break;
+
+      case 'experience_details':
+        if (cvData.experience && Array.isArray(cvData.experience)) {
+          cvData.experience.forEach((exp: any, index: number) => {
+            if (!exp.description || exp.description.length < 50) {
+              errors.push({
+                ruleId: rule.id,
+                field: `experience[${index}].description`,
+                message: 'Experience descriptions should be detailed (at least 50 characters)',
+                severity: rule.severity,
+                suggestions: ['Add more detailed descriptions of your responsibilities and achievements'],
+                location: { section: 'experience', line: index }
+              });
+            }
+          });
+        }
+        break;
+
+      case 'skills_list':
+        if (!cvData.skills || !Array.isArray(cvData.skills) || cvData.skills.length < 3) {
+          errors.push({
+            ruleId: rule.id,
+            field: 'skills',
+            message: 'CV should include at least 3 relevant skills',
+            severity: rule.severity,
+            suggestions: ['Add more relevant skills to strengthen your profile'],
+            location: { section: 'skills' }
+          });
+        }
+        break;
+
+      case 'education_info':
+        if (!cvData.education || !Array.isArray(cvData.education) || cvData.education.length === 0) {
+          errors.push({
+            ruleId: rule.id,
+            field: 'education',
+            message: 'Education information is recommended',
+            severity: rule.severity,
+            suggestions: ['Add your educational background'],
+            location: { section: 'education' }
+          });
+        }
+        break;
+
+      case 'proper_formatting':
+        // Simple formatting check
+        const sections = ['personalInfo', 'experience', 'education', 'skills'];
+        const missingSections = sections.filter(section => !cvData[section]);
+        if (missingSections.length > 1) {
+          errors.push({
+            ruleId: rule.id,
+            field: 'structure',
+            message: 'CV is missing important sections',
+            severity: rule.severity,
+            suggestions: [`Consider adding: ${missingSections.join(', ')}`],
+            location: { section: 'overall' }
+          });
+        }
+        break;
+
+      case 'length_appropriate':
+        const contentLength = JSON.stringify(cvData).length;
+        if (contentLength < 500) {
+          errors.push({
+            ruleId: rule.id,
+            field: 'overall',
+            message: 'CV appears to be too short',
+            severity: rule.severity,
+            suggestions: ['Consider adding more detailed information about your experience and achievements'],
+            location: { section: 'overall' }
+          });
+        }
+        break;
+
+      default:
+        // Handle custom rules or skip unknown rules
+        break;
+    }
+
+    return errors;
+  }
+
+  private isValidEmail(email: string): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
+  private calculateValidationScore(
+    errors: ValidationError[],
+    warnings: ValidationError[],
+    totalRules: number
+  ): number {
+    if (totalRules === 0) return 100;
+
+    const errorWeight = 10;
+    const warningWeight = 3;
+
+    const deductions = (errors.length * errorWeight) + (warnings.length * warningWeight);
+    const maxDeductions = totalRules * errorWeight;
+
+    const score = Math.max(0, 100 - (deductions / maxDeductions) * 100);
+    return Math.round(score);
+  }
+
+  private generateValidationRecommendations(
+    errors: ValidationError[],
+    warnings: ValidationError[]
+  ): string[] {
+    const recommendations: string[] = [];
+
+    // Priority recommendations based on errors
+    if (errors.length > 0) {
+      recommendations.push('Address all critical errors before submitting your CV');
+
+      const criticalFields = errors.map(e => e.field);
+      if (criticalFields.includes('personalInfo.name')) {
+        recommendations.push('Add your full name to make your CV complete');
       }
-
-      return { success: true, data: incompatibleFeatures };
-
-    } catch (error) {
-      return {
-        success: false,
-        error: error instanceof Error ? error.message : 'Feature validation failed'
-      };
-    }
-  }
-
-  private selectCVData(jobData: any, features?: string[]): any {
-    // Use privacy version if privacy mode is enabled
-    if (features?.includes('privacy-mode') && jobData.privacyVersion) {
-      return jobData.privacyVersion;
-    }
-    return jobData.parsedData;
-  }
-
-  private calculateCompleteness(cvData: any): number {
-    let score = 0;
-    const maxScore = 100;
-
-    // Personal info (30 points)
-    if (cvData.personalInfo) {
-      if (cvData.personalInfo.name) score += 10;
-      if (cvData.personalInfo.email) score += 5;
-      if (cvData.personalInfo.phone) score += 5;
-      if (cvData.personalInfo.location) score += 5;
-      if (cvData.personalInfo.summary || cvData.personalInfo.objective) score += 5;
-    }
-
-    // Experience (40 points)
-    if (cvData.experience && Array.isArray(cvData.experience)) {
-      if (cvData.experience.length > 0) {
-        score += 20; // Base score for having experience
-        
-        // Additional points for complete experience entries
-        const completeEntries = cvData.experience.filter((exp: any) => 
-          exp.company && exp.position && exp.startDate
-        ).length;
-        
-        score += Math.min(20, completeEntries * 5);
+      if (criticalFields.includes('personalInfo.email')) {
+        recommendations.push('Include a valid email address for employers to contact you');
+      }
+      if (criticalFields.includes('experience')) {
+        recommendations.push('Add work experience to demonstrate your professional background');
       }
     }
 
-    // Education (15 points)
-    if (cvData.education && Array.isArray(cvData.education) && cvData.education.length > 0) {
-      score += 15;
-    }
+    // Secondary recommendations based on warnings
+    if (warnings.length > 0) {
+      recommendations.push('Consider addressing warnings to improve CV quality');
 
-    // Skills (15 points)
-    if (cvData.skills && Array.isArray(cvData.skills) && cvData.skills.length > 0) {
-      score += 15;
-    }
-
-    return Math.min(maxScore, score);
-  }
-
-  private getTemplateRequirements(templateId: string): { field: string, required: boolean }[] {
-    const requirements: Record<string, { field: string, required: boolean }[]> = {
-      'modern': [
-        { field: 'personalInfo.name', required: true },
-        { field: 'experience', required: true }
-      ],
-      'classic': [
-        { field: 'personalInfo.name', required: true },
-        { field: 'personalInfo.email', required: true },
-        { field: 'experience', required: true },
-        { field: 'education', required: true }
-      ],
-      'creative': [
-        { field: 'personalInfo.name', required: true },
-        { field: 'skills', required: true },
-        { field: 'portfolio', required: false }
-      ]
-    };
-
-    return requirements[templateId] || requirements['modern'] || [];
-  }
-
-  private checkRequirement(cvData: any, requirement: { field: string, required: boolean }): boolean {
-    if (!requirement.required) return true;
-
-    const fields = requirement.field.split('.');
-    let current = cvData;
-
-    for (const field of fields) {
-      if (!current || !current[field]) {
-        return false;
+      if (warnings.some(w => w.field.includes('description'))) {
+        recommendations.push('Provide more detailed descriptions of your work experience');
       }
-      current = current[field];
+      if (warnings.some(w => w.field === 'skills')) {
+        recommendations.push('Expand your skills list to better showcase your capabilities');
+      }
     }
 
-    return true;
-  }
-
-  private async checkFeatureCompatibility(cvData: any, feature: string): Promise<boolean> {
-    const featureRequirements: Record<string, (data: any) => boolean> = {
-      'skills-visualization': (data) => data.skills && Array.isArray(data.skills) && data.skills.length > 0,
-      'generate-podcast': (data) => data.experience && Array.isArray(data.experience) && data.experience.length > 0,
-      'achievements-analysis': (data) => data.experience && Array.isArray(data.experience),
-      'ats-optimization': () => true, // ATS optimization works with any CV data
-      'portfolio-gallery': (data) => data.portfolio || (data.experience && data.experience.some((exp: any) => exp.projects)),
-      'language-proficiency': (data) => data.languages && Array.isArray(data.languages) && data.languages.length > 0
-    };
-
-    const checkFunction = featureRequirements[feature];
-    if (!checkFunction) {
-      return true; // Unknown features are assumed compatible
+    // General recommendations
+    if (errors.length === 0 && warnings.length === 0) {
+      recommendations.push('Your CV passes all validation checks - great job!');
     }
 
-    return checkFunction(cvData);
+    return recommendations;
   }
 }
