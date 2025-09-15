@@ -52,3 +52,15 @@ export type {
 // Package metadata
 export const CV_PROCESSING_VERSION = '1.0.0';
 export const CV_PROCESSING_NAME = '@cvplus/cv-processing';
+// Migrated staging services
+export { CVAnalysisService } from './services/cv/cv-analysis.service';
+export { EnhancedATSAnalysisService } from './services/enhanced-ats-analysis.service';
+export { PolicyEnforcementService } from './services/policy-enforcement.service';
+export { CVGenerationService } from './services/cv/cv-generation.service';
+export { CVTemplateService } from './services/cv/cv-template.service';
+export { CVGenerator } from './services/cvGenerator';
+export { CVValidationService } from './services/cv/cv-validation.service';
+export { CVValidator } from './services/validation/cv-validator';
+export { CVHashService } from './services/cv-hash.service';
+export { EnhancementProcessingService } from './services/enhancements/enhancement-processing.service';
+export * from './services/cv-generator/types';
