@@ -1,9 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Workflow Integration for CV Processing
  *
  * Provides integration layer for workflow services from @cvplus/workflow submodule.
  * Uses dependency injection pattern to avoid direct dependencies between same-layer modules.
- */
+  */
 
 import { ParsedCV } from '../../cvParser';
 
@@ -37,20 +38,20 @@ export interface CertificationBadgesService {
 
 /**
  * Integration layer for workflow services
- */
+  */
 export class WorkflowIntegration {
   private static provider: WorkflowProvider | null = null;
 
   /**
    * Set the workflow provider (called by root application during startup)
-   */
+    */
   static setProvider(provider: WorkflowProvider): void {
     this.provider = provider;
   }
 
   /**
    * Get certification badges service from workflow submodule
-   */
+    */
   static getCertificationBadgesService(): CertificationBadgesService | null {
     if (!this.provider) {
       return null;
@@ -66,21 +67,21 @@ export class WorkflowIntegration {
 
   /**
    * Create fallback certification badges service
-   */
+    */
   static createFallbackCertificationBadgesService(): CertificationBadgesService {
     return new FallbackCertificationBadgesService();
   }
 
   /**
    * Get certification badges service with fallback
-   */
+    */
   static getCertificationBadgesServiceWithFallback(): CertificationBadgesService {
     return this.getCertificationBadgesService() || this.createFallbackCertificationBadgesService();
   }
 
   /**
    * Check if provider is available
-   */
+    */
   static isProviderAvailable(): boolean {
     return this.provider !== null;
   }
@@ -88,7 +89,7 @@ export class WorkflowIntegration {
 
 /**
  * Fallback certification badges service for when workflow submodule is not available
- */
+  */
 export class FallbackCertificationBadgesService implements CertificationBadgesService {
   async generateCertificationBadges(cv: any, jobId: string): Promise<CertificationBadgesCollection> {
     // Extract certifications from CV data

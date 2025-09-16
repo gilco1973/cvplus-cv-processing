@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Cache Service
  * 
  * Implements multi-level caching with Firestore and memory cache
@@ -7,7 +8,7 @@
  * @author Gil Klainert
  * @created 2025-08-23
  * @version 1.0
- */
+  */
 
 import { logger } from 'firebase-functions';
 import { getFirestore, Timestamp } from 'firebase-admin/firestore';
@@ -35,7 +36,7 @@ export class CacheService {
 
   /**
    * Get cached data
-   */
+    */
   async get(key: string): Promise<any | null> {
     try {
       // Check memory cache first
@@ -85,7 +86,7 @@ export class CacheService {
 
   /**
    * Set cached data
-   */
+    */
   async set(key: string, data: any, ttlSeconds?: number): Promise<void> {
     try {
       const ttl = ttlSeconds || this.defaultTTL;
@@ -133,7 +134,7 @@ export class CacheService {
 
   /**
    * Delete cached data
-   */
+    */
   async delete(key: string): Promise<void> {
     try {
       // Remove from memory cache
@@ -154,7 +155,7 @@ export class CacheService {
 
   /**
    * Clear all cached data for a user
-   */
+    */
   async clearUserCache(userId: string): Promise<void> {
     try {
       const snapshot = await this.db
@@ -183,7 +184,7 @@ export class CacheService {
 
   /**
    * Invalidate cache entries matching pattern
-   */
+    */
   async invalidate(pattern: string): Promise<void> {
     try {
       // Clear memory cache entries matching pattern
@@ -219,7 +220,7 @@ export class CacheService {
 
   /**
    * Get cache statistics
-   */
+    */
   async getStats(): Promise<{
     memoryEntries: number;
     firestoreEntries: number;
@@ -267,7 +268,7 @@ export class CacheService {
 
   /**
    * Set memory cache with LRU eviction
-   */
+    */
   private setMemoryCache(key: string, entry: CacheEntry): void {
     // Implement LRU eviction if cache is full
     if (this.memoryCache.size >= this.maxMemoryCacheSize) {
@@ -280,7 +281,7 @@ export class CacheService {
 
   /**
    * Check if cache entry is expired
-   */
+    */
   private isExpired(entry: CacheEntry): boolean {
     const expiresAt = new Date(entry.expiresAt);
     return expiresAt < new Date();
@@ -288,7 +289,7 @@ export class CacheService {
 
   /**
    * Sanitize key for Firestore document ID
-   */
+    */
   private sanitizeKey(key: string): string {
     // Replace invalid characters for Firestore document IDs
     return key.replace(/[\/\s]/g, '_').substring(0, 500);
@@ -296,7 +297,7 @@ export class CacheService {
 
   /**
    * Get approximate object size in bytes
-   */
+    */
   private getObjectSize(obj: any): number {
     const str = JSON.stringify(obj);
     return new Blob([str]).size;
@@ -304,7 +305,7 @@ export class CacheService {
 
   /**
    * Get total memory cache size
-   */
+    */
   private getMemoryCacheSize(): number {
     let totalSize = 0;
     Array.from(this.memoryCache.values()).forEach(entry => {
@@ -315,7 +316,7 @@ export class CacheService {
 
   /**
    * Schedule periodic cleanup of expired entries
-   */
+    */
   private scheduleCleanup(): void {
     // Run cleanup every hour
     setInterval(async () => {
@@ -325,7 +326,7 @@ export class CacheService {
 
   /**
    * Clean up expired cache entries
-   */
+    */
   private async cleanupExpired(): Promise<void> {
     try {
       const now = Timestamp.now();

@@ -1,9 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * System Simulation Service
  * 
  * Specialized service for simulating different ATS systems and their specific
  * parsing behaviors, compatibility requirements, and optimization strategies.
- */
+  */
 
 import { 
   ParsedCV, 
@@ -73,7 +74,7 @@ export class SystemSimulationService {
 
   /**
    * Simulate multiple ATS systems parsing the CV
-   */
+    */
   async simulateATSSystems(parsedCV: ParsedCV): Promise<ATSSystemSimulation[]> {
     
     const simulations: ATSSystemSimulation[] = [];
@@ -93,7 +94,7 @@ export class SystemSimulationService {
 
   /**
    * Simulate a specific ATS system's behavior
-   */
+    */
   private simulateSpecificATS(
     parsedCV: ParsedCV, 
     systemName: string, 
@@ -136,7 +137,7 @@ export class SystemSimulationService {
 
   /**
    * Calculate parsing accuracy for specific ATS system
-   */
+    */
   private calculateParsingAccuracy(parsedCV: ParsedCV, systemName: string): number {
     let accuracy = 0;
     const maxScore = 100;
@@ -206,7 +207,7 @@ export class SystemSimulationService {
 
   /**
    * Calculate keyword matching effectiveness for specific system
-   */
+    */
   private calculateKeywordMatching(cvText: string, systemName: string): number {
     let score = 60; // Base score
     
@@ -231,7 +232,7 @@ export class SystemSimulationService {
 
   /**
    * Calculate format compatibility for specific system
-   */
+    */
   private calculateFormatCompatibility(parsedCV: ParsedCV, systemName: string): number {
     const config = this.atsSystemConfigs[systemName];
     if (!config) return 70; // Default score
@@ -277,7 +278,7 @@ export class SystemSimulationService {
   /**
    * Generate system-specific issues
    * Reserved for future system-specific issue generation
-   */
+    */
   // @ts-ignore - unused method reserved for future functionality
   private generateSystemSpecificIssues(parsedCV: ParsedCV, systemName: string): string[] {
     const issues: string[] = [];
@@ -323,7 +324,7 @@ export class SystemSimulationService {
 
   /**
    * Generate system-specific optimization tips
-   */
+    */
   private generateSystemSpecificTips(systemName: string): string[] {
     const tipsMap: { [key: string]: string[] } = {
       workday: [
@@ -382,7 +383,7 @@ export class SystemSimulationService {
   /**
    * Identify system-specific strengths
    * Reserved for future system-specific strength identification
-   */
+    */
   // @ts-ignore - unused method reserved for future functionality
   private identifySystemStrengths(
     parsedCV: ParsedCV, 
@@ -414,7 +415,7 @@ export class SystemSimulationService {
   /**
    * Identify system-specific weaknesses
    * Reserved for future system-specific weakness identification
-   */
+    */
   // @ts-ignore - unused method reserved for future functionality
   private identifySystemWeaknesses(
     parsedCV: ParsedCV, 
@@ -442,7 +443,7 @@ export class SystemSimulationService {
   /**
    * Generate system-specific recommendations
    * Reserved for future system-specific recommendations
-   */
+    */
   // @ts-ignore - unused method reserved for future functionality
   private generateSystemSpecificRecommendations(
     parsedCV: ParsedCV,

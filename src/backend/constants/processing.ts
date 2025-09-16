@@ -1,11 +1,12 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Processing Constants
  * 
  * Constants for CV processing, generation, and workflow management.
  * 
  * @author Gil Klainert
  * @version 1.0.0
- */
+  */
 
 // ============================================================================
 // PROCESSING STAGES

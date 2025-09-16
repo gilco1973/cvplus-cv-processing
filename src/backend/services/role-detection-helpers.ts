@@ -1,8 +1,9 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Role Detection Helper Functions
  * 
  * Utility functions for fuzzy matching, synonym detection, and seniority analysis
- */
+  */
 
 import { ExperienceLevel } from '@cvplus/core/types/role-profile.types';
 import { ParsedCV } from '../types/job';
@@ -21,7 +22,7 @@ export interface SeniorityIndicators {
 
 /**
  * Calculate Levenshtein distance for fuzzy matching
- */
+  */
 export function levenshteinDistance(str1: string, str2: string): number {
   const matrix: number[][] = [];
   const len1 = str1.length;
@@ -55,7 +56,7 @@ export function levenshteinDistance(str1: string, str2: string): number {
 
 /**
  * Get full text from CV for analysis
- */
+  */
 export function getCVFullText(parsedCV: ParsedCV): string {
   const texts: string[] = [];
   
@@ -84,7 +85,7 @@ export function getCVFullText(parsedCV: ParsedCV): string {
 
 /**
  * Calculate recency weight for experience
- */
+  */
 export function calculateRecencyWeight(experienceIndex: number, totalExperiences: number): number {
   // More recent experience (lower index) gets higher weight
   // Weight decreases exponentially for older experiences
@@ -94,7 +95,7 @@ export function calculateRecencyWeight(experienceIndex: number, totalExperiences
 
 /**
  * Calculate seniority adjustment factor
- */
+  */
 export function calculateSeniorityAdjustment(
   requiredLevel: ExperienceLevel,
   detectedIndicators: SeniorityIndicators
@@ -128,7 +129,7 @@ export function calculateSeniorityAdjustment(
 
 /**
  * Extract keywords from text with improved processing
- */
+  */
 export function extractKeywords(text: string): string[] {
   if (!text) return [];
   
@@ -172,7 +173,7 @@ export function extractKeywords(text: string): string[] {
 
 /**
  * Detect hybrid/compound roles
- */
+  */
 export function detectHybridRoles(parsedCV: ParsedCV): string[] {
   const hybridPatterns = [
     /technical\s+product\s+manager/i,

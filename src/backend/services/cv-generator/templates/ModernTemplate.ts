@@ -1,10 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflictsimport { ParsedCV } from '../../cvParser';
+// @ts-ignore - Export conflicts/../cvParser';
 import { CVTemplate, InteractiveFeatureResult } from '../types';
 
 /**
  * Modern CV template generator with clean, professional design
  * Features: Modern typography, blue accent colors, clean sections
- */
+  */
 export class ModernTemplate implements CVTemplate {
   
   async generateHTML(cv: ParsedCV, jobId: string, features?: string[], interactiveFeatures?: InteractiveFeatureResult): Promise<string> {

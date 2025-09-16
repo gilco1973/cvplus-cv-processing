@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Advanced ATS (Applicant Tracking System) Optimization Service - Phase 1
  * 
  * LEGACY WRAPPER - This service maintains backward compatibility while
@@ -16,7 +17,7 @@
  * - ATS system simulation engine
  * - Semantic keyword analysis
  * - Competitor benchmarking
- */
+  */
 
 import { 
   ParsedCV, 
@@ -31,7 +32,7 @@ import { ATSOptimizationOrchestrator } from './ats-optimization/ATSOptimizationO
  * while delegating all functionality to the new modular architecture.
  * 
  * @deprecated Use ATSOptimizationOrchestrator directly for new implementations
- */
+  */
 export class AdvancedATSOptimizationService {
   private orchestrator: ATSOptimizationOrchestrator;
 
@@ -45,7 +46,7 @@ export class AdvancedATSOptimizationService {
    * Advanced Multi-Factor ATS Analysis - Main Entry Point
    * 
    * @deprecated Use orchestrator.analyzeCV() directly
-   */
+    */
   async analyzeCV(
     parsedCV: ParsedCV,
     targetRole?: string,
@@ -65,7 +66,7 @@ export class AdvancedATSOptimizationService {
 
   /**
    * Backward compatibility methods
-   */
+    */
 
   async analyzeATSCompatibility(
     parsedCV: ParsedCV,
@@ -99,7 +100,7 @@ export class AdvancedATSOptimizationService {
    * 
    * Use this method to access the new modular architecture directly
    * when migrating away from this legacy wrapper.
-   */
+    */
   getOrchestrator(): ATSOptimizationOrchestrator {
     return this.orchestrator;
   }

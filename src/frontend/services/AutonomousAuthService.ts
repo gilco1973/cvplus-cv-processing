@@ -1,7 +1,8 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Autonomous Authentication Service
  * Replaces @cvplus/auth dependency for independent operation
- */
+  */
 
 import { User, Auth, getAuth, signInWithPopup, GoogleAuthProvider, signOut } from 'firebase/auth';
 
@@ -24,7 +25,7 @@ type AuthStateListener = (state: AuthState) => void;
 /**
  * Independent authentication service for autonomous operation
  * Provides Firebase Auth integration without external dependencies
- */
+  */
 export class AutonomousAuthService {
   private auth: Auth;
   private authState: AuthState = { user: null, loading: true, error: null };
@@ -42,7 +43,7 @@ export class AutonomousAuthService {
 
   /**
    * Initialize Firebase auth state listener
-   */
+    */
   private initializeAuthListener(): void {
     this.auth.onAuthStateChanged((user) => {
       this.authState = {
@@ -56,7 +57,7 @@ export class AutonomousAuthService {
 
   /**
    * Map Firebase user to our AuthUser interface
-   */
+    */
   private mapFirebaseUser(user: User): AuthUser {
     return {
       uid: user.uid,
@@ -69,35 +70,35 @@ export class AutonomousAuthService {
 
   /**
    * Notify all listeners of auth state changes
-   */
+    */
   private notifyListeners(): void {
     this.listeners.forEach(listener => listener(this.authState));
   }
 
   /**
    * Get current auth state
-   */
+    */
   getAuthState(): AuthState {
     return { ...this.authState };
   }
 
   /**
    * Get current user
-   */
+    */
   getCurrentUser(): AuthUser | null {
     return this.authState.user;
   }
 
   /**
    * Check if user is authenticated
-   */
+    */
   isAuthenticated(): boolean {
     return !!this.authState.user;
   }
 
   /**
    * Subscribe to auth state changes
-   */
+    */
   onAuthStateChange(listener: AuthStateListener): () => void {
     this.listeners.add(listener);
     
@@ -112,7 +113,7 @@ export class AutonomousAuthService {
 
   /**
    * Sign in with Google
-   */
+    */
   async signInWithGoogle(): Promise<AuthUser> {
     try {
       this.authState = { ...this.authState, loading: true, error: null };
@@ -136,7 +137,7 @@ export class AutonomousAuthService {
 
   /**
    * Sign out current user
-   */
+    */
   async signOut(): Promise<void> {
     try {
       this.authState = { ...this.authState, loading: true, error: null };
@@ -157,7 +158,7 @@ export class AutonomousAuthService {
 
   /**
    * Get Firebase ID token for API calls
-   */
+    */
   async getIdToken(): Promise<string | null> {
     const user = this.auth.currentUser;
     if (!user) return null;
@@ -167,7 +168,7 @@ export class AutonomousAuthService {
 
   /**
    * Refresh current user token
-   */
+    */
   async refreshToken(): Promise<string | null> {
     const user = this.auth.currentUser;
     if (!user) return null;

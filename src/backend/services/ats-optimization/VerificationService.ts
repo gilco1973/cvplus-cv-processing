@@ -1,9 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Verification Service
  * 
  * Specialized service for dual-LLM verification of ATS optimization results
  * using both OpenAI GPT-4 and Claude for enhanced accuracy and confidence.
- */
+  */
 
 import { 
   AdvancedATSScore, 
@@ -40,7 +41,7 @@ export class VerificationService {
 
   /**
    * Verify ATS optimization results using dual-LLM approach
-   */
+    */
   async verifyResultsWithDualLLM(params: VerificationParams): Promise<VerificationResult> {
     const { advancedScore, recommendations, parsedCV } = params;
     
@@ -69,7 +70,7 @@ export class VerificationService {
 
   /**
    * Perform verification using Claude
-   */
+    */
   private async performClaudeVerification(
     score: AdvancedATSScore,
     recommendations: PrioritizedRecommendation[],
@@ -114,7 +115,7 @@ Provide specific feedback on any discrepancies or improvements needed.`;
 
   /**
    * Perform verification using GPT-4
-   */
+    */
   private async performGPTVerification(
     score: AdvancedATSScore,
     recommendations: PrioritizedRecommendation[],
@@ -158,7 +159,7 @@ Provide concise feedback on accuracy and suggested improvements.`;
 
   /**
    * Build consensus from both LLM verifications
-   */
+    */
   private buildConsensus(
     claudeResult: any,
     gptResult: any,
@@ -236,7 +237,7 @@ Provide concise feedback on accuracy and suggested improvements.`;
 
   /**
    * Parse verification response from LLM
-   */
+    */
   private parseVerificationResponse(text: string, source: 'claude' | 'gpt'): any {
     const lines = text.split('\n').map(line => line.trim()).filter(line => line.length > 0);
     
@@ -285,7 +286,7 @@ Provide concise feedback on accuracy and suggested improvements.`;
 
   /**
    * Calculate similarity between recommendation critiques
-   */
+    */
   private calculateRecommendationSimilarity(critiques1: string[], critiques2: string[]): number {
     if (critiques1.length === 0 && critiques2.length === 0) return 1;
     if (critiques1.length === 0 || critiques2.length === 0) return 0;
@@ -306,7 +307,7 @@ Provide concise feedback on accuracy and suggested improvements.`;
 
   /**
    * Generate fallback verification when LLM verification fails
-   */
+    */
   private generateFallbackVerification(
     score: AdvancedATSScore,
     recommendations: PrioritizedRecommendation[]
@@ -329,7 +330,7 @@ Provide concise feedback on accuracy and suggested improvements.`;
 
   /**
    * Get OpenAI instance
-   */
+    */
   private getOpenAI(): OpenAI {
     if (!this.openai) {
       const apiKey = environment.production ? process.env.OPENAI_API_KEY : process.env.OPENAI_API_KEY;
@@ -344,7 +345,7 @@ Provide concise feedback on accuracy and suggested improvements.`;
 
   /**
    * Convert CV to text for analysis
-   */
+    */
   private cvToText(cv: ParsedCV): string {
     const sections: string[] = [];
 
@@ -372,7 +373,7 @@ Provide concise feedback on accuracy and suggested improvements.`;
 
   /**
    * Extract skills as text
-   */
+    */
   private extractSkillsText(skills: any): string {
     if (Array.isArray(skills)) {
       return skills.join(' ');

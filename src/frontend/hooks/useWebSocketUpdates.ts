@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * WebSocket Updates Hook (T067)
  *
  * Custom React hook for managing WebSocket connections to receive
@@ -13,63 +14,63 @@
  *
  * @author Gil Klainert
  * @version 1.0.0 - Initial T067 Implementation
- */
+  */
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import type { WebSocketUpdate } from '../components/CVProcessor.types';
 
 interface UseWebSocketUpdatesProps {
-  /** Enable WebSocket connection */
+  /** Enable WebSocket connection  */
   enabled: boolean;
 
-  /** Job ID to subscribe to updates */
+  /** Job ID to subscribe to updates  */
   jobId: string | null;
 
-  /** WebSocket endpoint URL */
+  /** WebSocket endpoint URL  */
   wsEndpoint?: string;
 
-  /** Callback for status updates */
+  /** Callback for status updates  */
   onStatusUpdate?: (update: any) => void;
 
-  /** Callback for connection state changes */
+  /** Callback for connection state changes  */
   onConnectionChange?: (connected: boolean) => void;
 
-  /** Callback for errors */
+  /** Callback for errors  */
   onError?: (error: Error) => void;
 
-  /** Connection timeout in milliseconds */
+  /** Connection timeout in milliseconds  */
   connectionTimeout?: number;
 
-  /** Reconnection attempts */
+  /** Reconnection attempts  */
   maxReconnectAttempts?: number;
 
-  /** Reconnection delay in milliseconds */
+  /** Reconnection delay in milliseconds  */
   reconnectDelay?: number;
 
-  /** Heartbeat interval in milliseconds */
+  /** Heartbeat interval in milliseconds  */
   heartbeatInterval?: number;
 }
 
 interface WebSocketState {
-  /** Connection status */
+  /** Connection status  */
   connected: boolean;
 
-  /** Connection state */
+  /** Connection state  */
   readyState: number;
 
-  /** Last error */
+  /** Last error  */
   error: string | null;
 
-  /** Reconnection attempt count */
+  /** Reconnection attempt count  */
   reconnectAttempts: number;
 
-  /** Last message received timestamp */
+  /** Last message received timestamp  */
   lastMessageAt: Date | null;
 
-  /** Connection established timestamp */
+  /** Connection established timestamp  */
   connectedAt: Date | null;
 
-  /** Total messages received */
+  /** Total messages received  */
   messagesReceived: number;
 }
 
@@ -103,7 +104,7 @@ export const useWebSocketUpdates = ({
 
   /**
    * Send heartbeat ping
-   */
+    */
   const sendHeartbeat = useCallback(() => {
     if (websocketRef.current?.readyState === WebSocket.OPEN) {
       try {
@@ -122,7 +123,7 @@ export const useWebSocketUpdates = ({
 
   /**
    * Handle WebSocket message
-   */
+    */
   const handleMessage = useCallback((event: MessageEvent) => {
     try {
       const message = JSON.parse(event.data);
@@ -208,7 +209,7 @@ export const useWebSocketUpdates = ({
 
   /**
    * Connect to WebSocket
-   */
+    */
   const connect = useCallback(() => {
     if (!enabled || !jobId) {
       return;
@@ -333,7 +334,7 @@ export const useWebSocketUpdates = ({
 
   /**
    * Disconnect from WebSocket
-   */
+    */
   const disconnect = useCallback(() => {
     // Clear all timeouts
     if (reconnectTimeoutRef.current) {
@@ -370,7 +371,7 @@ export const useWebSocketUpdates = ({
 
   /**
    * Send message to WebSocket
-   */
+    */
   const sendMessage = useCallback((message: any) => {
     if (websocketRef.current?.readyState === WebSocket.OPEN) {
       try {
@@ -386,7 +387,7 @@ export const useWebSocketUpdates = ({
 
   /**
    * Subscribe to specific job updates
-   */
+    */
   const subscribeToJob = useCallback((newJobId: string) => {
     if (websocketRef.current?.readyState === WebSocket.OPEN) {
       sendMessage({
@@ -399,7 +400,7 @@ export const useWebSocketUpdates = ({
 
   /**
    * Unsubscribe from job updates
-   */
+    */
   const unsubscribeFromJob = useCallback((oldJobId: string) => {
     if (websocketRef.current?.readyState === WebSocket.OPEN) {
       sendMessage({

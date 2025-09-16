@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Skills Enrichment Module
  * 
  * Validates and enriches technical skills from GitHub language stats,
@@ -7,7 +8,7 @@
  * @author Gil Klainert
  * @created 2025-08-23
  * @version 1.0
- */
+  */
 
 import type { ParsedCV } from '@cvplus/core/src/types';
 import { EnrichedCVData, GitHubStats } from '../types';
@@ -43,7 +44,7 @@ export type ProficiencyLevel = 'beginner' | 'intermediate' | 'advanced' | 'exper
 export class SkillsEnrichmentService {
   /**
    * Enriches CV skills with validation and proficiency data
-   */
+    */
   async enrichSkills(
     cv: ParsedCV,
     externalData: Partial<EnrichedCVData>
@@ -84,7 +85,7 @@ export class SkillsEnrichmentService {
 
   /**
    * Extract existing skills from CV
-   */
+    */
   private extractExistingSkills(cv: ParsedCV): SkillWithMetadata[] {
     const skills: SkillWithMetadata[] = [];
     
@@ -107,7 +108,7 @@ export class SkillsEnrichmentService {
 
   /**
    * Extract skills from GitHub statistics
-   */
+    */
   private extractGitHubSkills(github?: any): SkillWithMetadata[] {
     if (!github?.stats) return [];
     
@@ -150,7 +151,7 @@ export class SkillsEnrichmentService {
 
   /**
    * Extract skills from LinkedIn data
-   */
+    */
   private extractLinkedInSkills(externalData: Partial<EnrichedCVData>): SkillWithMetadata[] {
     const skills: SkillWithMetadata[] = [];
     const linkedIn = externalData.linkedin;
@@ -189,7 +190,7 @@ export class SkillsEnrichmentService {
 
   /**
    * Extract skills from projects
-   */
+    */
   private extractProjectSkills(cv: ParsedCV, externalData: Partial<EnrichedCVData>): SkillWithMetadata[] {
     const skills: SkillWithMetadata[] = [];
     
@@ -226,7 +227,7 @@ export class SkillsEnrichmentService {
 
   /**
    * Merge skills from multiple sources
-   */
+    */
   private mergeSkills(...skillGroups: SkillWithMetadata[][]): SkillWithMetadata[] {
     const merged = new Map<string, SkillWithMetadata>();
     
@@ -251,7 +252,7 @@ export class SkillsEnrichmentService {
 
   /**
    * Merge data for duplicate skills
-   */
+    */
   private mergeSkillData(existing: SkillWithMetadata, additional: SkillWithMetadata): SkillWithMetadata {
     return {
       ...existing,
@@ -265,7 +266,7 @@ export class SkillsEnrichmentService {
 
   /**
    * Calculate proficiency levels based on evidence
-   */
+    */
   private calculateProficiencyLevels(skills: SkillWithMetadata[]): Map<string, ProficiencyLevel> {
     const proficiencyMap = new Map<string, ProficiencyLevel>();
     
@@ -294,7 +295,7 @@ export class SkillsEnrichmentService {
 
   /**
    * Organize skills by category
-   */
+    */
   private organizeSkillsByCategory(skills: SkillWithMetadata[]): any {
     const organized: any = {
       technical: [],
@@ -325,7 +326,7 @@ export class SkillsEnrichmentService {
 
   /**
    * Helper methods
-   */
+    */
   private createSkillMetadata(name: string, category: string, sources: string[]): SkillWithMetadata {
     return {
       name,

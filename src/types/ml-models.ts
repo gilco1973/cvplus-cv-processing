@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * ML Model Types
  * 
  * ML model metadata and configuration types.
@@ -6,7 +7,7 @@
  * 
  * @author Gil Klainert
  * @version 1.0.0
- */
+  */
 
 export interface MLModelMetadata {
   modelId: string;
@@ -14,7 +15,7 @@ export interface MLModelMetadata {
   modelType: 'classification' | 'regression' | 'clustering' | 'recommendation' | 'nlp' | 'computer_vision' | 'ensemble';
   modelVersion: string;
   
-  /** Training information */
+  /** Training information  */
   trainingData: {
     datasetSize: number;
     datasetVersion: string;
@@ -23,7 +24,7 @@ export interface MLModelMetadata {
     testSplit: number;
   };
   
-  /** Model architecture */
+  /** Model architecture  */
   architecture: {
     algorithm: string;
     hyperparameters: Record<string, any>;
@@ -35,7 +36,7 @@ export interface MLModelMetadata {
     }>;
   };
   
-  /** Performance metrics */
+  /** Performance metrics  */
   performance: {
     accuracy?: number;
     precision?: number;
@@ -58,7 +59,7 @@ export interface MLModelMetadata {
     }>;
   };
   
-  /** Deployment configuration */
+  /** Deployment configuration  */
   deployment: {
     status: 'development' | 'staging' | 'production' | 'deprecated';
     endpoints: string[];
@@ -78,7 +79,7 @@ export interface MLModelMetadata {
     };
   };
   
-  /** Model lineage */
+  /** Model lineage  */
   lineage: {
     parentModels?: string[];
     dependencies: string[];
@@ -90,7 +91,7 @@ export interface MLModelMetadata {
     }>;
   };
   
-  /** Metadata */
+  /** Metadata  */
   metadata: {
     createdBy: string;
     createdAt: Date;
@@ -103,9 +104,9 @@ export interface MLModelMetadata {
 
 /**
  * ML training configuration
- */
+  */
 export interface MLTrainingConfig {
-  /** Training parameters */
+  /** Training parameters  */
   training: {
     epochs: number;
     batchSize: number;
@@ -121,7 +122,7 @@ export interface MLTrainingConfig {
     };
   };
   
-  /** Data configuration */
+  /** Data configuration  */
   data: {
     sources: string[];
     preprocessing: Array<{
@@ -140,7 +141,7 @@ export interface MLTrainingConfig {
     };
   };
   
-  /** Resource configuration */
+  /** Resource configuration  */
   resources: {
     gpuRequired: boolean;
     memoryGB: number;
@@ -148,7 +149,7 @@ export interface MLTrainingConfig {
     parallelJobs?: number;
   };
   
-  /** Experiment tracking */
+  /** Experiment tracking  */
   experiment: {
     name: string;
     description?: string;

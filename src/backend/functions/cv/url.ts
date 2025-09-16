@@ -1,4 +1,4 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflictsimport { onRequest } from 'firebase-functions/v2/https';
+// @ts-ignore - Export conflicts/v2/https';
 import { Request, Response } from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import axios from 'axios';
@@ -261,7 +261,7 @@ export const uploadCVFromUrl = onRequest(
 
 /**
  * Download file from URL with validation and error handling
- */
+  */
 async function downloadFileFromUrl(url: string): Promise<{
   success: boolean;
   buffer?: Buffer;
@@ -339,7 +339,7 @@ async function downloadFileFromUrl(url: string): Promise<{
 
 /**
  * Process CV asynchronously
- */
+  */
 async function processCVAsync(
   jobId: string,
   fileUrl: string,
@@ -366,7 +366,7 @@ async function processCVAsync(
 
 /**
  * Validate URL format
- */
+  */
 function isValidUrl(url: string): boolean {
   try {
     const urlObj = new URL(url);
@@ -378,7 +378,7 @@ function isValidUrl(url: string): boolean {
 
 /**
  * Check if URL is from allowed domain
- */
+  */
 function isAllowedDomain(url: string): boolean {
   try {
     const urlObj = new URL(url);
@@ -412,7 +412,7 @@ function isAllowedDomain(url: string): boolean {
 
 /**
  * Extract filename from URL
- */
+  */
 function extractFileNameFromUrl(url: string): string {
   try {
     const urlObj = new URL(url);
@@ -432,7 +432,7 @@ function extractFileNameFromUrl(url: string): string {
 
 /**
  * Calculate processing cost based on features
- */
+  */
 function calculateProcessingCost(features: CVProcessingFeatures): number {
   let cost = 1.0; // Base cost for basic processing
 
@@ -448,7 +448,7 @@ function calculateProcessingCost(features: CVProcessingFeatures): number {
 
 /**
  * Get subscription limits
- */
+  */
 function getSubscriptionLimits(tier: string) {
   const limits = {
     free: { maxFeatures: 2, maxUploadsPerMonth: 3 },
@@ -462,7 +462,7 @@ function getSubscriptionLimits(tier: string) {
 
 /**
  * Get user priority based on subscription
- */
+  */
 function getUserPriority(tier: string): number {
   const priorities = {
     enterprise: 1,
@@ -476,7 +476,7 @@ function getUserPriority(tier: string): number {
 
 /**
  * Calculate estimated processing time based on features
- */
+  */
 function calculateEstimatedTime(features: CVProcessingFeatures): number {
   let baseTime = 15; // 15 seconds base time
 

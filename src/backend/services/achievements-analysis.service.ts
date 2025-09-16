@@ -1,7 +1,8 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Achievements Analysis Service
  * Extracts and analyzes key achievements from CV data
- */
+  */
 
 import { ParsedCV } from '../types/enhanced-models';
 import OpenAI from 'openai';
@@ -29,7 +30,7 @@ export class AchievementsAnalysisService {
 
   /**
    * Extract key achievements from parsed CV data
-   */
+    */
   async extractKeyAchievements(cv: ParsedCV): Promise<Achievement[]> {
     const achievements: Achievement[] = [];
 
@@ -72,7 +73,7 @@ export class AchievementsAnalysisService {
 
   /**
    * Extract achievements from a single work experience
-   */
+    */
   private async extractFromExperience(experience: any): Promise<Achievement[]> {
     if (!this.openai.apiKey) {
       return this.fallbackExperienceExtraction(experience);
@@ -149,7 +150,7 @@ Only include real, substantive achievements. Skip generic responsibilities.
 
   /**
    * Extract achievements from summary/description
-   */
+    */
   private async extractFromSummary(summary: string): Promise<Achievement[]> {
     if (!this.openai.apiKey) {
       return [];
@@ -221,7 +222,7 @@ Focus on concrete achievements, not generic statements.
 
   /**
    * Validate and clean an achievement object
-   */
+    */
   private validateAndCleanAchievement(ach: any): Achievement | null {
     if (!ach || typeof ach !== 'object') {
       return null;
@@ -259,7 +260,7 @@ Focus on concrete achievements, not generic statements.
 
   /**
    * Safely parse AI response with proper error handling and validation
-   */
+    */
   private parseAIResponse(responseContent: string, context: string): any {
     if (!responseContent || typeof responseContent !== 'string') {
       return null;
@@ -372,7 +373,7 @@ Focus on concrete achievements, not generic statements.
 
   /**
    * Fallback extraction when OpenAI is not available
-   */
+    */
   private fallbackExperienceExtraction(experience: any): Achievement[] {
     const achievements: Achievement[] = [];
 
@@ -395,7 +396,7 @@ Focus on concrete achievements, not generic statements.
 
   /**
    * Categorize achievement based on keywords
-   */
+    */
   private categorizeAchievement(text: string): Achievement['category'] {
     const lowerText = text.toLowerCase();
     
@@ -420,7 +421,7 @@ Focus on concrete achievements, not generic statements.
 
   /**
    * Calculate significance based on achievement content
-   */
+    */
   private calculateSignificance(text: string): number {
     let score = 5; // Base score
     
@@ -443,7 +444,7 @@ Focus on concrete achievements, not generic statements.
 
   /**
    * Generate achievement display HTML
-   */
+    */
   generateAchievementsHTML(achievements: Achievement[]): string {
     if (!achievements.length) {
       return '<p>No key achievements extracted from CV data.</p>';

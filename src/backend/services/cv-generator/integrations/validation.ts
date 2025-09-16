@@ -1,7 +1,8 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Manual validation script for multimedia integration
  * This script validates that the integration layer works correctly
- */
+  */
 
 import { MultimediaIntegration, MultimediaFallbackFeature } from './MultimediaIntegration';
 import { FeatureRegistry } from '../features/FeatureRegistry';

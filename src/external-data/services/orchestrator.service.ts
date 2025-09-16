@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * External Data Orchestrator Service
  * 
  * Coordinates fetching data from multiple external sources,
@@ -7,7 +8,7 @@
  * @author Gil Klainert
  * @created 2025-08-23
  * @version 1.0
- */
+  */
 
 import { logger } from 'firebase-functions';
 import { 
@@ -56,7 +57,7 @@ export class ExternalDataOrchestrator {
 
   /**
    * Orchestrate data fetching from multiple sources
-   */
+    */
   async orchestrate(request: OrchestrationRequest): Promise<OrchestrationResult> {
     const startTime = Date.now();
     const requestId = this.generateRequestId();
@@ -164,7 +165,7 @@ export class ExternalDataOrchestrator {
 
   /**
    * Fetch data from a specific source with resilience
-   */
+    */
   private async fetchFromSource(
     source: ExternalDataSource,
     request: OrchestrationRequest
@@ -203,7 +204,7 @@ export class ExternalDataOrchestrator {
 
   /**
    * Fetch with timeout
-   */
+    */
   private async fetchWithTimeout(
     promises: Promise<any>[],
     timeoutMs: number
@@ -219,7 +220,7 @@ export class ExternalDataOrchestrator {
 
   /**
    * Merge source data into enriched data
-   */
+    */
   private mergeSourceData(
     enrichedData: Partial<EnrichedCVData>,
     source: string,
@@ -259,7 +260,7 @@ export class ExternalDataOrchestrator {
 
   /**
    * Get active sources based on request
-   */
+    */
   private getActiveSources(requestedSources: string[]): ExternalDataSource[] {
     return requestedSources
       .map(id => this.dataSources.get(id))
@@ -271,7 +272,7 @@ export class ExternalDataOrchestrator {
 
   /**
    * Count data points in fetched data
-   */
+    */
   private countDataPoints(data: any): number {
     if (!data) return 0;
     
@@ -293,7 +294,7 @@ export class ExternalDataOrchestrator {
 
   /**
    * Determine overall status
-   */
+    */
   private determineStatus(
     results: DataSourceResult[],
     errors: Error[]
@@ -309,21 +310,21 @@ export class ExternalDataOrchestrator {
 
   /**
    * Generate unique request ID
-   */
+    */
   private generateRequestId(): string {
     return `req_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
   }
 
   /**
    * Generate cache key
-   */
+    */
   private getCacheKey(request: OrchestrationRequest): string {
     return `external_data:${request.userId}:${request.cvId}:${request.sources.join('_')}`;
   }
 
   /**
    * Get rate limit status for all sources
-   */
+    */
   getRateLimitStatus(): RateLimitStatus[] {
     return Array.from(this.rateLimitStatus.values());
   }

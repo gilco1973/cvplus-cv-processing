@@ -1,11 +1,12 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Shared types for CV processing
  * 
  * This module exports types that are shared between frontend and backend:
  * - Common interfaces
  * - Shared enums
  * - API request/response types
- */
+  */
 
 // Common CV processing types
 export interface CVData {

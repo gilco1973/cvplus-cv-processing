@@ -1,17 +1,18 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Text Chunking Utilities for CV Embedding Service
  * 
  * Provides intelligent text chunking strategies for optimal embedding generation
  * 
  * @version 1.0.0
  * @author Gil Klainert
- */
+  */
 
 import { EmbeddingMetadata, CVSection, ContentType } from '../../../types/portal';
 
 /**
  * Chunking options interface
- */
+  */
 export interface ChunkingConfig {
   strategy: 'semantic' | 'fixed-size' | 'sliding-window';
   maxTokens: number;
@@ -22,7 +23,7 @@ export interface ChunkingConfig {
 
 /**
  * Chunking result interface
- */
+  */
 export interface ChunkResult {
   content: string;
   metadata: EmbeddingMetadata;
@@ -32,12 +33,12 @@ export interface ChunkResult {
 
 /**
  * Text chunking utilities class
- */
+  */
 export class ChunkingUtils {
   
   /**
    * Semantic chunking based on content structure
-   */
+    */
   static semanticChunking(text: string, config: ChunkingConfig): ChunkResult[] {
     const chunks: ChunkResult[] = [];
     
@@ -112,7 +113,7 @@ export class ChunkingUtils {
   
   /**
    * Fixed-size chunking with overlap
-   */
+    */
   static fixedSizeChunking(text: string, config: ChunkingConfig): ChunkResult[] {
     const chunks: ChunkResult[] = [];
     const words = text.split(/\s+/);
@@ -146,7 +147,7 @@ export class ChunkingUtils {
   
   /**
    * Sliding window chunking for continuous context
-   */
+    */
   static slidingWindowChunking(text: string, config: ChunkingConfig): ChunkResult[] {
     const chunks: ChunkResult[] = [];
     const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0);
@@ -204,7 +205,7 @@ export class ChunkingUtils {
   
   /**
    * Split large paragraph into smaller chunks
-   */
+    */
   private static splitLargeParagraph(paragraph: string, maxTokens: number): string[] {
     const sentences = paragraph.split(/[.!?]+/).filter(s => s.trim().length > 0);
     const chunks: string[] = [];
@@ -232,7 +233,7 @@ export class ChunkingUtils {
   
   /**
    * Estimate token count for text (rough approximation)
-   */
+    */
   static estimateTokenCount(text: string): number {
     // Rough estimation: 1 token ≈ 4 characters for English text
     return Math.ceil(text.length / 4);

@@ -1,8 +1,9 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Role Detection Matcher
  * 
  * Handles matching logic between CV features and role profiles
- */
+  */
 
 import { ParsedCV } from '../types/job';
 import {
@@ -43,7 +44,7 @@ export class RoleDetectionMatcher {
 
   /**
    * Calculate comprehensive match score between CV and role profile
-   */
+    */
   calculateMatchScore(
     cv: ParsedCV, 
     profile: RoleProfile, 
@@ -76,7 +77,7 @@ export class RoleDetectionMatcher {
 
   /**
    * Calculate matching factors between CV and role profile
-   */
+    */
   private calculateMatchingFactors(cv: ParsedCV, profile: RoleProfile): MatchingFactor[] {
     const factors: MatchingFactor[] = [];
 
@@ -170,7 +171,7 @@ export class RoleDetectionMatcher {
 
   /**
    * Calculate skills matching score
-   */
+    */
   private calculateSkillsMatch(cvSkills: string[], requiredSkills: string[]): number {
     if (requiredSkills.length === 0) return 0.5;
 
@@ -192,7 +193,7 @@ export class RoleDetectionMatcher {
 
   /**
    * Calculate experience matching score
-   */
+    */
   private calculateExperienceMatch(cv: ParsedCV, profile: RoleProfile): number {
     if (!cv.experience || cv.experience.length === 0) return 0;
 
@@ -220,7 +221,7 @@ export class RoleDetectionMatcher {
 
   /**
    * Calculate description relevance to role profile
-   */
+    */
   private calculateDescriptionRelevance(description: string, profile: RoleProfile): number {
     const descriptionLower = description.toLowerCase();
     const profileKeywords = [
@@ -240,7 +241,7 @@ export class RoleDetectionMatcher {
 
   /**
    * Calculate recency weight for experience
-   */
+    */
   private calculateRecencyWeight(startDate?: string, endDate?: string): number {
     const now = new Date();
     const end = endDate ? new Date(endDate) : now;
@@ -252,7 +253,7 @@ export class RoleDetectionMatcher {
 
   /**
    * Calculate seniority bonus
-   */
+    */
   private calculateSeniorityBonus(cv: ParsedCV, profile: RoleProfile): number {
     // Simple seniority calculation based on years of experience
     const totalYears = cv.experience?.reduce((total, exp) => {
@@ -275,7 +276,7 @@ export class RoleDetectionMatcher {
 
   /**
    * Calculate negative indicator penalty
-   */
+    */
   private calculateNegativePenalty(cv: ParsedCV, profile: RoleProfile): number {
     const cvText = getCVFullText(cv);
     const indicators = this.negativeIndicators.get(profile.id) || [];
@@ -292,14 +293,14 @@ export class RoleDetectionMatcher {
 
   /**
    * Get seniority keywords for external use
-   */
+    */
   getSeniorityKeywords(): Map<ExperienceLevel, string[]> {
     return this.seniorityKeywords;
   }
 
   /**
    * Update configuration
-   */
+    */
   updateConfig(config: RoleDetectionConfig): void {
     this.config = config;
   }

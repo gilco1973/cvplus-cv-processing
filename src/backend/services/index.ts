@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Backend services for CV processing
  * 
  * This module exports all backend services related to CV processing:
@@ -6,7 +7,7 @@
  * - PDF generation services  
  * - CV analysis services
  * - Processing workflow services
- */
+  */
 
 // Core CV Processing Services
 export * from './cv-parser.service';

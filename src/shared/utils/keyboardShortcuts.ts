@@ -1,11 +1,12 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * CVPlus CV Processing - Keyboard Shortcuts Utility
  * 
  * Utility functions for handling keyboard shortcuts in the CV processing interface.
  * 
  * @author Gil Klainert
  * @version 1.0.0
- */
+  */
 
 import { useEffect, useCallback } from 'react';
 

@@ -1,8 +1,9 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Fuzzy Matching Service for Role Detection
  * 
  * Provides fuzzy string matching and synonym detection capabilities
- */
+  */
 
 import {
   FuzzyMatchConfig,
@@ -26,7 +27,7 @@ export class FuzzyMatchingService {
 
   /**
    * Perform fuzzy string matching
-   */
+    */
   fuzzyMatch(str1: string, str2: string, threshold: number = 0.8): boolean {
     const s1 = str1.toLowerCase().trim();
     const s2 = str2.toLowerCase().trim();
@@ -55,7 +56,7 @@ export class FuzzyMatchingService {
 
   /**
    * Check if keywords match considering synonyms
-   */
+    */
   matchWithSynonyms(keyword1: string, keyword2: string): boolean {
     const k1 = keyword1.toLowerCase().trim();
     const k2 = keyword2.toLowerCase().trim();
@@ -78,7 +79,7 @@ export class FuzzyMatchingService {
 
   /**
    * Enhanced keyword matching with fuzzy logic and synonyms
-   */
+    */
   matchKeywords(
     cvKeywords: string[],
     profileKeywords: string[],

@@ -1,6 +1,7 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Core Types for Generated CV Display System
- */
+  */
 
 import type { AnalysisResult } from '../../../types/analysis';
 import type { Job } from '../../../types/job';
@@ -11,7 +12,7 @@ import type { Job } from '../../../types/job';
 
 /**
  * CV Template Definition
- */
+  */
 export interface CVTemplate {
   id: string;
   name: string;
@@ -58,7 +59,7 @@ export interface TemplateMetadata {
 
 /**
  * Generated CV Content
- */
+  */
 export interface GeneratedCV {
   id: string;
   jobId: string;

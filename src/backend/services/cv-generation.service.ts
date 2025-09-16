@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * CV Generation Service
  * 
  * Core service for generating CVs from parsed data using templates and AI enhancement.
@@ -6,7 +7,7 @@
  * 
  * @author Gil Klainert
  * @version 2.0.0 - Modularized Architecture
- */
+  */
 
 import { CVProcessingContext, ServiceResult } from '../../types';
 import { BaseService } from '../../shared/utils/base-service';
@@ -36,7 +37,7 @@ export class CVGenerationService extends BaseService {
 
   /**
    * Generate a CV from processed context data
-   */
+    */
   async generateCV(context: CVProcessingContext): Promise<ServiceResult<CVGenerationResult>> {
     const startTime = Date.now();
     
@@ -85,7 +86,7 @@ export class CVGenerationService extends BaseService {
 
   /**
    * Enhance CV content using AI
-   */
+    */
   private async enhanceCVContent(context: CVProcessingContext): Promise<any> {
     try {
       console.log(`🤖 Enhancing CV content with AI for job ${context.jobId}`);
@@ -118,7 +119,7 @@ export class CVGenerationService extends BaseService {
 
   /**
    * Generate PDF using template engine
-   */
+    */
   private async generatePDF(context: CVProcessingContext, content: any): Promise<string> {
     const fileName = `cv_${context.jobId}_${Date.now()}.pdf`;
     const tempPath = `/tmp/${fileName}`;
@@ -168,7 +169,7 @@ export class CVGenerationService extends BaseService {
 
   /**
    * Apply template styling to PDF document
-   */
+    */
   private applyTemplate(doc: PDFDocument, templateId: string, content: any): void {
     const template = this.getTemplate(templateId);
     
@@ -212,7 +213,7 @@ export class CVGenerationService extends BaseService {
 
   /**
    * Get template configuration
-   */
+    */
   private getTemplate(templateId: string) {
     const templates = {
       modern: {
@@ -240,7 +241,7 @@ export class CVGenerationService extends BaseService {
 
   /**
    * Add a section to the PDF
-   */
+    */
   private addSection(doc: PDFDocument, template: any, title: string, content: string, y: number): number {
     doc.fontSize(template.section.fontSize)
        .fillColor(template.section.color)
@@ -255,7 +256,7 @@ export class CVGenerationService extends BaseService {
 
   /**
    * Add experience section
-   */
+    */
   private addExperienceSection(doc: PDFDocument, template: any, experiences: any[], y: number): number {
     doc.fontSize(template.section.fontSize)
        .fillColor(template.section.color)
@@ -286,7 +287,7 @@ export class CVGenerationService extends BaseService {
 
   /**
    * Add education section
-   */
+    */
   private addEducationSection(doc: PDFDocument, template: any, education: any[], y: number): number {
     doc.fontSize(template.section.fontSize)
        .fillColor(template.section.color)
@@ -312,7 +313,7 @@ export class CVGenerationService extends BaseService {
 
   /**
    * Add skills section
-   */
+    */
   private addSkillsSection(doc: PDFDocument, template: any, skills: any[], y: number): number {
     doc.fontSize(template.section.fontSize)
        .fillColor(template.section.color)
@@ -331,7 +332,7 @@ export class CVGenerationService extends BaseService {
 
   /**
    * Generate preview image from PDF
-   */
+    */
   private async generatePreviewImage(pdfPath: string): Promise<string> {
     // This would typically use a library like pdf2pic or similar
     // For now, return a placeholder
@@ -341,7 +342,7 @@ export class CVGenerationService extends BaseService {
 
   /**
    * Build AI enhancement prompt
-   */
+    */
   private buildEnhancementPrompt(context: CVProcessingContext): string {
     return `
 Enhance the following CV data to make it more professional and impactful. 
@@ -365,7 +366,7 @@ Maintain factual accuracy and don't add information not present in the original.
 
   /**
    * Validate generation context
-   */
+    */
   private validateGenerationContext(context: CVProcessingContext) {
     const errors: string[] = [];
 
@@ -381,7 +382,7 @@ Maintain factual accuracy and don't add information not present in the original.
 
   /**
    * Update job status in Firestore
-   */
+    */
   private async updateJobStatus(jobId: string, status: string, data: any = {}) {
     try {
       await admin.firestore().collection('jobs').doc(jobId).update({

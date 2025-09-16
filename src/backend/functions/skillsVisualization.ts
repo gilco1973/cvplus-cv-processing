@@ -1,6 +1,7 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Cloud Functions for Skills Visualization
- */
+  */
 
 import { onCall, HttpsError, CallableRequest } from 'firebase-functions/v2/https';
 import * as admin from 'firebase-admin';
@@ -48,7 +49,7 @@ interface EndorseSkillRequest {
 
 /**
  * Generate skills visualization
- */
+  */
 export const generateSkillsVisualization = onCall<GenerateVisualizationRequest>(
   {
     timeoutSeconds: 120,
@@ -135,7 +136,7 @@ export const generateSkillsVisualization = onCall<GenerateVisualizationRequest>(
 
 /**
  * Update skills data
- */
+  */
 export const updateSkillsData = onCall<UpdateSkillsRequest>(
   {
     timeoutSeconds: 90,
@@ -201,7 +202,7 @@ export const updateSkillsData = onCall<UpdateSkillsRequest>(
 
 /**
  * Get skills insights
- */
+  */
 export const getSkillsInsights = onCall<GetInsightsRequest>(
   {
     timeoutSeconds: 90,
@@ -248,7 +249,7 @@ export const getSkillsInsights = onCall<GetInsightsRequest>(
 
 /**
  * Export skills data
- */
+  */
 export const exportSkillsData = onCall<ExportDataRequest>(
   {
     timeoutSeconds: 60,
@@ -310,7 +311,7 @@ export const exportSkillsData = onCall<ExportDataRequest>(
 
 /**
  * Endorse a skill
- */
+  */
 export const endorseSkill = onCall<EndorseSkillRequest>(
   {
     timeoutSeconds: 60,
@@ -375,5 +376,5 @@ export const endorseSkill = onCall<EndorseSkillRequest>(
 
 /**
  * Type definitions for this function
- */
+  */
 export type { SkillsVisualizationRequest, SkillsVisualizationResponse };

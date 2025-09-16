@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * External Data Services - Staging for Migration
  *
  * This staging area contains external data processing and enrichment services
@@ -7,7 +8,7 @@
  * Domain: Data Enrichment, External APIs, Web Scraping, Third-party Integration
  * Target Submodule: @cvplus/external-data
  * Migration Phase: 4B
- */
+  */
 
 // Core external data services - only export what actually exists
 export { ExternalDataOrchestrator } from './orchestrator.service';

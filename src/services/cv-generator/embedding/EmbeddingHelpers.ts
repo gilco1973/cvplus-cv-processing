@@ -1,7 +1,7 @@
 /**
  * Embedding Helpers
  * Utility functions for working with text embeddings
- */
+  */
 
 import { CVSection } from '../../../types/role-profile.types';
 import { ChunkResult } from '../chunking/ChunkingUtils';

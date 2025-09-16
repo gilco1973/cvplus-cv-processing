@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * CV Generator Types - Re-export Facade
  *
  * MIGRATION NOTICE: This module has been moved to staging-for-submodules/cv-processing/
@@ -10,7 +11,7 @@
  * @deprecated Use import from @cvplus/cv-processing when submodule is created
  * @author Gil Klainert
  * @since 2025-09-14
- */
+  */
 
 // TEMPORARILY DISABLED: Staging area import disabled, cv-processing not built yet
 // export * from '../../staging-for-submodules/cv-processing/services/cv-generator/types';

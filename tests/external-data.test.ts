@@ -1,7 +1,7 @@
 /**
  * @fileoverview External Data Integration - Basic tests
  * @author Gil Klainert
- */
+  */
 
 import { describe, expect, test } from 'vitest';
 import { EXTERNAL_DATA_SHARED_VERSION } from '../src/shared';

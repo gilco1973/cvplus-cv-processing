@@ -1,7 +1,8 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Autonomous Configuration Service
  * Independent configuration management without external dependencies
- */
+  */
 
 export interface CVProcessingConfig {
   api: {
@@ -35,7 +36,7 @@ export interface CVProcessingConfig {
 /**
  * Configuration management for autonomous operation
  * Provides environment-based configuration with runtime updates
- */
+  */
 export class AutonomousConfigService {
   private config: CVProcessingConfig;
   private listeners: Set<(config: CVProcessingConfig) => void> = new Set();
@@ -47,7 +48,7 @@ export class AutonomousConfigService {
 
   /**
    * Load default configuration
-   */
+    */
   private loadDefaultConfig(): CVProcessingConfig {
     return {
       api: {
@@ -81,7 +82,7 @@ export class AutonomousConfigService {
 
   /**
    * Load environment-specific configuration
-   */
+    */
   private loadEnvironmentConfig(): void {
     if (typeof window === 'undefined') return;
 
@@ -100,7 +101,7 @@ export class AutonomousConfigService {
 
   /**
    * Load user preferences from localStorage
-   */
+    */
   private loadUserPreferences(): Partial<CVProcessingConfig> | null {
     try {
       const stored = localStorage.getItem('cv-processing-config');
@@ -113,7 +114,7 @@ export class AutonomousConfigService {
 
   /**
    * Save user preferences to localStorage
-   */
+    */
   private saveUserPreferences(config: Partial<CVProcessingConfig>): void {
     try {
       localStorage.setItem('cv-processing-config', JSON.stringify(config));
@@ -124,7 +125,7 @@ export class AutonomousConfigService {
 
   /**
    * Detect appropriate API base URL
-   */
+    */
   private detectApiBaseUrl(): string {
     if (typeof window === 'undefined') {
       return 'https://us-central1-cvplus-app.cloudfunctions.net';
@@ -145,7 +146,7 @@ export class AutonomousConfigService {
 
   /**
    * Check if running in development mode
-   */
+    */
   private isDevelopment(): boolean {
     return process.env.NODE_ENV === 'development' ||
            (typeof window !== 'undefined' && window.location.hostname === 'localhost');
@@ -153,7 +154,7 @@ export class AutonomousConfigService {
 
   /**
    * Merge configuration objects
-   */
+    */
   private mergeConfig(updates: Partial<CVProcessingConfig>): void {
     this.config = this.deepMerge(this.config, updates);
     this.notifyListeners();
@@ -161,7 +162,7 @@ export class AutonomousConfigService {
 
   /**
    * Deep merge objects
-   */
+    */
   private deepMerge(target: any, source: any): any {
     const result = { ...target };
     
@@ -178,7 +179,7 @@ export class AutonomousConfigService {
 
   /**
    * Notify configuration listeners
-   */
+    */
   private notifyListeners(): void {
     this.listeners.forEach(listener => {
       try {
@@ -191,14 +192,14 @@ export class AutonomousConfigService {
 
   /**
    * Get full configuration
-   */
+    */
   getConfig(): CVProcessingConfig {
     return { ...this.config };
   }
 
   /**
    * Get configuration value by path
-   */
+    */
   get<K extends keyof CVProcessingConfig>(key: K): CVProcessingConfig[K];
   get(path: string): any;
   get(key: any): any {
@@ -210,14 +211,14 @@ export class AutonomousConfigService {
 
   /**
    * Get nested configuration value
-   */
+    */
   private getNestedValue(obj: any, path: string): any {
     return path.split('.').reduce((current, key) => current?.[key], obj);
   }
 
   /**
    * Update configuration
-   */
+    */
   updateConfig(updates: Partial<CVProcessingConfig>): void {
     this.mergeConfig(updates);
     
@@ -229,7 +230,7 @@ export class AutonomousConfigService {
 
   /**
    * Reset to default configuration
-   */
+    */
   resetConfig(): void {
     this.config = this.loadDefaultConfig();
     this.loadEnvironmentConfig();
@@ -244,7 +245,7 @@ export class AutonomousConfigService {
 
   /**
    * Subscribe to configuration changes
-   */
+    */
   onChange(listener: (config: CVProcessingConfig) => void): () => void {
     this.listeners.add(listener);
     
@@ -256,14 +257,14 @@ export class AutonomousConfigService {
 
   /**
    * Feature flag helpers
-   */
+    */
   isFeatureEnabled(feature: keyof CVProcessingConfig['features']): boolean {
     return this.config.features[feature];
   }
 
   /**
    * Performance setting helpers
-   */
+    */
   getMaxFileSize(): number {
     return this.config.performance.maxFileSize;
   }
@@ -274,7 +275,7 @@ export class AutonomousConfigService {
 
   /**
    * Security setting helpers
-   */
+    */
   shouldValidateOrigin(): boolean {
     return this.config.security.validateOrigin;
   }
@@ -285,7 +286,7 @@ export class AutonomousConfigService {
 
   /**
    * API configuration helpers
-   */
+    */
   getApiBaseUrl(): string {
     return this.config.api.baseUrl;
   }

@@ -1,9 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * ATS Optimization Orchestrator
  * 
  * Coordinates the entire ATS optimization workflow across all specialized services.
  * Maintains backward compatibility with the original AdvancedATSOptimizationService interface.
- */
+  */
 
 import { ParsedCV } from '../../types/job';
 import { ATSOptimizationResult } from '../../types/enhanced-ats';
@@ -43,7 +44,7 @@ export class ATSOptimizationOrchestrator {
    * 
    * Orchestrates the complete ATS optimization workflow with parallel processing
    * and comprehensive analysis across all specialized services.
-   */
+    */
   async analyzeCV(
     parsedCV: ParsedCV,
     targetRole?: string,
@@ -186,7 +187,7 @@ export class ATSOptimizationOrchestrator {
 
   /**
    * Backward compatibility methods
-   */
+    */
   
   async analyzeATSCompatibility(
     parsedCV: ParsedCV,

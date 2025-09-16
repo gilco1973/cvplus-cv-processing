@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Data Validation Service
  * 
  * Validates and sanitizes external data, removes PII,
@@ -7,7 +8,7 @@
  * @author Gil Klainert
  * @created 2025-08-23
  * @version 1.0
- */
+  */
 
 import { logger } from 'firebase-functions';
 import { 
@@ -39,7 +40,7 @@ export class ValidationService {
 
   /**
    * Validate and sanitize enriched CV data
-   */
+    */
   async validate(data: EnrichedCVData): Promise<EnrichedCVData> {
     logger.info('[VALIDATION-SERVICE] Starting validation', { 
       userId: data.userId,
@@ -102,7 +103,7 @@ export class ValidationService {
 
   /**
    * Validate GitHub data
-   */
+    */
   private validateGitHubData(data: any, issues: ValidationIssue[]): void {
     if (!data.profile?.username) {
       issues.push({
@@ -132,7 +133,7 @@ export class ValidationService {
 
   /**
    * Validate LinkedIn data
-   */
+    */
   private validateLinkedInData(data: any, issues: ValidationIssue[]): void {
     if (data.experience && !Array.isArray(data.experience)) {
       issues.push({
@@ -168,7 +169,7 @@ export class ValidationService {
 
   /**
    * Validate web presence data
-   */
+    */
   private validateWebPresence(data: any, issues: ValidationIssue[]): void {
     if (data.searchResults && !Array.isArray(data.searchResults)) {
       issues.push({
@@ -192,7 +193,7 @@ export class ValidationService {
 
   /**
    * Validate website data
-   */
+    */
   private validateWebsite(data: any, issues: ValidationIssue[]): void {
     if (!data.url || !this.isValidUrl(data.url)) {
       issues.push({
@@ -214,7 +215,7 @@ export class ValidationService {
 
   /**
    * Validate aggregated data
-   */
+    */
   private validateAggregatedData(data: any, issues: ValidationIssue[]): void {
     // Remove duplicate skills
     if (data.aggregatedSkills && Array.isArray(data.aggregatedSkills)) {
@@ -242,7 +243,7 @@ export class ValidationService {
 
   /**
    * Sanitize object by removing PII and sensitive data
-   */
+    */
   private sanitizeObject(obj: any): any {
     if (!obj) return obj;
     
@@ -265,7 +266,7 @@ export class ValidationService {
 
   /**
    * Check if text contains PII
-   */
+    */
   private containsPII(text: string): boolean {
     for (const pattern of Object.values(this.piiPatterns)) {
       if (pattern.test(text)) {
@@ -277,7 +278,7 @@ export class ValidationService {
 
   /**
    * Check if text contains sensitive data
-   */
+    */
   private containsSensitiveData(text: string): boolean {
     const lowerText = text.toLowerCase();
     return this.sensitiveKeywords.some(keyword => lowerText.includes(keyword));
@@ -285,7 +286,7 @@ export class ValidationService {
 
   /**
    * Calculate data quality score
-   */
+    */
   private calculateQualityScore(data: EnrichedCVData, issues: ValidationIssue[]): number {
     let score = 100;
     
@@ -316,7 +317,7 @@ export class ValidationService {
 
   /**
    * Validate date format
-   */
+    */
   private isValidDate(dateStr: string): boolean {
     const date = new Date(dateStr);
     return !isNaN(date.getTime());
@@ -324,7 +325,7 @@ export class ValidationService {
 
   /**
    * Validate URL format
-   */
+    */
   private isValidUrl(url: string): boolean {
     try {
       const urlObj = new URL(url);
@@ -336,7 +337,7 @@ export class ValidationService {
 
   /**
    * Remove duplicate entries from array
-   */
+    */
   removeDuplicates<T>(array: T[], keyFn: (item: T) => string): T[] {
     const seen = new Set<string>();
     return array.filter(item => {

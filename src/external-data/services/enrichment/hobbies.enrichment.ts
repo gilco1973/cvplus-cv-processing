@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Hobbies Enrichment Module
  * 
  * Extracts and enriches hobbies and interests from GitHub activity,
@@ -7,7 +8,7 @@
  * @author Gil Klainert
  * @created 2025-08-23
  * @version 1.0
- */
+  */
 
 import type { ParsedCV } from '@cvplus/core/src/types';
 import { 
@@ -38,7 +39,7 @@ export interface HobbiesEnrichmentResult {
 export class HobbiesEnrichmentService {
   /**
    * Enriches CV hobbies and interests with external data
-   */
+    */
   async enrichHobbies(
     cv: ParsedCV,
     externalData: Partial<EnrichedCVData>
@@ -75,7 +76,7 @@ export class HobbiesEnrichmentService {
 
   /**
    * Extract existing interests from CV
-   */
+    */
   private extractExistingInterests(cv: ParsedCV): any[] {
     const interests = cv.interests || [];
     return interests.map(interest => ({
@@ -89,7 +90,7 @@ export class HobbiesEnrichmentService {
 
   /**
    * Extract interests from GitHub activity
-   */
+    */
   private extractGitHubInterests(github?: any): any[] {
     if (!github) return [];
     
@@ -146,7 +147,7 @@ export class HobbiesEnrichmentService {
 
   /**
    * Extract interests from personal website
-   */
+    */
   private extractWebsiteInterests(externalData: Partial<EnrichedCVData>): any[] {
     const interests: any[] = [];
     const website = externalData.personalWebsite;
@@ -170,7 +171,7 @@ export class HobbiesEnrichmentService {
 
   /**
    * Extract interests from web presence
-   */
+    */
   private extractWebPresenceInterests(externalData: Partial<EnrichedCVData>): any[] {
     const interests: any[] = [];
     const webPresence = externalData.webPresence;
@@ -207,7 +208,7 @@ export class HobbiesEnrichmentService {
 
   /**
    * Merge interests from multiple sources
-   */
+    */
   private mergeInterests(...interestGroups: any[][]): any[] {
     const merged = new Map<string, any>();
     
@@ -236,7 +237,7 @@ export class HobbiesEnrichmentService {
 
   /**
    * Categorize interests into groups
-   */
+    */
   private categorizeInterests(interests: any[]): any {
     const categorized: any = {
       technical: [],
@@ -257,7 +258,7 @@ export class HobbiesEnrichmentService {
 
   /**
    * Categorize a single interest
-   */
+    */
   private categorizeInterest(interest: string): string {
     const lower = interest.toLowerCase();
     
@@ -271,7 +272,7 @@ export class HobbiesEnrichmentService {
 
   /**
    * Check if topic is interesting enough to include
-   */
+    */
   private isInterestingTopic(topic: string): boolean {
     const boringTopics = ['website', 'portfolio', 'personal', 'test', 'demo', 'example'];
     return !boringTopics.some(boring => topic.toLowerCase().includes(boring));
@@ -279,7 +280,7 @@ export class HobbiesEnrichmentService {
 
   /**
    * Format topic for display
-   */
+    */
   private formatTopic(topic: string): string {
     return topic
       .split('-')
@@ -289,7 +290,7 @@ export class HobbiesEnrichmentService {
 
   /**
    * Extract topics from blog posts
-   */
+    */
   private extractBlogTopics(posts: BlogPost[]): string[] {
     const topics = new Set<string>();
     
@@ -306,7 +307,7 @@ export class HobbiesEnrichmentService {
 
   /**
    * Extract topics from publications
-   */
+    */
   private extractPublicationTopics(publications: any[]): string[] {
     const topics = new Set<string>();
     
@@ -320,14 +321,14 @@ export class HobbiesEnrichmentService {
 
   /**
    * Generate unique key for interest deduplication
-   */
+    */
   private getInterestKey(interest: any): string {
     return interest.interest.toLowerCase().replace(/[^a-z0-9]/g, '');
   }
 
   /**
    * Check if interest is technical
-   */
+    */
   private isTechnicalInterest(interest: string): boolean {
     const technical = ['programming', 'coding', 'development', 'tech', 'software', 
                       'hardware', 'ai', 'machine learning', 'data', 'cloud'];
@@ -336,7 +337,7 @@ export class HobbiesEnrichmentService {
 
   /**
    * Check if interest is creative
-   */
+    */
   private isCreativeInterest(interest: string): boolean {
     const creative = ['design', 'art', 'music', 'writing', 'photography', 
                      'video', 'creative', 'drawing', 'painting'];
@@ -345,7 +346,7 @@ export class HobbiesEnrichmentService {
 
   /**
    * Check if interest is community-related
-   */
+    */
   private isCommunityInterest(interest: string): boolean {
     const community = ['volunteer', 'mentor', 'teaching', 'speaking', 'community',
                       'open source', 'contribution', 'organizing'];
@@ -354,7 +355,7 @@ export class HobbiesEnrichmentService {
 
   /**
    * Check if interest is professional
-   */
+    */
   private isProfessionalInterest(interest: string): boolean {
     const professional = ['leadership', 'management', 'business', 'entrepreneur',
                          'innovation', 'strategy', 'consulting'];
@@ -363,7 +364,7 @@ export class HobbiesEnrichmentService {
 
   /**
    * Count newly added interests
-   */
+    */
   private countNewInterests(existing: any[], merged: any[]): number {
     const existingKeys = new Set(existing.map(i => this.getInterestKey(i)));
     return merged.filter(i => !existingKeys.has(this.getInterestKey(i))).length;
@@ -371,7 +372,7 @@ export class HobbiesEnrichmentService {
 
   /**
    * Calculate overall quality score
-   */
+    */
   private calculateQualityScore(interests: any[]): number {
     if (interests.length === 0) return 0;
     

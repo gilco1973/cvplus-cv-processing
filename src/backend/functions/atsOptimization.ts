@@ -1,6 +1,7 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Cloud Functions for ATS Optimization
- */
+  */
 
 import { onCall, HttpsError, CallableRequest } from 'firebase-functions/v2/https';
 import * as admin from 'firebase-admin';
@@ -11,7 +12,7 @@ import { ATSAnalysisRequest, ATSAnalysisResponse } from '../../types';
 
 /**
  * Analyze CV for ATS compatibility
- */
+  */
 export const analyzeATSCompatibility = onCall(
   { 
     timeoutSeconds: 120,
@@ -84,7 +85,7 @@ export const analyzeATSCompatibility = onCall(
 
 /**
  * Apply ATS optimizations to CV
- */
+  */
 export const applyATSOptimizations = onCall(
   { 
     timeoutSeconds: 180,
@@ -141,7 +142,7 @@ export const applyATSOptimizations = onCall(
 
 /**
  * Get ATS-optimized templates
- */
+  */
 export const getATSTemplates = onCall(
   { 
     timeoutSeconds: 60,
@@ -166,7 +167,7 @@ export const getATSTemplates = onCall(
 
 /**
  * Generate ATS-optimized keywords
- */
+  */
 export const generateATSKeywords = onCall(
   { 
     timeoutSeconds: 90,
@@ -249,7 +250,7 @@ export const generateATSKeywords = onCall(
 
 /**
  * Batch analyze multiple CVs for ATS optimization
- */
+  */
 export const batchATSAnalysis = onCall(
   { 
     timeoutSeconds: 300,
@@ -341,5 +342,5 @@ export const batchATSAnalysis = onCall(
 
 /**
  * Type definitions for this function
- */
+  */
 export type { ATSAnalysisRequest, ATSAnalysisResponse };

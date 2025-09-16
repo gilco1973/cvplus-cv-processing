@@ -1,12 +1,13 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Autonomous Backend Configuration
  * Replaces @cvplus/core/config dependencies for independent operation
- */
+  */
 
 /**
  * CORS configuration for autonomous operation
  * Replaces corsOptions from @cvplus/core/config
- */
+  */
 export const corsOptions = {
   origin: [
     'http://localhost:3000',
@@ -28,14 +29,14 @@ export const corsOptions = {
 
 /**
  * Environment detection
- */
+  */
 export const isDevelopment = process.env.NODE_ENV === 'development';
 export const isProduction = process.env.NODE_ENV === 'production';
 export const isTest = process.env.NODE_ENV === 'test';
 
 /**
  * API Configuration
- */
+  */
 export const apiConfig = {
   timeout: 30000, // 30 seconds
   retryAttempts: 3,
@@ -51,7 +52,7 @@ export const apiConfig = {
 
 /**
  * Firebase Function Configuration
- */
+  */
 export const functionConfig = {
   region: 'us-central1',
   memory: '1GB' as const,
@@ -62,7 +63,7 @@ export const functionConfig = {
 
 /**
  * Rate Limiting Configuration
- */
+  */
 export const rateLimitConfig = {
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // limit each IP to 100 requests per windowMs
@@ -73,7 +74,7 @@ export const rateLimitConfig = {
 
 /**
  * Security Configuration
- */
+  */
 export const securityConfig = {
   validateOrigin: !isDevelopment,
   sanitizeInput: true,
@@ -85,7 +86,7 @@ export const securityConfig = {
 
 /**
  * Cache Configuration
- */
+  */
 export const cacheConfig = {
   defaultTTL: 5 * 60 * 1000, // 5 minutes
   maxEntries: 1000,

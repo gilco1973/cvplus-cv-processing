@@ -1,7 +1,8 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Language Proficiency Visualization Service
  * Creates visual representations of language skills
- */
+  */
 
 import { ParsedCV } from '../../types/enhanced-models';
 import * as admin from 'firebase-admin';
@@ -124,7 +125,7 @@ export class LanguageProficiencyService {
   
   /**
    * Generate language proficiency visualization from CV
-   */
+    */
   async generateLanguageVisualization(
     parsedCV: ParsedCV, 
     jobId: string
@@ -166,7 +167,7 @@ export class LanguageProficiencyService {
   
   /**
    * Extract language information from CV
-   */
+    */
   private async extractLanguages(cv: ParsedCV): Promise<LanguageProficiency[]> {
     const languages: LanguageProficiency[] = [];
     
@@ -279,7 +280,7 @@ export class LanguageProficiencyService {
   
   /**
    * Parse language string (e.g., "Spanish (Fluent)", "French - B2")
-   */
+    */
   private parseLanguageString(langString: string): LanguageProficiency | null {
     const patterns = [
       /^(.+?)\s*[\(\-]\s*(.+?)\s*[\)]?$/,  // Language (Level) or Language - Level
@@ -323,7 +324,7 @@ export class LanguageProficiencyService {
   
   /**
    * Normalize proficiency level
-   */
+    */
   private normalizeLevel(levelStr: string): LanguageProficiency['proficiency'] {
     const normalized = levelStr.toLowerCase();
     
@@ -354,14 +355,14 @@ export class LanguageProficiencyService {
   
   /**
    * Convert level to numeric score
-   */
+    */
   private levelToScore(_level: LanguageProficiency['proficiency']): number {
     return this.proficiencyScores[_level] || 50;
   }
   
   /**
    * Enhance language proficiencies with AI
-   */
+    */
   private async enhanceLanguageProficiencies(
     languages: LanguageProficiency[],
     cv: ParsedCV
@@ -387,7 +388,7 @@ export class LanguageProficiencyService {
   
   /**
    * Sanitize data for Firestore compatibility
-   */
+    */
   private sanitizeForFirestore(obj: any): any {
     if (obj === null || obj === undefined) {
       return null;
@@ -421,7 +422,7 @@ export class LanguageProficiencyService {
 
   /**
    * Generate visualizations for language proficiencies
-   */
+    */
   private generateVisualizations(
     proficiencies: LanguageProficiency[]
   ): LanguageVisualization['visualizations'] {
@@ -554,7 +555,7 @@ export class LanguageProficiencyService {
   
   /**
    * Generate insights from language proficiencies
-   */
+    */
   private generateInsights(
     proficiencies: LanguageProficiency[]
   ): LanguageVisualization['insights'] {
@@ -606,7 +607,7 @@ export class LanguageProficiencyService {
   
   /**
    * Identify data sources for language extraction
-   */
+    */
   private identifyDataSources(cv: ParsedCV): string[] {
     const sources: string[] = [];
     
@@ -641,7 +642,7 @@ export class LanguageProficiencyService {
   
   /**
    * Calculate confidence score
-   */
+    */
   private calculateConfidence(proficiencies: LanguageProficiency[]): number {
     let confidence = 50; // Base confidence
     
@@ -659,7 +660,7 @@ export class LanguageProficiencyService {
   
   /**
    * Estimate years of experience with a language
-   */
+    */
   private estimateYearsOfExperience(
     language: LanguageProficiency,
     cv: ParsedCV
@@ -699,7 +700,7 @@ export class LanguageProficiencyService {
   
   /**
    * Check if certification is language-related
-   */
+    */
   private isLanguageCertification(certName: string, language?: string): boolean {
     const languageCerts = [
       'TOEFL', 'IELTS', 'TOEIC', 'Cambridge', 'DELE', 'DELF', 'DALF',
@@ -721,7 +722,7 @@ export class LanguageProficiencyService {
   
   /**
    * Infer native language from CV context
-   */
+    */
   private inferNativeLanguage(cv: ParsedCV): string | null {
     // Check for location clues
     const location = cv.personalInfo?.address?.toLowerCase() || '';
@@ -752,7 +753,7 @@ export class LanguageProficiencyService {
   
   /**
    * Store visualization in Firestore
-   */
+    */
   private async storeVisualization(
     jobId: string, 
     visualization: LanguageVisualization
@@ -772,7 +773,7 @@ export class LanguageProficiencyService {
   
   /**
    * Update language proficiency
-   */
+    */
   async updateLanguageProficiency(
     jobId: string,
     languageId: string,

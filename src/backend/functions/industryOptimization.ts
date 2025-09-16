@@ -1,9 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Industry Optimization Firebase Functions
  * 
  * Provides industry-specific CV optimization and career guidance
  * for the 10 priority industries in Phase 2.
- */
+  */
 import { onCall, HttpsError } from 'firebase-functions/v2/https';
 import { CallableRequest } from 'firebase-functions/v2/https';
 // import { IndustrySpecializationService, IndustryOptimizationRequest } from '../services/industry-specialization.service'; // Module not found
@@ -33,7 +34,7 @@ const db = admin.firestore();
 
 /**
  * Optimize CV for specific industry
- */
+  */
 export const optimizeForIndustry = onCall(
   { ...corsOptions, timeoutSeconds: 60 ,
     secrets: ['OPENAI_API_KEY', 'ANTHROPIC_API_KEY']
@@ -113,7 +114,7 @@ export const optimizeForIndustry = onCall(
 
 /**
  * Get supported industries list
- */
+  */
 export const getSupportedIndustries = onCall(
   { ...corsOptions, timeoutSeconds: 10 },
   async (_request: CallableRequest) => {
@@ -150,7 +151,7 @@ export const getSupportedIndustries = onCall(
 
 /**
  * Get industry market insights
- */
+  */
 export const getIndustryInsights = onCall(
   { ...corsOptions, timeoutSeconds: 30 },
   async (request: CallableRequest) => {
@@ -197,7 +198,7 @@ export const getIndustryInsights = onCall(
 
 /**
  * Compare multiple industries for user
- */
+  */
 export const compareIndustries = onCall(
   { ...corsOptions, timeoutSeconds: 90 },
   async (request: CallableRequest) => {
@@ -317,7 +318,7 @@ export const compareIndustries = onCall(
 
 /**
  * Get user's industry optimization history
- */
+  */
 export const getUserIndustryHistory = onCall(
   { ...corsOptions, timeoutSeconds: 30 },
   async (request: CallableRequest) => {

@@ -1,6 +1,7 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Cloud Functions for Personality Insights
- */
+  */
 import { onCall, HttpsError, CallableRequest } from 'firebase-functions/v2/https';
 import * as admin from 'firebase-admin';
 import { personalityInsightsService } from '../services/personality-insights.service';
@@ -39,7 +40,7 @@ interface UpdateSettingsRequest {
 
 /**
  * Generate personality insights from CV
- */
+  */
 export const generatePersonalityInsights = onCall<PersonalityInsightsRequest>(
   {
     timeoutSeconds: 120,
@@ -108,7 +109,7 @@ export const generatePersonalityInsights = onCall<PersonalityInsightsRequest>(
 
 /**
  * Compare personalities between two CVs
- */
+  */
 export const comparePersonalities = onCall<ComparePersonalitiesRequest>(
   {
     timeoutSeconds: 90,
@@ -167,7 +168,7 @@ export const comparePersonalities = onCall<ComparePersonalitiesRequest>(
 
 /**
  * Get personality insights summary
- */
+  */
 export const getPersonalityInsightsSummary = onCall<GetInsightsSummaryRequest>(
   {
     timeoutSeconds: 60,
@@ -217,7 +218,7 @@ export const getPersonalityInsightsSummary = onCall<GetInsightsSummaryRequest>(
 
 /**
  * Update personality insights display settings
- */
+  */
 export const updatePersonalitySettings = onCall<UpdateSettingsRequest>(
   {
     timeoutSeconds: 60,

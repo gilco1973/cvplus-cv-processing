@@ -1,9 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Safe Firestore Service
  * 
  * Provides safe operations for Firestore with error handling and validation.
  * Minimal implementation for TypeScript compilation.
- */
+  */
 
 import { FirebaseFirestore } from 'firebase-admin/firestore';
 

@@ -1,6 +1,7 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * CORS Configuration for CV Processing Functions
- */
+  */
 
 export const corsConfig = {
   origin: [
@@ -18,14 +19,14 @@ export const corsConfig = {
 
 /**
  * CORS options for Firebase Functions v2 format
- */
+  */
 export const corsOptions = {
   cors: corsConfig.origin
 };
 
 /**
  * CORS middleware factory for Firebase Functions
- */
+  */
 export const createCorsMiddleware = () => {
   return {
     ...corsConfig,

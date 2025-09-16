@@ -1,4 +1,4 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflictsimport { onRequest } from 'firebase-functions/v2/https';
+// @ts-ignore - Export conflicts/v2/https';
 import { Request } from 'firebase-functions/v2/https';
 import { Response } from 'express';
 import * as admin from 'firebase-admin';
@@ -217,7 +217,7 @@ export const downloadProcessedCV = onRequest(
 
 /**
  * Generate PDF download
- */
+  */
 async function generatePDFDownload(
   processedCV: any,
   includeAnalytics: boolean
@@ -237,7 +237,7 @@ async function generatePDFDownload(
 
 /**
  * Generate DOCX download
- */
+  */
 async function generateDocxDownload(
   processedCV: any,
   includeAnalytics: boolean
@@ -255,7 +255,7 @@ async function generateDocxDownload(
 
 /**
  * Generate JSON download
- */
+  */
 async function generateJSONDownload(
   processedCV: any,
   includeAnalytics: boolean
@@ -284,7 +284,7 @@ async function generateJSONDownload(
 
 /**
  * Generate HTML download
- */
+  */
 async function generateHTMLDownload(
   processedCV: any,
   includeAnalytics: boolean
@@ -301,7 +301,7 @@ async function generateHTMLDownload(
 
 /**
  * Generate PDF content (simplified placeholder)
- */
+  */
 function generatePDFContent(processedCV: any, includeAnalytics: boolean): string {
   // This is a placeholder. In production, use proper PDF generation
   return `PDF: Enhanced CV for ${processedCV.structuredData.personalInfo.fullName}`;
@@ -309,7 +309,7 @@ function generatePDFContent(processedCV: any, includeAnalytics: boolean): string
 
 /**
  * Generate DOCX content (simplified placeholder)
- */
+  */
 function generateDocxContent(processedCV: any, includeAnalytics: boolean): string {
   // This is a placeholder. In production, use proper DOCX generation
   return `DOCX: Enhanced CV for ${processedCV.structuredData.personalInfo.fullName}`;
@@ -317,7 +317,7 @@ function generateDocxContent(processedCV: any, includeAnalytics: boolean): strin
 
 /**
  * Generate HTML content
- */
+  */
 function generateHTMLContent(processedCV: any, includeAnalytics: boolean): string {
   const { personalInfo, summary, experience, skills, education } = processedCV.structuredData;
   const { atsAnalysis, aiAnalysis } = processedCV;

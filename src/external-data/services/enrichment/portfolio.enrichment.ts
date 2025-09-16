@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Portfolio Enrichment Module
  * 
  * Merges external portfolio data from GitHub, NPM, and personal websites
@@ -7,7 +8,7 @@
  * @author Gil Klainert
  * @created 2025-08-23
  * @version 1.0
- */
+  */
 
 import type { ParsedCV } from '@cvplus/core/src/types';
 import {
@@ -41,7 +42,7 @@ export interface PortfolioEnrichmentResult {
 export class PortfolioEnrichmentService {
   /**
    * Enriches CV portfolio with external data
-   */
+    */
   async enrichPortfolio(
     cv: ParsedCV,
     externalData: Partial<EnrichedCVData>
@@ -73,7 +74,7 @@ export class PortfolioEnrichmentService {
 
   /**
    * Extract existing projects from CV
-   */
+    */
   private extractExistingProjects(cv: ParsedCV): any[] {
     const projects = cv.projects || [];
     return projects.map(p => ({
@@ -85,7 +86,7 @@ export class PortfolioEnrichmentService {
 
   /**
    * Convert GitHub repositories to portfolio projects
-   */
+    */
   private convertGitHubProjects(repos?: GitHubRepository[]): any[] {
     if (!repos) return [];
     
@@ -108,7 +109,7 @@ export class PortfolioEnrichmentService {
 
   /**
    * Merge projects from multiple sources
-   */
+    */
   private mergeProjects(
     existing: any[],
     github: any[],
@@ -168,7 +169,7 @@ export class PortfolioEnrichmentService {
 
   /**
    * Enhance existing project with additional data
-   */
+    */
   private enhanceProject(existing: any, additional: any): any {
     return {
       ...existing,
@@ -190,7 +191,7 @@ export class PortfolioEnrichmentService {
 
   /**
    * Generate unique key for project deduplication
-   */
+    */
   private getProjectKey(project: any): string {
     const name = project.name?.toLowerCase().replace(/[^a-z0-9]/g, '') || '';
     const tech = (project.technologies?.[0] || '').toLowerCase();
@@ -199,7 +200,7 @@ export class PortfolioEnrichmentService {
 
   /**
    * Calculate confidence score for GitHub project
-   */
+    */
   private calculateGitHubConfidence(repo: GitHubRepository): number {
     let confidence = 0.5;
     
@@ -213,7 +214,7 @@ export class PortfolioEnrichmentService {
 
   /**
    * Calculate project score for sorting
-   */
+    */
   private getProjectScore(project: any): number {
     let score = project.confidence * 100;
     
@@ -227,7 +228,7 @@ export class PortfolioEnrichmentService {
 
   /**
    * Count newly added projects
-   */
+    */
   private countNewProjects(existing: any[], merged: any[]): number {
     const existingKeys = new Set(existing.map(p => this.getProjectKey(p)));
     return merged.filter(p => !existingKeys.has(this.getProjectKey(p))).length;
@@ -235,7 +236,7 @@ export class PortfolioEnrichmentService {
 
   /**
    * Count enhanced projects
-   */
+    */
   private countEnhancedProjects(existing: any[], merged: any[]): number {
     const existingKeys = new Set(existing.map(p => this.getProjectKey(p)));
     return merged.filter(p => 
@@ -245,7 +246,7 @@ export class PortfolioEnrichmentService {
 
   /**
    * Calculate overall quality score
-   */
+    */
   private calculateQualityScore(projects: any[]): number {
     if (projects.length === 0) return 0;
     

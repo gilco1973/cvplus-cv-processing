@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Base Service Class
  * 
  * Abstract base class for all CV processing services.
@@ -6,7 +7,7 @@
  * 
  * @author Gil Klainert
  * @version 2.0.0 - Modularized Architecture
- */
+  */
 
 import { ServiceResult } from '../../types';
 
@@ -24,7 +25,7 @@ export abstract class BaseService {
 
   /**
    * Get service information
-   */
+    */
   getServiceInfo() {
     return {
       name: this.serviceName,
@@ -35,7 +36,7 @@ export abstract class BaseService {
 
   /**
    * Create a successful service result
-   */
+    */
   protected createSuccessResult<T>(data: T, message?: string): ServiceResult<T> {
     return {
       success: true,
@@ -49,7 +50,7 @@ export abstract class BaseService {
 
   /**
    * Create an error service result
-   */
+    */
   protected createErrorResult<T = any>(
     message: string, 
     error?: Error | any, 
@@ -74,7 +75,7 @@ export abstract class BaseService {
 
   /**
    * Log service activity
-   */
+    */
   protected log(level: 'info' | 'warn' | 'error', message: string, data?: any) {
     const timestamp = new Date().toISOString();
     const logMessage = `[${timestamp}] [${this.serviceName}] ${message}`;
@@ -94,7 +95,7 @@ export abstract class BaseService {
 
   /**
    * Validate required parameters
-   */
+    */
   protected validateRequired(params: Record<string, any>, requiredFields: string[]): string[] {
     const errors: string[] = [];
     
@@ -109,7 +110,7 @@ export abstract class BaseService {
 
   /**
    * Measure execution time
-   */
+    */
   protected async measureExecution<T>(
     operation: () => Promise<T>,
     operationName: string
@@ -131,7 +132,7 @@ export abstract class BaseService {
 
   /**
    * Safe JSON parsing
-   */
+    */
   protected safeJsonParse(jsonString: string, defaultValue: any = null): any {
     try {
       return JSON.parse(jsonString);
@@ -143,7 +144,7 @@ export abstract class BaseService {
 
   /**
    * Sanitize sensitive data for logging
-   */
+    */
   protected sanitizeForLog(data: any): any {
     if (!data) return data;
     

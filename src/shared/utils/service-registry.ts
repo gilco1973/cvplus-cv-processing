@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Service Registry
  * 
  * Manages service instances and dependency injection for CV processing services.
@@ -6,7 +7,7 @@
  * 
  * @author Gil Klainert
  * @version 2.0.0 - Modularized Architecture
- */
+  */
 
 // BaseService imported but not used - removing unused import
 
@@ -36,7 +37,7 @@ export class ServiceRegistry {
 
   /**
    * Get singleton instance of the service registry
-   */
+    */
   static getInstance(): ServiceRegistry {
     if (!ServiceRegistry.instance) {
       ServiceRegistry.instance = new ServiceRegistry();
@@ -46,7 +47,7 @@ export class ServiceRegistry {
 
   /**
    * Register a service instance
-   */
+    */
   async registerService<T extends ServiceInterface>(
     service: T,
     name?: string
@@ -75,7 +76,7 @@ export class ServiceRegistry {
 
   /**
    * Get a service instance
-   */
+    */
   getService<T extends ServiceInterface>(name: string): T | null {
     const registration = this.services.get(name);
     if (!registration) {
@@ -86,7 +87,7 @@ export class ServiceRegistry {
 
   /**
    * Get a service instance (throws if not found)
-   */
+    */
   requireService<T extends ServiceInterface>(name: string): T {
     const service = this.getService<T>(name);
     if (!service) {
@@ -97,14 +98,14 @@ export class ServiceRegistry {
 
   /**
    * Check if a service is registered
-   */
+    */
   hasService(name: string): boolean {
     return this.services.has(name);
   }
 
   /**
    * Unregister a service
-   */
+    */
   unregisterService(name: string): boolean {
     const existed = this.services.delete(name);
     if (existed) {
@@ -115,21 +116,21 @@ export class ServiceRegistry {
 
   /**
    * Get all registered services
-   */
+    */
   getAllServices(): ServiceRegistration[] {
     return Array.from(this.services.values());
   }
 
   /**
    * Get service names
-   */
+    */
   listServiceNames(): string[] {
     return Array.from(this.services.keys());
   }
 
   /**
    * Get registry statistics
-   */
+    */
   getStats() {
     const services = this.getAllServices();
     return {
@@ -146,7 +147,7 @@ export class ServiceRegistry {
 
   /**
    * Clear all services (useful for testing)
-   */
+    */
   clear(): void {
     console.log(`🧹 Clearing ${this.services.size} services from registry`);
     this.services.clear();
@@ -154,7 +155,7 @@ export class ServiceRegistry {
 
   /**
    * Health check for all services
-   */
+    */
   async healthCheck(): Promise<{
     healthy: boolean;
     services: Array<{
@@ -194,7 +195,7 @@ export class ServiceRegistry {
 
   /**
    * Get service dependencies (placeholder for future dependency injection)
-   */
+    */
   getDependencies(serviceName: string): string[] {
     // This could be enhanced to track service dependencies
     // For now, we don't track dependencies for: serviceName
@@ -204,7 +205,7 @@ export class ServiceRegistry {
 
   /**
    * Validate service registration
-   */
+    */
   private _validateService(service: ServiceInterface): void {
     if (!service.getServiceInfo) {
       throw new Error('Service must implement getServiceInfo method');

@@ -1,7 +1,8 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Parent Integration Service
  * Handles communication between autonomous CV processing module and parent application
- */
+  */
 
 import { EventEmitter } from 'events';
 
@@ -27,7 +28,7 @@ export interface ModuleEvent {
 /**
  * Integration service for autonomous module operation
  * Enables communication with parent application while maintaining independence
- */
+  */
 export class ParentIntegrationService extends EventEmitter {
   private config: ParentConfig = {};
   private isConnected = false;
@@ -41,7 +42,7 @@ export class ParentIntegrationService extends EventEmitter {
 
   /**
    * Initialize integration with parent application
-   */
+    */
   private initializeIntegration(): void {
     // Check if running inside parent application
     if (typeof window !== 'undefined' && window.parent !== window) {
@@ -53,7 +54,7 @@ export class ParentIntegrationService extends EventEmitter {
 
   /**
    * Setup message listener for parent communication
-   */
+    */
   private setupMessageListener(): void {
     if (typeof window !== 'undefined') {
       window.addEventListener('message', (event) => {
@@ -70,7 +71,7 @@ export class ParentIntegrationService extends EventEmitter {
 
   /**
    * Validate message origin for security
-   */
+    */
   private isValidOrigin(origin: string): boolean {
     // In development, allow localhost
     if (origin.includes('localhost') || origin.includes('127.0.0.1')) {
@@ -89,7 +90,7 @@ export class ParentIntegrationService extends EventEmitter {
 
   /**
    * Handle messages from parent application
-   */
+    */
   private handleParentMessage(data: any): void {
     if (!data || data.source !== 'cvplus-parent') return;
 
@@ -113,7 +114,7 @@ export class ParentIntegrationService extends EventEmitter {
 
   /**
    * Request initial configuration from parent
-   */
+    */
   private requestInitialConfig(): void {
     this.sendToParent({
       type: 'request-config',
@@ -123,7 +124,7 @@ export class ParentIntegrationService extends EventEmitter {
 
   /**
    * Send message to parent application
-   */
+    */
   private sendToParent(event: ModuleEvent): void {
     if (!this.parentWindow) {
       // Queue message if not connected yet
@@ -142,7 +143,7 @@ export class ParentIntegrationService extends EventEmitter {
 
   /**
    * Flush queued messages when connection established
-   */
+    */
   private flushMessageQueue(): void {
     while (this.messageQueue.length > 0) {
       const event = this.messageQueue.shift();
@@ -154,7 +155,7 @@ export class ParentIntegrationService extends EventEmitter {
 
   /**
    * Update configuration
-   */
+    */
   private updateConfig(newConfig: Partial<ParentConfig>): void {
     this.config = { ...this.config, ...newConfig };
     this.isConnected = true;
@@ -164,7 +165,7 @@ export class ParentIntegrationService extends EventEmitter {
 
   /**
    * Update authentication token
-   */
+    */
   private updateAuthToken(token: string): void {
     this.config.authToken = token;
     this.emit('auth-token-updated', token);
@@ -172,7 +173,7 @@ export class ParentIntegrationService extends EventEmitter {
 
   /**
    * Update theme
-   */
+    */
   private updateTheme(theme: 'light' | 'dark' | 'auto'): void {
     this.config.theme = theme;
     this.emit('theme-changed', theme);
@@ -180,7 +181,7 @@ export class ParentIntegrationService extends EventEmitter {
 
   /**
    * Update feature flags
-   */
+    */
   private updateFeatures(features: string[]): void {
     this.config.features = features;
     this.emit('features-updated', features);
@@ -188,21 +189,21 @@ export class ParentIntegrationService extends EventEmitter {
 
   /**
    * Get current configuration
-   */
+    */
   getConfig(): ParentConfig {
     return { ...this.config };
   }
 
   /**
    * Check if module is connected to parent
-   */
+    */
   isConnectedToParent(): boolean {
     return this.isConnected;
   }
 
   /**
    * Notify parent of job start
-   */
+    */
   notifyJobStarted(jobId: string, jobData: any): void {
     this.sendToParent({
       type: 'job-started',
@@ -212,7 +213,7 @@ export class ParentIntegrationService extends EventEmitter {
 
   /**
    * Notify parent of job completion
-   */
+    */
   notifyJobCompleted(jobId: string, result: any): void {
     this.sendToParent({
       type: 'job-completed',
@@ -222,7 +223,7 @@ export class ParentIntegrationService extends EventEmitter {
 
   /**
    * Notify parent of job failure
-   */
+    */
   notifyJobFailed(jobId: string, error: string): void {
     this.sendToParent({
       type: 'job-failed',
@@ -232,7 +233,7 @@ export class ParentIntegrationService extends EventEmitter {
 
   /**
    * Request navigation to parent route
-   */
+    */
   requestNavigation(route: string, params?: any): void {
     this.sendToParent({
       type: 'navigation-request',
@@ -242,28 +243,28 @@ export class ParentIntegrationService extends EventEmitter {
 
   /**
    * Get authentication token
-   */
+    */
   getAuthToken(): string | null {
     return this.config.authToken || null;
   }
 
   /**
    * Check if feature is enabled
-   */
+    */
   isFeatureEnabled(feature: string): boolean {
     return this.config.features?.includes(feature) || false;
   }
 
   /**
    * Check if premium features are enabled
-   */
+    */
   isPremiumEnabled(): boolean {
     return this.config.premiumEnabled || false;
   }
 
   /**
    * Get current theme
-   */
+    */
   getTheme(): 'light' | 'dark' | 'auto' {
     return this.config.theme || 'auto';
   }

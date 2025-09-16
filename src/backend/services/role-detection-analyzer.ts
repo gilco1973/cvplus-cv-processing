@@ -1,8 +1,9 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Role Detection Analyzer
  * 
  * Handles analysis and feature extraction for role detection
- */
+  */
 
 import { ParsedCV } from '../types/job';
 import {
@@ -38,7 +39,7 @@ export class RoleDetectionAnalyzer {
 
   /**
    * Analyze role compatibility between CV and role profile
-   */
+    */
   async analyzeRoleCompatibility(cv: ParsedCV, profile: RoleProfile): Promise<RoleProfileAnalysis> {
     // Create a basic role match result for primary role
     const primaryRole: RoleMatchResult = {
@@ -96,7 +97,7 @@ export class RoleDetectionAnalyzer {
 
   /**
    * Calculate basic compatibility score
-   */
+    */
   private calculateBasicCompatibility(cv: ParsedCV, profile: RoleProfile): number {
     let score = 0.5; // Base score
     
@@ -130,7 +131,7 @@ export class RoleDetectionAnalyzer {
 
   /**
    * Identify strength areas
-   */
+    */
   private identifyStrengths(cv: ParsedCV, profile: RoleProfile): string[] {
     const strengths: string[] = [];
     
@@ -151,7 +152,7 @@ export class RoleDetectionAnalyzer {
 
   /**
    * Identify improvement areas
-   */
+    */
   private identifyImprovements(cv: ParsedCV, profile: RoleProfile): string[] {
     const improvements: string[] = [];
     
@@ -172,7 +173,7 @@ export class RoleDetectionAnalyzer {
 
   /**
    * Generate basic recommendations
-   */
+    */
   private async generateBasicRecommendations(cv: ParsedCV, profile: RoleProfile): Promise<RoleBasedRecommendation[]> {
     const recommendations: RoleBasedRecommendation[] = [];
     
@@ -195,7 +196,7 @@ export class RoleDetectionAnalyzer {
 
   /**
    * Identify skill gaps
-   */
+    */
   private identifySkillGaps(cv: ParsedCV, profile: RoleProfile): string[] {
     if (!profile.requiredSkills) return [];
     
@@ -214,7 +215,7 @@ export class RoleDetectionAnalyzer {
 
   /**
    * Assess experience relevance
-   */
+    */
   private assessExperienceRelevance(cv: ParsedCV, profile: RoleProfile): number {
     if (!cv.experience || cv.experience.length === 0) return 0;
     
@@ -232,7 +233,7 @@ export class RoleDetectionAnalyzer {
 
   /**
    * Assess cultural fit (simplified)
-   */
+    */
   private assessCulturalFit(cv: ParsedCV, profile: RoleProfile): number {
     // Simplified cultural fit assessment
     return 0.7; // Default moderate fit
@@ -240,7 +241,7 @@ export class RoleDetectionAnalyzer {
 
   /**
    * Analyze career progression
-   */
+    */
   private analyzeCareerProgression(cv: ParsedCV, profile: RoleProfile): {
     isProgressive: boolean;
     experienceLevel: ExperienceLevel;
@@ -261,7 +262,7 @@ export class RoleDetectionAnalyzer {
 
   /**
    * Calculate total years of experience
-   */
+    */
   private calculateTotalExperience(cv: ParsedCV): number {
     if (!cv.experience) return 0;
     
@@ -280,14 +281,14 @@ export class RoleDetectionAnalyzer {
 
   /**
    * Get analyzer configuration
-   */
+    */
   getConfig(): RoleDetectionConfig {
     return this.config;
   }
 
   /**
    * Update configuration
-   */
+    */
   updateConfig(config: RoleDetectionConfig): void {
     this.config = config;
   }

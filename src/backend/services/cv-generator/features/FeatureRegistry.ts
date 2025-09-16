@@ -1,4 +1,4 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflictsimport { CVFeature, FeatureType, InteractiveFeatureResult } from '../types';
+// @ts-ignore - Export conflicts/types';
 import { ParsedCV } from '../../cvParser';
 import { MultimediaIntegration, MultimediaFallbackFeature } from '../integrations/MultimediaIntegration';
 import { ContactFormFeature } from './ContactFormFeature';
@@ -13,13 +13,13 @@ import { AchievementsShowcaseFeature } from './AchievementsShowcaseFeature';
 /**
  * Feature registry for managing CV interactive features
  * Implements factory pattern for feature creation and orchestration
- */
+  */
 export class FeatureRegistry {
   private static features: Map<FeatureType, CVFeature> = new Map();
 
   /**
    * Generate all requested features for a CV
-   */
+    */
   static async generateFeatures(
     cv: ParsedCV, 
     jobId: string, 
@@ -67,7 +67,7 @@ export class FeatureRegistry {
 
   /**
    * Get feature instance by type
-   */
+    */
   private static getFeature(type: FeatureType): CVFeature | null {
     if (!this.features.has(type)) {
       const feature = this.createFeature(type);
@@ -81,7 +81,7 @@ export class FeatureRegistry {
 
   /**
    * Create feature instance by type
-   */
+    */
   private static createFeature(type: FeatureType): CVFeature | null {
     switch (type) {
       // Multimedia features - delegated to multimedia submodule
@@ -133,7 +133,7 @@ export class FeatureRegistry {
 
   /**
    * Assign generated content to the appropriate result property
-   */
+    */
   private static assignFeatureContent(
     result: InteractiveFeatureResult, 
     featureType: FeatureType, 
@@ -188,7 +188,7 @@ export class FeatureRegistry {
 
   /**
    * Get all supported feature types
-   */
+    */
   static getSupportedTypes(): FeatureType[] {
     return [
       'embed-qr-code',
@@ -211,14 +211,14 @@ export class FeatureRegistry {
 
   /**
    * Check if feature type is supported
-   */
+    */
   static isSupported(type: string): type is FeatureType {
     return this.getSupportedTypes().includes(type as FeatureType);
   }
 
   /**
    * Clear feature cache (useful for testing)
-   */
+    */
   static clearCache(): void {
     this.features.clear();
   }

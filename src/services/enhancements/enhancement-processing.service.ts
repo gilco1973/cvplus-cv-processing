@@ -7,7 +7,7 @@
  * @author Gil Klainert
  * @version 2.1.0 - Migration Facade
  * @deprecated Use @cvplus/enhancements/backend instead
- */
+  */
 
 // Re-export from enhancements module
 export {
@@ -32,7 +32,7 @@ export interface LegacyEnhancementResult {
 /**
  * Legacy enhancement processing function for backward compatibility
  * @deprecated Use EnhancementProcessingService from @cvplus/enhancements instead
- */
+  */
 export const processEnhancements = async (options: LegacyEnhancementOptions = {}) => {
   console.warn('processEnhancements is deprecated. Use EnhancementProcessingService from @cvplus/enhancements instead.');
   return {

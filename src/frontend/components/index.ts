@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * React components for CV processing
  * 
  * This module exports all React components related to CV processing:
@@ -8,7 +9,7 @@
  * - Processing status components
  * - CV analysis and display components
  * - CV comparison and enhancement components
- */
+  */
 
 // Core CV Components
 export * from './CVPreview';

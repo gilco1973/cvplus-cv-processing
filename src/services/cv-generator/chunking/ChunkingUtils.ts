@@ -1,7 +1,7 @@
 /**
  * Chunking Utilities
  * Handles text chunking for CV content processing
- */
+  */
 
 export interface ChunkResult {
   chunks: string[];

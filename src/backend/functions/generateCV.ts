@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Generate CV Function
  * 
  * Simplified function wrapper that uses the new modular CV services.
@@ -6,7 +7,7 @@
  * 
  * @author Gil Klainert
  * @version 2.0.0 - Modularized
- */
+  */
 
 import { onCall } from 'firebase-functions/v2/https';
 import { corsOptions } from '../config/cors';
@@ -38,7 +39,7 @@ const registry = ServiceRegistry.getInstance();
 /**
  * Core CV generation logic that can be called from other functions
  * Maintains backward compatibility while using new service architecture
- */
+  */
 export async function generateCVCore(
   jobId: string, 
   templateId: string | undefined, 
@@ -119,7 +120,7 @@ export async function generateCVCore(
 
 /**
  * Firebase Function export - maintains exact same API
- */
+  */
 export const generateCV = onCall(
   {
     timeoutSeconds: 600, // 10 minutes
@@ -140,7 +141,7 @@ export const generateCV = onCall(
 
 /**
  * Initialize services in the registry
- */
+  */
 async function initializeServices(): Promise<void> {
   try {
     // Register CV Generation Service
@@ -164,5 +165,5 @@ async function initializeServices(): Promise<void> {
 
 /**
  * Type definitions for this function
- */
+  */
 export type { CVGenerationRequest, CVGenerationResponse };

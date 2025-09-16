@@ -1,9 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Recommendation Service
  * 
  * Specialized service for generating prioritized, actionable recommendations
  * for ATS optimization based on analysis results from all other services.
- */
+  */
 
 import { 
   ParsedCV, 
@@ -19,7 +20,7 @@ export class RecommendationService {
 
   /**
    * Helper to create a properly structured recommendation
-   */
+    */
   private createRecommendation(base: Partial<PrioritizedRecommendation>): PrioritizedRecommendation {
     return {
       effort: 'medium' as const,
@@ -37,7 +38,7 @@ export class RecommendationService {
 
   /**
    * Generate comprehensive prioritized recommendations
-   */
+    */
   async generatePrioritizedRecommendations(params: RecommendationParams): Promise<PrioritizedRecommendation[]> {
     try {
       const { parsedCV, advancedScore, semanticAnalysis, systemSimulations, competitorBenchmark } = params;
@@ -76,7 +77,7 @@ export class RecommendationService {
 
   /**
    * Safe wrapper for generating recommendations
-   */
+    */
   private safeGenerateRecommendations(generator: () => PrioritizedRecommendation[]): PrioritizedRecommendation[] {
     try {
       const result = generator();
@@ -88,7 +89,7 @@ export class RecommendationService {
 
   /**
    * Fallback recommendations when main generation fails
-   */
+    */
   private getFallbackRecommendations(): PrioritizedRecommendation[] {
     return [
       {
@@ -141,7 +142,7 @@ export class RecommendationService {
 
   /**
    * Generate keyword-specific recommendations
-   */
+    */
   private generateKeywordRecommendations(
     semanticAnalysis: SemanticKeywordAnalysis, 
     parsedCV: ParsedCV
@@ -230,7 +231,7 @@ export class RecommendationService {
 
   /**
    * Generate structure and formatting recommendations
-   */
+    */
   private generateStructureRecommendations(
     parsedCV: ParsedCV, 
     advancedScore: AdvancedATSScore
@@ -299,7 +300,7 @@ export class RecommendationService {
 
   /**
    * Generate content quality recommendations
-   */
+    */
   private generateContentRecommendations(
     parsedCV: ParsedCV, 
     advancedScore: AdvancedATSScore
@@ -362,7 +363,7 @@ export class RecommendationService {
 
   /**
    * Generate ATS system-specific recommendations
-   */
+    */
   private generateSystemSpecificRecommendations(
     systemSimulations: ATSSystemSimulation[]
   ): PrioritizedRecommendation[] {
@@ -394,7 +395,7 @@ export class RecommendationService {
 
   /**
    * Generate competitive positioning recommendations
-   */
+    */
   private generateCompetitiveRecommendations(
     competitorBenchmark: CompetitorAnalysis | undefined, 
     advancedScore: AdvancedATSScore
@@ -443,7 +444,7 @@ export class RecommendationService {
 
   /**
    * Prioritize recommendations by impact and urgency
-   */
+    */
   private prioritizeRecommendations(
     recommendations: PrioritizedRecommendation[], 
     advancedScore: AdvancedATSScore
@@ -581,7 +582,8 @@ export class RecommendationService {
     return [];
   }
 
-  /*
+  /* 
+  */
   private identifyCommonSystemIssues(problemSystems: ATSSystemSimulation[]): string[] {
     const allIssues = problemSystems.flatMap(sys => sys.specificIssues || []);
     const issueCount: { [key: string]: number } = {};
@@ -597,5 +599,5 @@ export class RecommendationService {
       .slice(0, 4)
       .map(([issue]) => `Address: ${issue}`);
   }
-  */
+   */
 }

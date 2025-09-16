@@ -1,9 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Auth Integration for CV Processing
  *
  * Provides integration layer for authentication services from @cvplus/auth and @cvplus/premium submodules.
  * Uses dependency injection pattern to avoid direct dependencies between same-layer modules.
- */
+  */
 
 // Integration types for auth services
 export interface AuthUser {
@@ -45,28 +46,28 @@ export interface PremiumProvider {
 
 /**
  * Integration layer for auth services
- */
+  */
 export class AuthIntegration {
   private static authProvider: AuthProvider | null = null;
   private static premiumProvider: PremiumProvider | null = null;
 
   /**
    * Set the auth provider (called by root application during startup)
-   */
+    */
   static setAuthProvider(provider: AuthProvider): void {
     this.authProvider = provider;
   }
 
   /**
    * Set the premium provider (called by root application during startup)
-   */
+    */
   static setPremiumProvider(provider: PremiumProvider): void {
     this.premiumProvider = provider;
   }
 
   /**
    * Get autonomous auth service from auth submodule
-   */
+    */
   static getAutonomousAuthService(): AutonomousAuthService | null {
     if (!this.authProvider) {
       return null;
@@ -82,7 +83,7 @@ export class AuthIntegration {
 
   /**
    * Get auth guard from auth submodule
-   */
+    */
   static getAuthGuard(): AuthGuard | null {
     if (!this.authProvider) {
       return null;
@@ -98,7 +99,7 @@ export class AuthIntegration {
 
   /**
    * Get premium guard from premium submodule
-   */
+    */
   static getPremiumGuard(): PremiumGuard | null {
     if (!this.premiumProvider) {
       return null;
@@ -114,56 +115,56 @@ export class AuthIntegration {
 
   /**
    * Create fallback autonomous auth service
-   */
+    */
   static createFallbackAutonomousAuthService(): AutonomousAuthService {
     return new FallbackAutonomousAuthService();
   }
 
   /**
    * Create fallback auth guard
-   */
+    */
   static createFallbackAuthGuard(): AuthGuard {
     return new FallbackAuthGuard();
   }
 
   /**
    * Create fallback premium guard
-   */
+    */
   static createFallbackPremiumGuard(): PremiumGuard {
     return new FallbackPremiumGuard();
   }
 
   /**
    * Get autonomous auth service with fallback
-   */
+    */
   static getAutonomousAuthServiceWithFallback(): AutonomousAuthService {
     return this.getAutonomousAuthService() || this.createFallbackAutonomousAuthService();
   }
 
   /**
    * Get auth guard with fallback
-   */
+    */
   static getAuthGuardWithFallback(): AuthGuard {
     return this.getAuthGuard() || this.createFallbackAuthGuard();
   }
 
   /**
    * Get premium guard with fallback
-   */
+    */
   static getPremiumGuardWithFallback(): PremiumGuard {
     return this.getPremiumGuard() || this.createFallbackPremiumGuard();
   }
 
   /**
    * Check if auth provider is available
-   */
+    */
   static isAuthProviderAvailable(): boolean {
     return this.authProvider !== null;
   }
 
   /**
    * Check if premium provider is available
-   */
+    */
   static isPremiumProviderAvailable(): boolean {
     return this.premiumProvider !== null;
   }
@@ -171,7 +172,7 @@ export class AuthIntegration {
 
 /**
  * Fallback autonomous auth service for when auth submodule is not available
- */
+  */
 export class FallbackAutonomousAuthService implements AutonomousAuthService {
   async requireGoogleAuth(request: AuthRequest): Promise<AuthUser> {
     // Basic fallback authentication check
@@ -199,7 +200,7 @@ export class FallbackAutonomousAuthService implements AutonomousAuthService {
 
 /**
  * Fallback auth guard for when auth submodule is not available
- */
+  */
 export class FallbackAuthGuard implements AuthGuard {
   async authenticateUser(request: AuthRequest): Promise<AuthUser> {
     if (!request.auth?.uid) {
@@ -221,7 +222,7 @@ export class FallbackAuthGuard implements AuthGuard {
 
 /**
  * Fallback premium guard for when premium submodule is not available
- */
+  */
 export class FallbackPremiumGuard implements PremiumGuard {
   async requirePremiumAccess(request: AuthRequest, featureId: string): Promise<AuthUser> {
     // Fallback - deny premium access but allow basic auth

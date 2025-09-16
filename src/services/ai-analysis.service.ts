@@ -5,7 +5,7 @@
  * personality insights, content generation, and intelligent recommendations.
  *
  * @fileoverview AI Analysis service with multiple provider support and intelligent fallbacks
- */
+  */
 
 import { logger } from 'firebase-functions/v2';
 import OpenAI from 'openai';
@@ -101,7 +101,7 @@ export class AIAnalysisService {
 
   /**
    * Initialize AI service clients
-   */
+    */
   private initializeClients(): void {
     try {
       // Initialize OpenAI
@@ -134,7 +134,7 @@ export class AIAnalysisService {
 
   /**
    * Extract structured CV data from raw text using AI
-   */
+    */
   async extractStructuredCV(rawText: string): Promise<StructuredCVData> {
     logger.debug('Extracting structured CV data from text');
 
@@ -165,7 +165,7 @@ export class AIAnalysisService {
 
   /**
    * Analyze CV content for improvements and insights
-   */
+    */
   async analyzeCVContent(cvData: {
     summary: string;
     experience: Experience[];
@@ -201,7 +201,7 @@ export class AIAnalysisService {
 
   /**
    * Analyze personality from CV content
-   */
+    */
   async analyzePersonality(cvData: Omit<ProcessedCV, 'id' | 'createdAt' | 'updatedAt'>): Promise<PersonalityProfile> {
     logger.debug('Analyzing personality from CV content');
 
@@ -238,7 +238,7 @@ export class AIAnalysisService {
 
   /**
    * Generate optimized content for CV sections
-   */
+    */
   async generateOptimizedContent(
     sectionType: 'summary' | 'experience' | 'achievements',
     context: any,
@@ -272,7 +272,7 @@ export class AIAnalysisService {
 
   /**
    * Analyze job market fit and provide recommendations
-   */
+    */
   async analyzeJobMarketFit(
     cvData: Omit<ProcessedCV, 'id' | 'createdAt' | 'updatedAt'>,
     targetIndustry?: string
@@ -315,7 +315,7 @@ export class AIAnalysisService {
 
   /**
    * Call AI with fallback to alternative providers
-   */
+    */
   private async callAIWithFallback(
     prompt: string,
     options: {
@@ -361,7 +361,7 @@ export class AIAnalysisService {
 
   /**
    * Call OpenAI API
-   */
+    */
   private async callOpenAI(
     prompt: string,
     options: { temperature: number; maxTokens: number; systemMessage: string }
@@ -390,7 +390,7 @@ export class AIAnalysisService {
 
   /**
    * Call Anthropic API (placeholder implementation)
-   */
+    */
   private async callAnthropic(
     prompt: string,
     options: { temperature: number; maxTokens: number; systemMessage: string }
@@ -670,7 +670,7 @@ export function getAIAnalysisService(): AIAnalysisService {
 
 /**
  * Public API functions
- */
+  */
 export async function extractStructuredCV(rawText: string): Promise<StructuredCVData> {
   const service = getAIAnalysisService();
   return service.extractStructuredCV(rawText);

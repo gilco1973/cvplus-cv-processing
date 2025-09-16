@@ -1,7 +1,8 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Regional CV Optimization Service
  * Moved from i18n module to correct cv-processing domain
- */
+  */
 
 import * as admin from 'firebase-admin';
 import { RegionalScoreCalculator } from './regional-score-calculator.service';
@@ -41,7 +42,7 @@ export class RegionalOptimizationService {
 
   /**
    * Initialize regional configurations
-   */
+    */
   async initialize(): Promise<void> {
     if (this.initialized) return;
 
@@ -55,7 +56,7 @@ export class RegionalOptimizationService {
 
   /**
    * Get countries for a given region
-   */
+    */
   public getCountriesForRegion(region: string): string[] {
     // Map regions to countries
     const regionCountriesMap: Record<string, string[]> = {
@@ -75,7 +76,7 @@ export class RegionalOptimizationService {
 
   /**
    * Optimize CV for specific region
-   */
+    */
   async optimizeForRegion(request: RegionalOptimizationRequest): Promise<RegionalOptimizationResult> {
     const startTime = Date.now();
 
@@ -145,14 +146,14 @@ export class RegionalOptimizationService {
 
   /**
    * Get list of supported regions
-   */
+    */
   getSupportedRegions(): string[] {
     return Array.from(this.regionalConfigs.keys());
   }
 
   /**
    * Get regional configuration for a specific region
-   */
+    */
   async getRegionalConfiguration(regionId: string): Promise<RegionalConfiguration | null> {
     await this.initialize();
     return this.regionalConfigs.get(regionId.toLowerCase()) || null;
@@ -160,7 +161,7 @@ export class RegionalOptimizationService {
 
   /**
    * Load regional configurations from database
-   */
+    */
   private async loadRegionalConfigurations(): Promise<void> {
     try {
       const configsSnapshot = await db.collection('regional_configurations').get();

@@ -1,6 +1,7 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Skills Visualization Service
- */
+  */
 
 import { ParsedCV, SkillsVisualization, SkillCategory, LanguageSkill, Certification } from '../types/enhanced-models';
 import OpenAI from 'openai';
@@ -49,7 +50,7 @@ export class SkillsVisualizationService {
   
   /**
    * Analyze and visualize skills from CV
-   */
+    */
   async analyzeSkills(parsedCV: ParsedCV, targetRole?: string): Promise<SkillsVisualization> {
     // 1. Extract and categorize technical skills
     const technicalSkills = await this.analyzeTechnicalSkills(parsedCV);
@@ -73,7 +74,7 @@ export class SkillsVisualizationService {
   
   /**
    * Analyze technical skills
-   */
+    */
   private async analyzeTechnicalSkills(cv: ParsedCV): Promise<SkillCategory[]> {
     const categories: SkillCategory[] = [];
     // Extract all text is done in individual analysis methods
@@ -146,7 +147,7 @@ export class SkillsVisualizationService {
   
   /**
    * Analyze soft skills
-   */
+    */
   private async analyzeSoftSkills(cv: ParsedCV): Promise<SkillCategory[]> {
     const categories: SkillCategory[] = [];
     // Extract all text is done in individual analysis methods
@@ -194,7 +195,7 @@ export class SkillsVisualizationService {
   
   /**
    * Analyze language skills
-   */
+    */
   private analyzeLanguageSkills(cv: ParsedCV): LanguageSkill[] {
     const languages: LanguageSkill[] = [];
     
@@ -237,7 +238,7 @@ export class SkillsVisualizationService {
   
   /**
    * Process certifications
-   */
+    */
   private processCertifications(cv: ParsedCV): Certification[] {
     const certifications: Certification[] = [];
     
@@ -275,7 +276,7 @@ export class SkillsVisualizationService {
   
   /**
    * Extract skills from CV
-   */
+    */
   private extractSkillsFromCV(cv: ParsedCV): { technical: string[]; soft: string[] } {
     if (!cv.skills || Array.isArray(cv.skills)) {
       return { technical: Array.isArray(cv.skills) ? cv.skills : [], soft: [] };
@@ -294,7 +295,7 @@ export class SkillsVisualizationService {
   
   /**
    * Infer skills from experience using AI
-   */
+    */
   private async inferSkillsFromExperience(cv: ParsedCV): Promise<string[]> {
     if (!cv.experience || cv.experience.length === 0) return [];
     
@@ -335,7 +336,7 @@ Technical skills only (languages, frameworks, tools, platforms):`;
   
   /**
    * Infer soft skills from content
-   */
+    */
   private async inferSoftSkillsFromContent(cv: ParsedCV): Promise<string[]> {
     const softSkills: string[] = [];
     const allText = this.extractAllText(cv);
@@ -370,7 +371,7 @@ Technical skills only (languages, frameworks, tools, platforms):`;
   
   /**
    * Assess skill level based on context
-   */
+    */
   private assessSkillLevel(skill: string, cv: ParsedCV): number {
     let level = 5; // Base level
     const skillLower = skill.toLowerCase();
@@ -397,7 +398,7 @@ Technical skills only (languages, frameworks, tools, platforms):`;
   
   /**
    * Assess soft skill level
-   */
+    */
   private assessSoftSkillLevel(skill: string, cv: ParsedCV): number {
     let level = 5;
     const allText = this.extractAllText(cv).toLowerCase();
@@ -417,7 +418,7 @@ Technical skills only (languages, frameworks, tools, platforms):`;
   
   /**
    * Estimate years of experience for a skill
-   */
+    */
   private estimateYearsOfExperience(skill: string, cv: ParsedCV): number {
     if (!cv.experience) return 0;
     
@@ -443,7 +444,7 @@ Technical skills only (languages, frameworks, tools, platforms):`;
   
   /**
    * Find when skill was last used
-   */
+    */
   private findLastUsed(skill: string, cv: ParsedCV): Date | null {
     if (!cv.experience) return null;
     
@@ -464,7 +465,7 @@ Technical skills only (languages, frameworks, tools, platforms):`;
   
   /**
    * Parse language skill string
-   */
+    */
   private parseLanguageSkill(langString: string): LanguageSkill {
     const proficiencyMap: Record<string, LanguageSkill['proficiency']> = {
       native: 'native',
@@ -501,7 +502,7 @@ Technical skills only (languages, frameworks, tools, platforms):`;
   
   /**
    * Extract language from education
-   */
+    */
   private extractLanguageFromEducation(edu: any): LanguageSkill | null {
     const field = edu.field?.toLowerCase() || '';
     const degree = edu.degree?.toLowerCase() || '';
@@ -530,7 +531,7 @@ Technical skills only (languages, frameworks, tools, platforms):`;
   
   /**
    * Generate verification URL for certification
-   */
+    */
   private generateVerificationUrl(cert: any): string | undefined {
     if (cert.credentialId) {
       // Common certification providers
@@ -555,7 +556,7 @@ Technical skills only (languages, frameworks, tools, platforms):`;
   
   /**
    * Generate badge URL for certification
-   */
+    */
   private generateBadgeUrl(cert: any): string | undefined {
     // Placeholder - would integrate with actual badge providers
     // Badge providers list (for future implementation)
@@ -567,7 +568,7 @@ Technical skills only (languages, frameworks, tools, platforms):`;
   
   /**
    * Categorize certification
-   */
+    */
   private categorizeCertification(certName: string): string {
     const certLower = certName.toLowerCase();
     
@@ -584,7 +585,7 @@ Technical skills only (languages, frameworks, tools, platforms):`;
 
   /**
    * Get expiry months for common certifications
-   */
+    */
   private getExpiryMonths(certName: string): number | null {
     const certLower = certName.toLowerCase();
     
@@ -601,7 +602,7 @@ Technical skills only (languages, frameworks, tools, platforms):`;
   
   /**
    * Extract all text from CV
-   */
+    */
   private extractAllText(cv: ParsedCV): string {
     const parts: string[] = [];
     
@@ -628,7 +629,7 @@ Technical skills only (languages, frameworks, tools, platforms):`;
   
   /**
    * Format category name
-   */
+    */
   private formatCategoryName(name: string): string {
     return name
       .split(/[\s_-]/)
@@ -638,7 +639,7 @@ Technical skills only (languages, frameworks, tools, platforms):`;
   
   /**
    * Generate skills matrix for visualization
-   */
+    */
   generateSkillsMatrix(visualization: SkillsVisualization): {
     labels: string[];
     datasets: Array<{
@@ -683,7 +684,7 @@ Technical skills only (languages, frameworks, tools, platforms):`;
 
   /**
    * Generate skills visualization
-   */
+    */
   async generateVisualization(
     parsedCV: ParsedCV,
     chartTypes: string[] = ['radar', 'bar'],
@@ -694,7 +695,7 @@ Technical skills only (languages, frameworks, tools, platforms):`;
 
   /**
    * Export skills data to CSV
-   */
+    */
   exportToCSV(visualization: SkillsVisualization): string {
     let csv = 'Category,Skill,Level,Experience\n';
     
@@ -717,7 +718,7 @@ Technical skills only (languages, frameworks, tools, platforms):`;
 
   /**
    * Add endorsement to visualization
-   */
+    */
   async addEndorsement(
     visualization: SkillsVisualization,
     skillName: string,

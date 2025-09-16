@@ -1,7 +1,8 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Autonomous API Service
  * Independent HTTP client for CV processing operations
- */
+  */
 
 import { AutonomousAuthService } from './AutonomousAuthService';
 
@@ -34,7 +35,7 @@ export interface ProcessCVRequest {
 /**
  * Independent API service for autonomous CV processing operations
  * Zero dependencies on parent application services
- */
+  */
 export class AutonomousAPIService {
   private baseURL: string;
   private authService: AutonomousAuthService;
@@ -51,7 +52,7 @@ export class AutonomousAPIService {
 
   /**
    * Auto-detect base URL based on environment
-   */
+    */
   private detectBaseURL(): string {
     if (typeof window !== 'undefined') {
       const hostname = window.location.hostname;
@@ -65,7 +66,7 @@ export class AutonomousAPIService {
 
   /**
    * Get authorization headers
-   */
+    */
   private async getAuthHeaders(): Promise<Record<string, string>> {
     const token = await this.authService.getIdToken();
     
@@ -77,7 +78,7 @@ export class AutonomousAPIService {
 
   /**
    * Generic HTTP request method
-   */
+    */
   private async request<T>(
     endpoint: string, 
     options: RequestInit = {}
@@ -126,7 +127,7 @@ export class AutonomousAPIService {
 
   /**
    * Process CV file
-   */
+    */
   async processCV(request: ProcessCVRequest): Promise<APIResponse<CVProcessingJob>> {
     return this.request<CVProcessingJob>('processCV', {
       method: 'POST',
@@ -136,14 +137,14 @@ export class AutonomousAPIService {
 
   /**
    * Get processing job status
-   */
+    */
   async getJobStatus(jobId: string): Promise<APIResponse<CVProcessingJob>> {
     return this.request<CVProcessingJob>(`processCV/${jobId}`);
   }
 
   /**
    * Generate CV with specific template
-   */
+    */
   async generateCV(jobId: string, template: string): Promise<APIResponse<any>> {
     return this.request('generateCV', {
       method: 'POST',
@@ -153,7 +154,7 @@ export class AutonomousAPIService {
 
   /**
    * Get ATS optimization analysis
-   */
+    */
   async getATSAnalysis(jobId: string, jobDescription?: string): Promise<APIResponse<any>> {
     return this.request('atsOptimization', {
       method: 'POST',
@@ -163,7 +164,7 @@ export class AutonomousAPIService {
 
   /**
    * Get industry-specific recommendations
-   */
+    */
   async getIndustryRecommendations(
     jobId: string, 
     industry: string
@@ -176,7 +177,7 @@ export class AutonomousAPIService {
 
   /**
    * Get regional optimization suggestions
-   */
+    */
   async getRegionalOptimization(
     jobId: string, 
     region: string
@@ -189,7 +190,7 @@ export class AutonomousAPIService {
 
   /**
    * Get comprehensive analysis with predictions
-   */
+    */
   async getAdvancedPredictions(jobId: string): Promise<APIResponse<any>> {
     return this.request('advancedPredictions', {
       method: 'POST',
@@ -199,7 +200,7 @@ export class AutonomousAPIService {
 
   /**
    * Upload file and get signed URL
-   */
+    */
   async uploadFile(file: File): Promise<APIResponse<{ fileUrl: string; mimeType: string }>> {
     const formData = new FormData();
     formData.append('file', file);
@@ -240,7 +241,7 @@ export class AutonomousAPIService {
 
   /**
    * Health check endpoint
-   */
+    */
   async healthCheck(): Promise<APIResponse<{ status: string; timestamp: string }>> {
     return this.request('health');
   }

@@ -1,0 +1,26 @@
+// @ts-ignore
+/**
+ * Environment Configuration for CV Processing
+ */
+
+export interface EnvironmentConfig {
+  nodeEnv: 'development' | 'staging' | 'production';
+  projectId: string;
+  region: string;
+  anthropicApiKey: string;
+  maxFileSize: number;
+  maxProcessingTime: number;
+}
+
+export const getEnvironmentConfig = (): EnvironmentConfig => {
+  return {
+    nodeEnv: (process.env.NODE_ENV as 'development' | 'staging' | 'production') || 'development',
+    projectId: process.env.GCLOUD_PROJECT || 'cvplus-dev',
+    region: process.env.FUNCTIONS_REGION || 'us-central1',
+    anthropicApiKey: process.env.ANTHROPIC_API_KEY || '',
+    maxFileSize: parseInt(process.env.MAX_FILE_SIZE || '10485760', 10), // 10MB
+    maxProcessingTime: parseInt(process.env.MAX_PROCESSING_TIME || '300000', 10) // 5 minutes
+  };
+};
+
+export const config = getEnvironmentConfig();

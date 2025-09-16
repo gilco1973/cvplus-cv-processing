@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * CV and Resume Types
  * 
  * Core types for CV/resume data structures and processing.
@@ -6,7 +7,7 @@
  * 
  * @author Gil Klainert
  * @version 1.0.0
- */
+  */
 
 // ============================================================================
 // PERSONAL INFORMATION TYPES

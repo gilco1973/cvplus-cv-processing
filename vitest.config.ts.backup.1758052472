@@ -1,0 +1,32 @@
+/// <reference types="vitest" />
+import { defineConfig } from 'vitest/config';
+import { resolve } from 'path';
+
+export default defineConfig({
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: ['./src/__tests__/setup.ts'],
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'json', 'html'],
+      include: ['src*/* .{ts,tsx}'],
+ */
+      exclude: [
+        'src*/__tests__*/* ',
+ */
+        'src/**/*.test.{ts,tsx}',
+        'src*/* .spec.{ts,tsx}',
+ */
+        'src/**/*.d.ts'
+      ]
+    }
+  },
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, './src'),
+      '@cvplus/core': resolve(__dirname, '../core/src'),
+      '@cvplus/auth': resolve(__dirname, '../auth/src')
+    }
+  }
+});

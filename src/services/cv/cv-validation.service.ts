@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * CV Validation Service
  *
  * Core service for validating CV content, structure, and compliance.
@@ -7,7 +8,7 @@
  *
  * @author Gil Klainert
  * @version 2.0.0 - Modularized Architecture
- */
+  */
 
 import { CVProcessingContext, ServiceResult } from '../../types';
 import { BaseService } from '../../shared/utils/base-service';
@@ -69,7 +70,7 @@ export class CVValidationService extends BaseService {
 
   /**
    * Validate CV content and structure
-   */
+    */
   async validateCV(
     cvData: any,
     options: ValidationOptions = {},

@@ -1,11 +1,11 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflictsimport { CVFeature } from '../types';
+// @ts-ignore - Export conflicts/types';
 import { ParsedCV } from '../../cvParser';
 import { PublicProfilesIntegration } from '../integrations/PublicProfilesIntegration';
 import * as admin from 'firebase-admin';
 
 /**
  * Contact Form Feature - Generates interactive contact form for CV
- */
+  */
 export class ContactFormFeature implements CVFeature {
   
   async generate(cv: ParsedCV, jobId: string, options?: any): Promise<string> {
@@ -20,7 +20,7 @@ export class ContactFormFeature implements CVFeature {
   
   /**
    * Get portal URLs for integration
-   */
+    */
   private async getPortalUrls(jobId: string): Promise<any> {
     try {
       const db = admin.firestore();
@@ -43,7 +43,7 @@ export class ContactFormFeature implements CVFeature {
 
   /**
    * Generate React component placeholder for modern CV rendering
-   */
+    */
   private generateReactComponentPlaceholder(jobId: string, contactName: string, options?: any, portalUrls?: any): string {
     const componentProps = {
       profileId: jobId,
@@ -88,7 +88,7 @@ export class ContactFormFeature implements CVFeature {
   
   /**
    * Generate legacy HTML for backward compatibility
-   */
+    */
   private generateLegacyHTML(formId: string, jobId: string, contactName: string, portalUrls?: any): string {
     // Add portal integration section if portal exists
     const portalSection = portalUrls ? this.generatePortalIntegrationSection(portalUrls) : '';
@@ -199,7 +199,7 @@ export class ContactFormFeature implements CVFeature {
 
   /**
    * Generate portal integration section
-   */
+    */
   private generatePortalIntegrationSection(portalUrls: any): string {
     if (!portalUrls) return '';
 
@@ -252,12 +252,12 @@ export class ContactFormFeature implements CVFeature {
 
   getStyles(): string {
     return `
-      /* CV Feature Container Styles */
+      /* CV Feature Container Styles  */
       .cv-feature-container.contact-form-feature {
         margin: 2rem 0;
       }
       
-      /* React Component Placeholder Styles */
+      /* React Component Placeholder Styles  */
       .react-component-placeholder {
         min-height: 400px;
         position: relative;
@@ -268,7 +268,7 @@ export class ContactFormFeature implements CVFeature {
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
       }
       
-      /* React Fallback Styles */
+      /* React Fallback Styles  */
       .react-fallback, .react-error {
         text-align: center;
         padding: 2rem;
@@ -342,7 +342,7 @@ export class ContactFormFeature implements CVFeature {
         100% { transform: rotate(360deg); }
       }
       
-      /* Legacy Contact Form Styles */
+      /* Legacy Contact Form Styles  */
       .contact-form-container {
         background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
         border-radius: 16px;
@@ -426,7 +426,7 @@ export class ContactFormFeature implements CVFeature {
         margin-top: 0.25rem;
       }
       
-      /* Form actions removed - React component handles styling */
+      /* Form actions removed - React component handles styling  */
       
       .form-status {
         margin-top: 1rem;
@@ -461,7 +461,7 @@ export class ContactFormFeature implements CVFeature {
         height: 20px;
       }
       
-      /* Mobile Responsive */
+      /* Mobile Responsive  */
       @media (max-width: 768px) {
         .contact-form-container {
           padding: 1.5rem;
@@ -478,7 +478,7 @@ export class ContactFormFeature implements CVFeature {
         }
       }
       
-      /* Dark mode support */
+      /* Dark mode support  */
       @media (prefers-color-scheme: dark) {
         .contact-form-container {
           background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
@@ -514,7 +514,7 @@ export class ContactFormFeature implements CVFeature {
           color: #6b7280;
         }
         
-        /* Portal Integration Dark Mode */
+        /* Portal Integration Dark Mode  */
         .portal-integration-section {
           background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
           border-color: #475569;
@@ -543,7 +543,7 @@ export class ContactFormFeature implements CVFeature {
         }
       }
       
-      /* Portal Integration Styles */
+      /* Portal Integration Styles  */
       .portal-integration-section {
         background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
         border: 2px solid #0ea5e9;
@@ -638,7 +638,7 @@ export class ContactFormFeature implements CVFeature {
         font-size: 1rem;
       }
       
-      /* Portal Integration Mobile Responsive */
+      /* Portal Integration Mobile Responsive  */
       @media (max-width: 768px) {
         .portal-actions {
           flex-direction: column;

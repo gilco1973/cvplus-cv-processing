@@ -1,7 +1,8 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Regional CV Processing Types
  * Moved from i18n module to correct cv-processing domain
- */
+  */
 
 // Enhanced ParsedCV interface for regional CV processing
 export interface ParsedCV {

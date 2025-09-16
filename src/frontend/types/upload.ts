@@ -1,11 +1,12 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * CV Upload Types
  *
  * Type definitions for CV upload functionality
  *
  * @author Gil Klainert
  * @version 3.0.0 - Enhanced T063 Implementation
- */
+  */
 
 import type { ComponentType } from 'react';
 
@@ -20,7 +21,7 @@ export interface CVProcessingFeature {
 }
 
 export interface CVUploadProps {
-  /** Callback when CV upload and processing is completed */
+  /** Callback when CV upload and processing is completed  */
   onUploadComplete?: (result: {
     jobId: string;
     cvData: any;
@@ -29,40 +30,40 @@ export interface CVUploadProps {
     jobDescription?: string;
   }) => void;
 
-  /** Callback when upload fails */
+  /** Callback when upload fails  */
   onUploadError?: (error: string) => void;
 
-  /** Callback when processing starts */
+  /** Callback when processing starts  */
   onProcessingStart?: (jobId: string, features: string[]) => void;
 
-  /** Template ID to use for processing */
+  /** Template ID to use for processing  */
   templateId?: string;
 
-  /** Pre-selected features */
+  /** Pre-selected features  */
   defaultFeatures?: string[];
 
-  /** Job description for targeted optimization */
+  /** Job description for targeted optimization  */
   jobDescription?: string;
 
-  /** Additional CSS classes */
+  /** Additional CSS classes  */
   className?: string;
 
-  /** Whether to show detailed processing steps */
+  /** Whether to show detailed processing steps  */
   showDetailedSteps?: boolean;
 
-  /** Whether to show feature selection */
+  /** Whether to show feature selection  */
   showFeatureSelection?: boolean;
 
-  /** Maximum file size in bytes */
+  /** Maximum file size in bytes  */
   maxFileSize?: number;
 
-  /** Allowed file types */
+  /** Allowed file types  */
   allowedTypes?: string[];
 
-  /** User authentication state */
+  /** User authentication state  */
   isAuthenticated?: boolean;
 
-  /** User premium status */
+  /** User premium status  */
   isPremium?: boolean;
 }
 

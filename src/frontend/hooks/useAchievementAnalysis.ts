@@ -1,11 +1,12 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * CVPlus CV Processing - Achievement Analysis Hook
  * 
  * React hook for analyzing CV achievements and providing enhancement suggestions.
  * 
  * @author Gil Klainert
  * @version 1.0.0
- */
+  */
 
 import { useState, useEffect, useCallback } from 'react';
 import type { CVParsedData } from '../../types';

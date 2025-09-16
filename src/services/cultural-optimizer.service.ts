@@ -1,14 +1,15 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Cultural Optimization Engine for Regional CV Processing
  * Moved from i18n module to correct cv-processing domain
- */
+  */
 
 import { ParsedCV, RegionalConfiguration, FormatAdjustment, ContentAdjustment, LanguageOptimization, StructuralChange } from '../types/regional';
 
 export class CulturalOptimizer {
   /**
    * Generate cultural optimizations for CV
-   */
+    */
   async generateCulturalOptimizations(cvData: ParsedCV, regionConfig: RegionalConfiguration) {
     const formatAdjustments = this.generateFormatAdjustments(cvData, regionConfig);
     const contentAdjustments = this.generateContentAdjustments(cvData, regionConfig);

@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * ML Feature Types
  * 
  * Feature vector and feature engineering types.
@@ -6,24 +7,24 @@
  * 
  * @author Gil Klainert
  * @version 1.0.0
- */
+  */
 
 /**
  * Feature vector for ML models
- */
+  */
 export interface FeatureVector {
-  /** Vector identifier */
+  /** Vector identifier  */
   id: string;
   
-  /** Associated job/CV ID */
+  /** Associated job/CV ID  */
   jobId: string;
   
-  /** Feature extraction timestamp */
+  /** Feature extraction timestamp  */
   extractedAt: Date;
   
-  /** Feature categories */
+  /** Feature categories  */
   features: {
-    /** Personal information features */
+    /** Personal information features  */
     personal: {
       ageGroup: number;
       locationTier: number;
@@ -31,7 +32,7 @@ export interface FeatureVector {
       careerStage: number;
     };
     
-    /** Experience features */
+    /** Experience features  */
     experience: {
       totalYears: number;
       companiesCount: number;
@@ -43,7 +44,7 @@ export interface FeatureVector {
       techStackModernity: number;
     };
     
-    /** Skills features */
+    /** Skills features  */
     skills: {
       technicalSkillsCount: number;
       softSkillsCount: number;
@@ -54,7 +55,7 @@ export interface FeatureVector {
       certificationLevel: number;
     };
     
-    /** Education features */
+    /** Education features  */
     education: {
       degreeLevel: number;
       institutionTier: number;
@@ -63,7 +64,7 @@ export interface FeatureVector {
       specialization: number;
     };
     
-    /** Achievements features */
+    /** Achievements features  */
     achievements: {
       achievementsCount: number;
       quantifiableResults: number;
@@ -72,7 +73,7 @@ export interface FeatureVector {
       innovationIndicator: number;
     };
     
-    /** Content quality features */
+    /** Content quality features  */
     content: {
       overallQuality: number;
       readabilityScore: number;
@@ -83,7 +84,7 @@ export interface FeatureVector {
       grammarScore: number;
     };
     
-    /** ATS compatibility features */
+    /** ATS compatibility features  */
     ats: {
       formatScore: number;
       keywordDensity: number;
@@ -92,7 +93,7 @@ export interface FeatureVector {
       parseability: number;
     };
     
-    /** Market alignment features */
+    /** Market alignment features  */
     market: {
       salaryCompetitiveness: number;
       roleAvailability: number;
@@ -101,7 +102,7 @@ export interface FeatureVector {
       timeToMarket: number;
     };
     
-    /** Behavioral indicators */
+    /** Behavioral indicators  */
     behavioral: {
       careerConsistency: number;
       growthTrajectory: number;
@@ -111,16 +112,16 @@ export interface FeatureVector {
     };
   };
   
-  /** Raw feature values */
+  /** Raw feature values  */
   rawFeatures: Record<string, number>;
   
-  /** Feature importance weights */
+  /** Feature importance weights  */
   weights: Record<string, number>;
   
-  /** Normalized features (0-1 scale) */
+  /** Normalized features (0-1 scale)  */
   normalizedFeatures: Record<string, number>;
   
-  /** Feature engineering metadata */
+  /** Feature engineering metadata  */
   metadata: {
     version: string;
     extractionMethod: string;

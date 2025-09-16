@@ -1,10 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflictsimport { CVFeature } from '../types';
+// @ts-ignore - Export conflicts/types';
 import { ParsedCV } from '../../cvParser';
 import * as admin from 'firebase-admin';
 
 /**
  * Personal Branding Feature - Generates AI-powered personality insights and personal branding
- */
+  */
 export class PersonalBrandingFeature implements CVFeature {
   
   async generate(cv: ParsedCV, jobId: string, options?: any): Promise<string> {
@@ -36,7 +36,7 @@ export class PersonalBrandingFeature implements CVFeature {
   
   /**
    * Extract relevant personal branding data from CV
-   */
+    */
   private extractComponentData(cv: ParsedCV): any {
     const skills = cv.skills || { technical: [], soft: [], languages: [] };
     const experience = cv.experience || [];
@@ -82,7 +82,7 @@ export class PersonalBrandingFeature implements CVFeature {
   
   /**
    * Get additional branding data from AI analysis if available
-   */
+    */
   private async getBrandingData(jobId: string): Promise<any> {
     try {
       const db = admin.firestore();
@@ -103,7 +103,7 @@ export class PersonalBrandingFeature implements CVFeature {
   
   /**
    * Calculate leadership score based on experience
-   */
+    */
   private calculateLeadershipScore(experience: any[]): number {
     let score = 5; // Base score
     
@@ -131,7 +131,7 @@ export class PersonalBrandingFeature implements CVFeature {
   
   /**
    * Calculate communication score
-   */
+    */
   private calculateCommunicationScore(experience: any[], skills: any): number {
     let score = 5;
     
@@ -161,7 +161,7 @@ export class PersonalBrandingFeature implements CVFeature {
   
   /**
    * Calculate innovation score
-   */
+    */
   private calculateInnovationScore(experience: any[], skills: any): number {
     let score = 4;
     
@@ -192,7 +192,7 @@ export class PersonalBrandingFeature implements CVFeature {
   
   /**
    * Calculate teamwork score
-   */
+    */
   private calculateTeamworkScore(experience: any[]): number {
     let score = 5;
     
@@ -209,7 +209,7 @@ export class PersonalBrandingFeature implements CVFeature {
   
   /**
    * Calculate problem solving score
-   */
+    */
   private calculateProblemSolvingScore(skills: any, experience: any[]): number {
     let score = 5;
     
@@ -239,7 +239,7 @@ export class PersonalBrandingFeature implements CVFeature {
   
   /**
    * Calculate attention to detail score
-   */
+    */
   private calculateDetailScore(experience: any[]): number {
     let score = 5;
     
@@ -257,7 +257,7 @@ export class PersonalBrandingFeature implements CVFeature {
   
   /**
    * Calculate adaptability score
-   */
+    */
   private calculateAdaptabilityScore(experience: any[]): number {
     let score = 5;
     
@@ -278,7 +278,7 @@ export class PersonalBrandingFeature implements CVFeature {
   
   /**
    * Calculate strategic thinking score
-   */
+    */
   private calculateStrategicScore(experience: any[]): number {
     let score = 4;
     
@@ -303,7 +303,7 @@ export class PersonalBrandingFeature implements CVFeature {
   
   /**
    * Analyze work style from experience
-   */
+    */
   private analyzeWorkStyle(experience: any[]): string[] {
     const styles: string[] = [];
     
@@ -339,7 +339,7 @@ export class PersonalBrandingFeature implements CVFeature {
   
   /**
    * Analyze team compatibility
-   */
+    */
   private analyzeTeamCompatibility(experience: any[]): string {
     const teamExperience = experience.filter(exp => 
       (exp.description || '').toLowerCase().includes('team') ||
@@ -357,7 +357,7 @@ export class PersonalBrandingFeature implements CVFeature {
   
   /**
    * Analyze culture fit preferences
-   */
+    */
   private analyzeCultureFit(experience: any[], skills: any): any {
     const allText = experience.map(exp => (exp.description || '') + ' ' + (exp.position || '')).join(' ').toLowerCase();
     const skillText = [...(skills.technical || []), ...(skills.soft || []), ...(skills.languages || [])].join(' ').toLowerCase();
@@ -409,7 +409,7 @@ export class PersonalBrandingFeature implements CVFeature {
   
   /**
    * Generate personality summary
-   */
+    */
   private generatePersonalitySummary(traits: any, workStyle: string[], personalInfo: any): string {
     const name = personalInfo.name || 'This professional';
     const topTrait = Object.entries(traits).sort((a: any, b: any) => b[1] - a[1])[0];
@@ -422,7 +422,7 @@ export class PersonalBrandingFeature implements CVFeature {
   
   /**
    * Generate React component placeholder
-   */
+    */
   private generateReactComponentPlaceholder(jobId: string, props: any): string {
     return `
       <div class="cv-feature-container personal-branding-feature">
@@ -441,12 +441,12 @@ export class PersonalBrandingFeature implements CVFeature {
 
   getStyles(): string {
     return `
-      /* Personal Branding Feature Styles */
+      /* Personal Branding Feature Styles  */
       .cv-feature-container.personal-branding-feature {
         margin: 2rem 0;
       }
       
-      /* React Component Placeholder Styles */
+      /* React Component Placeholder Styles  */
       .personal-branding-feature .react-component-placeholder {
         min-height: 500px;
         position: relative;
@@ -482,7 +482,7 @@ export class PersonalBrandingFeature implements CVFeature {
         100% { transform: rotate(360deg); }
       }
       
-      /* Mobile Responsive */
+      /* Mobile Responsive  */
       @media (max-width: 768px) {
         .personal-branding-feature .react-component-placeholder {
           padding: 1.5rem;
@@ -490,7 +490,7 @@ export class PersonalBrandingFeature implements CVFeature {
         }
       }
       
-      /* Dark theme is default for personal branding */
+      /* Dark theme is default for personal branding  */
       .personal-branding-feature {
         background: transparent;
       }

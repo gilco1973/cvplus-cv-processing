@@ -1,11 +1,11 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflictsimport { CVFeature } from '../types';
+// @ts-ignore - Export conflicts/types';
 import { ParsedCV } from '../../cvParser';
 import { certificationBadgesService, CertificationBadgesCollection } from '../integrations/WorkflowIntegration';
 import * as admin from 'firebase-admin';
 
 /**
  * Certification Badges Feature - Generates interactive certification badge display for CV
- */
+  */
 export class CertificationBadgesFeature implements CVFeature {
   
   async generate(cv: ParsedCV, jobId: string, options?: any): Promise<string> {
@@ -24,7 +24,7 @@ export class CertificationBadgesFeature implements CVFeature {
   
   /**
    * Extract certification data from CV for component props
-   */
+    */
   private extractCertificationData(cv: ParsedCV): any {
     const certifications = cv.certifications || [];
     
@@ -38,7 +38,7 @@ export class CertificationBadgesFeature implements CVFeature {
 
   /**
    * Generate React component placeholder for modern CV rendering
-   */
+    */
   private generateReactComponentPlaceholder(
     jobId: string, 
     badgesCollection: CertificationBadgesCollection, 
@@ -108,7 +108,7 @@ export class CertificationBadgesFeature implements CVFeature {
   
   /**
    * Generate fallback placeholder when badges generation fails
-   */
+    */
   private generateFallbackPlaceholder(jobId: string, options?: any): string {
     return `
       <div class="cv-feature-container certification-badges-feature">
@@ -132,12 +132,12 @@ export class CertificationBadgesFeature implements CVFeature {
 
   getStyles(): string {
     return `
-      /* CV Feature Container Styles */
+      /* CV Feature Container Styles  */
       .cv-feature-container.certification-badges-feature {
         margin: 2rem 0;
       }
       
-      /* React Component Placeholder Styles */
+      /* React Component Placeholder Styles  */
       .react-component-placeholder {
         min-height: 400px;
         position: relative;
@@ -148,7 +148,7 @@ export class CertificationBadgesFeature implements CVFeature {
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
       }
       
-      /* React Fallback Styles */
+      /* React Fallback Styles  */
       .react-fallback {
         text-align: center;
         padding: 2rem;
@@ -217,7 +217,7 @@ export class CertificationBadgesFeature implements CVFeature {
         100% { transform: rotate(360deg); }
       }
       
-      /* Certification Badges Specific Styles */
+      /* Certification Badges Specific Styles  */
       .certification-badges-feature .badge-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -283,7 +283,7 @@ export class CertificationBadgesFeature implements CVFeature {
         margin-top: 0.5rem;
       }
       
-      /* Mobile Responsive */
+      /* Mobile Responsive  */
       @media (max-width: 768px) {
         .certification-badges-feature {
           padding: 1.5rem;
@@ -300,7 +300,7 @@ export class CertificationBadgesFeature implements CVFeature {
         }
       }
       
-      /* Dark mode support */
+      /* Dark mode support  */
       @media (prefers-color-scheme: dark) {
         .certification-badges-feature {
           background: linear-gradient(135deg, #1e293b 0%, #334155 100%);

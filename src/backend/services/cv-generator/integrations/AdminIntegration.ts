@@ -1,9 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Admin Integration for CV Processing
  *
  * Provides integration layer for admin services from @cvplus/admin submodule.
  * Uses dependency injection pattern to avoid direct dependencies between same-layer modules.
- */
+  */
 
 // Integration types for admin services
 export interface PolicyCheckRequest {
@@ -45,20 +46,20 @@ export interface AdminProvider {
 
 /**
  * Integration layer for admin services
- */
+  */
 export class AdminIntegration {
   private static provider: AdminProvider | null = null;
 
   /**
    * Set the admin provider (called by root application during startup)
-   */
+    */
   static setProvider(provider: AdminProvider): void {
     this.provider = provider;
   }
 
   /**
    * Get admin access service from admin submodule
-   */
+    */
   static getAdminAccessService(): AdminAccessService | null {
     if (!this.provider) {
       return null;
@@ -74,7 +75,7 @@ export class AdminIntegration {
 
   /**
    * Get policy enforcement service from admin submodule
-   */
+    */
   static getPolicyEnforcementService(): PolicyEnforcementService | null {
     if (!this.provider) {
       return null;
@@ -90,35 +91,35 @@ export class AdminIntegration {
 
   /**
    * Create fallback admin access service
-   */
+    */
   static createFallbackAdminAccessService(): AdminAccessService {
     return new FallbackAdminAccessService();
   }
 
   /**
    * Create fallback policy enforcement service
-   */
+    */
   static createFallbackPolicyEnforcementService(): PolicyEnforcementService {
     return new FallbackPolicyEnforcementService();
   }
 
   /**
    * Get admin access service with fallback
-   */
+    */
   static getAdminAccessServiceWithFallback(): AdminAccessService {
     return this.getAdminAccessService() || this.createFallbackAdminAccessService();
   }
 
   /**
    * Get policy enforcement service with fallback
-   */
+    */
   static getPolicyEnforcementServiceWithFallback(): PolicyEnforcementService {
     return this.getPolicyEnforcementService() || this.createFallbackPolicyEnforcementService();
   }
 
   /**
    * Check if provider is available
-   */
+    */
   static isProviderAvailable(): boolean {
     return this.provider !== null;
   }
@@ -126,7 +127,7 @@ export class AdminIntegration {
 
 /**
  * Fallback admin access service for when admin submodule is not available
- */
+  */
 export class FallbackAdminAccessService implements AdminAccessService {
   async isAdmin(userId: string): Promise<boolean> {
     // Fallback - always return false for security
@@ -144,7 +145,7 @@ export class FallbackAdminAccessService implements AdminAccessService {
 
 /**
  * Fallback policy enforcement service for when admin submodule is not available
- */
+  */
 export class FallbackPolicyEnforcementService implements PolicyEnforcementService {
   async checkUploadPolicy(request: PolicyCheckRequest): Promise<PolicyCheckResult> {
     // Basic fallback policy checking

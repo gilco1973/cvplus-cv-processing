@@ -1,7 +1,8 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Skills Proficiency Analysis Service  
  * Analyzes and calculates actual skill proficiency levels from CV data
- */
+  */
 
 import { ParsedCV } from '../types/enhanced-models';
 import OpenAI from 'openai';
@@ -36,7 +37,7 @@ export class SkillsProficiencyService {
 
   /**
    * Analyze and calculate skill proficiency from CV data
-   */
+    */
   async analyzeSkillsProficiency(cv: ParsedCV): Promise<SkillsBreakdown> {
     // Extract all skill mentions from CV
     const skillMentions = await this.extractSkillMentions(cv);
@@ -50,7 +51,7 @@ export class SkillsProficiencyService {
 
   /**
    * Extract skill mentions from entire CV
-   */
+    */
   private async extractSkillMentions(cv: ParsedCV): Promise<Map<string, string[]>> {
     const skillMentions = new Map<string, string[]>();
 
@@ -128,7 +129,7 @@ export class SkillsProficiencyService {
 
   /**
    * Extract skills from text using AI or keyword matching
-   */
+    */
   private async extractSkillsFromText(text: string): Promise<string[]> {
     if (!this.openai.apiKey) {
       return this.fallbackSkillExtraction(text);
@@ -169,7 +170,7 @@ Return empty array if no technical skills found.
 
   /**
    * Fallback skill extraction using keyword matching
-   */
+    */
   private fallbackSkillExtraction(text: string): string[] {
     const commonSkills = [
       'JavaScript', 'TypeScript', 'Python', 'Java', 'C#', 'C++', 'React', 'Angular', 'Vue',
@@ -186,7 +187,7 @@ Return empty array if no technical skills found.
 
   /**
    * Calculate proficiency levels based on context and frequency
-   */
+    */
   private async calculateProficiencyLevels(
     skillMentions: Map<string, string[]>, 
     cv: ParsedCV
@@ -205,7 +206,7 @@ Return empty array if no technical skills found.
 
   /**
    * Calculate proficiency for a single skill
-   */
+    */
   private async calculateSingleSkillProficiency(
     skill: string, 
     contexts: string[], 
@@ -266,7 +267,7 @@ Return empty array if no technical skills found.
 
   /**
    * Calculate total career years from CV
-   */
+    */
   private calculateCareerYears(cv: ParsedCV): number {
     if (!cv.experience || cv.experience.length === 0) return 0;
 
@@ -287,7 +288,7 @@ Return empty array if no technical skills found.
 
   /**
    * Get experience description based on level and context
-   */
+    */
   private getExperienceDescription(level: number, contextCount: number, careerYears: number): string {
     if (level >= 90) return `Expert level (${careerYears}+ years)`;
     if (level >= 75) return `Advanced (${Math.floor(careerYears * 0.7)}+ years)`;
@@ -298,7 +299,7 @@ Return empty array if no technical skills found.
 
   /**
    * Categorize skill type
-   */
+    */
   private categorizeSkill(skill: string): SkillProficiency['category'] {
     const lowerSkill = skill.toLowerCase();
     
@@ -320,7 +321,7 @@ Return empty array if no technical skills found.
 
   /**
    * Categorize skills into breakdown structure
-   */
+    */
   private categorizeSkills(proficiencies: SkillProficiency[]): SkillsBreakdown {
     return {
       technical: proficiencies.filter(s => s.category === 'technical').slice(0, 8),
@@ -334,7 +335,7 @@ Return empty array if no technical skills found.
 
   /**
    * Generate skills visualization HTML
-   */
+    */
   generateSkillsVisualizationHTML(skillsBreakdown: SkillsBreakdown): string {
     const allSkills = [
       ...skillsBreakdown.technical,

@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * CV Processing Service (T067)
  *
  * Frontend service for coordinating CV processing operations with backend
@@ -15,7 +16,7 @@
  *
  * @author Gil Klainert
  * @version 1.0.0 - Initial T067 Implementation
- */
+  */
 
 import { httpsCallable, getFunctions } from 'firebase/functions';
 import { ref, uploadBytesResumable, getDownloadURL, getStorage } from 'firebase/storage';
@@ -73,7 +74,7 @@ interface UploadProgressCallback {
 
 /**
  * CV Processing Service Class
- */
+  */
 export class CVProcessingService {
   private static instance: CVProcessingService;
   private activeJobs = new Map<string, ProcessingJob>();
@@ -90,7 +91,7 @@ export class CVProcessingService {
 
   /**
    * Upload file to Firebase Storage with progress tracking
-   */
+    */
   async uploadFile(
     file: File,
     onProgress?: UploadProgressCallback
@@ -161,7 +162,7 @@ export class CVProcessingService {
 
   /**
    * Start CV processing
-   */
+    */
   async startProcessing(request: ProcessCVRequest): Promise<ProcessCVResponse> {
     try {
       // Check authentication
@@ -235,7 +236,7 @@ export class CVProcessingService {
 
   /**
    * Get processing status
-   */
+    */
   async getProcessingStatus(jobId: string): Promise<CVStatusResponse> {
     try {
       const result = await getCVStatus({ jobId });
@@ -283,7 +284,7 @@ export class CVProcessingService {
 
   /**
    * Cancel processing job
-   */
+    */
   async cancelProcessing(jobId: string): Promise<{ success: boolean; error?: string }> {
     try {
       const result = await cancelCVProcessing({ jobId });
@@ -323,7 +324,7 @@ export class CVProcessingService {
 
   /**
    * Update CV data during processing
-   */
+    */
   async updateProcessingData(
     jobId: string,
     updates: Record<string, any>
@@ -352,14 +353,14 @@ export class CVProcessingService {
 
   /**
    * Get active jobs
-   */
+    */
   getActiveJobs(): ProcessingJob[] {
     return Array.from(this.activeJobs.values());
   }
 
   /**
    * Get job by ID
-   */
+    */
   getJob(jobId: string): ProcessingJob | undefined {
     return this.activeJobs.get(jobId) ||
            Array.from(this.activeJobs.values())
@@ -368,21 +369,21 @@ export class CVProcessingService {
 
   /**
    * Remove completed job from cache
-   */
+    */
   removeJob(jobId: string): void {
     this.activeJobs.delete(jobId);
   }
 
   /**
    * Clear upload cache
-   */
+    */
   clearUploadCache(): void {
     this.uploadCache.clear();
   }
 
   /**
    * Get processing queue status
-   */
+    */
   async getQueueStatus(): Promise<{
     queueLength: number;
     averageWaitTime: number;
@@ -411,7 +412,7 @@ export class CVProcessingService {
 
   /**
    * Validate file before processing
-   */
+    */
   validateFile(file: File): { valid: boolean; errors: string[] } {
     const errors: string[] = [];
 
@@ -446,7 +447,7 @@ export class CVProcessingService {
 
   /**
    * Get processing statistics
-   */
+    */
   getProcessingStats(): {
     totalJobs: number;
     completedJobs: number;

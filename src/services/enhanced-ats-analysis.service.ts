@@ -1,4 +1,4 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflictsimport { ParsedCV, CVRecommendation } from '../../../types/job';
+// @ts-ignore - Export conflicts/../../types/job';
 import { VerifiedClaudeService } from '../../../services/verified-claude.service';
 
 export interface ATSAnalysisResult {
@@ -33,7 +33,7 @@ export class EnhancedATSAnalysisService {
 
   /**
    * Performs comprehensive ATS analysis and generates actionable recommendations
-   */
+    */
   async analyzeForATS(
     parsedCV: ParsedCV,
     jobDescription?: string,

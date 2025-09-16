@@ -1,8 +1,9 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Keyword Extractor
  * 
  * Handles keyword extraction, matching, and relevance scoring.
- */
+  */
 
 import { KeywordMatch } from '../../../types/enhanced-models';
 
@@ -26,7 +27,7 @@ export class KeywordExtractor {
 
   /**
    * Extract and analyze keywords from CV
-   */
+    */
   extractKeywords(cvText: string, targetKeywords: string[], industry?: string): KeywordMatch[] {
     const matchedKeywords: KeywordMatch[] = [];
     const cvLower = cvText.toLowerCase();
@@ -71,7 +72,7 @@ export class KeywordExtractor {
 
   /**
    * Calculate keyword relevance score
-   */
+    */
   private calculateKeywordRelevance(keyword: string, cvText: string, industry?: string): number {
     let relevance = 0.5; // Base relevance
     
@@ -99,7 +100,7 @@ export class KeywordExtractor {
 
   /**
    * Extract context where keyword appears
-   */
+    */
   private extractKeywordContext(keyword: string, cvText: string): string[] {
     const contexts: string[] = [];
     const sentences = cvText.split(/[.!?]+/);
@@ -117,7 +118,7 @@ export class KeywordExtractor {
 
   /**
    * Find semantic variations of matched keywords
-   */
+    */
   findSemanticVariations(matchedKeywords: KeywordMatch[], cvText: string): string[] {
     const variations: string[] = [];
     
@@ -138,7 +139,7 @@ export class KeywordExtractor {
 
   /**
    * Get fallback keywords for industry
-   */
+    */
   getFallbackKeywords(industry?: string, role?: string): string[] {
     const baseKeywords = ['experience', 'management', 'team', 'project', 'development'];
     
@@ -154,7 +155,7 @@ export class KeywordExtractor {
 
   /**
    * Get optimal keyword density for industry
-   */
+    */
   getOptimalKeywordDensity(industry?: string): number {
     const densityMap: { [key: string]: number } = {
       technology: 0.035,

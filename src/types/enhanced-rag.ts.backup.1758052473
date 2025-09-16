@@ -1,0 +1,44 @@
+// @ts-ignore
+/**
+ * Enhanced RAG (Retrieval-Augmented Generation) Types
+ * Supports AI-powered content enhancement and knowledge augmentation
+ */
+
+export interface UserRAGProfile {
+  id: string;
+  userId: string;
+  knowledgeBase: string[];
+  preferences: RAGPreferences;
+  lastUpdated: number;
+  version: string;
+}
+
+export interface RAGPreferences {
+  contentTypes: string[];
+  industries: string[];
+  seniority: string;
+  languages: string[];
+}
+
+export interface RAGQuery {
+  query: string;
+  context?: Record<string, unknown>;
+  filters?: RAGFilters;
+}
+
+export interface RAGFilters {
+  industry?: string;
+  role?: string;
+  seniority?: string;
+  dateRange?: {
+    start: number;
+    end: number;
+  };
+}
+
+export interface RAGResponse {
+  content: string;
+  relevance: number;
+  sources: string[];
+  confidence: number;
+}

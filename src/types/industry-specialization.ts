@@ -1,9 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Industry Specialization Types
  * Extracted from phase2-models.ts for better modularity
  * 
  * Industry models, skill definitions, career paths, and company profiles.
- */
+  */
 
 // ===============================
 // INDUSTRY SPECIALIZATION MODELS

@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * ML API Response Types
  * 
  * API response interfaces for ML pipeline endpoints.
@@ -6,11 +7,11 @@
  * 
  * @author Gil Klainert
  * @version 1.0.0
- */
+  */
 
 /**
  * Base API response structure
- */
+  */
 export interface Phase2APIResponse<T = any> {
   success: boolean;
   data: T;
@@ -27,21 +28,21 @@ export interface Phase2APIResponse<T = any> {
 
 /**
  * Prediction API response
- */
+  */
 export interface PredictionResponse extends Phase2APIResponse<import('./success-prediction').SuccessPrediction> {
   model: string;
 }
 
 /**
  * Analytics API response
- */
+  */
 export interface AnalyticsResponse extends Phase2APIResponse<import('@cvplus/analytics').AnalyticsMetrics> {
   reportId: string;
 }
 
 /**
  * Industry optimization response
- */
+  */
 export interface IndustryOptimizationResponse extends Phase2APIResponse<{
   recommendations: string[];
   industryScore: number;
@@ -53,7 +54,7 @@ export interface IndustryOptimizationResponse extends Phase2APIResponse<{
 
 /**
  * Regional optimization response
- */
+  */
 export interface RegionalOptimizationResponse extends Phase2APIResponse<{
   salaryBenchmarks: {
     min: number;

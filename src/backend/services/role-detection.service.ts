@@ -1,8 +1,9 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Main Role Detection Service
  * 
  * Orchestrates role detection functionality with enhanced accuracy
- */
+  */
 
 import { ParsedCV } from '../types/job';
 import {
@@ -89,7 +90,7 @@ export class RoleDetectionService {
 
   /**
    * Detect roles from CV with enhanced accuracy
-   */
+    */
   async detectRoles(cv: ParsedCV, targetRoles?: string[]): Promise<RoleMatchResult[]> {
     try {
       // Enhanced role detection with improved accuracy
@@ -103,7 +104,7 @@ export class RoleDetectionService {
 
   /**
    * Analyze role compatibility with detailed analysis
-   */
+    */
   async analyzeRoleCompatibility(cv: ParsedCV, roleId: string): Promise<RoleProfileAnalysis> {
     try {
       // Get the specific role profile
@@ -122,7 +123,7 @@ export class RoleDetectionService {
 
   /**
    * Perform enhanced role detection with multiple strategies
-   */
+    */
   private async performEnhancedRoleDetection(
     cv: ParsedCV, 
     targetRoles?: string[]
@@ -157,7 +158,7 @@ export class RoleDetectionService {
 
   /**
    * Perform role matching with enhanced accuracy
-   */
+    */
   private async performRoleMatch(cv: ParsedCV, profile: RoleProfile): Promise<RoleMatchResult> {
     // Use the analyzer to get detailed analysis
     const analysis = await this.analyzer.analyzeRoleCompatibility(cv, profile);
@@ -179,7 +180,7 @@ export class RoleDetectionService {
 
   /**
    * Get service statistics
-   */
+    */
   getStats() {
     return {
       service: 'RoleDetectionService',
@@ -198,7 +199,7 @@ export class RoleDetectionService {
 
   /**
    * Update configuration
-   */
+    */
   updateConfig(config: Partial<RoleDetectionConfig>): void {
     this.config = { ...this.config, ...config };
   }

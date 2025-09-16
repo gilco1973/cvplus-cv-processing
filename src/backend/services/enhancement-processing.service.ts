@@ -7,7 +7,7 @@
  * @author Gil Klainert
  * @version 2.1.0 - Migration Facade
  * @deprecated Use @cvplus/enhancements/backend instead
- */
+  */
 
 // Re-export from enhancements module
 export {

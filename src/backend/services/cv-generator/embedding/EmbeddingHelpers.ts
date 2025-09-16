@@ -1,23 +1,24 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Embedding Service Helper Functions
  * 
  * Supporting utilities for the main embedding service
  * 
  * @version 1.0.0
  * @author Gil Klainert
- */
+  */
 
 import { EmbeddingMetadata, CVSection, ContentType } from '../../../types/portal';
 import { ChunkResult } from '../chunking/ChunkingUtils';
 
 /**
  * Helper functions for embedding processing
- */
+  */
 export class EmbeddingHelpers {
   
   /**
    * Calculate relevance score based on similarity and metadata
-   */
+    */
   static calculateRelevanceScore(similarity: number, metadata: EmbeddingMetadata): number {
     let score = similarity;
     
@@ -43,7 +44,7 @@ export class EmbeddingHelpers {
 
   /**
    * Process CV section into chunks with appropriate metadata
-   */
+    */
   static processCVSection(sectionData: any, sectionType: CVSection, chunkText: Function): ChunkResult[] {
     const chunks: ChunkResult[] = [];
     
@@ -85,7 +86,7 @@ export class EmbeddingHelpers {
 
   /**
    * Extract text content from CV item object
-   */
+    */
   static extractTextFromItem(item: any): string {
     if (typeof item === 'string') return item;
     
@@ -120,14 +121,14 @@ export class EmbeddingHelpers {
 
   /**
    * Create delay for rate limiting
-   */
+    */
   static delay(ms: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   /**
    * Estimate token count for text (rough approximation)
-   */
+    */
   static estimateTokenCount(text: string): number {
     // Rough estimation: 1 token ≈ 4 characters for English text
     return Math.ceil(text.length / 4);

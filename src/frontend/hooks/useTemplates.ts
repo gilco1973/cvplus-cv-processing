@@ -1,9 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Templates Hook
  *
  * Custom hook for managing CV templates, filtering,
  * and template-related operations.
- */
+  */
 
 import { useState, useCallback, useEffect } from 'react';
 import type {
@@ -174,7 +175,7 @@ const mockTemplates: CVTemplate[] = [
 
 /**
  * Custom hook for template management
- */
+  */
 export const useTemplates = (): UseTemplatesReturn => {
   const [state, setState] = useState<TemplateState>({
     templates: [],

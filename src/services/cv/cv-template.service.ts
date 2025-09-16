@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * CV Template Service
  *
  * Core service for managing CV templates and template-based generation.
@@ -6,7 +7,7 @@
  *
  * @author Gil Klainert
  * @version 2.0.0 - Modularized Architecture
- */
+  */
 
 import { CVProcessingContext, ServiceResult } from '../../types';
 import { BaseService } from '../../shared/utils/base-service';
@@ -72,7 +73,7 @@ export class CVTemplateService extends BaseService {
 
   /**
    * Get all available CV templates
-   */
+    */
   async getTemplates(category?: string): Promise<ServiceResult<CVTemplate[]>> {
     try {
       this.logInfo('Fetching CV templates', { category });
@@ -117,7 +118,7 @@ export class CVTemplateService extends BaseService {
 
   /**
    * Get a specific template by ID
-   */
+    */
   async getTemplate(templateId: string): Promise<ServiceResult<CVTemplate>> {
     try {
       this.logInfo('Fetching template', { templateId });
@@ -161,7 +162,7 @@ export class CVTemplateService extends BaseService {
 
   /**
    * Render CV using a template
-   */
+    */
   async renderWithTemplate(
     options: TemplateRenderOptions,
     context?: CVProcessingContext

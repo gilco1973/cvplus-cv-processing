@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * CVProcessingService Usage Examples (T071)
  *
  * Comprehensive examples demonstrating how to use the enhanced CV Processing Service
@@ -6,7 +7,7 @@
  *
  * @version 1.0.0 - T071 Usage Examples
  * @author Gil Klainert
- */
+  */
 
 import {
   CVProcessingService,
@@ -20,7 +21,7 @@ import {
 
 /**
  * Example 1: Basic CV Upload and Processing
- */
+  */
 export async function basicCVProcessing(file: File) {
   try {
     console.log('Starting basic CV processing...');
@@ -70,7 +71,7 @@ export async function basicCVProcessing(file: File) {
 
 /**
  * Example 2: Advanced Processing with Real-time Updates
- */
+  */
 export async function advancedProcessingWithRealTime(file: File) {
   try {
     console.log('Starting advanced CV processing with real-time updates...');
@@ -145,7 +146,7 @@ export async function advancedProcessingWithRealTime(file: File) {
 
 /**
  * Example 3: Template Management and Application
- */
+  */
 export async function templateManagementExample(jobId: string) {
   try {
     console.log('Demonstrating template management...');
@@ -179,7 +180,7 @@ export async function templateManagementExample(jobId: string) {
 
 /**
  * Example 4: Multiple Format Exports
- */
+  */
 export async function multipleFormatExports(jobId: string) {
   try {
     console.log('Exporting CV in multiple formats...');
@@ -234,7 +235,7 @@ export async function multipleFormatExports(jobId: string) {
 
 /**
  * Example 5: Batch Processing Multiple CVs
- */
+  */
 export async function batchProcessingExample(files: File[]) {
   try {
     console.log(`Starting batch processing of ${files.length} CVs...`);
@@ -295,7 +296,7 @@ export async function batchProcessingExample(files: File[]) {
 
 /**
  * Example 6: Error Handling and Recovery
- */
+  */
 export async function errorHandlingExample(file: File) {
   try {
     console.log('Demonstrating error handling and recovery...');
@@ -346,7 +347,7 @@ export async function errorHandlingExample(file: File) {
 
 /**
  * Example 7: Performance Monitoring and Statistics
- */
+  */
 export async function performanceMonitoringExample() {
   try {
     console.log('Getting performance statistics...');
@@ -392,7 +393,7 @@ export async function performanceMonitoringExample() {
 
 /**
  * Example 8: Service Lifecycle Management
- */
+  */
 export async function serviceLifecycleExample() {
   try {
     console.log('Demonstrating service lifecycle management...');
@@ -432,7 +433,7 @@ export async function serviceLifecycleExample() {
 
 /**
  * Helper function to monitor processing status until completion
- */
+  */
 async function monitorProcessingStatus(jobId: string, pollInterval: number = 2000) {
   console.log(`Monitoring job ${jobId}...`);
 
@@ -460,7 +461,7 @@ async function monitorProcessingStatus(jobId: string, pollInterval: number = 200
 
 /**
  * Helper function to handle processing completion
- */
+  */
 async function handleProcessingComplete(jobId: string) {
   try {
     console.log(`Handling completion for job ${jobId}`);
@@ -486,7 +487,7 @@ async function handleProcessingComplete(jobId: string) {
 
 /**
  * Usage in React Component Example
- */
+  */
 export const CVProcessingReactExample = `
 import React, { useState, useEffect } from 'react';
 import { cvProcessingService, ProcessingJobStatus, ProcessingFeature } from '@cvplus/cv-processing';

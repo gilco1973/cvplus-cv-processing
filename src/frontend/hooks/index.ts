@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Custom React hooks for CV processing
  * 
  * This module exports all custom hooks related to CV processing:
@@ -6,7 +7,7 @@
  * - CV processing hooks
  * - CV analysis hooks
  * - CV generation hooks
- */
+  */
 
 // Export created hooks
 export * from './useCVUpload';

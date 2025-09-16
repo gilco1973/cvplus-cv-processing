@@ -1,10 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// TEMPORARILY DISABLED DUE TO TYPESCRIPT ERRORS - FOR TESTING getRecommendations
+// @ts-ignore - Export conflicts// TEMPORARILY DISABLED DUE TO TYPESCRIPT ERRORS - FOR TESTING getRecommendations
 /**
  * Role Profile Service
  * 
  * Comprehensive service for managing role profiles including CRUD operations,
  * caching, and integration with Firebase Firestore
- */
+  */
 
 import {
   RoleProfile,
@@ -72,7 +72,7 @@ export class RoleProfileService {
 
   /**
    * Gets all available role profiles
-   */
+    */
   async getAllProfiles(): Promise<RoleProfile[]> {
     
     try {
@@ -120,7 +120,7 @@ export class RoleProfileService {
 
   /**
    * Gets a specific role profile by ID
-   */
+    */
   async getProfileById(id: string): Promise<RoleProfile | null> {
     
     try {
@@ -158,7 +158,7 @@ export class RoleProfileService {
 
   /**
    * Gets profiles by category
-   */
+    */
   async getProfilesByCategory(category: RoleCategory): Promise<RoleProfile[]> {
     
     try {
@@ -190,7 +190,7 @@ export class RoleProfileService {
 
   /**
    * Creates a new role profile
-   */
+    */
   async createProfile(profileData: Omit<RoleProfile, 'id' | 'createdAt' | 'updatedAt'>): Promise<string> {
     
     try {
@@ -215,7 +215,7 @@ export class RoleProfileService {
 
   /**
    * Updates an existing role profile
-   */
+    */
   async updateProfile(id: string, updates: Partial<RoleProfile>): Promise<void> {
     
     try {
@@ -243,7 +243,7 @@ export class RoleProfileService {
 
   /**
    * Deactivates a role profile (soft delete)
-   */
+    */
   async deactivateProfile(id: string): Promise<void> {
     
     try {
@@ -265,7 +265,7 @@ export class RoleProfileService {
 
   /**
    * Searches profiles by keywords
-   */
+    */
   async searchProfiles(query: string, limit: number = 10): Promise<RoleProfile[]> {
     
     try {
@@ -293,7 +293,7 @@ export class RoleProfileService {
 
   /**
    * Gets profile statistics and metrics
-   */
+    */
   async getMetrics(): Promise<RoleDetectionMetrics> {
     
     try {
@@ -324,7 +324,7 @@ export class RoleProfileService {
 
   /**
    * Validates a role profile structure
-   */
+    */
   validateProfile(profile: Partial<RoleProfile>): { isValid: boolean; errors: string[] } {
     const errors: string[] = [];
 
@@ -375,7 +375,7 @@ export class RoleProfileService {
 
   /**
    * Initialize default profiles from static data
-   */
+    */
   private async initializeDefaultProfiles(): Promise<void> {
     
     try {
@@ -407,7 +407,7 @@ export class RoleProfileService {
 
   /**
    * Gets default profiles (fallback when Firestore is unavailable)
-   */
+    */
   private getDefaultProfiles(): RoleProfile[] {
     return roleProfilesData.map((profile, index) => ({
       id: `default_${index}`,
@@ -427,7 +427,7 @@ export class RoleProfileService {
 
   /**
    * Updates the in-memory cache
-   */
+    */
   private updateCache(profiles: RoleProfile[]): void {
     this.cache.clear();
     profiles.forEach(profile => {
@@ -438,7 +438,7 @@ export class RoleProfileService {
 
   /**
    * Checks if the cache is still valid
-   */
+    */
   private isCacheValid(): boolean {
     if (!this.config.enableCaching || this.cache.size === 0) {
       return false;
@@ -448,7 +448,7 @@ export class RoleProfileService {
 
   /**
    * Invalidates the cache
-   */
+    */
   private invalidateCache(): void {
     this.cache.clear();
     this.lastCacheUpdate = 0;
@@ -456,7 +456,7 @@ export class RoleProfileService {
 
   /**
    * Calculates cache hit rate for metrics
-   */
+    */
   private calculateCacheHitRate(): number {
     // This would be calculated based on actual cache hits vs misses
     // For now, return a placeholder value
@@ -465,14 +465,14 @@ export class RoleProfileService {
 
   /**
    * Updates service configuration
-   */
+    */
   updateConfig(newConfig: Partial<RoleProfileServiceConfig>): void {
     this.config = { ...this.config, ...newConfig };
   }
 
   /**
    * Gets current service configuration and status
-   */
+    */
   getStatus(): {
     service: string;
     config: RoleProfileServiceConfig;

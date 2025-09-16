@@ -1,9 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Enhanced Role Detection Service with Opus 4.1
  * 
  * Advanced role detection service that guarantees multiple role suggestions
  * with detailed scoring reasoning using Claude Opus 4.1 model
- */
+  */
 
 import { ParsedCV } from '../types/job';
 import {
@@ -56,7 +57,7 @@ export class EnhancedRoleDetectionService {
 
   /**
    * Analyzes CV and detects multiple suitable role profiles with detailed reasoning
-   */
+    */
   async detectRoles(parsedCV: ParsedCV): Promise<RoleProfileAnalysis> {
     try {
       console.log('[ENHANCED-ROLE-DETECTION] Starting role detection with Opus 4.1');
@@ -79,7 +80,7 @@ export class EnhancedRoleDetectionService {
 
   /**
    * Use Claude Opus 4.1 to analyze CV and provide detailed role matching with reasoning
-   */
+    */
   private async analyzeRolesWithOpus(
     parsedCV: ParsedCV, 
     availableProfiles: RoleProfile[]
@@ -183,7 +184,7 @@ Remember: Always suggest multiple roles (minimum 2, ideally 3-4) with realistic 
 
   /**
    * Validate and enhance role matches from Opus response
-   */
+    */
   private validateAndEnhanceMatches(
     roleMatches: RoleMatchResult[], 
     availableProfiles: RoleProfile[]
@@ -223,7 +224,7 @@ Remember: Always suggest multiple roles (minimum 2, ideally 3-4) with realistic 
 
   /**
    * Create basic matching factors for fallback scenarios
-   */
+    */
   private createBasicMatchingFactors(profile: RoleProfile): MatchingFactor[] {
     return [
       {
@@ -250,7 +251,7 @@ Remember: Always suggest multiple roles (minimum 2, ideally 3-4) with realistic 
 
   /**
    * Ensure we have at least the minimum number of results
-   */
+    */
   private async ensureMinimumResults(
     roleMatches: RoleMatchResult[],
     parsedCV: ParsedCV,
@@ -293,7 +294,7 @@ Remember: Always suggest multiple roles (minimum 2, ideally 3-4) with realistic 
 
   /**
    * Create CV summary for analysis
-   */
+    */
   private createCVSummary(parsedCV: ParsedCV): string {
     const sections: string[] = [];
 
@@ -330,7 +331,7 @@ Remember: Always suggest multiple roles (minimum 2, ideally 3-4) with realistic 
 
   /**
    * Create basic matches as fallback
-   */
+    */
   private createBasicMatches(parsedCV: ParsedCV, availableProfiles: RoleProfile[]): RoleMatchResult[] {
     return availableProfiles.slice(0, 3).map((profile, index) => ({
       roleId: profile.id,
@@ -350,7 +351,7 @@ Remember: Always suggest multiple roles (minimum 2, ideally 3-4) with realistic 
 
   /**
    * Generate comprehensive role profile analysis
-   */
+    */
   private async generateRoleProfileAnalysis(
     matches: RoleMatchResult[],
     parsedCV: ParsedCV
@@ -402,7 +403,7 @@ Remember: Always suggest multiple roles (minimum 2, ideally 3-4) with realistic 
 
   /**
    * Create fallback analysis when detection fails
-   */
+    */
   private createFallbackAnalysis(parsedCV: ParsedCV): RoleProfileAnalysis {
     const fallbackRole: RoleMatchResult = {
       roleId: 'general_professional',
@@ -462,14 +463,14 @@ Remember: Always suggest multiple roles (minimum 2, ideally 3-4) with realistic 
 
   /**
    * Update service configuration
-   */
+    */
   updateConfig(config: Partial<RoleDetectionConfig>): void {
     this.config = { ...this.config, ...config };
   }
 
   /**
    * Get service statistics
-   */
+    */
   getStats() {
     return {
       service: 'EnhancedRoleDetectionService',

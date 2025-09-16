@@ -1,9 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Role Profile System Type Definitions
  * 
  * Comprehensive type definitions for the CVPlus role profile system
  * Supports role detection, CV enhancement, and personalized transformations
- */
+  */
 
 export interface RoleProfile {
   id: string;

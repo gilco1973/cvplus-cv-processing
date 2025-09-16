@@ -1,9 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Competitor Analysis Service
  * 
  * Specialized service for analyzing CV competitiveness against industry benchmarks
  * and providing comparative insights for ATS optimization.
- */
+  */
 
 import { 
   ParsedCV, 
@@ -20,7 +21,7 @@ export class CompetitorAnalysisService {
 
   /**
    * Perform comprehensive competitor analysis
-   */
+    */
   async performCompetitorAnalysis(
     parsedCV: ParsedCV,
     targetRole?: string,
@@ -63,7 +64,7 @@ Focus on actionable insights for improving ATS performance relative to market co
 
   /**
    * Parse competitor analysis response from Claude
-   */
+    */
   private parseCompetitorAnalysis(text: string, industry?: string): CompetitorAnalysis {
     const lines = text.split('\n').map(line => line.trim()).filter(line => line.length > 0);
     
@@ -108,7 +109,7 @@ Focus on actionable insights for improving ATS performance relative to market co
 
   /**
    * Generate fallback competitor analysis when API fails
-   */
+    */
   private generateFallbackCompetitorAnalysis(industry?: string): CompetitorAnalysis {
     const industryData = this.getIndustryBenchmark(industry);
     
@@ -125,7 +126,7 @@ Focus on actionable insights for improving ATS performance relative to market co
 
   /**
    * Get industry benchmark data
-   */
+    */
   private getIndustryBenchmark(industry?: string): {
     averageATSScore: number;
     topPercentileScore: number;
@@ -175,7 +176,7 @@ Focus on actionable insights for improving ATS performance relative to market co
 
   /**
    * Extract list items from text based on keywords
-   */
+    */
   private extractListItems(text: string, keywords: string[]): string[] {
     const items: string[] = [];
     const lines = text.split('\n');
@@ -202,7 +203,7 @@ Focus on actionable insights for improving ATS performance relative to market co
 
   /**
    * Identify competitive advantages from differentiators
-   */
+    */
   private identifyCompetitiveAdvantages(differentiators: string[]): string[] {
     const advantages: string[] = [];
     
@@ -226,7 +227,7 @@ Focus on actionable insights for improving ATS performance relative to market co
 
   /**
    * Generate competitive improvement recommendations
-   */
+    */
   private generateCompetitiveImprovements(
     weaknesses: string[], 
     industry?: string
@@ -281,7 +282,7 @@ Focus on actionable insights for improving ATS performance relative to market co
 
   /**
    * Convert CV to text for analysis
-   */
+    */
   private cvToText(cv: ParsedCV): string {
     const sections: string[] = [];
 
@@ -311,7 +312,7 @@ Focus on actionable insights for improving ATS performance relative to market co
 
   /**
    * Extract skills array from various formats
-   */
+    */
   private extractSkillsArray(skills: any): string[] {
     if (Array.isArray(skills)) {
       return skills.map((skill: any) => typeof skill === 'string' ? skill : skill.name || skill.skill || '');

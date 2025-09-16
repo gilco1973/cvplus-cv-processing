@@ -1,8 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * CV Processing Frontend Module
  * Autonomous frontend package for CV processing functionality
- * Zero external @cvplus/* dependencies - fully self-contained
- */
+ * Zero external @cvplus/*  dependencies - fully self-contained
+  */
+  */
 
 // Core components
 export * from './components';
@@ -32,7 +34,7 @@ import { setupServices } from './setup/serviceSetup';
 
 /**
  * Initialize the CV Processing frontend module
- */
+  */
 export const initializeCVProcessingFrontend = async (config?: any) => {
   try {
     // Setup autonomous services

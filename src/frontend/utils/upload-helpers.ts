@@ -1,17 +1,18 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * CV Upload Helper Functions
  *
  * Utility functions for CV file upload and processing
  *
  * @author Gil Klainert
  * @version 3.0.0 - Enhanced T063 Implementation
- */
+  */
 
 import type { UploadOptions } from '../types/upload';
 
 /**
  * Enhanced file upload with validation
- */
+  */
 export async function uploadFileToStorage(
   file: File,
   options: UploadOptions
@@ -38,21 +39,21 @@ export async function uploadFileToStorage(
 
 /**
  * Simulate processing step delay
- */
+  */
 export async function simulateProcessingStep(duration: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, duration));
 }
 
 /**
  * Generate unique processing job ID
- */
+  */
 export function generateJobId(): string {
   return `cvjob_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 }
 
 /**
  * Calculate total estimated processing time for selected features
- */
+  */
 export function calculateEstimatedTime(
   selectedFeatures: string[],
   featureList: Array<{ id: string; estimatedTime?: number }>,
@@ -68,7 +69,7 @@ export function calculateEstimatedTime(
 
 /**
  * Format file size for display
- */
+  */
 export function formatFileSize(bytes: number): string {
   if (bytes === 0) return '0 Bytes';
 
@@ -81,7 +82,7 @@ export function formatFileSize(bytes: number): string {
 
 /**
  * Validate file before upload
- */
+  */
 export function validateFile(
   file: File,
   maxSize: number,

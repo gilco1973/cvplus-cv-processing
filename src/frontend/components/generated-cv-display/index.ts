@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Generated CV Display Module
  *
  * Complete CV display system with editing capabilities,
@@ -20,7 +21,7 @@
  * - Type-safe interfaces
  * - Comprehensive error handling
  * - Performance optimizations
- */
+  */
 
 // =============================================================================
 // MAIN COMPONENTS
@@ -102,7 +103,7 @@ export type {
 
 /**
  * Default export formats available
- */
+  */
 export const DEFAULT_EXPORT_FORMATS: ExportFormat[] = [
   'pdf',
   'docx',
@@ -112,7 +113,7 @@ export const DEFAULT_EXPORT_FORMATS: ExportFormat[] = [
 
 /**
  * Supported paper sizes
- */
+  */
 export const PAPER_SIZES = [
   { value: 'a4', label: 'A4', dimensions: '210 × 297 mm' },
   { value: 'letter', label: 'Letter', dimensions: '8.5 × 11 in' },
@@ -123,7 +124,7 @@ export const PAPER_SIZES = [
 
 /**
  * Template categories
- */
+  */
 export const TEMPLATE_CATEGORIES = [
   'modern',
   'classic',
@@ -134,7 +135,7 @@ export const TEMPLATE_CATEGORIES = [
 
 /**
  * Editor modes
- */
+  */
 export const EDITOR_MODES = [
   'view',
   'edit',
@@ -144,7 +145,7 @@ export const EDITOR_MODES = [
 
 /**
  * Export quality levels
- */
+  */
 export const EXPORT_QUALITIES = [
   'draft',
   'standard',
@@ -158,7 +159,7 @@ export const EXPORT_QUALITIES = [
 
 /**
  * Format file size for display
- */
+  */
 export const formatFileSize = (bytes: number): string => {
   if (bytes === 0) return '0 Bytes';
 
@@ -171,7 +172,7 @@ export const formatFileSize = (bytes: number): string => {
 
 /**
  * Format date for display
- */
+  */
 export const formatDate = (date: Date): string => {
   const now = new Date();
   const diffMs = now.getTime() - date.getTime();
@@ -192,14 +193,14 @@ export const formatDate = (date: Date): string => {
 
 /**
  * Generate unique ID
- */
+  */
 export const generateId = (prefix: string = 'id'): string => {
   return `${prefix}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 };
 
 /**
  * Debounce function for performance optimization
- */
+  */
 export const debounce = <T extends (...args: any[]) => any>(
   func: T,
   delay: number
@@ -214,7 +215,7 @@ export const debounce = <T extends (...args: any[]) => any>(
 
 /**
  * Deep clone object
- */
+  */
 export const deepClone = <T>(obj: T): T => {
   if (obj === null || typeof obj !== 'object') return obj;
   if (obj instanceof Date) return new Date(obj.getTime()) as unknown as T;
@@ -231,7 +232,7 @@ export const deepClone = <T>(obj: T): T => {
 
 /**
  * Validate email format
- */
+  */
 export const isValidEmail = (email: string): boolean => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
@@ -239,7 +240,7 @@ export const isValidEmail = (email: string): boolean => {
 
 /**
  * Sanitize HTML content
- */
+  */
 export const sanitizeHTML = (html: string): string => {
   // Basic HTML sanitization - in production, use a proper library like DOMPurify
   return html
@@ -251,7 +252,7 @@ export const sanitizeHTML = (html: string): string => {
 
 /**
  * Extract text content from HTML
- */
+  */
 export const extractTextFromHTML = (html: string): string => {
   const tempDiv = document.createElement('div');
   tempDiv.innerHTML = sanitizeHTML(html);
@@ -260,7 +261,7 @@ export const extractTextFromHTML = (html: string): string => {
 
 /**
  * Calculate content statistics
- */
+  */
 export const calculateContentStats = (content: CVContent) => {
   const textContent = extractTextFromHTML(content.html);
   const words = textContent.trim().split(/\s+/).filter(word => word.length > 0);
@@ -282,7 +283,7 @@ export const calculateContentStats = (content: CVContent) => {
 
 /**
  * Validate CV content
- */
+  */
 export const validateCVContent = (content: CVContent): { valid: boolean; errors: string[] } => {
   const errors: string[] = [];
 
@@ -306,7 +307,7 @@ export const validateCVContent = (content: CVContent): { valid: boolean; errors:
 
 /**
  * Validate template configuration
- */
+  */
 export const validateTemplate = (template: CVTemplate): { valid: boolean; errors: string[] } => {
   const errors: string[] = [];
 
@@ -338,7 +339,7 @@ export const validateTemplate = (template: CVTemplate): { valid: boolean; errors
 
 /**
  * Module version and metadata
- */
+  */
 export const GENERATED_CV_DISPLAY_VERSION = '1.0.0';
 
 export const MODULE_INFO = {

@@ -1,11 +1,12 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Template Constants
  * 
  * Constants related to CV templates and customization.
  * 
  * @author Gil Klainert
  * @version 1.0.0
- */
+  */
 
 import { TemplateCategory } from '../types';
 

@@ -1,4 +1,4 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflictsimport { onRequest } from 'firebase-functions/v2/https';
+// @ts-ignore - Export conflicts/v2/https';
 import { Request, Response } from 'firebase-functions';
 import { getCVJob, subscribeToJobUpdates } from '../../models/cv-job.service';
 import { getProcessedCV } from '../../models/processed-cv.service';
@@ -208,7 +208,7 @@ export const getCVStatus = onRequest(
 
 /**
  * Calculate progress percentage based on status and stage
- */
+  */
 function calculateProgress(status: JobStatus, currentStage: ProcessingStage): number {
   if (status === JobStatus.COMPLETED) return 100;
   if (status === JobStatus.FAILED) return 0;
@@ -229,7 +229,7 @@ function calculateProgress(status: JobStatus, currentStage: ProcessingStage): nu
 
 /**
  * Calculate estimated remaining time in seconds
- */
+  */
 function calculateRemainingTime(
   status: JobStatus,
   currentStage: ProcessingStage,

@@ -1,15 +1,15 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflictsimport { ParsedCV } from '../cvParser';
+// @ts-ignore - Export conflicts/cvParser';
 
 /**
  * Base interface for CV template generators
- */
+  */
 export interface CVTemplate {
   generateHTML(cv: ParsedCV, jobId: string, features?: string[], interactiveFeatures?: InteractiveFeatureResult): Promise<string>;
 }
 
 /**
  * CV feature generator interface
- */
+  */
 export interface CVFeature {
   generate(cv: ParsedCV, jobId: string, options?: any): Promise<string>;
   getStyles(): string;
@@ -18,7 +18,7 @@ export interface CVFeature {
 
 /**
  * Template generation options
- */
+  */
 export interface TemplateOptions {
   jobId: string;
   features?: string[];
@@ -28,7 +28,7 @@ export interface TemplateOptions {
 
 /**
  * Interactive feature result
- */
+  */
 export interface InteractiveFeatureResult {
   qrCode?: string;
   podcastPlayer?: string;
@@ -50,7 +50,7 @@ export interface InteractiveFeatureResult {
 
 /**
  * PDF generation options
- */
+  */
 export interface PDFGenerationOptions {
   features?: string[];
   interactive?: boolean;
@@ -59,7 +59,7 @@ export interface PDFGenerationOptions {
 
 /**
  * File generation result
- */
+  */
 export interface FileGenerationResult {
   pdfUrl: string;
   docxUrl: string;
@@ -68,19 +68,19 @@ export interface FileGenerationResult {
 
 /**
  * Enhanced file generation result with error tracking
- */
+  */
 export interface EnhancedFileGenerationResult extends FileGenerationResult {
   errors?: string[];
 }
 
 /**
  * Template types supported by the system
- */
+  */
 export type TemplateType = 'modern' | 'classic' | 'creative';
 
 /**
  * Feature types supported by the system
- */
+  */
 export type FeatureType = 
   | 'embed-qr-code'
   | 'generate-podcast'

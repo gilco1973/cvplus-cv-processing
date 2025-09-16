@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Shared utilities for CV processing
  * 
  * This module exports utility functions that can be used by both
@@ -7,7 +8,7 @@
  * - Processing helpers
  * - Format conversion utilities
  * - Service management utilities
- */
+  */
 
 import { CVData, CVStatus, ProcessingType } from '../types';
 
@@ -18,7 +19,7 @@ export * from './cv-generation-helpers';
 
 /**
  * Validate CV data structure
- */
+  */
 export function validateCVData(data: any): data is CVData {
   return (
     typeof data === 'object' &&
@@ -31,28 +32,28 @@ export function validateCVData(data: any): data is CVData {
 
 /**
  * Check if CV processing is in progress
- */
+  */
 export function isProcessingInProgress(status: CVStatus): boolean {
   return status === CVStatus.PENDING || status === CVStatus.PROCESSING;
 }
 
 /**
  * Check if CV processing is completed
- */
+  */
 export function isProcessingCompleted(status: CVStatus): boolean {
   return status === CVStatus.COMPLETED;
 }
 
 /**
  * Check if CV processing has failed
- */
+  */
 export function isProcessingFailed(status: CVStatus): boolean {
   return status === CVStatus.FAILED;
 }
 
 /**
  * Get processing type display name
- */
+  */
 export function getProcessingTypeDisplayName(type: ProcessingType): string {
   const displayNames = {
     [ProcessingType.ANALYSIS]: 'Analysis',
@@ -66,14 +67,14 @@ export function getProcessingTypeDisplayName(type: ProcessingType): string {
 
 /**
  * Generate unique processing ID
- */
+  */
 export function generateProcessingId(): string {
   return `proc_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 }
 
 /**
  * Sanitize CV content for processing
- */
+  */
 export function sanitizeCVContent(content: string): string {
   // Basic sanitization - remove excessive whitespace and normalize line breaks
   return content

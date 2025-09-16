@@ -1,9 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Regional Optimization Firebase Functions
  * 
  * Provides CV optimization for different global regions with
  * cultural preferences, legal compliance, and local market insights.
- */
+  */
 import { onCall, HttpsError } from 'firebase-functions/v2/https';
 import { CallableRequest } from 'firebase-functions/v2/https';
 // import { RegionalLocalizationService, RegionalOptimizationRequest } from '../services/regional-localization.service'; // Module not found
@@ -31,7 +32,7 @@ const db = admin.firestore();
 
 /**
  * Optimize CV for specific region
- */
+  */
 export const optimizeForRegion = onCall(
   { ...corsOptions, timeoutSeconds: 60 },
   async (request: CallableRequest) => {
@@ -106,7 +107,7 @@ export const optimizeForRegion = onCall(
 
 /**
  * Get supported regions and countries
- */
+  */
 export const getSupportedRegions = onCall(
   { ...corsOptions, timeoutSeconds: 10 },
   async (request: CallableRequest) => {
@@ -150,7 +151,7 @@ export const getSupportedRegions = onCall(
 
 /**
  * Get regional market insights
- */
+  */
 export const getRegionalMarketInsights = onCall(
   { ...corsOptions, timeoutSeconds: 30 },
   async (request: CallableRequest) => {
@@ -198,7 +199,7 @@ export const getRegionalMarketInsights = onCall(
 
 /**
  * Check legal compliance for region
- */
+  */
 export const checkRegionalCompliance = onCall(
   { ...corsOptions, timeoutSeconds: 30 },
   async (request: CallableRequest) => {
@@ -245,7 +246,7 @@ export const checkRegionalCompliance = onCall(
 
 /**
  * Compare regional suitability
- */
+  */
 export const compareRegions = onCall(
   { ...corsOptions, timeoutSeconds: 90 },
   async (request: CallableRequest) => {
@@ -367,7 +368,7 @@ export const compareRegions = onCall(
 
 /**
  * Get user's regional optimization history
- */
+  */
 export const getUserRegionalHistory = onCall(
   { ...corsOptions, timeoutSeconds: 30 },
   async (request: CallableRequest) => {

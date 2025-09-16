@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Certification Enrichment Module
  * 
  * Verifies and merges certifications from LinkedIn, Credly, and other sources
@@ -7,7 +8,7 @@
  * @author Gil Klainert
  * @created 2025-08-23
  * @version 1.0
- */
+  */
 
 import type { ParsedCV } from '@cvplus/core/src/types';
 import { LinkedInCertification, EnrichedCVData } from '../types';
@@ -33,7 +34,7 @@ export interface CertificationEnrichmentResult {
 export class CertificationEnrichmentService {
   /**
    * Enriches CV certifications with external verification
-   */
+    */
   async enrichCertifications(
     cv: ParsedCV,
     externalData: Partial<EnrichedCVData>
@@ -65,7 +66,7 @@ export class CertificationEnrichmentService {
 
   /**
    * Extract existing certifications from CV
-   */
+    */
   private extractExistingCertifications(cv: ParsedCV): any[] {
     const certs = cv.certifications || [];
     return certs.map(cert => ({
@@ -78,7 +79,7 @@ export class CertificationEnrichmentService {
 
   /**
    * Extract certifications from web search results
-   */
+    */
   private extractWebCertifications(externalData: Partial<EnrichedCVData>): any[] {
     const certs: any[] = [];
     
@@ -101,7 +102,7 @@ export class CertificationEnrichmentService {
 
   /**
    * Merge certifications from multiple sources
-   */
+    */
   private mergeCertifications(
     existing: any[],
     linkedIn: LinkedInCertification[],
@@ -157,7 +158,7 @@ export class CertificationEnrichmentService {
 
   /**
    * Enhance existing certification with additional data
-   */
+    */
   private enhanceCertification(existing: any, additional: any): any {
     return {
       ...existing,
@@ -173,7 +174,7 @@ export class CertificationEnrichmentService {
 
   /**
    * Generate unique key for certification deduplication
-   */
+    */
   private getCertificationKey(cert: any): string {
     const name = (cert.name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
     const issuer = (cert.issuer || cert.issuingOrganization || '')
@@ -185,7 +186,7 @@ export class CertificationEnrichmentService {
 
   /**
    * Check if an award is likely a certification
-   */
+    */
   private isLikelyCertification(title: string): boolean {
     const certKeywords = [
       'certified', 'certification', 'certificate',
@@ -199,7 +200,7 @@ export class CertificationEnrichmentService {
 
   /**
    * Count newly added certifications
-   */
+    */
   private countNewCertifications(existing: any[], merged: any[]): number {
     const existingKeys = new Set(existing.map(c => this.getCertificationKey(c)));
     return merged.filter(c => !existingKeys.has(this.getCertificationKey(c))).length;
@@ -207,14 +208,14 @@ export class CertificationEnrichmentService {
 
   /**
    * Count verified certifications
-   */
+    */
   private countVerifiedCertifications(certs: any[]): number {
     return certs.filter(c => c.verified).length;
   }
 
   /**
    * Calculate overall quality score
-   */
+    */
   private calculateQualityScore(certs: any[]): number {
     if (certs.length === 0) return 0;
     
@@ -233,7 +234,7 @@ export class CertificationEnrichmentService {
 
   /**
    * Check if certification is expired
-   */
+    */
   isExpired(cert: any): boolean {
     if (!cert.expirationDate) return false;
     return new Date(cert.expirationDate) < new Date();
@@ -241,7 +242,7 @@ export class CertificationEnrichmentService {
 
   /**
    * Get certification validity status
-   */
+    */
   getValidityStatus(cert: any): 'valid' | 'expired' | 'expiring_soon' | 'unknown' {
     if (!cert.expirationDate) return 'unknown';
     

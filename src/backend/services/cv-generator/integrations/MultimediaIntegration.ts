@@ -1,24 +1,24 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflictsimport { CVFeature } from '../types';
+// @ts-ignore - Export conflicts/types';
 import { ParsedCV } from '../../cvParser';
 
 /**
  * Multimedia Integration Service
  * Provides bridge between cv-processing and multimedia submodule
  * Uses dependency injection pattern for multimedia feature access
- */
+  */
 export class MultimediaIntegration {
   private static multimediaProvider: MultimediaProvider | null = null;
 
   /**
    * Set the multimedia provider for dependency injection
-   */
+    */
   static setProvider(provider: MultimediaProvider): void {
     this.multimediaProvider = provider;
   }
 
   /**
    * Get multimedia feature instance
-   */
+    */
   static getFeature(featureType: MultimediaFeatureType): CVFeature | null {
     if (!this.multimediaProvider) {
       console.warn('MultimediaProvider not set. Multimedia features unavailable.');
@@ -30,7 +30,7 @@ export class MultimediaIntegration {
 
   /**
    * Create multimedia feature wrapper for integration
-   */
+    */
   static createFeatureWrapper(featureType: MultimediaFeatureType): CVFeature | null {
     const multimediaFeature = this.getFeature(featureType);
     if (!multimediaFeature) {
@@ -42,7 +42,7 @@ export class MultimediaIntegration {
 
   /**
    * Check if multimedia provider is available
-   */
+    */
   static isAvailable(): boolean {
     return this.multimediaProvider !== null;
   }
@@ -50,14 +50,14 @@ export class MultimediaIntegration {
 
 /**
  * Interface for multimedia provider dependency injection
- */
+  */
 export interface MultimediaProvider {
   getFeature(featureType: MultimediaFeatureType): CVFeature | null;
 }
 
 /**
  * Multimedia feature types supported by the multimedia submodule
- */
+  */
 export type MultimediaFeatureType =
   | 'video-introduction'
   | 'generate-podcast'
@@ -66,7 +66,7 @@ export type MultimediaFeatureType =
 
 /**
  * Wrapper class that adapts multimedia features to cv-processing interface
- */
+  */
 export class MultimediaFeatureWrapper implements CVFeature {
   constructor(private multimediaFeature: CVFeature) {}
 
@@ -86,7 +86,7 @@ export class MultimediaFeatureWrapper implements CVFeature {
 
   /**
    * Convert ParsedCV to multimedia-compatible format
-   */
+    */
   private convertToMultimediaFormat(cv: ParsedCV): any {
     return {
       personalInfo: cv.personalInfo,
@@ -103,7 +103,7 @@ export class MultimediaFeatureWrapper implements CVFeature {
 
 /**
  * Fallback feature implementation when multimedia is unavailable
- */
+  */
 export class MultimediaFallbackFeature implements CVFeature {
   constructor(private featureType: MultimediaFeatureType) {}
 

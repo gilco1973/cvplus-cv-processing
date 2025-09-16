@@ -1,11 +1,12 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * CV Upload Firebase Function
  *
  * Handles CV file uploads and initiates processing jobs.
  * Implements the POST /cv/upload contract from api-spec.yaml.
  *
  * @fileoverview Core CV upload functionality with comprehensive validation
- */
+  */
 
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
@@ -45,7 +46,7 @@ const bucket = storage.bucket();
  * - 401: Unauthorized
  * - 413: File too large
  * - 429: Rate limited
- */
+  */
 export const uploadCV = functions
   .runWith({
     memory: '512MB',
@@ -331,7 +332,7 @@ interface FormData {
 
 /**
  * Parse multipart form data from request
- */
+  */
 async function parseMultipartForm(request: functions.Request, maxFileSize: number): Promise<FormData> {
   return new Promise((resolve, reject) => {
     const formData: FormData = {};
@@ -400,7 +401,7 @@ async function parseMultipartForm(request: functions.Request, maxFileSize: numbe
 
 /**
  * Get InputType from MIME type
- */
+  */
 function getInputTypeFromMimeType(mimeType: string): InputType | null {
   switch (mimeType) {
     case 'application/pdf':
@@ -418,7 +419,7 @@ function getInputTypeFromMimeType(mimeType: string): InputType | null {
 
 /**
  * Trigger CV processing asynchronously
- */
+  */
 async function triggerCVProcessing(jobId: string, job: CVJob) {
   try {
     // Update job status to analyzing

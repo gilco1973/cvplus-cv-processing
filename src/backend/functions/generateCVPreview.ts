@@ -1,4 +1,4 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflictsimport { onCall } from 'firebase-functions/v2/https';
+// @ts-ignore - Export conflicts/v2/https';
 import * as admin from 'firebase-admin';
 import { corsOptions } from '../config/cors';
 import { CVPreviewRequest, CVPreviewResponse } from '../../types';
@@ -6,7 +6,7 @@ import { CVPreviewRequest, CVPreviewResponse } from '../../types';
 /**
  * Firebase Function to generate real-time CV preview JSON data
  * Lightweight version optimized for React SPA consumption
- */
+  */
 export const generateCVPreview = onCall(
   {
     timeoutSeconds: 60, // Short timeout for preview - should be fast
@@ -53,7 +53,7 @@ export const generateCVPreview = onCall(
 
 /**
  * Validate job ownership and get CV data
- */
+  */
 async function validateJobAndGetData(jobId: string, userId: string) {
   // Get job data
   const jobDoc = await admin.firestore()
@@ -88,7 +88,7 @@ async function validateJobAndGetData(jobId: string, userId: string) {
 
 /**
  * Generate lightweight preview JSON data for React SPA
- */
+  */
 async function generatePreviewData(
   cvData: any,
   templateId: string | undefined,
@@ -123,5 +123,5 @@ async function generatePreviewData(
 
 /**
  * Type definitions for this function
- */
+  */
 export type { CVPreviewRequest, CVPreviewResponse };

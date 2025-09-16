@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Main Enrichment Service
  * 
  * Orchestrates all enrichment modules to enhance CV with external data
@@ -7,7 +8,7 @@
  * @author Gil Klainert
  * @created 2025-08-23
  * @version 1.0
- */
+  */
 
 import type { ParsedCV } from '@cvplus/core/src/types';
 import { EnrichedCVData } from '../types';
@@ -64,7 +65,7 @@ export class EnrichmentService {
 
   /**
    * Main enrichment orchestration method
-   */
+    */
   async enrichCV(
     originalCV: ParsedCV,
     externalData: Partial<EnrichedCVData>
@@ -144,7 +145,7 @@ export class EnrichmentService {
 
   /**
    * Apply portfolio enrichment to CV
-   */
+    */
   private applyPortfolioEnrichment(
     cv: ParsedCV,
     result: PortfolioEnrichmentResult,
@@ -183,7 +184,7 @@ export class EnrichmentService {
 
   /**
    * Apply certification enrichment to CV
-   */
+    */
   private applyCertificationEnrichment(
     cv: ParsedCV,
     result: CertificationEnrichmentResult,
@@ -222,7 +223,7 @@ export class EnrichmentService {
 
   /**
    * Apply hobbies enrichment to CV
-   */
+    */
   private applyHobbiesEnrichment(
     cv: ParsedCV,
     result: HobbiesEnrichmentResult,
@@ -253,7 +254,7 @@ export class EnrichmentService {
 
   /**
    * Apply skills enrichment to CV
-   */
+    */
   private applySkillsEnrichment(
     cv: ParsedCV,
     result: SkillEnrichmentResult,
@@ -321,7 +322,7 @@ export class EnrichmentService {
 
   /**
    * Enrich professional summary
-   */
+    */
   private enrichProfessionalSummary(
     cv: ParsedCV,
     newSummary: string,
@@ -341,7 +342,7 @@ export class EnrichmentService {
 
   /**
    * Resolve conflicts between original and enriched data
-   */
+    */
   private resolveConflicts(
     enrichedCV: ParsedCV,
     originalCV: ParsedCV,
@@ -368,7 +369,7 @@ export class EnrichmentService {
 
   /**
    * Calculate CV quality score
-   */
+    */
   private calculateCVQualityScore(cv: ParsedCV): number {
     let score = 0;
     const weights = {
@@ -434,7 +435,7 @@ export class EnrichmentService {
 
   /**
    * Generate enrichment report
-   */
+    */
   generateEnrichmentReport(result: EnrichmentResult): string {
     const report = [
       '=== CV Enrichment Report ===',

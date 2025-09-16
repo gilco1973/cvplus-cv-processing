@@ -1,14 +1,15 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Legal Compliance Checker for Regional CV Processing
  * Moved from i18n module to correct cv-processing domain
- */
+  */
 
 import { ParsedCV, RegionalConfiguration, ComplianceIssue } from '../types/regional';
 
 export class ComplianceChecker {
   /**
    * Check legal compliance for CV in target region
-   */
+    */
   async checkLegalCompliance(cvData: ParsedCV, regionConfig: RegionalConfiguration) {
     const issues: ComplianceIssue[] = [];
     const recommendations: string[] = [];
@@ -267,7 +268,7 @@ export class ComplianceChecker {
 
   /**
    * Auto-fix compliance issues where possible
-   */
+    */
   async autoFixCompliance(cvData: ParsedCV, issues: ComplianceIssue[]): Promise<{ fixedCV: ParsedCV; appliedFixes: string[] }> {
     const fixedCV = JSON.parse(JSON.stringify(cvData));
     const appliedFixes: string[] = [];

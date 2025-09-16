@@ -1,9 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Public Profiles Integration for CV Processing
  *
  * Provides integration layer for public profile features from @cvplus/public-profiles submodule.
  * Uses dependency injection pattern to avoid direct dependencies between same-layer modules.
- */
+  */
 
 import { CVFeature } from '../types';
 import { ParsedCV } from '../../cvParser';
@@ -19,20 +20,20 @@ export type PublicProfileFeatureType = 'social-links' | 'portfolio-gallery' | 'p
 
 /**
  * Integration layer for public profile features
- */
+  */
 export class PublicProfilesIntegration {
   private static provider: PublicProfileProvider | null = null;
 
   /**
    * Set the public profiles provider (called by root application during startup)
-   */
+    */
   static setProvider(provider: PublicProfileProvider): void {
     this.provider = provider;
   }
 
   /**
    * Get feature instance from public profiles submodule
-   */
+    */
   static getFeature(featureType: PublicProfileFeatureType): CVFeature | null {
     if (!this.provider) {
       return null;
@@ -55,7 +56,7 @@ export class PublicProfilesIntegration {
 
   /**
    * Get portal integration service
-   */
+    */
   static getPortalIntegrationService(): any {
     if (!this.provider) {
       return null;
@@ -71,7 +72,7 @@ export class PublicProfilesIntegration {
 
   /**
    * Create wrapper feature that delegates to public profiles submodule
-   */
+    */
   static createFeatureWrapper(featureType: PublicProfileFeatureType): CVFeature | null {
     const feature = this.getFeature(featureType);
     if (feature) {
@@ -84,7 +85,7 @@ export class PublicProfilesIntegration {
 
   /**
    * Check if provider is available
-   */
+    */
   static isProviderAvailable(): boolean {
     return this.provider !== null;
   }
@@ -92,7 +93,7 @@ export class PublicProfilesIntegration {
 
 /**
  * Fallback feature for when public profiles submodule is not available
- */
+  */
 export class PublicProfileFallbackFeature implements CVFeature {
   constructor(private featureType: PublicProfileFeatureType) {}
 

@@ -1,14 +1,15 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Role Detection Maps and Configurations
  * 
  * Synonym mappings, abbreviations, and indicators for role detection
- */
+  */
 
 import { ExperienceLevel } from '@cvplus/core/types/role-profile.types';
 
 /**
  * Create synonym mappings for role keywords
- */
+  */
 export function createSynonymMap(): Map<string, string[]> {
   return new Map([
     ['software engineer', ['software developer', 'programmer', 'coder', 'developer', 'swe', 'software dev']],
@@ -31,7 +32,7 @@ export function createSynonymMap(): Map<string, string[]> {
 
 /**
  * Create abbreviation mappings
- */
+  */
 export function createAbbreviationMap(): Map<string, string> {
   return new Map([
     ['pm', 'product manager'],
@@ -60,7 +61,7 @@ export function createAbbreviationMap(): Map<string, string> {
 
 /**
  * Create negative indicators that exclude certain roles
- */
+  */
 export function createNegativeIndicators(): Map<string, string[]> {
   return new Map([
     ['software engineer', ['no coding', 'non-technical', 'no programming', 'business only', 'non-developer']],
@@ -73,7 +74,7 @@ export function createNegativeIndicators(): Map<string, string[]> {
 
 /**
  * Create seniority keywords for experience level detection
- */
+  */
 export function createSeniorityKeywords(): Map<ExperienceLevel, string[]> {
   return new Map([
     [ExperienceLevel.ENTRY, ['entry level', 'graduate', 'intern', 'trainee', '0-1 years', 'fresh graduate']],
@@ -88,7 +89,7 @@ export function createSeniorityKeywords(): Map<ExperienceLevel, string[]> {
 
 /**
  * Detect experience level from CV content
- */
+  */
 export function detectExperienceLevel(text: string, seniorityKeywords: Map<ExperienceLevel, string[]>): {
   level: ExperienceLevel;
   yearsOfExperience?: number;
@@ -152,7 +153,7 @@ export function detectExperienceLevel(text: string, seniorityKeywords: Map<Exper
 
 /**
  * Check for negative indicators that should reduce role confidence
- */
+  */
 export function checkNegativeIndicators(
   roleKeyword: string,
   cvText: string,

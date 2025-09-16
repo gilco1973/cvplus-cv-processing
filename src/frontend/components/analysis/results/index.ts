@@ -1,7 +1,8 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Analysis Results Components Export Index
  * Sub-components for CVAnalysisResults main component
- */
+  */
 
 export { AnalysisOverview } from './AnalysisOverview';
 export { SkillsAnalysisCard } from './SkillsAnalysisCard';

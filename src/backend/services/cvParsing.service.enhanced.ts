@@ -1,4 +1,4 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflictsimport * as admin from 'firebase-admin';
+// @ts-ignore - Export conflicts
 import { FieldValue } from 'firebase-admin/firestore';
 import { LLMVerificationService, VerificationResult } from '@cvplus/core/services/llm-verification.service';
 import { llmVerificationConfig } from '@cvplus/core/config/llm-verification.config';
@@ -109,7 +109,7 @@ export interface ParsedCV {
  * 3. Comprehensive error handling with fallback
  * 4. Enhanced validation with verification scores
  * 5. Audit trail for compliance and debugging
- */
+  */
 export class EnhancedCVParsingService {
   private db = admin.firestore();
   private verifiedParser?: VerifiedCVParsingService;
@@ -142,7 +142,7 @@ export class EnhancedCVParsingService {
   /**
    * BEFORE: Simple getParsedCV without verification details
    * AFTER: Enhanced method with optional verification details
-   */
+    */
   async getParsedCV(jobId: string): Promise<ParsedCV | null> {
     try {
       const jobDoc = await this.db.collection('jobs').doc(jobId).get();
@@ -164,7 +164,7 @@ export class EnhancedCVParsingService {
   
   /**
    * NEW: Get parsed CV with verification details if available
-   */
+    */
   async getParsedCVWithVerification(jobId: string): Promise<{
     parsedCV: ParsedCV | null;
     verificationDetails?: any;
@@ -197,7 +197,7 @@ export class EnhancedCVParsingService {
   /**
    * BEFORE: Simple updateParsedCV
    * AFTER: Enhanced update with backward compatibility
-   */
+    */
   async updateParsedCV(jobId: string, parsedData: ParsedCV): Promise<void> {
     try {
       await this.db.collection('jobs').doc(jobId).update({
@@ -211,7 +211,7 @@ export class EnhancedCVParsingService {
   
   /**
    * NEW: Update parsed CV with verification results
-   */
+    */
   async updateParsedCVWithVerification(
     jobId: string, 
     result: VerifiedParsingResult,
@@ -255,7 +255,7 @@ export class EnhancedCVParsingService {
   /**
    * BEFORE: Basic validation only
    * AFTER: Enhanced validation with backward compatibility
-   */
+    */
   async validateParsedCV(parsedData: any): Promise<boolean> {
     try {
       // Basic validation
@@ -276,7 +276,7 @@ export class EnhancedCVParsingService {
   
   /**
    * NEW: Enhanced validation with verification
-   */
+    */
   async validateParsedCVWithVerification(
     parsedData: any, 
     originalText?: string
@@ -342,7 +342,7 @@ export class EnhancedCVParsingService {
   /**
    * NEW: Parse CV with LLM verification if enabled
    * This is the main integration point showing how to use verified parsing
-   */
+    */
   async parseWithVerification(
     fileBuffer: Buffer, 
     mimeType: string, 
@@ -446,7 +446,7 @@ export class EnhancedCVParsingService {
   
   /**
    * NEW: Get service health status including verification availability
-   */
+    */
   getServiceStatus(): {
     verificationEnabled: boolean;
     verificationAvailable: boolean;

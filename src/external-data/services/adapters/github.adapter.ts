@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * GitHub Integration Adapter
  * 
  * Fetches user profile, repositories, and contribution data from GitHub
@@ -6,7 +7,7 @@
  * @author Gil Klainert
  * @created 2025-08-23
  * @version 1.0
- */
+  */
 
 import { logger } from 'firebase-functions';
 import axios from 'axios';
@@ -37,7 +38,7 @@ export class GitHubAdapter {
 
   /**
    * Fetch all GitHub data for a user
-   */
+    */
   async fetchData(username: string): Promise<{
     profile: GitHubProfile;
     stats: GitHubStats;
@@ -75,7 +76,7 @@ export class GitHubAdapter {
 
   /**
    * Fetch user profile
-   */
+    */
   private async fetchProfile(username: string): Promise<GitHubProfile> {
     try {
       const response = await axios.get(
@@ -110,7 +111,7 @@ export class GitHubAdapter {
 
   /**
    * Fetch user repositories
-   */
+    */
   private async fetchRepositories(username: string): Promise<GitHubRepository[]> {
     try {
       const repos: GitHubRepository[] = [];
@@ -167,7 +168,7 @@ export class GitHubAdapter {
 
   /**
    * Calculate GitHub statistics
-   */
+    */
   private calculateStats(repositories: GitHubRepository[]): GitHubStats {
     const stats: GitHubStats = {
       totalStars: 0,
@@ -202,7 +203,7 @@ export class GitHubAdapter {
 
   /**
    * Extract README content from a repository
-   */
+    */
   async fetchReadme(username: string, repo: string): Promise<string | null> {
     try {
       const response = await axios.get(
@@ -224,7 +225,7 @@ export class GitHubAdapter {
 
   /**
    * Fetch language statistics for a repository
-   */
+    */
   async fetchLanguageStats(username: string, repo: string): Promise<Record<string, number>> {
     try {
       const response = await axios.get(

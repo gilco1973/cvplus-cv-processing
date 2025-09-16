@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * LinkedIn Integration Adapter
  * 
  * Fetches profile data, certifications, and skills from LinkedIn
@@ -8,7 +9,7 @@
  * @author Gil Klainert
  * @created 2025-08-23
  * @version 1.0
- */
+  */
 
 import { logger } from 'firebase-functions';
 import axios from 'axios';
@@ -32,7 +33,7 @@ export class LinkedInAdapter {
 
   /**
    * Fetch LinkedIn data for a user
-   */
+    */
   async fetchData(profileUrl: string): Promise<{
     profile: LinkedInProfile;
     experience: LinkedInExperience[];
@@ -60,7 +61,7 @@ export class LinkedInAdapter {
 
   /**
    * Fetch data via LinkedIn API (requires OAuth)
-   */
+    */
   private async fetchViaAPI(_profileId: string): Promise<any> {
     if (!this.accessToken) {
       throw new Error('LinkedIn API access token not configured');
@@ -111,7 +112,7 @@ export class LinkedInAdapter {
 
   /**
    * Fetch public profile data (web scraping fallback)
-   */
+    */
   private async fetchPublicProfile(profileUrl: string): Promise<any> {
     logger.warn('[LINKEDIN-ADAPTER] Using public profile scraping (limited data)');
     
@@ -175,7 +176,7 @@ export class LinkedInAdapter {
 
   /**
    * Transform LinkedIn API response to our format
-   */
+    */
   private transformAPIResponse(apiData: any): any {
     const profile: LinkedInProfile = {
       profileUrl: apiData.profile.vanityName 
@@ -220,7 +221,7 @@ export class LinkedInAdapter {
 
   /**
    * Format LinkedIn date object
-   */
+    */
   private formatDate(dateObj: any): string {
     if (!dateObj) return '';
     
@@ -232,7 +233,7 @@ export class LinkedInAdapter {
 
   /**
    * Validate LinkedIn profile URL
-   */
+    */
   isValidProfileUrl(url: string): boolean {
     const patterns = [
       /^https?:\/\/(www\.)?linkedin\.com\/in\/[\w-]+\/?$/,
@@ -244,7 +245,7 @@ export class LinkedInAdapter {
 
   /**
    * Extract profile ID from URL
-   */
+    */
   extractProfileId(url: string): string | null {
     const match = url.match(/linkedin\.com\/in\/([\w-]+)/);
     return match ? (match[1] || null) : null;

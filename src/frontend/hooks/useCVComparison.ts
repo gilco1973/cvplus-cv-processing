@@ -1,11 +1,12 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * CVPlus CV Processing - CV Comparison Hook
  * 
  * React hook for comparing CV versions and tracking changes.
  * 
  * @author Gil Klainert
  * @version 1.0.0
- */
+  */
 
 import { useState, useCallback, useMemo } from 'react';
 import type { CVParsedData } from '../../types';

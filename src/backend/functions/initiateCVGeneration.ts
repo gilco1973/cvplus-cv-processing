@@ -1,4 +1,4 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflictsimport { onCall } from 'firebase-functions/v2/https';
+// @ts-ignore - Export conflicts/v2/https';
 import * as admin from 'firebase-admin';
 import { FieldValue } from 'firebase-admin/firestore';
 import { corsOptions } from '../config/cors';
@@ -115,7 +115,7 @@ export const initiateCVGeneration = onCall(
 
 /**
  * Initialize feature tracking structure with all selected features set to 'pending' status
- */
+  */
 function initializeFeatureTracking(selectedFeatures: string[]): Record<string, any> {
   const enhancedFeatures: Record<string, any> = {};
   
@@ -135,7 +135,7 @@ function initializeFeatureTracking(selectedFeatures: string[]): Record<string, a
 
 /**
  * Calculate total estimated time based on number and type of features
- */
+  */
 function calculateEstimatedTime(features: string[]): number {
   if (!features || features.length === 0) {
     return 60; // Base CV generation: 1 minute
@@ -155,7 +155,7 @@ function calculateEstimatedTime(features: string[]): number {
 
 /**
  * Get estimated processing time for individual features (in seconds)
- */
+  */
 function getFeatureEstimatedTime(feature: string): number {
   const featureTimings: Record<string, number> = {
     // Fast features (30-60 seconds)
@@ -189,7 +189,7 @@ function getFeatureEstimatedTime(feature: string): number {
 
 /**
  * Comprehensive error recovery for CV generation failures
- */
+  */
 async function handleCVGenerationFailure(jobId: string, error: any, features: string[]): Promise<void> {
   const errorMessage = error instanceof Error ? error.message : 'Unknown error';
   const isTimeout = errorMessage.includes('timed out') || errorMessage.includes('timeout');
@@ -251,7 +251,7 @@ async function handleCVGenerationFailure(jobId: string, error: any, features: st
 
 /**
  * Get recommended retry delay based on error type
- */
+  */
 function getRetryDelay(errorMessage: string): number {
   const lowerError = errorMessage.toLowerCase();
   
@@ -272,5 +272,5 @@ function getRetryDelay(errorMessage: string): number {
 
 /**
  * Type definitions for this function
- */
+  */
 export type { CVInitiationRequest, CVInitiationResponse };

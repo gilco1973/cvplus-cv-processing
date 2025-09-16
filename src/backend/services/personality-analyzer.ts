@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Personality Analysis Module
  *
  * Analyzes CV data to extract personality profiles and communication styles.
@@ -6,7 +7,7 @@
  *
  * @author Gil Klainert
  * @version 1.0.0
- */
+  */
 
 import { ParsedCV } from '../../types/enhanced-models';
 import { PersonalityProfile } from '../../types/enhanced-models';
@@ -14,7 +15,7 @@ import { PersonalityProfile } from '../../types/enhanced-models';
 export class PersonalityAnalyzer {
   /**
    * Analyzes CV data to extract personality profile
-   */
+    */
   async analyzePersonality(cv: ParsedCV): Promise<PersonalityProfile> {
     const communicationStyle = this.determineCommunicationStyle(cv);
     const leadershipType = this.determineLeadershipType(cv);

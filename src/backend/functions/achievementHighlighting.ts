@@ -1,6 +1,7 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Cloud Functions for Achievement Highlighting
- */
+  */
 import { onCall, HttpsError, CallableRequest } from 'firebase-functions/v2/https';
 import * as admin from 'firebase-admin';
 import { AchievementsAnalysisService } from '../services/achievements-analysis.service';
@@ -9,7 +10,7 @@ import { corsOptions } from '../config/cors';
 
 /**
  * Analyze and highlight achievements in CV
- */
+  */
 export const analyzeAchievements = onCall(
   { 
     timeoutSeconds: 120,
@@ -98,7 +99,7 @@ export const analyzeAchievements = onCall(
 
 /**
  * Generate achievement showcase HTML for CV
- */
+  */
 export const generateAchievementShowcase = onCall(
   { 
     timeoutSeconds: 90,
@@ -156,7 +157,7 @@ export const generateAchievementShowcase = onCall(
 
 /**
  * Generate achievement recommendations
- */
+  */
 function generateRecommendations(_achievements: any[], stats: any): string[] {
   const recommendations = [];
 

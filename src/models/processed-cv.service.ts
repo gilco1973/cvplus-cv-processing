@@ -1,7 +1,8 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Processed CV Model Service
  * Handles processed CV operations for the CV Processing submodule
- */
+  */
 
 import * as admin from 'firebase-admin';
 
@@ -83,7 +84,7 @@ export interface ProcessedCV {
 
 /**
  * Get processed CV by ID
- */
+  */
 export async function getProcessedCV(processedCVId: string): Promise<ProcessedCV | null> {
   try {
     const db = admin.firestore();
@@ -110,7 +111,7 @@ export async function getProcessedCV(processedCVId: string): Promise<ProcessedCV
 
 /**
  * Create new processed CV
- */
+  */
 export async function createProcessedCV(cvData: Omit<ProcessedCV, 'id' | 'createdAt' | 'updatedAt'>): Promise<string> {
   try {
     const db = admin.firestore();
@@ -131,7 +132,7 @@ export async function createProcessedCV(cvData: Omit<ProcessedCV, 'id' | 'create
 
 /**
  * Update processed CV
- */
+  */
 export async function updateProcessedCV(processedCVId: string, updates: Partial<ProcessedCV>): Promise<void> {
   try {
     const db = admin.firestore();
@@ -147,7 +148,7 @@ export async function updateProcessedCV(processedCVId: string, updates: Partial<
 
 /**
  * Get processed CVs by user ID
- */
+  */
 export async function getProcessedCVsByUserId(userId: string, limit = 50): Promise<ProcessedCV[]> {
   try {
     const db = admin.firestore();
@@ -169,7 +170,7 @@ export async function getProcessedCVsByUserId(userId: string, limit = 50): Promi
 
 /**
  * Delete processed CV
- */
+  */
 export async function deleteProcessedCV(processedCVId: string): Promise<void> {
   try {
     const db = admin.firestore();

@@ -1,11 +1,12 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * CV Status Firebase Function
  *
  * Retrieves CV processing job status and progress information.
  * Implements the GET /cv/status/{jobId} contract from api-spec.yaml.
  *
  * @fileoverview CV job status checking with comprehensive progress tracking
- */
+  */
 
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
@@ -33,7 +34,7 @@ const db = admin.firestore();
  * - 401: Unauthorized
  * - 403: Access denied (not job owner)
  * - 404: Job not found
- */
+  */
 export const getCVStatus = functions
   .runWith({
     memory: '256MB',
@@ -207,7 +208,7 @@ export const getCVStatus = functions
 
 /**
  * Calculate estimated start time for queued jobs
- */
+  */
 function calculateEstimatedStartTime(): string {
   const estimatedStart = new Date();
   estimatedStart.setMinutes(estimatedStart.getMinutes() + 1); // 1 minute estimate
@@ -216,7 +217,7 @@ function calculateEstimatedStartTime(): string {
 
 /**
  * Get queue position for pending jobs
- */
+  */
 async function getQueuePosition(jobId: string): Promise<number> {
   try {
     // Count jobs that were created before this job and are still pending
@@ -239,7 +240,7 @@ async function getQueuePosition(jobId: string): Promise<number> {
 
 /**
  * Get current processing step description
- */
+  */
 function getCurrentProcessingStep(job: CVJob): string {
   if (job.status === ProcessingStatus.ANALYZING) {
     return 'Analyzing CV content and extracting information';
@@ -264,7 +265,7 @@ function getCurrentProcessingStep(job: CVJob): string {
 
 /**
  * Calculate estimated completion time for active jobs
- */
+  */
 function calculateEstimatedCompletionTime(job: CVJob): string {
   const estimated = new Date();
 
@@ -283,7 +284,7 @@ function calculateEstimatedCompletionTime(job: CVJob): string {
 
 /**
  * Build results object for completed jobs
- */
+  */
 async function buildJobResults(job: CVJob): Promise<any> {
   const results: any = {
     enhancedCV: {
@@ -326,7 +327,7 @@ async function buildJobResults(job: CVJob): Promise<any> {
 
 /**
  * Add feature-specific results to status response
- */
+  */
 async function addFeatureSpecificResults(statusResponse: any, job: CVJob): Promise<void> {
   const features = job.selectedFeatures;
 
@@ -354,7 +355,7 @@ async function addFeatureSpecificResults(statusResponse: any, job: CVJob): Promi
 
 /**
  * Check if a failed job can be retried
- */
+  */
 function canRetryJob(job: CVJob): boolean {
   if (!job.errorDetails) return true;
 

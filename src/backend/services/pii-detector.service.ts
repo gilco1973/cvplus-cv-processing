@@ -1,4 +1,4 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflictsimport { PIIDetectionResult, PIIMaskingOptions } from '../../types';
+// @ts-ignore - Export conflicts/../types';
 
 export class PIIDetector {
   private anthropic: any;
@@ -132,7 +132,7 @@ For masking, use:
   /**
    * Robust JSON extraction from AI response text
    * Handles multiple extraction strategies and sanitization
-   */
+    */
   private extractAndParseJSON(responseText: string): PIIDetectionResult | null {
     // Strategy 1: Try to find JSON using multiple patterns
     const jsonPatterns = [
@@ -176,7 +176,7 @@ For masking, use:
 
   /**
    * Sanitize JSON string by removing comments and fixing common issues
-   */
+    */
   private sanitizeJSON(jsonString: string): string {
     let cleaned = jsonString;
 
@@ -212,7 +212,7 @@ For masking, use:
 
   /**
    * Attempt to parse JSON with error handling
-   */
+    */
   private attemptJSONParse(jsonString: string): PIIDetectionResult | null {
     try {
       const parsed = JSON.parse(jsonString);
@@ -229,7 +229,7 @@ For masking, use:
 
   /**
    * Extract JSON using balanced brace counting
-   */
+    */
   private extractBalancedJSON(text: string): string | null {
     const startIndex = text.indexOf('{');
     if (startIndex === -1) return null;
@@ -273,7 +273,7 @@ For masking, use:
 
   /**
    * Try to extract JSON from structured text patterns
-   */
+    */
   private extractJSONFromStructure(text: string): PIIDetectionResult | null {
     // Look for key-value patterns that indicate JSON structure
     const hasPIIMatch = text.match(/["']?hasPII["']?\s*:\s*(true|false)/i);
@@ -315,7 +315,7 @@ For masking, use:
 
   /**
    * Validate and normalize PIIDetectionResult
-   */
+    */
   private validatePIIDetectionResult(result: any): PIIDetectionResult {
     if (!result || typeof result !== 'object') {
       throw new Error('Invalid PII detection result: not an object');
@@ -337,7 +337,7 @@ For masking, use:
 
   /**
    * Create a fallback result when parsing fails
-   */
+    */
   private createFallbackResult(cvData: any): PIIDetectionResult {
     
     // Use regex-based quick detection as fallback

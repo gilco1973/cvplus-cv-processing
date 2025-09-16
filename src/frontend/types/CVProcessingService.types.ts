@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * CVProcessingService Types (T071)
  *
  * Comprehensive type definitions for the enhanced CV Processing Service.
@@ -6,7 +7,7 @@
  *
  * @version 1.0.0 - T071 Implementation
  * @author Gil Klainert
- */
+  */
 
 // Core processing types
 export interface CVProcessingServiceConfig {

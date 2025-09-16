@@ -1,11 +1,12 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * CV Embedding Processor for CVPlus RAG System
  * 
  * Handles CV-specific embedding processing and optimization
  * 
  * @version 1.0.0
  * @author Gil Klainert
- */
+  */
 
 import { ParsedCV } from '../../../types/enhanced-models';
 import { RAGEmbedding, CVSection } from '../../../types/portal';
@@ -14,7 +15,7 @@ import { EmbeddingHelpers } from './EmbeddingHelpers';
 
 /**
  * CV embedding processing result
- */
+  */
 export interface CVEmbeddingResult {
   embeddings: RAGEmbedding[];
   totalChunks: number;
@@ -25,7 +26,7 @@ export interface CVEmbeddingResult {
 
 /**
  * HuggingFace export configuration
- */
+  */
 export interface HuggingFaceExport {
   embeddings: RAGEmbedding[];
   model: string;
@@ -36,12 +37,12 @@ export interface HuggingFaceExport {
 
 /**
  * CV embedding processor utility class
- */
+  */
 export class CVEmbeddingProcessor {
   
   /**
    * Process CV data into embeddings with section-aware chunking
-   */
+    */
   static async processCV(
     cvData: ParsedCV, 
     chunkTextFn: Function, 
@@ -121,7 +122,7 @@ export class CVEmbeddingProcessor {
 
   /**
    * Optimize embeddings for HuggingFace deployment
-   */
+    */
   static optimizeForHuggingFace(
     embeddings: RAGEmbedding[], 
     model: string
@@ -142,7 +143,7 @@ export class CVEmbeddingProcessor {
 
   /**
    * Calculate processing statistics for monitoring
-   */
+    */
   static calculateProcessingStats(result: CVEmbeddingResult): {
     efficiency: number;
     averageTokensPerChunk: number;
@@ -171,7 +172,7 @@ export class CVEmbeddingProcessor {
 
   /**
    * Validate CV data before processing
-   */
+    */
   static validateCVData(cvData: ParsedCV): {
     isValid: boolean;
     errors: string[];

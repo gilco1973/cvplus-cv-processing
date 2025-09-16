@@ -1,4 +1,4 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflictsimport { onCall, HttpsError } from 'firebase-functions/v2/https';
+// @ts-ignore - Export conflicts/v2/https';
 import { logger } from 'firebase-functions/v2';
 import { authGuard } from '@cvplus/auth/middleware/authGuard';
 import { premiumGuard } from '@cvplus/premium/middleware/premiumGuard';
@@ -24,7 +24,7 @@ interface TranslateCVResponse {
 /**
  * Firebase Function to translate CV content to target language
  * Requires authentication and premium access for professional translations
- */
+  */
 export const translateCV = onCall<TranslateCVRequest, Promise<TranslateCVResponse>>(
   {
     region: 'us-central1',

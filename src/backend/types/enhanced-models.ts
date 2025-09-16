@@ -1,10 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// Re-export ParsedCV from job types for compatibility
+// @ts-ignore - Export conflicts// Re-export ParsedCV from job types for compatibility
 export { ParsedCV } from "../../types/job";
 
 
 /**
  * Enhanced Models for CV Processing
- */
+  */
 import { CVData } from '../../types/autonomous-cv.types';
 
 export interface EnhancedJob {

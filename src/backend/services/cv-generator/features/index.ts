@@ -1,4 +1,4 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// CV-processing native features
+// @ts-ignore - Export conflicts// CV-processing native features
 export { ContactFormFeature } from './ContactFormFeature';
 export { SocialLinksFeature } from './SocialLinksFeature';
 export { PersonalBrandingFeature } from './PersonalBrandingFeature';

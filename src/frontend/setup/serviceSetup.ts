@@ -1,7 +1,8 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Service Setup for Autonomous Frontend
  * Registers and configures all services for independent operation
- */
+  */
 
 import { serviceContainer } from '../services/ServiceContainer';
 import { AutonomousAuthService } from '../services/AutonomousAuthService';
@@ -11,7 +12,7 @@ import { parentIntegration } from '../integration/ParentIntegrationService';
 
 /**
  * Setup all autonomous services for independent operation
- */
+  */
 export async function setupServices(config?: any): Promise<void> {
   try {
     // Register Configuration Service first
@@ -75,7 +76,7 @@ export async function setupServices(config?: any): Promise<void> {
 
 /**
  * Validate that all required services are properly registered
- */
+  */
 async function validateServices(): Promise<void> {
   const requiredServices = ['config', 'auth', 'api'];
   
@@ -97,7 +98,7 @@ async function validateServices(): Promise<void> {
 
 /**
  * Get all registered service information for debugging
- */
+  */
 export function getServiceInfo(): Record<string, any> {
   const services = serviceContainer.getServiceNames();
   const info: Record<string, any> = {};
@@ -124,7 +125,7 @@ export function getServiceInfo(): Record<string, any> {
 
 /**
  * Health check for all services
- */
+  */
 export async function healthCheck(): Promise<{
   healthy: boolean;
   services: Record<string, { status: 'ok' | 'error'; message?: string }>;

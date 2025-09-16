@@ -1,11 +1,12 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * CV Processing Service
  *
  * Core business logic service for CV processing orchestration, including
  * file parsing, content extraction, AI analysis, and ATS optimization.
  *
  * @fileoverview CV Processing orchestration service with comprehensive workflow management
- */
+  */
 
 import { logger } from 'firebase-functions/v2';
 import { Timestamp } from 'firebase-admin/firestore';
@@ -104,7 +105,7 @@ export class CVProcessorService {
 
   /**
    * Main entry point for CV processing
-   */
+    */
   async processCV(options: CVProcessingOptions): Promise<CVProcessingResult> {
     const startTime = Date.now();
     const warnings: string[] = [];
@@ -191,7 +192,7 @@ export class CVProcessorService {
 
   /**
    * Extract content from CV file
-   */
+    */
   private async extractCVContent(job: CVJob): Promise<CVExtractionResult> {
     logger.debug('Extracting CV content', { jobId: job.id, fileUrl: job.fileUrl });
 
@@ -279,7 +280,7 @@ export class CVProcessorService {
 
   /**
    * Structure CV content into standardized format
-   */
+    */
   private async structureCVContent(
     extractionResult: CVExtractionResult,
     job: CVJob
@@ -337,7 +338,7 @@ export class CVProcessorService {
 
   /**
    * Perform AI analysis on structured CV
-   */
+    */
   private async performAIAnalysis(
     structuredCV: Omit<ProcessedCV, 'id' | 'createdAt' | 'updatedAt'>,
     features: FeatureType[]
@@ -375,7 +376,7 @@ export class CVProcessorService {
 
   /**
    * Perform ATS analysis and optimization
-   */
+    */
   private async performATSAnalysis(
     structuredCV: Omit<ProcessedCV, 'id' | 'createdAt' | 'updatedAt'>,
     aiResults: { extractedKeywords: string[] }
@@ -435,7 +436,7 @@ export class CVProcessorService {
 
   /**
    * Validate processing results for quality and completeness
-   */
+    */
   private async validateProcessingResults(
     structuredCV: any,
     aiResults: any,
@@ -471,7 +472,7 @@ export class CVProcessorService {
 
   /**
    * Save processed CV to database
-   */
+    */
   private async saveProcessedCV(
     jobId: string,
     structuredCV: Omit<ProcessedCV, 'id' | 'createdAt' | 'updatedAt'>,
@@ -661,7 +662,7 @@ export function getCVProcessorService(): CVProcessorService {
 
 /**
  * Process a CV job
- */
+  */
 export async function processCV(options: CVProcessingOptions): Promise<CVProcessingResult> {
   const service = getCVProcessorService();
   return service.processCV(options);
@@ -669,7 +670,7 @@ export async function processCV(options: CVProcessingOptions): Promise<CVProcess
 
 /**
  * Reprocess a CV with different features
- */
+  */
 export async function reprocessCV(
   jobId: string,
   additionalFeatures: FeatureType[]
@@ -690,7 +691,7 @@ export async function reprocessCV(
 
 /**
  * Get processing status and progress
- */
+  */
 export async function getProcessingStatus(jobId: string): Promise<{
   status: JobStatus;
   stage: ProcessingStage;

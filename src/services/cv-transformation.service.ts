@@ -1,7 +1,7 @@
 /**
  * CV Transformation Service
  * Handles CV analysis, recommendations generation, and transformations
- */
+  */
 
 import { CVParsedData, CVSection } from '../types';
 

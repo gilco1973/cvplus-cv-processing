@@ -1,11 +1,12 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Test setup file for cv-processing package
  * 
  * This file configures the test environment for Vitest including:
  * - Global test utilities
  * - Mock configurations
  * - Test environment setup
- */
+  */
 
 import { beforeAll, afterAll, beforeEach, afterEach, vi } from 'vitest';
 

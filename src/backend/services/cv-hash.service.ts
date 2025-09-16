@@ -1,4 +1,4 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflictsimport { createHash } from 'crypto';
+// @ts-ignore - Export conflicts
 import { getFirestore } from 'firebase-admin/firestore';
 import { logger } from 'firebase-functions';
 
@@ -51,7 +51,7 @@ export class CVHashService {
   /**
    * Generate normalized hash for CV content
    * Removes formatting, dates, and personal info to detect content similarity
-   */
+    */
   async generateCVHash(cvContent: string): Promise<string> {
     try {
       const normalizedContent = this.normalizeContent(cvContent);
@@ -76,7 +76,7 @@ export class CVHashService {
 
   /**
    * Check for duplicate CV uploads across all users
-   */
+    */
   async checkForDuplicates(hash: string, userId: string): Promise<DuplicateCheckResult> {
     try {
       // First check for exact hash match
@@ -140,7 +140,7 @@ export class CVHashService {
 
   /**
    * Record a new CV upload or add to existing duplicate list
-   */
+    */
   async recordCVUpload(
     hash: string, 
     userId: string, 
@@ -190,7 +190,7 @@ export class CVHashService {
 
   /**
    * Flag a policy violation for a specific hash/user combination
-   */
+    */
   async flagPolicyViolation(
     hash: string, 
     userId: string, 
@@ -243,7 +243,7 @@ export class CVHashService {
 
   /**
    * Get duplicate upload statistics for monitoring
-   */
+    */
   async getDuplicateStats(timeRange: 'day' | 'week' | 'month' = 'week'): Promise<{
     totalDuplicates: number;
     uniqueViolators: number;
@@ -309,7 +309,7 @@ export class CVHashService {
 
   /**
    * Normalize CV content for consistent hashing
-   */
+    */
   private normalizeContent(content: string): string {
     return content
       // Remove extra whitespace
@@ -340,7 +340,7 @@ export class CVHashService {
   /**
    * Find similar hashes using fuzzy matching (basic implementation)
    * In production, this could use more sophisticated algorithms
-   */
+    */
   private async findSimilarHashes(hash: string, userId: string): Promise<CVHashRecord[]> {
     try {
       // For now, implement basic string similarity check
@@ -376,7 +376,7 @@ export class CVHashService {
 
   /**
    * Calculate string similarity using Levenshtein distance
-   */
+    */
   private calculateStringSimilarity(str1: string, str2: string): number {
     if (str1 === str2) return 1.0;
     
@@ -391,7 +391,7 @@ export class CVHashService {
 
   /**
    * Calculate Levenshtein distance between two strings
-   */
+    */
   private levenshteinDistance(str1: string, str2: string): number {
     const matrix = [];
     

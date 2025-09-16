@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * CV Processing Service (T071 - Enhanced Implementation)
  *
  * Comprehensive frontend service for all CV processing operations with Firebase Functions
@@ -18,7 +19,7 @@
  *
  * @version 2.0.0 - T071 Enhanced Implementation
  * @author Gil Klainert
- */
+  */
 
 import { httpsCallable, getFunctions } from 'firebase/functions';
 import { ref, uploadBytesResumable, getDownloadURL, getStorage } from 'firebase/storage';
@@ -185,7 +186,7 @@ const getAnalysisResultsFunction = httpsCallable(functions, 'getAnalysisResults'
 
 /**
  * Enhanced CV Processing Service Class
- */
+  */
 export class CVProcessingService {
   private static instance: CVProcessingService;
   private activeJobs = new Map<string, ProcessingJob>();
@@ -221,7 +222,7 @@ export class CVProcessingService {
 
   /**
    * Upload CV file with enhanced progress tracking and validation
-   */
+    */
   async uploadCV(file: File, options: UploadOptions): Promise<UploadResult> {
     try {
       // Validate authentication
@@ -335,7 +336,7 @@ export class CVProcessingService {
 
   /**
    * Start CV processing with retry logic and queue management
-   */
+    */
   async startProcessing(jobId: string, features: ProcessingFeatures): Promise<ProcessingJob> {
     try {
       const job = this.activeJobs.get(jobId);
@@ -368,7 +369,7 @@ export class CVProcessingService {
 
   /**
    * Get processing status with caching
-   */
+    */
   async getProcessingStatus(jobId: string): Promise<ProcessingStatus> {
     try {
       // Check local job first
@@ -415,7 +416,7 @@ export class CVProcessingService {
 
   /**
    * Cancel processing job
-   */
+    */
   async cancelProcessing(jobId: string): Promise<void> {
     try {
       const job = this.activeJobs.get(jobId);
@@ -453,7 +454,7 @@ export class CVProcessingService {
 
   /**
    * Get processing results with caching
-   */
+    */
   async getProcessingResults(jobId: string): Promise<ProcessingResults> {
     try {
       const job = this.activeJobs.get(jobId);
@@ -493,7 +494,7 @@ export class CVProcessingService {
 
   /**
    * Get analysis results
-   */
+    */
   async getAnalysisResults(jobId: string): Promise<AnalysisResults> {
     try {
       const result = await this.withRetry(
@@ -517,7 +518,7 @@ export class CVProcessingService {
 
   /**
    * Get available templates with caching
-   */
+    */
   async getTemplates(): Promise<CVTemplate[]> {
     try {
       // Check cache first
@@ -555,7 +556,7 @@ export class CVProcessingService {
 
   /**
    * Apply template to CV
-   */
+    */
   async applyTemplate(jobId: string, templateId: string): Promise<ProcessedCVData> {
     try {
       const job = this.activeJobs.get(jobId);
@@ -591,7 +592,7 @@ export class CVProcessingService {
 
   /**
    * Export CV in specified format
-   */
+    */
   async exportCV(jobId: string, format: ExportFormat): Promise<ExportResult> {
     try {
       const job = this.activeJobs.get(jobId);
@@ -626,7 +627,7 @@ export class CVProcessingService {
 
   /**
    * Subscribe to real-time processing updates
-   */
+    */
   async subscribeToUpdates(jobId: string): Promise<EventSource> {
     try {
       // Close existing connection if any
@@ -675,7 +676,7 @@ export class CVProcessingService {
 
   /**
    * Unsubscribe from real-time updates
-   */
+    */
   unsubscribeFromUpdates(jobId: string): void {
     const eventSource = this.eventSources.get(jobId);
     if (eventSource) {
@@ -1073,21 +1074,21 @@ export class CVProcessingService {
 
   /**
    * Get active jobs
-   */
+    */
   getActiveJobs(): ProcessingJob[] {
     return Array.from(this.activeJobs.values());
   }
 
   /**
    * Get specific job
-   */
+    */
   getJob(jobId: string): ProcessingJob | undefined {
     return this.activeJobs.get(jobId);
   }
 
   /**
    * Remove completed job from memory
-   */
+    */
   removeJob(jobId: string): void {
     this.activeJobs.delete(jobId);
     this.stopStatusTracking(jobId);
@@ -1101,7 +1102,7 @@ export class CVProcessingService {
 
   /**
    * Clear all caches
-   */
+    */
   clearCaches(): void {
     this.uploadCache.clear();
     this.templateCache.clear();
@@ -1109,7 +1110,7 @@ export class CVProcessingService {
 
   /**
    * Get processing statistics
-   */
+    */
   getProcessingStats() {
     const jobs = Array.from(this.activeJobs.values());
     const completed = jobs.filter(job => job.status === ProcessingJobStatus.COMPLETED).length;

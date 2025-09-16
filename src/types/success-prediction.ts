@@ -1,10 +1,11 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Success Prediction Types
  * Extracted from phase2-models.ts for better modularity
  * 
  * Core predictions, salary predictions, time to hire predictions,
  * and predictive recommendations.
- */
+  */
 
 // ===============================
 // SUCCESS PREDICTION MODELS

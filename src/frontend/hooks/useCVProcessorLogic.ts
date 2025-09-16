@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * CV Processor Logic Hook (T067)
  *
  * Custom React hook that encapsulates the core business logic
@@ -7,7 +8,7 @@
  *
  * @author Gil Klainert
  * @version 1.0.0 - Initial T067 Implementation
- */
+  */
 
 import { useState, useCallback, useRef, useEffect } from 'react';
 import type {
@@ -19,48 +20,48 @@ import type {
 } from '../components/CVProcessor.types';
 
 interface UseCVProcessorLogicProps {
-  /** Processing stages configuration */
+  /** Processing stages configuration  */
   stages: ProcessingStage[];
 
-  /** Maximum retry attempts */
+  /** Maximum retry attempts  */
   maxRetries: number;
 
-  /** Stage update callback */
+  /** Stage update callback  */
   onStageUpdate?: (stageId: string, progress: number) => void;
 
-  /** Error recovery configuration */
+  /** Error recovery configuration  */
   errorRecovery?: ErrorRecoveryConfig;
 
-  /** Custom stage handlers */
+  /** Custom stage handlers  */
   stageHandlers?: Record<string, (context: StageExecutionContext) => Promise<any>>;
 }
 
 interface ProcessingState {
-  /** Current processing status */
+  /** Current processing status  */
   status: ProcessingJobStatus;
 
-  /** Overall progress (0-100) */
+  /** Overall progress (0-100)  */
   progress: number;
 
-  /** Currently active stage */
+  /** Currently active stage  */
   currentStage?: string;
 
-  /** Processing stages */
+  /** Processing stages  */
   stages: ProcessingStage[];
 
-  /** Error information */
+  /** Error information  */
   error?: string;
 
-  /** Retry count */
+  /** Retry count  */
   retryCount: number;
 
-  /** Stage execution results */
+  /** Stage execution results  */
   stageResults: Record<string, any>;
 
-  /** Processing start time */
+  /** Processing start time  */
   startTime?: Date;
 
-  /** Estimated completion time */
+  /** Estimated completion time  */
   estimatedCompletion?: Date;
 }
 
@@ -101,7 +102,7 @@ export const useCVProcessorLogic = ({
 
   /**
    * Initialize processing
-   */
+    */
   const initializeProcessing = useCallback((job: ProcessingJob) => {
     const startTime = new Date();
     const totalDuration = stages.reduce((sum, stage) => sum + stage.estimatedDuration, 0);
@@ -131,7 +132,7 @@ export const useCVProcessorLogic = ({
 
   /**
    * Execute processing stage
-   */
+    */
   const executeStage = useCallback(async (
     stageId: string,
     job: ProcessingJob,
@@ -229,7 +230,7 @@ export const useCVProcessorLogic = ({
 
   /**
    * Default stage handler (fallback)
-   */
+    */
   const defaultStageHandler = async (
     stageId: string,
     context: StageExecutionContext
@@ -263,7 +264,7 @@ export const useCVProcessorLogic = ({
 
   /**
    * Execute all stages in sequence
-   */
+    */
   const executeAllStages = useCallback(async (job: ProcessingJob): Promise<void> => {
     const cancellationToken = initializeProcessing(job);
 
@@ -313,7 +314,7 @@ export const useCVProcessorLogic = ({
 
   /**
    * Check if error is recoverable
-   */
+    */
   const isRecoverableError = useCallback((error: string): boolean => {
     return errorRecovery.recoverableErrors.some(pattern =>
       error.toLowerCase().includes(pattern.toLowerCase())
@@ -322,7 +323,7 @@ export const useCVProcessorLogic = ({
 
   /**
    * Handle recoverable errors with retry logic
-   */
+    */
   const handleRecoverableError = useCallback(async (
     job: ProcessingJob,
     error: string
@@ -360,7 +361,7 @@ export const useCVProcessorLogic = ({
 
   /**
    * Cancel processing
-   */
+    */
   const cancelProcessing = useCallback(() => {
     cancellationTokenRef.current.cancel();
 
@@ -377,7 +378,7 @@ export const useCVProcessorLogic = ({
 
   /**
    * Reset processing state
-   */
+    */
   const resetProcessing = useCallback(() => {
     cancelProcessing();
 
@@ -395,14 +396,14 @@ export const useCVProcessorLogic = ({
 
   /**
    * Get stage by ID
-   */
+    */
   const getStage = useCallback((stageId: string) => {
     return state.stages.find(stage => stage.id === stageId);
   }, [state.stages]);
 
   /**
    * Get stage results
-   */
+    */
   const getStageResults = useCallback((stageId?: string) => {
     if (stageId) {
       return state.stageResults[stageId];
@@ -412,7 +413,7 @@ export const useCVProcessorLogic = ({
 
   /**
    * Calculate progress statistics
-   */
+    */
   const getProgressStats = useCallback(() => {
     const completed = state.stages.filter(s => s.status === 'completed').length;
     const failed = state.stages.filter(s => s.status === 'failed').length;

@@ -1,7 +1,8 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * CV Job Model Service
  * Handles CV job operations for the CV Processing submodule
- */
+  */
 
 import * as admin from 'firebase-admin';
 
@@ -47,7 +48,7 @@ export interface CVJob {
 
 /**
  * Get CV job by ID
- */
+  */
 export async function getCVJob(jobId: string): Promise<CVJob | null> {
   try {
     const db = admin.firestore();
@@ -74,7 +75,7 @@ export async function getCVJob(jobId: string): Promise<CVJob | null> {
 
 /**
  * Create new CV job
- */
+  */
 export async function createCVJob(jobData: Omit<CVJob, 'id' | 'createdAt' | 'updatedAt'>): Promise<string> {
   try {
     const db = admin.firestore();
@@ -95,7 +96,7 @@ export async function createCVJob(jobData: Omit<CVJob, 'id' | 'createdAt' | 'upd
 
 /**
  * Update CV job status
- */
+  */
 export async function updateCVJobStatus(jobId: string, status: JobStatus, error?: string): Promise<void> {
   try {
     const db = admin.firestore();
@@ -117,7 +118,7 @@ export async function updateCVJobStatus(jobId: string, status: JobStatus, error?
 
 /**
  * Update CV job with processed CV ID
- */
+  */
 export async function updateCVJobWithProcessedCV(jobId: string, processedCVId: string): Promise<void> {
   try {
     const db = admin.firestore();
@@ -133,7 +134,7 @@ export async function updateCVJobWithProcessedCV(jobId: string, processedCVId: s
 
 /**
  * Get CV jobs by user ID
- */
+  */
 export async function getCVJobsByUserId(userId: string, limit = 50): Promise<CVJob[]> {
   try {
     const db = admin.firestore();

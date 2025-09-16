@@ -1,11 +1,12 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Shared constants for CV processing
  * 
  * This module exports constants that are shared between frontend and backend:
  * - Processing configuration
  * - API endpoints
  * - Default values
- */
+  */
 
 // Processing configuration constants
 export const PROCESSING_CONFIG = {

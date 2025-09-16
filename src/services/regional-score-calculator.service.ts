@@ -1,14 +1,15 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Regional Score Calculator for CV Processing
  * Moved from i18n module to correct cv-processing domain
- */
+  */
 
 import { ParsedCV, RegionalConfiguration, RegionalScore, ScoreBreakdown } from '../types/regional';
 
 export class RegionalScoreCalculator {
   /**
    * Calculate comprehensive regional compatibility score for CV
-   */
+    */
   async calculateRegionalScore(cvData: ParsedCV, regionConfig: RegionalConfiguration): Promise<RegionalScore> {
     const categories = {
       legal: await this.calculateLegalScore(cvData, regionConfig),

@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * CV Data Validation Module
  *
  * Validates CV-specific data structures and content.
@@ -6,7 +7,7 @@
  *
  * @author Gil Klainert
  * @version 1.0.0
- */
+  */
 
 import { ValidationResult, ValidationError, ValidationErrorCode, ValidationOptions } from '../../../services/validation/types';
 import { TextValidator } from '../../../services/validation/text-validator';
@@ -34,7 +35,7 @@ export class CVValidator {
 
   /**
    * Validates personal information section
-   */
+    */
   validatePersonalInfo(personalInfo: any): ValidationResult {
     const errors: ValidationError[] = [];
     const sanitizedData: any = {};
@@ -111,7 +112,7 @@ export class CVValidator {
 
   /**
    * Validates work experience array
-   */
+    */
   validateExperience(experience: any[]): ValidationResult {
     const errors: ValidationError[] = [];
     const sanitizedData: any[] = [];
@@ -203,7 +204,7 @@ export class CVValidator {
 
   /**
    * Validates skills array
-   */
+    */
   validateSkills(skills: any[]): ValidationResult {
     const errors: ValidationError[] = [];
     const sanitizedData: any[] = [];
@@ -263,7 +264,7 @@ export class CVValidator {
 
   /**
    * Validates education array
-   */
+    */
   validateEducation(education: any[]): ValidationResult {
     const errors: ValidationError[] = [];
     const sanitizedData: any[] = [];

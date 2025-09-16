@@ -1,9 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Format Optimization Service
  * 
  * Specialized service for CV format optimization, ATS-friendly templates,
  * and structure recommendations for better parsing compatibility.
- */
+  */
 
 import { ParsedCV } from '../../types/enhanced-models';
 
@@ -38,7 +39,7 @@ export class FormatOptimizationService {
 
   /**
    * Get ATS-optimized templates based on industry and role
-   */
+    */
   async getATSTemplates(industry?: string, role?: string): Promise<ATSTemplate[]> {
     const allTemplates = this.getTemplateLibrary();
     
@@ -71,7 +72,7 @@ export class FormatOptimizationService {
 
   /**
    * Analyze current CV format and provide optimization recommendations
-   */
+    */
   analyzeFormatCompatibility(parsedCV: ParsedCV): {
     overallScore: number;
     issues: string[];
@@ -112,7 +113,7 @@ export class FormatOptimizationService {
 
   /**
    * Get template library with ATS-optimized formats
-   */
+    */
   private getTemplateLibrary(): ATSTemplate[] {
     return [
       {
@@ -312,7 +313,7 @@ export class FormatOptimizationService {
 
   /**
    * Analyze section structure for ATS compatibility
-   */
+    */
   private analyzeSectionStructure(parsedCV: ParsedCV): string[] {
     const issues: string[] = [];
     
@@ -347,7 +348,7 @@ export class FormatOptimizationService {
 
   /**
    * Analyze formatting consistency
-   */
+    */
   private analyzeFormattingConsistency(parsedCV: ParsedCV): string[] {
     const issues: string[] = [];
     
@@ -375,7 +376,7 @@ export class FormatOptimizationService {
 
   /**
    * Analyze ATS-friendly elements
-   */
+    */
   private analyzeATSFriendliness(parsedCV: ParsedCV): string[] {
     const issues: string[] = [];
     
@@ -411,7 +412,7 @@ export class FormatOptimizationService {
 
   /**
    * Generate format recommendations based on issues
-   */
+    */
   private generateFormatRecommendations(issues: string[]): string[] {
     const recommendations: string[] = [];
     
@@ -441,7 +442,7 @@ export class FormatOptimizationService {
 
   /**
    * Calculate format compatibility score
-   */
+    */
   private calculateFormatScore(parsedCV: ParsedCV, issues: string[]): number {
     let score = 100;
     
@@ -470,7 +471,7 @@ export class FormatOptimizationService {
 
   /**
    * Recommend best templates for specific CV
-   */
+    */
   private recommendTemplatesForCV(parsedCV: ParsedCV): string[] {
     // Note: template library integration pending - using hardcoded recommendations for now
     const recommendations: string[] = [];
@@ -506,7 +507,7 @@ export class FormatOptimizationService {
 
   /**
    * Calculate average compatibility score
-   */
+    */
   private calculateAverageCompatibility(compatibility: any): number {
     const scores = Object.values(compatibility) as number[];
     return scores.reduce((sum, score) => sum + score, 0) / scores.length;

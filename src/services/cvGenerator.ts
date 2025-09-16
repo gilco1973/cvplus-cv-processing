@@ -1,4 +1,4 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflictsimport { ParsedCV } from './cvParser';
+// @ts-ignore - Export conflicts/cvParser';
 import { 
   TemplateType, 
   FeatureType, 
@@ -12,7 +12,7 @@ import { FileManager } from './cv-generator/files/FileManager';
 /**
  * Refactored CV Generator using modular architecture
  * Orchestrates template generation, feature integration, and file management
- */
+  */
 export class CVGenerator {
   private fileManager: FileManager;
 
@@ -22,7 +22,7 @@ export class CVGenerator {
 
   /**
    * Generate complete HTML CV with template and features
-   */
+    */
   async generateHTML(
     parsedCV: ParsedCV, 
     template: string, 
@@ -66,7 +66,7 @@ export class CVGenerator {
 
   /**
    * Save generated CV files (HTML, PDF, DOCX)
-   */
+    */
   async saveGeneratedFiles(
     jobId: string,
     userId: string,
@@ -77,14 +77,14 @@ export class CVGenerator {
 
   /**
    * Delete generated files for a job
-   */
+    */
   async deleteGeneratedFiles(userId: string, jobId: string): Promise<void> {
     return await this.fileManager.deleteGeneratedFiles(userId, jobId);
   }
 
   /**
    * Check if files exist for a job
-   */
+    */
   async checkFilesExist(userId: string, jobId: string): Promise<{
     htmlExists: boolean;
     pdfExists: boolean;
@@ -95,7 +95,7 @@ export class CVGenerator {
 
   /**
    * Validate template type
-   */
+    */
   private validateTemplateType(template: string): TemplateType {
     if (!TemplateRegistry.isSupported(template)) {
       return 'modern';
@@ -105,7 +105,7 @@ export class CVGenerator {
 
   /**
    * Validate and filter features
-   */
+    */
   private validateFeatures(features: string[]): FeatureType[] {
     const validFeatures: FeatureType[] = [];
     
@@ -122,14 +122,14 @@ export class CVGenerator {
 
   /**
    * Get supported template types
-   */
+    */
   getSupportedTemplates(): TemplateType[] {
     return TemplateRegistry.getSupportedTypes();
   }
 
   /**
    * Get supported feature types
-   */
+    */
   getSupportedFeatures(): FeatureType[] {
     return FeatureRegistry.getSupportedTypes();
   }

@@ -1,9 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Advanced Predictions Firebase Functions
  * 
  * Provides sophisticated prediction capabilities including salary forecasting,
  * time-to-hire estimation, competitive analysis, and market positioning.
- */
+  */
 
 import { onCall, HttpsError } from 'firebase-functions/v2/https';
 import { CallableRequest } from 'firebase-functions/v2/https';
@@ -24,7 +25,7 @@ const db = admin.firestore();
 
 /**
  * Generate advanced salary prediction with market analysis
- */
+  */
 export const predictSalaryAdvanced = onCall(
   { ...corsOptions, timeoutSeconds: 60 },
   async (request: CallableRequest) => {
@@ -94,7 +95,7 @@ export const predictSalaryAdvanced = onCall(
 
 /**
  * Generate advanced time-to-hire prediction
- */
+  */
 export const predictTimeToHireAdvanced = onCall(
   { ...corsOptions, timeoutSeconds: 60 },
   async (request: CallableRequest) => {
@@ -158,7 +159,7 @@ export const predictTimeToHireAdvanced = onCall(
 
 /**
  * Generate comprehensive competitive analysis
- */
+  */
 export const generateCompetitiveAnalysis = onCall(
   { ...corsOptions, timeoutSeconds: 90 },
   async (request: CallableRequest) => {
@@ -222,7 +223,7 @@ export const generateCompetitiveAnalysis = onCall(
 
 /**
  * Generate market insights and trends
- */
+  */
 export const generateMarketInsights = onCall(
   { ...corsOptions, timeoutSeconds: 60 },
   async (request: CallableRequest) => {
@@ -286,7 +287,7 @@ export const generateMarketInsights = onCall(
 
 /**
  * Generate negotiation insights and strategy
- */
+  */
 export const generateNegotiationInsights = onCall(
   { ...corsOptions, timeoutSeconds: 60 },
   async (request: CallableRequest) => {
@@ -350,7 +351,7 @@ export const generateNegotiationInsights = onCall(
 
 /**
  * Get comprehensive prediction package (all predictions in one call)
- */
+  */
 export const getComprehensivePredictions = onCall(
   { ...corsOptions, timeoutSeconds: 120 },
   async (request: CallableRequest) => {
@@ -446,7 +447,7 @@ export const getComprehensivePredictions = onCall(
 
 /**
  * Get user's advanced prediction history
- */
+  */
 export const getUserAdvancedPredictionHistory = onCall(
   { ...corsOptions, timeoutSeconds: 30 },
   async (request: CallableRequest) => {

@@ -1,18 +1,19 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * CV Generation Helper Functions
  * 
  * Utility functions supporting CV generation process.
  * 
  * @author Gil Klainert
  * @version 1.0.0
- */
+  */
 
 import * as admin from 'firebase-admin';
 import { FieldValue } from 'firebase-admin/firestore';
 
 /**
  * Handle special features that require additional processing
- */
+  */
 export async function handleSpecialFeatures(jobId: string, features?: string[]): Promise<void> {
   if (!features) return;
 
@@ -41,7 +42,7 @@ export async function handleSpecialFeatures(jobId: string, features?: string[]):
 
 /**
  * Handle generation errors with proper logging and status updates
- */
+  */
 export async function handleGenerationError(jobId: string, error: any): Promise<void> {
   const errorMessage = error instanceof Error ? error.message : 'Unknown error';
   const errorStack = error instanceof Error ? error.stack : '';
@@ -75,7 +76,7 @@ export async function handleGenerationError(jobId: string, error: any): Promise<
 
 /**
  * Determine if an error is retryable
- */
+  */
 export function isRetryableError(errorMessage: string): boolean {
   const retryablePatterns = [
     'timeout',

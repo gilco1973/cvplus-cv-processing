@@ -1,4 +1,4 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflictsimport { onCall, HttpsError } from 'firebase-functions/v2/https';
+// @ts-ignore - Export conflicts/v2/https';
 import { logger } from 'firebase-functions/v2';
 import { authGuard } from '@cvplus/auth/middleware/authGuard';
 import { premiumGuard } from '@cvplus/premium/middleware/premiumGuard';
@@ -41,7 +41,7 @@ interface TranslateProfessionalResponse {
 /**
  * Firebase Function to translate professional terminology with industry-specific accuracy
  * Includes job titles, skills, industries, degrees, certifications, and company names
- */
+  */
 export const translateProfessional = onCall<TranslateProfessionalRequest, Promise<TranslateProfessionalResponse>>(
   {
     region: 'us-central1',

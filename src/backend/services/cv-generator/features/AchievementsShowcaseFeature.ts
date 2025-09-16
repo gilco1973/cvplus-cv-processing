@@ -1,9 +1,9 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflictsimport { CVFeature } from '../types';
+// @ts-ignore - Export conflicts/types';
 import { ParsedCV } from '../../cvParser';
 
 /**
  * Achievements Showcase Feature - Generates interactive achievements showcase for CV
- */
+  */
 export class AchievementsShowcaseFeature implements CVFeature {
   
   async generate(cv: ParsedCV, jobId: string, options?: any): Promise<string> {
@@ -15,7 +15,7 @@ export class AchievementsShowcaseFeature implements CVFeature {
   
   /**
    * Generate React component placeholder for modern CV rendering
-   */
+    */
   private generateReactComponentPlaceholder(jobId: string, contactName: string, cv: ParsedCV, options?: any): string {
     // Extract achievements from CV data
     const achievements = this.extractAchievements(cv);
@@ -64,7 +64,7 @@ export class AchievementsShowcaseFeature implements CVFeature {
 
   /**
    * Extract achievements from CV data
-   */
+    */
   private extractAchievements(cv: ParsedCV): any[] {
     const achievements: any[] = [];
 
@@ -251,7 +251,7 @@ export class AchievementsShowcaseFeature implements CVFeature {
 
   /**
    * Get highlighted achievements (high importance ones)
-   */
+    */
   private getHighlightedAchievements(achievements: any[]): string[] {
     return achievements
       .filter(ach => ach.importance === 'high')
@@ -261,7 +261,7 @@ export class AchievementsShowcaseFeature implements CVFeature {
 
   /**
    * Calculate duration between two dates
-   */
+    */
   private calculateDuration(startDate: string, endDate?: string): string {
     const start = new Date(startDate);
     const end = endDate ? new Date(endDate) : new Date();
@@ -282,7 +282,7 @@ export class AchievementsShowcaseFeature implements CVFeature {
 
   /**
    * Extract metrics from achievement descriptions (basic text analysis)
-   */
+    */
   private extractMetricsFromDescription(description: string): any[] {
     const metrics: any[] = [];
     
@@ -330,12 +330,12 @@ export class AchievementsShowcaseFeature implements CVFeature {
 
   getStyles(): string {
     return `
-      /* CV Achievements Showcase Feature Container Styles */
+      /* CV Achievements Showcase Feature Container Styles  */
       .cv-feature-container.achievements-showcase-feature {
         margin: 2rem 0;
       }
       
-      /* React Component Placeholder Styles */
+      /* React Component Placeholder Styles  */
       .react-component-placeholder[data-component="AchievementCards"] {
         min-height: 600px;
         position: relative;
@@ -346,7 +346,7 @@ export class AchievementsShowcaseFeature implements CVFeature {
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
       }
       
-      /* Loading state for achievements */
+      /* Loading state for achievements  */
       .achievements-showcase-feature .component-loading {
         display: flex;
         flex-direction: column;
@@ -366,7 +366,7 @@ export class AchievementsShowcaseFeature implements CVFeature {
         margin-bottom: 1rem;
       }
       
-      /* Achievements fallback styles */
+      /* Achievements fallback styles  */
       .achievements-fallback {
         text-align: center;
         padding: 3rem;
@@ -552,7 +552,7 @@ export class AchievementsShowcaseFeature implements CVFeature {
         letter-spacing: 0.05em;
       }
       
-      /* Dark mode support */
+      /* Dark mode support  */
       @media (prefers-color-scheme: dark) {
         .react-component-placeholder[data-component="AchievementCards"] {
           background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
@@ -629,7 +629,7 @@ export class AchievementsShowcaseFeature implements CVFeature {
         }
       }
       
-      /* Mobile responsive */
+      /* Mobile responsive  */
       @media (max-width: 768px) {
         .cv-feature-container.achievements-showcase-feature {
           margin: 1rem 0;

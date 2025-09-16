@@ -1,8 +1,9 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * LivePreview Component Types
  *
  * Type definitions for the LivePreview component system
- */
+  */
 
 export type ViewportMode = 'desktop' | 'tablet' | 'mobile' | 'print';
 export type PreviewMode = 'split' | 'preview-only' | 'editor-only';

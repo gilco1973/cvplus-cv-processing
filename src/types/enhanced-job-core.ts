@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Enhanced Job Core Types
  * 
  * Core enhanced job interface for CV enhancement features.
@@ -6,19 +7,19 @@
  * 
  * @author Gil Klainert
  * @version 1.0.0
- */
+  */
 
 import { Job } from './job';
 
 /**
  * Enhanced Job interface with all new features
  * Main interface that extends the base Job with enhancement capabilities
- */
+  */
 export interface EnhancedJob extends Job {
-  /** Industry information for ATS optimization */
+  /** Industry information for ATS optimization  */
   industry?: string;
   
-  /** Enhancement features status and data */
+  /** Enhancement features status and data  */
   enhancedFeatures?: {
     [featureId: string]: {
       enabled: boolean;
@@ -29,7 +30,7 @@ export interface EnhancedJob extends Job {
     };
   };
   
-  /** Analytics data tracking */
+  /** Analytics data tracking  */
   analytics?: {
     qrCodeScans: number;
     profileViews: number;
@@ -40,7 +41,7 @@ export interface EnhancedJob extends Job {
     lastViewedAt?: Date;
   };
   
-  /** Media assets generated for this CV */
+  /** Media assets generated for this CV  */
   mediaAssets?: {
     videoIntroUrl?: string;
     videoThumbnailUrl?: string;
@@ -60,7 +61,7 @@ export interface EnhancedJob extends Job {
     }>;
   };
   
-  /** Interactive features data */
+  /** Interactive features data  */
   interactiveData?: {
     availabilityCalendar?: any; // Will reference CalendarSettings from another module
     testimonials?: any[]; // Will reference Testimonial[] from another module
@@ -69,7 +70,7 @@ export interface EnhancedJob extends Job {
     certifications?: any[]; // Will reference Certification[] from another module
   };
   
-  /** Privacy and sharing settings */
+  /** Privacy and sharing settings  */
   privacySettings?: {
     showContactInfo: boolean;
     showSocialLinks: boolean;
@@ -84,7 +85,7 @@ export interface EnhancedJob extends Job {
     requireContactFormForCV: boolean;
   };
   
-  /** AI-generated content and insights */
+  /** AI-generated content and insights  */
   aiGeneratedContent?: {
     personalityInsights?: string;
     careerGuidance?: string;
@@ -93,10 +94,10 @@ export interface EnhancedJob extends Job {
     skillGapAnalysis?: string;
   };
   
-  /** RAG system data for AI chat functionality */
+  /** RAG system data for AI chat functionality  */
   ragProfile?: any; // Will reference UserRAGProfile from enhanced-rag module
   
-  /** RAG chat data and settings */
+  /** RAG chat data and settings  */
   ragChat?: {
     enabled: boolean;
     config?: any;
@@ -112,10 +113,10 @@ export interface EnhancedJob extends Job {
     };
   };
   
-  /** ATS optimization data and results */
+  /** ATS optimization data and results  */
   atsOptimization?: any; // Will reference ATSOptimizationResult from enhanced-ats module
   
-  /** Feature interaction tracking for analytics */
+  /** Feature interaction tracking for analytics  */
   featureInteractions?: Array<{
     featureId: string;
     userId: string;

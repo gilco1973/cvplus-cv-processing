@@ -1,6 +1,7 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * AI Personality Insights Service
- */
+  */
 
 import OpenAI from 'openai';
 import { config } from '../config/environment';
@@ -77,7 +78,7 @@ export class PersonalityInsightsService {
   
   /**
    * Analyze CV and generate personality insights
-   */
+    */
   async analyzePersonality(parsedCV: ParsedCV): Promise<PersonalityProfile> {
     // 1. Extract text content for analysis
     const cvContent = this.extractCVContent(parsedCV);
@@ -129,7 +130,7 @@ export class PersonalityInsightsService {
   
   /**
    * Extract relevant content from CV
-   */
+    */
   private extractCVContent(cv: ParsedCV): {
     summary: string;
     experiences: string[];
@@ -187,7 +188,7 @@ export class PersonalityInsightsService {
   
   /**
    * Analyze personality traits from CV content
-   */
+    */
   private async analyzeTraits(content: any): Promise<PersonalityProfile['traits']> {
     const traits: PersonalityProfile['traits'] = {
       leadership: 0,
@@ -236,7 +237,7 @@ export class PersonalityInsightsService {
   
   /**
    * Refine trait scores using AI analysis
-   */
+    */
   private async refineTraitsWithAI(
     content: any,
     initialTraits: PersonalityProfile['traits']
@@ -293,7 +294,7 @@ Provide refined scores based on the context. Return only the scores in format: t
   
   /**
    * Determine work style based on traits and content
-   */
+    */
   private async determineWorkStyle(
     content: any,
     traits: PersonalityProfile['traits']
@@ -342,7 +343,7 @@ Provide refined scores based on the context. Return only the scores in format: t
   
   /**
    * Assess team compatibility
-   */
+    */
   private async assessTeamCompatibility(
     traits: PersonalityProfile['traits'],
     workStyle: string[]
@@ -400,7 +401,7 @@ Provide refined scores based on the context. Return only the scores in format: t
   
   /**
    * Calculate leadership potential
-   */
+    */
   private calculateLeadershipPotential(
     traits: PersonalityProfile['traits'],
     content: any
@@ -430,7 +431,7 @@ Provide refined scores based on the context. Return only the scores in format: t
   
   /**
    * Evaluate culture fit for different environments
-   */
+    */
   private async evaluateCultureFit(
     traits: PersonalityProfile['traits'],
     workStyle: string[],
@@ -502,7 +503,7 @@ Provide refined scores based on the context. Return only the scores in format: t
   
   /**
    * Generate personality summary
-   */
+    */
   private async generatePersonalitySummary(
     traits: PersonalityProfile['traits'],
     workStyle: string[],
@@ -553,7 +554,7 @@ Make it positive and professional, focusing on strengths.`;
   
   /**
    * Generate default summary if AI fails
-   */
+    */
   private generateDefaultSummary(
     topTraits: string[],
     workStyle: string[],
@@ -575,7 +576,7 @@ Make it positive and professional, focusing on strengths.`;
   
   /**
    * Parse AI scores from response
-   */
+    */
   private parseAIScores(text: string): Record<string, number> {
     const scores: Record<string, number> = {};
     const lines = text.split('\n');
@@ -596,7 +597,7 @@ Make it positive and professional, focusing on strengths.`;
 
   /**
    * Generate personality insights (wrapper for analyzePersonality)
-   */
+    */
   async generateInsights(
     parsedCV: ParsedCV | CVData,
     depth: string = 'detailed',
@@ -628,7 +629,7 @@ Make it positive and professional, focusing on strengths.`;
 
   /**
    * Compare two personality profiles
-   */
+    */
   async comparePersonalities(
     profile1: PersonalityProfile,
     profile2: PersonalityProfile
@@ -642,7 +643,7 @@ Make it positive and professional, focusing on strengths.`;
 
   /**
    * Extract strengths from traits
-   */
+    */
   private extractStrengths(traits: PersonalityProfile['traits']): string[] {
     const strengths = [];
     if (traits.leadership >= 7) strengths.push('Strong leadership capabilities');
@@ -656,7 +657,7 @@ Make it positive and professional, focusing on strengths.`;
 
   /**
    * Extract motivations from traits and content
-   */
+    */
   private extractMotivations(traits: PersonalityProfile['traits'], content: any): string[] {
     const motivations = [];
     if (traits.innovation >= 7) motivations.push('Creating innovative solutions');
@@ -669,7 +670,7 @@ Make it positive and professional, focusing on strengths.`;
 
   /**
    * Extract communication preferences
-   */
+    */
   private extractCommunicationPreferences(traits: PersonalityProfile['traits']): string[] {
     const preferences = [];
     if (traits.communication >= 8) preferences.push('Clear and direct communication');
@@ -681,7 +682,7 @@ Make it positive and professional, focusing on strengths.`;
 
   /**
    * Extract problem-solving approach
-   */
+    */
   private extractProblemSolvingApproach(traits: PersonalityProfile['traits']): string {
     if (traits.analytical >= 8) return 'Systematic and data-driven approach';
     if (traits.creative >= 8) return 'Creative and innovative problem solving';
@@ -691,7 +692,7 @@ Make it positive and professional, focusing on strengths.`;
 
   /**
    * Extract adaptability description
-   */
+    */
   private extractAdaptabilityDescription(traits: PersonalityProfile['traits']): string {
     if (traits.adaptability >= 8) return 'Highly adaptable to change and new environments';
     if (traits.adaptability >= 6) return 'Comfortable with change and learning new skills';
@@ -700,7 +701,7 @@ Make it positive and professional, focusing on strengths.`;
 
   /**
    * Extract stress management approach
-   */
+    */
   private extractStressManagement(traits: PersonalityProfile['traits']): string {
     if (traits.strategic_thinking >= 7) return 'Strategic planning and prioritization';
     if (traits.teamwork >= 7) return 'Collaborative support and team communication';
@@ -710,7 +711,7 @@ Make it positive and professional, focusing on strengths.`;
 
   /**
    * Extract career aspirations
-   */
+    */
   private extractCareerAspirations(content: any): string[] {
     const aspirations = ['Professional growth and advancement'];
     if (content.experiences.some((exp: string) => exp.toLowerCase().includes('lead'))) {
@@ -725,7 +726,7 @@ Make it positive and professional, focusing on strengths.`;
 
   /**
    * Extract values from traits and content
-   */
+    */
   private extractValues(traits: PersonalityProfile['traits'], content: any): string[] {
     const values = [];
     if (traits.teamwork >= 7) values.push('Collaboration and teamwork');
@@ -739,7 +740,7 @@ Make it positive and professional, focusing on strengths.`;
 
   /**
    * Generate summary from personality profile
-   */
+    */
   generateSummary(profile: PersonalityProfile): any {
     return {
       overview: profile.summary,

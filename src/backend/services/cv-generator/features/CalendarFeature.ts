@@ -1,9 +1,9 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflictsimport { CVFeature } from '../types';
+// @ts-ignore - Export conflicts/types';
 import { ParsedCV } from '../../cvParser';
 
 /**
  * Calendar Feature - Generates interactive calendar integration for CV
- */
+  */
 export class CalendarFeature implements CVFeature {
   
   async generate(cv: ParsedCV, jobId: string, options?: any): Promise<string> {
@@ -15,7 +15,7 @@ export class CalendarFeature implements CVFeature {
   
   /**
    * Generate React component placeholder for modern CV rendering
-   */
+    */
   private generateReactComponentPlaceholder(jobId: string, contactName: string, cv: ParsedCV, options?: any): string {
     // Extract calendar events from CV data
     const events = this.extractCalendarEvents(cv);
@@ -64,7 +64,7 @@ export class CalendarFeature implements CVFeature {
 
   /**
    * Extract calendar events from CV data
-   */
+    */
   private extractCalendarEvents(cv: ParsedCV): any[] {
     const events: any[] = [];
 
@@ -144,12 +144,12 @@ export class CalendarFeature implements CVFeature {
 
   getStyles(): string {
     return `
-      /* CV Calendar Feature Container Styles */
+      /* CV Calendar Feature Container Styles  */
       .cv-feature-container.calendar-integration-feature {
         margin: 2rem 0;
       }
       
-      /* React Component Placeholder Styles */
+      /* React Component Placeholder Styles  */
       .react-component-placeholder[data-component="CalendarIntegration"] {
         min-height: 500px;
         position: relative;
@@ -160,7 +160,7 @@ export class CalendarFeature implements CVFeature {
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
       }
       
-      /* Loading state for calendar */
+      /* Loading state for calendar  */
       .calendar-integration-feature .component-loading {
         display: flex;
         flex-direction: column;
@@ -180,7 +180,7 @@ export class CalendarFeature implements CVFeature {
         margin-bottom: 1rem;
       }
       
-      /* Calendar fallback styles */
+      /* Calendar fallback styles  */
       .calendar-fallback {
         text-align: center;
         padding: 3rem;
@@ -310,7 +310,7 @@ export class CalendarFeature implements CVFeature {
         line-height: 1.5;
       }
       
-      /* Dark mode support */
+      /* Dark mode support  */
       @media (prefers-color-scheme: dark) {
         .react-component-placeholder[data-component="CalendarIntegration"] {
           background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
@@ -368,7 +368,7 @@ export class CalendarFeature implements CVFeature {
         }
       }
       
-      /* Mobile responsive */
+      /* Mobile responsive  */
       @media (max-width: 768px) {
         .cv-feature-container.calendar-integration-feature {
           margin: 1rem 0;

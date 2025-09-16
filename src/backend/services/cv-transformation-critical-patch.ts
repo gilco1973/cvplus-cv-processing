@@ -1,7 +1,8 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Critical Runtime Error Patches for CV Transformation Service
  * Addresses: Memory leaks, error handling, and stability issues
- */
+  */
 
 // Simple logger implementation since utils/logger doesn't exist
 const logger = {
@@ -18,7 +19,7 @@ export class CVTransformationCriticalPatch {
 
   /**
    * Circuit breaker pattern for error handling
-   */
+    */
   public static async withCircuitBreaker<T>(
     operation: () => Promise<T>,
     operationName: string
@@ -40,7 +41,7 @@ export class CVTransformationCriticalPatch {
 
   /**
    * Memory-safe JSON parsing with size limits
-   */
+    */
   public static safeJsonParse(jsonString: string, maxSize: number = 10 * 1024 * 1024): any {
     // Check size before parsing to prevent memory issues
     if (jsonString.length > maxSize) {
@@ -57,7 +58,7 @@ export class CVTransformationCriticalPatch {
 
   /**
    * Timeout wrapper to prevent hanging operations
-   */
+    */
   public static withTimeout<T>(
     promise: Promise<T>,
     timeoutMs: number = 30000
@@ -72,7 +73,7 @@ export class CVTransformationCriticalPatch {
 
   /**
    * Memory cleanup helper
-   */
+    */
   public static cleanup(): void {
     if (global.gc) {
       try {
@@ -86,7 +87,7 @@ export class CVTransformationCriticalPatch {
 
   /**
    * Safe error response formatting
-   */
+    */
   public static formatErrorResponse(error: unknown): { success: false; error: string } {
     const errorMessage = error instanceof Error 
       ? error.message 
@@ -102,7 +103,7 @@ export class CVTransformationCriticalPatch {
 
   /**
    * Validate input data to prevent processing invalid data
-   */
+    */
   public static validateInput(data: any): boolean {
     if (!data) return false;
     if (typeof data !== 'object') return false;
@@ -126,7 +127,7 @@ export class CVTransformationCriticalPatch {
 
 /**
  * Enhanced error wrapper for CV transformation operations
- */
+  */
 export function withCriticalErrorHandling<T extends any[], R>(
   fn: (...args: T) => Promise<R>,
   operationName: string

@@ -1,12 +1,13 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Autonomous Utility Functions
  * Replaces @cvplus/core/utils dependencies for independent operation
- */
+  */
 
 /**
  * Combines CSS class names, filtering out falsy values
  * Replaces the `cn` utility from @cvplus/core/utils
- */
+  */
 export function cn(...classes: (string | undefined | null | boolean | number)[]): string {
   return classes
     .filter((cls): cls is string => Boolean(cls) && typeof cls === 'string')
@@ -16,14 +17,14 @@ export function cn(...classes: (string | undefined | null | boolean | number)[])
 
 /**
  * Safely get nested object property
- */
+  */
 export function getNestedProperty(obj: any, path: string): any {
   return path.split('.').reduce((current, key) => current?.[key], obj);
 }
 
 /**
  * Format file size in human readable format
- */
+  */
 export function formatFileSize(bytes: number): string {
   if (bytes === 0) return '0 Bytes';
   
@@ -36,7 +37,7 @@ export function formatFileSize(bytes: number): string {
 
 /**
  * Debounce function calls
- */
+  */
 export function debounce<T extends (...args: any[]) => any>(
   func: T,
   wait: number
@@ -51,7 +52,7 @@ export function debounce<T extends (...args: any[]) => any>(
 
 /**
  * Generate unique ID
- */
+  */
 export function generateId(prefix = ''): string {
   const timestamp = Date.now();
   const random = Math.random().toString(36).substr(2, 9);
@@ -60,14 +61,14 @@ export function generateId(prefix = ''): string {
 
 /**
  * Capitalize first letter of a string
- */
+  */
 export function capitalize(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
 
 /**
  * Truncate string with ellipsis
- */
+  */
 export function truncate(str: string, length: number): string {
   return str.length <= length ? str : str.slice(0, length) + '...';
 }
@@ -75,14 +76,14 @@ export function truncate(str: string, length: number): string {
 /**
  * Check if value is an object
  * Replaces error-handling utility from @cvplus/core
- */
+  */
 export function isObject(value: any): value is Record<string, any> {
   return value !== null && typeof value === 'object' && !Array.isArray(value);
 }
 
 /**
  * Safely stringify object for logging
- */
+  */
 export function safeStringify(obj: any): string {
   try {
     return JSON.stringify(obj, null, 2);
@@ -93,7 +94,7 @@ export function safeStringify(obj: any): string {
 
 /**
  * Safe error message extraction
- */
+  */
 export function getErrorMessage(error: unknown): string {
   if (error instanceof Error) {
     return error.message;

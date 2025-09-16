@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * CV Processor Types (T067)
  *
  * Type definitions for the CVProcessor component and related
@@ -6,7 +7,7 @@
  *
  * @author Gil Klainert
  * @version 1.0.0 - Initial T067 Implementation
- */
+  */
 
 import { ReactNode } from 'react';
 import type { ProcessingStep } from './ProcessingStatus';
@@ -14,7 +15,7 @@ import type { CVData } from '../../types/cv.types';
 
 /**
  * Processing job status enumeration
- */
+  */
 export type ProcessingJobStatus =
   | 'idle'          // Not started
   | 'queued'        // Waiting in queue
@@ -26,141 +27,141 @@ export type ProcessingJobStatus =
 
 /**
  * Processing stage definition
- */
+  */
 export interface ProcessingStage {
-  /** Unique stage identifier */
+  /** Unique stage identifier  */
   id: string;
 
-  /** Human-readable stage name */
+  /** Human-readable stage name  */
   name: string;
 
-  /** Stage description */
+  /** Stage description  */
   description?: string;
 
-  /** Current stage status */
+  /** Current stage status  */
   status: 'pending' | 'processing' | 'completed' | 'failed' | 'skipped';
 
-  /** Stage progress (0-100) */
+  /** Stage progress (0-100)  */
   progress: number;
 
-  /** Estimated duration in seconds */
+  /** Estimated duration in seconds  */
   estimatedDuration: number;
 
-  /** Actual duration in seconds */
+  /** Actual duration in seconds  */
   actualDuration?: number;
 
-  /** Stage-specific error message */
+  /** Stage-specific error message  */
   error?: string;
 
-  /** Stage-specific metadata */
+  /** Stage-specific metadata  */
   metadata?: Record<string, any>;
 }
 
 /**
  * Processing job definition
- */
+  */
 export interface ProcessingJob {
-  /** Unique job identifier */
+  /** Unique job identifier  */
   id: string;
 
-  /** Backend job identifier */
+  /** Backend job identifier  */
   backendJobId?: string;
 
-  /** Current job status */
+  /** Current job status  */
   status: ProcessingJobStatus;
 
-  /** Overall progress (0-100) */
+  /** Overall progress (0-100)  */
   progress: number;
 
-  /** Processing stages */
+  /** Processing stages  */
   stages: ProcessingStage[];
 
-  /** Currently active stage */
+  /** Currently active stage  */
   currentStage?: string;
 
-  /** Source file being processed */
+  /** Source file being processed  */
   file: File;
 
-  /** Processing options */
+  /** Processing options  */
   options: ProcessingJobOptions;
 
-  /** Processing result (when completed) */
+  /** Processing result (when completed)  */
   result?: ProcessingResult;
 
-  /** Error message (if failed) */
+  /** Error message (if failed)  */
   error?: string;
 
-  /** Retry attempt count */
+  /** Retry attempt count  */
   retryCount: number;
 
-  /** Job creation timestamp */
+  /** Job creation timestamp  */
   createdAt: Date;
 
-  /** Last update timestamp */
+  /** Last update timestamp  */
   updatedAt: Date;
 
-  /** Estimated completion time */
+  /** Estimated completion time  */
   estimatedCompletion?: Date;
 
-  /** Job priority (for queue management) */
+  /** Job priority (for queue management)  */
   priority?: number;
 
-  /** User identifier */
+  /** User identifier  */
   userId?: string;
 
-  /** Job metadata */
+  /** Job metadata  */
   metadata?: Record<string, any>;
 }
 
 /**
  * Processing job options
- */
+  */
 export interface ProcessingJobOptions {
-  /** Selected processing features */
+  /** Selected processing features  */
   features: string[];
 
-  /** Target job description (optional) */
+  /** Target job description (optional)  */
   jobDescription?: string;
 
-  /** CV template identifier */
+  /** CV template identifier  */
   templateId?: string;
 
-  /** Target industry */
+  /** Target industry  */
   industry?: string;
 
-  /** Target role/position */
+  /** Target role/position  */
   targetRole?: string;
 
-  /** Processing priority */
+  /** Processing priority  */
   priority?: 'low' | 'normal' | 'high' | 'urgent';
 
-  /** Skip certain stages */
+  /** Skip certain stages  */
   skipStages?: string[];
 
-  /** Stage-specific configurations */
+  /** Stage-specific configurations  */
   stageConfigs?: Record<string, any>;
 
-  /** Notification preferences */
+  /** Notification preferences  */
   notifications?: {
     email?: boolean;
     webhook?: string;
     stages?: string[];
   };
 
-  /** Additional processing options */
+  /** Additional processing options  */
   options?: Record<string, any>;
 }
 
 /**
  * Processing result definition
- */
+  */
 export interface ProcessingResult {
-  /** Processed CV data */
+  /** Processed CV data  */
   cvData: CVData;
 
-  /** Generated assets */
+  /** Generated assets  */
   assets: {
-    /** Generated documents */
+    /** Generated documents  */
     documents?: Array<{
       type: string;
       url: string;
@@ -168,7 +169,7 @@ export interface ProcessingResult {
       size: number;
     }>;
 
-    /** Generated multimedia */
+    /** Generated multimedia  */
     multimedia?: Array<{
       type: 'audio' | 'video' | 'image';
       url: string;
@@ -176,7 +177,7 @@ export interface ProcessingResult {
       duration?: number;
     }>;
 
-    /** Export formats */
+    /** Export formats  */
     exports?: Array<{
       format: string;
       url: string;
@@ -184,21 +185,21 @@ export interface ProcessingResult {
     }>;
   };
 
-  /** Processing analytics */
+  /** Processing analytics  */
   analytics: {
-    /** Processing time in milliseconds */
+    /** Processing time in milliseconds  */
     processingTime: number;
 
-    /** Stages completed */
+    /** Stages completed  */
     stagesCompleted: number;
 
-    /** Quality score */
+    /** Quality score  */
     qualityScore: number;
 
-    /** Feature analysis results */
+    /** Feature analysis results  */
     features: Record<string, any>;
 
-    /** Performance metrics */
+    /** Performance metrics  */
     performance: {
       memoryUsage: number;
       cpuTime: number;
@@ -206,71 +207,71 @@ export interface ProcessingResult {
     };
   };
 
-  /** Processing metadata */
+  /** Processing metadata  */
   metadata: {
-    /** Processing version */
+    /** Processing version  */
     version: string;
 
-    /** Processing timestamp */
+    /** Processing timestamp  */
     processedAt: Date;
 
-    /** Processing environment */
+    /** Processing environment  */
     environment: string;
 
-    /** Additional metadata */
+    /** Additional metadata  */
     [key: string]: any;
   };
 }
 
 /**
  * CVProcessor component props
- */
+  */
 export interface CVProcessorProps {
-  /** Initial job ID (for resume processing) */
+  /** Initial job ID (for resume processing)  */
   jobId?: string;
 
-  /** Callback when processing completes successfully */
+  /** Callback when processing completes successfully  */
   onProcessingComplete?: (result: ProcessingResult) => void;
 
-  /** Callback when processing fails */
+  /** Callback when processing fails  */
   onProcessingError?: (error: string) => void;
 
-  /** Callback for stage updates */
+  /** Callback for stage updates  */
   onStageUpdate?: (stageId: string, progress: number) => void;
 
-  /** Enable WebSocket for real-time updates */
+  /** Enable WebSocket for real-time updates  */
   enableWebSocket?: boolean;
 
-  /** Polling interval in milliseconds (when WebSocket disabled) */
+  /** Polling interval in milliseconds (when WebSocket disabled)  */
   pollInterval?: number;
 
-  /** Maximum retry attempts */
+  /** Maximum retry attempts  */
   maxRetries?: number;
 
-  /** Enable processing queue */
+  /** Enable processing queue  */
   enableQueue?: boolean;
 
-  /** Maximum queue capacity */
+  /** Maximum queue capacity  */
   queueCapacity?: number;
 
-  /** Additional CSS classes */
+  /** Additional CSS classes  */
   className?: string;
 
-  /** Child components */
+  /** Child components  */
   children?: ReactNode;
 
-  /** Custom configuration */
+  /** Custom configuration  */
   config?: {
-    /** Backend API endpoint */
+    /** Backend API endpoint  */
     apiEndpoint?: string;
 
-    /** WebSocket endpoint */
+    /** WebSocket endpoint  */
     wsEndpoint?: string;
 
-    /** Custom stage definitions */
+    /** Custom stage definitions  */
     customStages?: ProcessingStage[];
 
-    /** Feature toggles */
+    /** Feature toggles  */
     features?: {
       analytics?: boolean;
       notifications?: boolean;
@@ -278,7 +279,7 @@ export interface CVProcessorProps {
       retries?: boolean;
     };
 
-    /** UI customizations */
+    /** UI customizations  */
     ui?: {
       showMetrics?: boolean;
       showQueue?: boolean;
@@ -289,15 +290,15 @@ export interface CVProcessorProps {
 
 /**
  * WebSocket update message
- */
+  */
 export interface WebSocketUpdate {
-  /** Job identifier */
+  /** Job identifier  */
   jobId: string;
 
-  /** Update type */
+  /** Update type  */
   type: 'status' | 'progress' | 'stage' | 'error' | 'complete';
 
-  /** Updated data */
+  /** Updated data  */
   data: {
     status?: ProcessingJobStatus;
     progress?: number;
@@ -307,27 +308,27 @@ export interface WebSocketUpdate {
     result?: ProcessingResult;
   };
 
-  /** Update timestamp */
+  /** Update timestamp  */
   timestamp: Date;
 }
 
 /**
  * Processing queue configuration
- */
+  */
 export interface QueueConfig {
-  /** Maximum queue size */
+  /** Maximum queue size  */
   capacity: number;
 
-  /** Queue processing strategy */
+  /** Queue processing strategy  */
   strategy: 'fifo' | 'lifo' | 'priority';
 
-  /** Auto-process queue */
+  /** Auto-process queue  */
   autoProcess: boolean;
 
-  /** Queue timeout in milliseconds */
+  /** Queue timeout in milliseconds  */
   timeout: number;
 
-  /** Priority levels */
+  /** Priority levels  */
   priorityLevels: {
     urgent: number;
     high: number;
@@ -338,27 +339,27 @@ export interface QueueConfig {
 
 /**
  * Processing metrics
- */
+  */
 export interface ProcessingMetrics {
-  /** Total jobs processed */
+  /** Total jobs processed  */
   totalProcessed: number;
 
-  /** Average processing time */
+  /** Average processing time  */
   averageTime: number;
 
-  /** Success rate percentage */
+  /** Success rate percentage  */
   successRate: number;
 
-  /** Current queue length */
+  /** Current queue length  */
   queueLength: number;
 
-  /** Active processing jobs */
+  /** Active processing jobs  */
   activeJobs: number;
 
-  /** Failed jobs in last hour */
+  /** Failed jobs in last hour  */
   recentFailures: number;
 
-  /** System performance metrics */
+  /** System performance metrics  */
   system: {
     memoryUsage: number;
     cpuUsage: number;
@@ -368,41 +369,41 @@ export interface ProcessingMetrics {
 
 /**
  * Error recovery configuration
- */
+  */
 export interface ErrorRecoveryConfig {
-  /** Maximum retry attempts */
+  /** Maximum retry attempts  */
   maxRetries: number;
 
-  /** Retry delay strategy */
+  /** Retry delay strategy  */
   retryDelay: 'fixed' | 'exponential' | 'linear';
 
-  /** Base retry delay in milliseconds */
+  /** Base retry delay in milliseconds  */
   baseDelay: number;
 
-  /** Maximum retry delay in milliseconds */
+  /** Maximum retry delay in milliseconds  */
   maxDelay: number;
 
-  /** Recoverable error types */
+  /** Recoverable error types  */
   recoverableErrors: string[];
 
-  /** Fallback strategies */
+  /** Fallback strategies  */
   fallbackStrategies: Record<string, string>;
 }
 
 /**
  * Stage execution context
- */
+  */
 export interface StageExecutionContext {
-  /** Current job */
+  /** Current job  */
   job: ProcessingJob;
 
-  /** Stage configuration */
+  /** Stage configuration  */
   stageConfig: any;
 
-  /** Previous stage results */
+  /** Previous stage results  */
   previousResults: Record<string, any>;
 
-  /** Execution environment */
+  /** Execution environment  */
   environment: {
     userId?: string;
     sessionId: string;
@@ -410,7 +411,7 @@ export interface StageExecutionContext {
     timestamp: Date;
   };
 
-  /** Cancellation token */
+  /** Cancellation token  */
   cancellationToken: {
     isCancelled: boolean;
     cancel: () => void;

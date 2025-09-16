@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * CV Processing ML Models Types
  *
  * TypeScript type definitions for machine learning models and predictions
@@ -6,7 +7,7 @@
  *
  * @author Gil Klainert
  * @version 1.0.0
- */
+  */
 
 // Base ML Types
 export interface MLModelMetadata {

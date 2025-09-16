@@ -1,9 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * CV Generation Hook
  *
  * Custom hook for managing CV generation state, content updates,
  * template switching, version control, and exports.
- */
+  */
 
 import { useState, useCallback, useRef, useEffect } from 'react';
 import type {
@@ -16,7 +17,7 @@ import type {
 
 /**
  * Custom hook for CV generation management
- */
+  */
 export const useCVGeneration = (): UseCVGenerationReturn => {
   const [state, setState] = useState<GeneratedCVState>({
     cv: undefined,

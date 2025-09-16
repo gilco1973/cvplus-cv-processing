@@ -1,11 +1,12 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Package-specific types for CV processing
  * 
  * This module exports types that are specific to this package:
  * - Function-specific request/response types
  * - Internal service types
  * - Configuration types
- */
+  */
 
 import { ProcessingRequest, ProcessingResponse, ProcessingType } from '../shared/types';
 

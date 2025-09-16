@@ -1,7 +1,9 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Autonomous Service Container for CV Processing Frontend
- * Zero external @cvplus/* dependencies - fully self-contained
- */
+ * Zero external @cvplus/*  dependencies - fully self-contained
+  */
+  */
 
 type ServiceConstructor<T> = new (...args: any[]) => T;
 type ServiceFactory<T> = () => T;
@@ -16,14 +18,14 @@ interface ServiceDefinition<T = any> {
 /**
  * Dependency injection container for autonomous operation
  * Manages service lifecycle and dependencies
- */
+  */
 export class ServiceContainer {
   private services = new Map<string, ServiceDefinition>();
   private instances = new Map<string, any>();
 
   /**
    * Register a service with the container
-   */
+    */
   register<T>(
     name: string, 
     serviceType: ServiceType<T>, 
@@ -45,7 +47,7 @@ export class ServiceContainer {
 
   /**
    * Resolve a service instance
-   */
+    */
   resolve<T>(name: string): T {
     const service = this.services.get(name);
     if (!service) {
@@ -64,14 +66,14 @@ export class ServiceContainer {
 
   /**
    * Check if service is registered
-   */
+    */
   has(name: string): boolean {
     return this.services.has(name);
   }
 
   /**
    * Clear all services (useful for testing)
-   */
+    */
   clear(): void {
     this.services.clear();
     this.instances.clear();
@@ -79,7 +81,7 @@ export class ServiceContainer {
 
   /**
    * Get all registered service names
-   */
+    */
   getServiceNames(): string[] {
     return Array.from(this.services.keys());
   }

@@ -1,4 +1,4 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflictsimport { onCall } from 'firebase-functions/v2/https';
+// @ts-ignore - Export conflicts/v2/https';
 import * as admin from 'firebase-admin';
 import { FieldValue } from 'firebase-admin/firestore';
 import { CVParser } from '../services/cvParser';
@@ -34,7 +34,7 @@ import { corsOptions } from '../config/cors';
  * - Full audit trails for compliance
  * - Configurable verification per environment
  * - Enhanced status reporting with verification details
- */
+  */
 export const processCVEnhanced = onCall(
   {
     timeoutSeconds: 540, // Increased timeout for verification operations

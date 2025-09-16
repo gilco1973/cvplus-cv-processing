@@ -1,10 +1,11 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * External Data Enrichment Module Exports
  * 
  * @author Gil Klainert
  * @created 2025-08-23
  * @version 1.0
- */
+  */
 
 export { EnrichmentService } from './enrichment.service';
 export type { EnrichmentResult, DataAttribution, ConflictResolution } from './enrichment.service';

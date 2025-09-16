@@ -1,11 +1,11 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflictsimport { CVFeature } from '../types';
+// @ts-ignore - Export conflicts/types';
 import { ParsedCV } from '../../cvParser';
 import * as admin from 'firebase-admin';
 
 /**
  * Testimonials Carousel Feature - Generates interactive testimonials carousel for CV
  * Uses React TestimonialsCarousel component for modern rendering
- */
+  */
 export class TestimonialsCarouselFeature implements CVFeature {
   
   async generate(cv: ParsedCV, jobId: string, options?: any): Promise<string> {
@@ -48,7 +48,7 @@ export class TestimonialsCarouselFeature implements CVFeature {
   
   /**
    * Extract testimonial data from parsed CV
-   */
+    */
   private extractTestimonialsData(cv: ParsedCV): any[] {
     const testimonials: any[] = [];
     
@@ -119,7 +119,7 @@ export class TestimonialsCarouselFeature implements CVFeature {
   
   /**
    * Get stored testimonials from database
-   */
+    */
   private async getStoredTestimonials(jobId: string): Promise<any[]> {
     try {
       const db = admin.firestore();
@@ -141,7 +141,7 @@ export class TestimonialsCarouselFeature implements CVFeature {
   
   /**
    * Calculate analytics for testimonials
-   */
+    */
   private calculateAnalytics(testimonials: any[]): any {
     if (testimonials.length === 0) {
       return {
@@ -196,7 +196,7 @@ export class TestimonialsCarouselFeature implements CVFeature {
   
   /**
    * Generate testimonial name from company
-   */
+    */
   private generateTestimonialName(company: string, type: 'work' | 'academic' = 'work'): string {
     const workNames = [
       'Sarah Johnson', 'Michael Chen', 'Emily Rodriguez', 'David Kim',
@@ -215,7 +215,7 @@ export class TestimonialsCarouselFeature implements CVFeature {
   
   /**
    * Generate testimonial content from experience
-   */
+    */
   private generateTestimonialContent(experience: any): string {
     const templates = [
       `Outstanding professional who consistently delivered exceptional results during their time as ${experience.position}. Their technical expertise and collaborative approach made them an invaluable team member.`,
@@ -231,7 +231,7 @@ export class TestimonialsCarouselFeature implements CVFeature {
   
   /**
    * Generate academic testimonial content
-   */
+    */
   private generateAcademicTestimonialContent(education: any): string {
     const templates = [
       `Exceptional student who demonstrated outstanding academic performance in ${education.degree}. Their dedication to learning and research was truly impressive.`,
@@ -247,7 +247,7 @@ export class TestimonialsCarouselFeature implements CVFeature {
   
   /**
    * Generate skill-based testimonial content
-   */
+    */
   private generateSkillTestimonialContent(skill: string): string {
     const templates = [
       `Exceptional expertise in ${skill}. Their deep understanding and practical application of this technology consistently impressed the entire team.`,
@@ -263,7 +263,7 @@ export class TestimonialsCarouselFeature implements CVFeature {
   
   /**
    * Simple hash function for consistent randomization
-   */
+    */
   private simpleHash(str: string): number {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
@@ -276,7 +276,7 @@ export class TestimonialsCarouselFeature implements CVFeature {
   
   /**
    * Generate React component placeholder for modern CV rendering
-   */
+    */
   private generateReactComponentPlaceholder(jobId: string, props: any): string {
     return `
       <div class="cv-feature-container testimonials-carousel-feature">
@@ -296,12 +296,12 @@ export class TestimonialsCarouselFeature implements CVFeature {
 
   getStyles(): string {
     return `
-      /* CV Feature Container Styles */
+      /* CV Feature Container Styles  */
       .cv-feature-container.testimonials-carousel-feature {
         margin: 2rem 0;
       }
       
-      /* React Component Placeholder Styles */
+      /* React Component Placeholder Styles  */
       .react-component-placeholder {
         min-height: 400px;
         position: relative;
@@ -312,7 +312,7 @@ export class TestimonialsCarouselFeature implements CVFeature {
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
       }
       
-      /* Loading Styles */
+      /* Loading Styles  */
       .component-loading {
         display: flex;
         flex-direction: column;
@@ -337,7 +337,7 @@ export class TestimonialsCarouselFeature implements CVFeature {
         100% { transform: rotate(360deg); }
       }
       
-      /* Testimonials Fallback Styles */
+      /* Testimonials Fallback Styles  */
       .testimonials-fallback {
         text-align: center;
         padding: 2rem;
@@ -417,7 +417,7 @@ export class TestimonialsCarouselFeature implements CVFeature {
         color: #fbbf24;
       }
       
-      /* Mobile Responsive */
+      /* Mobile Responsive  */
       @media (max-width: 768px) {
         .cv-feature-container.testimonials-carousel-feature {
           margin: 1rem 0;
@@ -432,7 +432,7 @@ export class TestimonialsCarouselFeature implements CVFeature {
         }
       }
       
-      /* Dark mode support */
+      /* Dark mode support  */
       @media (prefers-color-scheme: dark) {
         .cv-feature-container.testimonials-carousel-feature {
           background: linear-gradient(135deg, #1e293b 0%, #334155 100%);

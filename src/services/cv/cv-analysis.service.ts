@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * CV Analysis Service
  *
  * Core service for analyzing CV content and providing insights.
@@ -7,7 +8,7 @@
  *
  * @author Gil Klainert
  * @version 2.0.0 - Modularized Architecture
- */
+  */
 
 import { CVProcessingContext, ServiceResult } from '../../types';
 import { BaseService } from '../../shared/utils/base-service';
@@ -64,7 +65,7 @@ export class CVAnalysisService extends BaseService {
 
   /**
    * Analyze a CV and provide comprehensive insights
-   */
+    */
   async analyzeCV(
     cvData: any,
     options: CVAnalysisOptions = {},

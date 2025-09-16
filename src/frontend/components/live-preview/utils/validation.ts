@@ -1,8 +1,9 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * LivePreview Validation Utilities
  *
  * Validation functions for CV data and templates
- */
+  */
 
 export interface ValidationResult {
   isValid: boolean;
@@ -30,7 +31,7 @@ const DEFAULT_VALIDATION_OPTIONS: CVValidationOptions = {
 
 /**
  * Validates CV data structure and content
- */
+  */
 export function validateCVData(
   cvData: any,
   options: CVValidationOptions = DEFAULT_VALIDATION_OPTIONS
@@ -163,7 +164,7 @@ export function validateCVData(
 
 /**
  * Validates template structure
- */
+  */
 export function validateTemplate(template: any): ValidationResult {
   const errors: string[] = [];
   const warnings: string[] = [];
@@ -204,7 +205,7 @@ export function validateTemplate(template: any): ValidationResult {
 
 /**
  * Validates viewport configuration
- */
+  */
 export function validateViewportConfig(config: any): ValidationResult {
   const errors: string[] = [];
   const warnings: string[] = [];
@@ -254,7 +255,7 @@ export function validateViewportConfig(config: any): ValidationResult {
 
 /**
  * Helper function to validate email format
- */
+  */
 function isValidEmail(email: string): boolean {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
@@ -262,7 +263,7 @@ function isValidEmail(email: string): boolean {
 
 /**
  * Helper function to validate phone format
- */
+  */
 function isValidPhone(phone: string): boolean {
   // Basic phone validation - accepts various formats
   const phoneRegex = /^[\+]?[\d\s\-\(\)]{10,}$/;
@@ -271,7 +272,7 @@ function isValidPhone(phone: string): boolean {
 
 /**
  * Sanitizes CV data by removing invalid entries and fixing format issues
- */
+  */
 export function sanitizeCVData(cvData: any): any {
   if (!cvData || typeof cvData !== 'object') {
     return {

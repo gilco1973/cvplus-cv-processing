@@ -1,9 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Matching Feature Service
  *
  * Extracts features that measure how well a CV matches a specific job description,
  * including skill alignment, experience relevance, and role compatibility.
- */
+  */
 
 import { ParsedCV } from '../../shared/types';
 import { FeatureVector } from '../types/models';
@@ -12,7 +13,7 @@ export class MatchingFeatureService {
 
   /**
    * Extract job matching features between CV and job description
-   */
+    */
   async extractFeatures(cv: ParsedCV, jobDescription: string): Promise<FeatureVector['matchingFeatures']> {
 
     const jobKeywords = await this.extractJobKeywords(jobDescription);
@@ -36,7 +37,7 @@ export class MatchingFeatureService {
 
   /**
    * Health check for matching feature service
-   */
+    */
   async healthCheck(): Promise<boolean> {
     try {
       const testCV: ParsedCV = {

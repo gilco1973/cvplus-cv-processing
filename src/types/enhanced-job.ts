@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Enhanced Job Models - Main Interface
  * 
  * Core enhanced job interface and related models for CV enhancement features.
@@ -6,7 +7,7 @@
  * 
  * @author Gil Klainert
  * @version 1.0.0
- */
+  */
 
 // Import and re-export core enhanced job interface
 export type { EnhancedJob } from './enhanced-job-core';
@@ -29,53 +30,53 @@ export type {
 
 // Privacy settings type (kept here as it's small and job-specific)
 export interface PrivacySettings {
-  /** Show contact information publicly */
+  /** Show contact information publicly  */
   showContactInfo: boolean;
   
-  /** Show social media links */
+  /** Show social media links  */
   showSocialLinks: boolean;
   
-  /** Allow CV download by visitors */
+  /** Allow CV download by visitors  */
   allowCVDownload: boolean;
   
-  /** Show analytics data to profile visitors */
+  /** Show analytics data to profile visitors  */
   showAnalytics: boolean;
   
-  /** Allow visitors to send chat messages */
+  /** Allow visitors to send chat messages  */
   allowChatMessages: boolean;
   
-  /** Make profile publicly accessible */
+  /** Make profile publicly accessible  */
   publicProfile: boolean;
   
-  /** Allow profile to be found in search engines */
+  /** Allow profile to be found in search engines  */
   searchable: boolean;
   
-  /** Display personality profile section */
+  /** Display personality profile section  */
   showPersonalityProfile: boolean;
   
-  /** Display testimonials section */
+  /** Display testimonials section  */
   showTestimonials: boolean;
   
-  /** Display portfolio section */
+  /** Display portfolio section  */
   showPortfolio: boolean;
   
-  /** Privacy level enabled */
+  /** Privacy level enabled  */
   enabled?: boolean;
   
-  /** Masking rules for sensitive information */
+  /** Masking rules for sensitive information  */
   maskingRules?: {
     maskEmail?: boolean;
     maskPhone?: boolean;
     maskAddress?: boolean;
   };
   
-  /** Whether to show public email */
+  /** Whether to show public email  */
   publicEmail?: boolean;
   
-  /** Whether to show public phone */
+  /** Whether to show public phone  */
   publicPhone?: boolean;
   
-  /** Require contact form submission before allowing CV download */
+  /** Require contact form submission before allowing CV download  */
   requireContactFormForCV: boolean;
 }
 

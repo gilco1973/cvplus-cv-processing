@@ -1,9 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Advanced Predictions Service
  * 
  * Provides sophisticated prediction capabilities including salary forecasting,
  * time-to-hire estimation, competitive analysis, and market positioning.
- */
+  */
 
 import * as admin from 'firebase-admin';
 // import { SalaryPrediction, TimeToHirePrediction } from '../types/phase2-models'; // Module not found
@@ -141,7 +142,7 @@ export class AdvancedPredictionsService {
 
   /**
    * Generate comprehensive salary prediction with market analysis
-   */
+    */
   async predictSalaryAdvanced(request: AdvancedPredictionRequest): Promise<SalaryPrediction> {
     try {
       // Get market salary data
@@ -222,7 +223,7 @@ export class AdvancedPredictionsService {
 
   /**
    * Predict time to hire with detailed breakdown
-   */
+    */
   async predictTimeToHireAdvanced(request: AdvancedPredictionRequest): Promise<TimeToHirePrediction> {
     try {
       // Get base hiring timeline for industry/company
@@ -274,7 +275,7 @@ export class AdvancedPredictionsService {
 
   /**
    * Generate comprehensive competitive analysis
-   */
+    */
   async generateCompetitiveAnalysis(request: AdvancedPredictionRequest): Promise<CompetitiveAnalysis> {
     try {
       // Get benchmark data for similar roles
@@ -313,7 +314,7 @@ export class AdvancedPredictionsService {
 
   /**
    * Generate market insights and trends
-   */
+    */
   async generateMarketInsights(request: AdvancedPredictionRequest): Promise<MarketInsight> {
     try {
       // Get market data
@@ -346,7 +347,7 @@ export class AdvancedPredictionsService {
 
   /**
    * Generate negotiation insights and strategy
-   */
+    */
   async generateNegotiationInsights(request: AdvancedPredictionRequest): Promise<NegotiationInsights> {
     try {
       // Calculate negotiation potential

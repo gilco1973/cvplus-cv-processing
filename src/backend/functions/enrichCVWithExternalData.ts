@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Enrich CV with External Data Function
  *
  * Firebase Function to enrich CVs with data from external sources
@@ -7,7 +8,7 @@
  * @author Gil Klainert
  * @created 2025-08-23
  * @version 1.0
- */
+  */
 import { onCall, HttpsError } from 'firebase-functions/v2/https';
 import { logger } from 'firebase-functions';
 import {
@@ -50,7 +51,7 @@ interface EnrichCVRequest {
  *
  * This function is protected by premium access controls and includes
  * usage tracking, rate limiting, and security audit logging.
- */
+  */
 export const enrichCVWithExternalData = onCall<EnrichCVRequest>(
   {
     maxInstances: 10,
@@ -228,7 +229,7 @@ export const enrichCVWithExternalData = onCall<EnrichCVRequest>(
 
 /**
  * Store user-provided hints for external data sources
- */
+  */
 async function storeUserHints(
   userId: string,
   hints: {
@@ -263,7 +264,7 @@ async function storeUserHints(
 /**
  * Internal function to track usage events
  * This bypasses the Cloud Function call and directly writes to Firestore
- */
+  */
 async function trackUsageEventInternal(event: ExternalDataUsageEvent): Promise<void> {
   try {
     const db = getFirestore();

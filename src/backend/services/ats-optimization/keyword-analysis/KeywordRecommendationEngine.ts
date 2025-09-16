@@ -1,8 +1,9 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Keyword Recommendation Engine
  * 
  * Generates keyword optimization recommendations and improvement suggestions.
- */
+  */
 
 import { KeywordMatch } from '../../../types/enhanced-models';
 
@@ -10,7 +11,7 @@ export class KeywordRecommendationEngine {
 
   /**
    * Generate keyword optimization recommendations
-   */
+    */
   generateRecommendations(
     matchedKeywords: KeywordMatch[], 
     missingKeywords: string[], 
@@ -40,7 +41,7 @@ export class KeywordRecommendationEngine {
 
   /**
    * Generate contextual keyword suggestions
-   */
+    */
   generateContextualSuggestions(
     matchedKeywords: KeywordMatch[],
     missingKeywords: string[],
@@ -59,7 +60,7 @@ export class KeywordRecommendationEngine {
 
   /**
    * Get integration suggestions for missing keywords
-   */
+    */
   private getIntegrationSuggestions(missingKeywords: string[], industry?: string): string[] {
     const suggestions: string[] = [];
     
@@ -89,7 +90,7 @@ export class KeywordRecommendationEngine {
 
   /**
    * Get placement suggestions for existing keywords
-   */
+    */
   private getPlacementSuggestions(matchedKeywords: KeywordMatch[]): string[] {
     const suggestions: string[] = [];
     const lowFrequencyKeywords = matchedKeywords.filter(kw => kw.frequency === 1);
@@ -110,7 +111,7 @@ export class KeywordRecommendationEngine {
 
   /**
    * Get variation suggestions for keyword diversity
-   */
+    */
   private getVariationSuggestions(matchedKeywords: KeywordMatch[]): string[] {
     const suggestions: string[] = [];
     
@@ -130,7 +131,7 @@ export class KeywordRecommendationEngine {
 
   /**
    * Assess keyword strategy effectiveness
-   */
+    */
   assessKeywordStrategy(
     matchedKeywords: KeywordMatch[],
     missingKeywords: string[],
@@ -206,7 +207,7 @@ export class KeywordRecommendationEngine {
 
   /**
    * Get optimal keyword density for industry
-   */
+    */
   private getOptimalKeywordDensity(industry?: string): number {
     const densityMap: { [key: string]: number } = {
       technology: 0.035,

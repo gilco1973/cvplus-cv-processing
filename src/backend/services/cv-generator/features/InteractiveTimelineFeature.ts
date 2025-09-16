@@ -1,15 +1,15 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflictsimport { CVFeature } from '../types';
+// @ts-ignore - Export conflicts/types';
 import { ParsedCV } from '../../cvParser';
 
 /**
  * Interactive Timeline Feature - Generates interactive career timeline for CV
- */
+  */
 export class InteractiveTimelineFeature implements CVFeature {
   
   /**
    * Sanitize timeline data to ensure Firestore compatibility
    * Removes undefined values recursively while preserving null values
-   */
+    */
   private sanitizeTimelineData(data: any): any {
     if (data === null || data === undefined) {
       return data === null ? null : undefined;
@@ -44,7 +44,7 @@ export class InteractiveTimelineFeature implements CVFeature {
   
   /**
    * Generate React component placeholder for modern CV rendering
-   */
+    */
   private generateReactComponentPlaceholder(jobId: string, contactName: string, cv: ParsedCV, options?: any): string {
     // Extract timeline events from CV data
     const events = this.extractTimelineEvents(cv, jobId);
@@ -91,7 +91,7 @@ export class InteractiveTimelineFeature implements CVFeature {
 
   /**
    * Extract timeline events from CV data
-   */
+    */
   private extractTimelineEvents(cv: ParsedCV, jobId: string): any[] {
     const events: any[] = [];
 
@@ -275,7 +275,7 @@ export class InteractiveTimelineFeature implements CVFeature {
 
   /**
    * Calculate years of experience from CV data
-   */
+    */
   private calculateYearsOfExperience(cv: ParsedCV): number {
     if (!cv.experience || cv.experience.length === 0) return 0;
 
@@ -294,12 +294,12 @@ export class InteractiveTimelineFeature implements CVFeature {
 
   getStyles(): string {
     return `
-      /* CV Interactive Timeline Feature Container Styles */
+      /* CV Interactive Timeline Feature Container Styles  */
       .cv-feature-container.interactive-timeline-feature {
         margin: 2rem 0;
       }
       
-      /* React Component Placeholder Styles */
+      /* React Component Placeholder Styles  */
       .react-component-placeholder[data-component="InteractiveTimeline"] {
         min-height: 600px;
         position: relative;
@@ -310,7 +310,7 @@ export class InteractiveTimelineFeature implements CVFeature {
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
       }
       
-      /* Loading state for timeline */
+      /* Loading state for timeline  */
       .interactive-timeline-feature .component-loading {
         display: flex;
         flex-direction: column;
@@ -330,7 +330,7 @@ export class InteractiveTimelineFeature implements CVFeature {
         margin-bottom: 1rem;
       }
       
-      /* Timeline fallback styles */
+      /* Timeline fallback styles  */
       .timeline-fallback {
         text-align: center;
         padding: 3rem;
@@ -467,7 +467,7 @@ export class InteractiveTimelineFeature implements CVFeature {
         line-height: 1.5;
       }
       
-      /* Dark mode support */
+      /* Dark mode support  */
       @media (prefers-color-scheme: dark) {
         .react-component-placeholder[data-component="InteractiveTimeline"] {
           background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
@@ -525,7 +525,7 @@ export class InteractiveTimelineFeature implements CVFeature {
         }
       }
       
-      /* Mobile responsive */
+      /* Mobile responsive  */
       @media (max-width: 768px) {
         .cv-feature-container.interactive-timeline-feature {
           margin: 1rem 0;

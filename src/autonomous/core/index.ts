@@ -2,7 +2,7 @@
  * Autonomous Core Module
  * Local replacement for missing @cvplus/core dependency
  * Provides essential shared types, utilities, and configuration
- */
+  */
 
 // Core configuration
 export interface CoreConfig {

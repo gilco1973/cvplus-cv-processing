@@ -1,10 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflictsimport { ParsedCV } from '../../cvParser';
+// @ts-ignore - Export conflicts/../cvParser';
 import { CVTemplate, InteractiveFeatureResult } from '../types';
 
 /**
  * Classic CV template generator with traditional, professional design
  * Features: Serif fonts, formal layout, double borders, classic styling
- */
+  */
 export class ClassicTemplate implements CVTemplate {
   
   async generateHTML(cv: ParsedCV, jobId: string, features?: string[], interactiveFeatures?: InteractiveFeatureResult): Promise<string> {

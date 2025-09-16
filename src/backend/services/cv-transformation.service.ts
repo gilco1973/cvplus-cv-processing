@@ -1,4 +1,4 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflictsimport { ParsedCV } from '../types/job';
+// @ts-ignore - Export conflicts/types/job';
 import { VerifiedClaudeService } from './verified-claude.service';
 import { PlaceholderManager, PlaceholderInfo } from '@cvplus/core/services/placeholder-manager.service';
 import { EnhancedRoleDetectionService } from './enhanced-role-detection.service';
@@ -75,7 +75,7 @@ export class CVTransformationService {
 
   /**
    * Enhanced method that combines role detection with CV recommendations
-   */
+    */
   async generateRoleEnhancedRecommendations(
     parsedCV: ParsedCV,
     enableRoleDetection: boolean = true,
@@ -170,7 +170,7 @@ export class CVTransformationService {
 
   /**
    * Analyzes CV and generates specific, actionable recommendations
-   */
+    */
   async generateDetailedRecommendations(
     parsedCV: ParsedCV, 
     targetRole?: string,
@@ -283,7 +283,7 @@ Return a JSON array of recommendations following this exact structure:
 
   /**
    * Applies selected recommendations to transform CV content
-   */
+    */
   async applyRecommendations(
     originalCV: ParsedCV,
     selectedRecommendations: CVRecommendation[]
@@ -771,7 +771,7 @@ Generate specific recommendations with placeholder templates that users can cust
 
   /**
    * Processes recommendations to detect and metadata for placeholders
-   */
+    */
   private processRecommendationsWithPlaceholders(
     recommendations: CVRecommendation[]
   ): CVRecommendation[] {
@@ -792,7 +792,7 @@ Generate specific recommendations with placeholder templates that users can cust
 
   /**
    * Naturally integrates keywords into existing content using AI
-   */
+    */
   private async integrateKeywordsNaturally(
     originalContent: string, 
     keywords: string[]
@@ -837,7 +837,7 @@ Enhanced Summary:`;
 
   /**
    * Captures the current state of all CV content sections
-   */
+    */
   private captureContentStates(cv: ParsedCV): Record<string, string> {
     const states: Record<string, string> = {};
     
@@ -881,7 +881,7 @@ Enhanced Summary:`;
   
   /**
    * Generates proper before/after comparison report
-   */
+    */
   private generateComparisonReport(
     originalStates: Record<string, string>,
     improvedStates: Record<string, string>,
@@ -1771,7 +1771,7 @@ Enhanced Summary:`;
 
   /**
    * Assess CV complexity to optimize processing strategy
-   */
+    */
   private getCVComplexity(cv: ParsedCV): 'low' | 'medium' | 'high' {
     const jsonSize = JSON.stringify(cv).length;
     const experienceCount = cv.experience?.length || 0;
@@ -1790,7 +1790,7 @@ Enhanced Summary:`;
   
   /**
    * Build condensed prompt for complex CVs to reduce processing time
-   */
+    */
   private buildCondensedPrompt(parsedCV: ParsedCV, targetRole?: string, industryKeywords?: string[]): string {
     const roleContext = targetRole ? `\nTarget Role: ${targetRole}` : '';
     const keywordContext = industryKeywords?.length ? `\nKeywords: ${industryKeywords.join(', ')}` : '';
@@ -1827,7 +1827,7 @@ Return JSON only: {"recommendations": [...]} with id, type, category, title, des
   
   /**
    * Check if error is related to API quota exceeded
-   */
+    */
   private isQuotaExceededError(error: any): boolean {
     const errorMessage = error?.message?.toLowerCase() || '';
     return (
@@ -1841,7 +1841,7 @@ Return JSON only: {"recommendations": [...]} with id, type, category, title, des
 
   /**
    * Ensure all recommendations have required fields for validation
-   */
+    */
   private ensureRecommendationsValid(recommendations: CVRecommendation[]): CVRecommendation[] {
     return recommendations.map(rec => {
       // Ensure all required fields are present and non-empty
@@ -1857,7 +1857,7 @@ Return JSON only: {"recommendations": [...]} with id, type, category, title, des
 
   /**
    * Generate enhanced fallback recommendations specifically for quota exceeded scenarios
-   */
+    */
   private generateQuotaFallbackRecommendations(cv: ParsedCV): CVRecommendation[] {
     const recommendations: CVRecommendation[] = [];
     let recCount = 1;
@@ -2053,7 +2053,7 @@ Return JSON only: {"recommendations": [...]} with id, type, category, title, des
 
   /**
    * Converts role-based recommendations to CV recommendations format
-   */
+    */
   private async convertRoleRecommendationsToCVRecommendations(
     roleRecommendations: RoleBasedRecommendation[],
     primaryRole: RoleMatchResult
@@ -2087,7 +2087,7 @@ Return JSON only: {"recommendations": [...]} with id, type, category, title, des
 
   /**
    * Generate recommendations based on enrichment results
-   */
+    */
   private generateEnrichmentRecommendations(enrichmentResult: EnrichmentResult): CVRecommendation[] {
     const recommendations: CVRecommendation[] = [];
     let recId = 1;
@@ -2151,7 +2151,7 @@ Return JSON only: {"recommendations": [...]} with id, type, category, title, des
   
   /**
    * Merges all recommendations from different sources
-   */
+    */
   private mergeAllRecommendations(
     standardRecs: CVRecommendation[],
     roleRecs: CVRecommendation[],
@@ -2172,7 +2172,7 @@ Return JSON only: {"recommendations": [...]} with id, type, category, title, des
   
   /**
    * Merges standard and role-enhanced recommendations, removing duplicates and prioritizing
-   */
+    */
   private mergeRecommendations(
     standardRecs: CVRecommendation[],
     roleRecs: CVRecommendation[],
@@ -2209,7 +2209,7 @@ Return JSON only: {"recommendations": [...]} with id, type, category, title, des
 
   /**
    * Helper methods for mapping between role and CV recommendation formats
-   */
+    */
   private mapRoleRecTypeToCVRecType(roleType: string): CVRecommendation['type'] {
     switch (roleType) {
       case 'content': return 'content';
@@ -2280,7 +2280,7 @@ Return JSON only: {"recommendations": [...]} with id, type, category, title, des
 
   /**
    * Enhanced apply recommendations method that includes role context
-   */
+    */
   async applyRoleEnhancedRecommendations(
     originalCV: ParsedCV,
     selectedRecommendations: CVRecommendation[],
@@ -2318,7 +2318,7 @@ Return JSON only: {"recommendations": [...]} with id, type, category, title, des
 
   /**
    * Get role-specific enhancement templates for a CV
-   */
+    */
   async getRoleEnhancementTemplates(parsedCV: ParsedCV): Promise<{
     detectedRole: RoleMatchResult | null;
     templates: {

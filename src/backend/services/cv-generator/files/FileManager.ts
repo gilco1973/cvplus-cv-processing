@@ -1,16 +1,16 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflictsimport * as admin from 'firebase-admin';
+// @ts-ignore - Export conflicts
 import { FileGenerationResult, EnhancedFileGenerationResult } from '../types';
 
 /**
  * File management service for CV generation
  * Handles saving HTML, PDF, and DOCX files to Firebase Storage
- */
+  */
 export class FileManager {
   private _bucket?: any;
   
   /**
    * Get Firebase Storage bucket (lazy initialization)
-   */
+    */
   private getBucket() {
     if (!this._bucket) {
       this._bucket = admin.storage().bucket();
@@ -20,7 +20,7 @@ export class FileManager {
 
   /**
    * Save generated CV files to Firebase Storage with comprehensive error handling
-   */
+    */
   async saveGeneratedFiles(
     jobId: string,
     userId: string,
@@ -76,7 +76,7 @@ export class FileManager {
 
   /**
    * Save HTML content to Firebase Storage
-   */
+    */
   private async saveHtmlFile(userId: string, jobId: string, htmlContent: string): Promise<string> {
     const htmlFileName = `users/${userId}/generated/${jobId}/cv.html`;
     const htmlFile = this.getBucket().file(htmlFileName);
@@ -109,7 +109,7 @@ export class FileManager {
 
   /**
    * Generate PDF and save to Firebase Storage with comprehensive error handling and timeout protection
-   */
+    */
   private async generateAndSavePdf(userId: string, jobId: string, htmlContent: string): Promise<string> {
     let browser: any = null;
     const startTime = Date.now();
@@ -250,7 +250,7 @@ export class FileManager {
   /**
    * Optimize HTML content for PDF generation
    * Converts interactive elements to static PDF-friendly versions
-   */
+    */
   private optimizeHtmlForPdf(htmlContent: string): string {
     let optimizedHtml = htmlContent;
     
@@ -299,14 +299,14 @@ export class FileManager {
             display: none !important;
           }
           
-          /* Ensure proper layout for PDF */
+          /* Ensure proper layout for PDF  */
           .qr-code {
             position: static !important;
             float: right !important;
             margin: 10px !important;
           }
           
-          /* Hide download buttons in PDF */
+          /* Hide download buttons in PDF  */
           .download-section, .download-btn {
             display: none !important;
           }
@@ -337,7 +337,7 @@ export class FileManager {
 
   /**
    * Delete generated files for a job
-   */
+    */
   async deleteGeneratedFiles(userId: string, jobId: string): Promise<void> {
     try {
       const filePaths = [
@@ -360,7 +360,7 @@ export class FileManager {
 
   /**
    * Check if files exist for a job
-   */
+    */
   async checkFilesExist(userId: string, jobId: string): Promise<{
     htmlExists: boolean;
     pdfExists: boolean;

@@ -1,9 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * T030: CV processing logging in packages/cv-processing/src/logging/ProcessingLogger.ts
  *
  * Specialized logger for CV processing, analysis, and transformation events
  * Tracks document processing, AI analysis, ATS optimization, and performance metrics
- */
+  */
 
 import {
   LoggerFactory,
@@ -16,7 +17,7 @@ import {
 
 /**
  * CV processing event types
- */
+  */
 export enum ProcessingEventType {
   CV_UPLOAD = 'cv.upload',
   CV_PARSING = 'cv.parsing',
@@ -38,7 +39,7 @@ export enum ProcessingEventType {
 
 /**
  * Processing stage enumeration
- */
+  */
 export enum ProcessingStage {
   UPLOAD = 'upload',
   PARSING = 'parsing',
@@ -52,7 +53,7 @@ export enum ProcessingStage {
 
 /**
  * CV processing context interface
- */
+  */
 export interface ProcessingContext {
   jobId?: string;
   userId?: string;
@@ -77,7 +78,7 @@ export interface ProcessingContext {
 
 /**
  * File processing metrics
- */
+  */
 export interface FileProcessingMetrics {
   fileSize: number;
   parseTime: number;
@@ -94,7 +95,7 @@ export interface FileProcessingMetrics {
 
 /**
  * ATS optimization results
- */
+  */
 export interface AtsOptimizationResult {
   originalScore: number;
   optimizedScore: number;
@@ -107,7 +108,7 @@ export interface AtsOptimizationResult {
 
 /**
  * Specialized CV processing logger
- */
+  */
 export class ProcessingLogger {
   private readonly logger: Logger;
   private readonly packageName = '@cvplus/cv-processing';
@@ -124,7 +125,7 @@ export class ProcessingLogger {
 
   /**
    * Log CV upload
-   */
+    */
   cvUpload(context: ProcessingContext): void {
     const correlationId = CorrelationService.getCurrentCorrelationId();
 
@@ -148,7 +149,7 @@ export class ProcessingLogger {
 
   /**
    * Log CV parsing start/completion
-   */
+    */
   cvParsing(context: ProcessingContext, success: boolean, metrics?: Partial<FileProcessingMetrics>, error?: Error): void {
     const correlationId = CorrelationService.getCurrentCorrelationId();
 
@@ -191,7 +192,7 @@ export class ProcessingLogger {
 
   /**
    * Log CV analysis
-   */
+    */
   cvAnalysis(context: ProcessingContext, analysisType: string, results: Record<string, any>, metrics?: Partial<FileProcessingMetrics>): void {
     const correlationId = CorrelationService.getCurrentCorrelationId();
 
@@ -228,7 +229,7 @@ export class ProcessingLogger {
 
   /**
    * Log ATS optimization
-   */
+    */
   atsOptimization(context: ProcessingContext, result: AtsOptimizationResult): void {
     const correlationId = CorrelationService.getCurrentCorrelationId();
 
@@ -253,7 +254,7 @@ export class ProcessingLogger {
 
   /**
    * Log skills extraction
-   */
+    */
   skillsExtraction(context: ProcessingContext, extractedSkills: string[], confidence: number): void {
     const correlationId = CorrelationService.getCurrentCorrelationId();
 
@@ -270,7 +271,7 @@ export class ProcessingLogger {
 
   /**
    * Log experience analysis
-   */
+    */
   experienceAnalysis(context: ProcessingContext, experienceData: Record<string, any>): void {
     const correlationId = CorrelationService.getCurrentCorrelationId();
 
@@ -289,7 +290,7 @@ export class ProcessingLogger {
 
   /**
    * Log personality analysis
-   */
+    */
   personalityAnalysis(context: ProcessingContext, personalityData: Record<string, any>): void {
     const correlationId = CorrelationService.getCurrentCorrelationId();
 
@@ -307,7 +308,7 @@ export class ProcessingLogger {
 
   /**
    * Log CV transformation
-   */
+    */
   cvTransformation(context: ProcessingContext, transformationType: string, success: boolean, error?: Error): void {
     const correlationId = CorrelationService.getCurrentCorrelationId();
 
@@ -344,7 +345,7 @@ export class ProcessingLogger {
 
   /**
    * Log CV generation
-   */
+    */
   cvGeneration(context: ProcessingContext, outputFormat: string, success: boolean, metrics?: Partial<FileProcessingMetrics>): void {
     const correlationId = CorrelationService.getCurrentCorrelationId();
 
@@ -375,7 +376,7 @@ export class ProcessingLogger {
 
   /**
    * Log AI enhancement
-   */
+    */
   aiEnhancement(context: ProcessingContext, enhancementType: string, tokenUsage?: number): void {
     const correlationId = CorrelationService.getCurrentCorrelationId();
 
@@ -392,7 +393,7 @@ export class ProcessingLogger {
 
   /**
    * Log quality check
-   */
+    */
   qualityCheck(context: ProcessingContext, checks: Record<string, boolean>, overallScore: number): void {
     const correlationId = CorrelationService.getCurrentCorrelationId();
 
@@ -414,7 +415,7 @@ export class ProcessingLogger {
 
   /**
    * Log processing job completion
-   */
+    */
   jobComplete(jobId: string, success: boolean, totalMetrics: FileProcessingMetrics): void {
     const correlationId = CorrelationService.getCurrentCorrelationId();
     const job = this.processingJobs.get(jobId);
@@ -448,7 +449,7 @@ export class ProcessingLogger {
 
   /**
    * Log processing error
-   */
+    */
   processingError(context: ProcessingContext, error: Error, stage: ProcessingStage): void {
     const correlationId = CorrelationService.getCurrentCorrelationId();
 
@@ -480,7 +481,7 @@ export class ProcessingLogger {
 
   /**
    * Log template application
-   */
+    */
   templateApply(context: ProcessingContext, templateData: Record<string, any>): void {
     const correlationId = CorrelationService.getCurrentCorrelationId();
 
@@ -498,7 +499,7 @@ export class ProcessingLogger {
 
   /**
    * Get processing statistics
-   */
+    */
   getProcessingStats(): {
     activeJobs: number;
     jobsByStage: Record<ProcessingStage, number>;
@@ -530,21 +531,21 @@ export class ProcessingLogger {
 
   /**
    * Log with correlation context
-   */
+    */
   withCorrelation<T>(correlationId: string, callback: () => T): T {
     return CorrelationService.withCorrelationId(correlationId, callback);
   }
 
   /**
    * Get job status
-   */
+    */
   getJobStatus(jobId: string): ProcessingContext | undefined {
     return this.processingJobs.get(jobId);
   }
 
   /**
    * Clear completed jobs
-   */
+    */
   clearCompletedJobs(): number {
     const completed = Array.from(this.processingJobs.entries())
       .filter(([_, job]) => job.stage === ProcessingStage.COMPLETE);
@@ -559,16 +560,16 @@ export class ProcessingLogger {
 
 /**
  * Global CV processing logger instance
- */
+  */
 export const processingLogger = new ProcessingLogger();
 
 /**
  * Convenience functions for common processing logging scenarios
- */
+  */
 export const processingLogging = {
   /**
    * Log file upload with basic validation
-   */
+    */
   uploadFile: (fileName: string, fileSize: number, userId?: string) => {
     processingLogger.cvUpload({
       fileName,
@@ -580,7 +581,7 @@ export const processingLogging = {
 
   /**
    * Log successful processing completion
-   */
+    */
   processComplete: (jobId: string, processingTimeMs: number, qualityScore?: number) => {
     processingLogger.jobComplete(jobId, true, {
       fileSize: 0,
@@ -598,14 +599,14 @@ export const processingLogging = {
 
   /**
    * Log processing failure
-   */
+    */
   processFailed: (jobId: string, stage: ProcessingStage, error: Error) => {
     processingLogger.processingError({ jobId }, error, stage);
   },
 
   /**
    * Log ATS score improvement
-   */
+    */
   atsImprovement: (jobId: string, beforeScore: number, afterScore: number, keywords: string[]) => {
     processingLogger.atsOptimization({ jobId }, {
       originalScore: beforeScore,
@@ -621,7 +622,7 @@ export const processingLogging = {
 
 /**
  * Processing logger middleware for Express
- */
+  */
 export const processingLoggerMiddleware = (req: any, res: any, next: any) => {
   // Add processing context to request
   req.processingLogger = processingLogger;
@@ -635,5 +636,5 @@ export const processingLoggerMiddleware = (req: any, res: any, next: any) => {
 
 /**
  * Default export
- */
+  */
 export default ProcessingLogger;

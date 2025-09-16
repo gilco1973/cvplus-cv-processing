@@ -1,9 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Update CV Data Function
  * 
  * Handles updates to CV data including profile pictures and personal information.
  * Provides secure, validated updates with proper error handling.
- */
+  */
 
 import { onCall, CallableRequest, HttpsError } from 'firebase-functions/v2/https';
 import { logger } from 'firebase-functions';
@@ -157,7 +158,7 @@ export const updateCVData = onCall(
 
 /**
  * Validate update data based on type
- */
+  */
 function validateUpdateData(updateData: any, updateType: string): { isValid: boolean; errors: string[] } {
   const errors: string[] = [];
 
@@ -242,7 +243,7 @@ function validateUpdateData(updateData: any, updateType: string): { isValid: boo
 
 /**
  * Type definitions for this function
- */
+  */
 export type { UpdateCVDataRequest, UpdateCVDataResponse };
 
 export default updateCVData;

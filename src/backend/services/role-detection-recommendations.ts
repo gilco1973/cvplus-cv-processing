@@ -1,8 +1,9 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Role Detection Recommendations Service
  * 
  * Generates role-specific recommendations and gap analysis
- */
+  */
 
 import { ParsedCV } from '../types/job';
 import {
@@ -24,7 +25,7 @@ export class RoleRecommendationsService {
 
   /**
    * Generate role-specific enhancement recommendations
-   */
+    */
   async generateRoleRecommendations(
     profile: RoleProfile,
     parsedCV: ParsedCV,
@@ -61,7 +62,7 @@ export class RoleRecommendationsService {
 
   /**
    * Create recommendation from matching factor analysis
-   */
+    */
   private createRecommendationFromFactor(
     profile: RoleProfile,
     factor: MatchingFactor,
@@ -113,7 +114,7 @@ export class RoleRecommendationsService {
 
   /**
    * Calculate the potential for CV enhancement based on role match
-   */
+    */
   calculateEnhancementPotential(
     profile: RoleProfile,
     parsedCV: ParsedCV,
@@ -148,7 +149,7 @@ export class RoleRecommendationsService {
 
   /**
    * Perform gap analysis between CV and role requirements
-   */
+    */
   async performGapAnalysis(
     primaryRole: RoleMatchResult,
     parsedCV: ParsedCV
@@ -186,7 +187,7 @@ export class RoleRecommendationsService {
 
   /**
    * Extract skills from CV for gap analysis
-   */
+    */
   private extractSkillsFromCV(parsedCV: ParsedCV): string[] {
     const skills: string[] = [];
     

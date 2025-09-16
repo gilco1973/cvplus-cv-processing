@@ -1,4 +1,4 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// CV Comparison Components
+// @ts-ignore - Export conflicts// CV Comparison Components
 export { CVComparisonView } from './CVComparisonView';
 export { DiffRenderer, SideBySideDiff, CompactDiff, DiffStats } from './DiffRenderer';
 export { MobileComparisonView, MobileComparisonToggle } from './MobileComparisonView';

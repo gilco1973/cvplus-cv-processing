@@ -1,9 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * ATS Scoring Service
  * 
  * Specialized service for calculating multi-factor ATS scores with weighted breakdown.
  * Provides comprehensive scoring across parsing, keywords, formatting, and content quality.
- */
+  */
 
 import { 
   ParsedCV, 
@@ -16,7 +17,7 @@ export class ATSScoringService {
 
   /**
    * Calculate comprehensive advanced ATS score
-   */
+    */
   calculateAdvancedScore(params: ScoringParams): AdvancedATSScore {
     const { parsedCV, semanticAnalysis, systemSimulations, competitorBenchmark } = params;
 
@@ -86,7 +87,7 @@ export class ATSScoringService {
 
   /**
    * Calculate parsing score based on CV structure and completeness
-   */
+    */
   private calculateParsingScore(parsedCV: ParsedCV): number {
     let score = 0;
     const maxScore = 100;
@@ -117,7 +118,7 @@ export class ATSScoringService {
 
   /**
    * Calculate keyword optimization score
-   */
+    */
   private calculateKeywordScore(semanticAnalysis: SemanticKeywordAnalysis): number {
     if (!semanticAnalysis) return 0;
 
@@ -160,7 +161,7 @@ export class ATSScoringService {
 
   /**
    * Calculate formatting and structure score
-   */
+    */
   private calculateFormattingScore(parsedCV: ParsedCV): number {
     let score = 0;
     const maxScore = 100;
@@ -230,7 +231,7 @@ export class ATSScoringService {
 
   /**
    * Calculate content quality score
-   */
+    */
   private calculateContentScore(parsedCV: ParsedCV): number {
     let score = 0;
     const maxScore = 100;
@@ -260,7 +261,7 @@ export class ATSScoringService {
 
   /**
    * Calculate specificity score based on detailed, quantified content
-   */
+    */
   private calculateSpecificityScore(parsedCV: ParsedCV, semanticAnalysis: SemanticKeywordAnalysis): number {
     let score = 0;
     let factors = 0;
@@ -291,7 +292,7 @@ export class ATSScoringService {
 
   /**
    * Calculate confidence level based on data completeness and quality
-   */
+    */
   private calculateConfidence(parsedCV: ParsedCV, semanticAnalysis: SemanticKeywordAnalysis): number {
     let confidence = 0;
     let factors = 0;

@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Web Search Adapter
  * 
  * Searches for professional presence, publications, and achievements
@@ -7,7 +8,7 @@
  * @author Gil Klainert
  * @created 2025-08-23
  * @version 1.0
- */
+  */
 
 import { logger } from 'firebase-functions';
 import axios from 'axios';
@@ -33,7 +34,7 @@ export class WebSearchAdapter {
 
   /**
    * Search for professional presence across the web
-   */
+    */
   async fetchData(personName: string): Promise<WebPresence> {
     try {
       logger.info('[WEB-SEARCH-ADAPTER] Searching web presence', { personName });
@@ -75,7 +76,7 @@ export class WebSearchAdapter {
 
   /**
    * General search for person's professional presence
-   */
+    */
   private async searchGeneral(personName: string): Promise<WebSearchResult[]> {
     const queries = [
       `"${personName}" professional`,
@@ -104,7 +105,7 @@ export class WebSearchAdapter {
 
   /**
    * Search for publications
-   */
+    */
   private async searchPublications(personName: string): Promise<WebPublication[]> {
     const queries = [
       `"${personName}" site:medium.com`,
@@ -140,7 +141,7 @@ export class WebSearchAdapter {
 
   /**
    * Search for speaking engagements
-   */
+    */
   private async searchSpeakingEngagements(personName: string): Promise<SpeakingEngagement[]> {
     const queries = [
       `"${personName}" conference speaker`,
@@ -176,7 +177,7 @@ export class WebSearchAdapter {
 
   /**
    * Search for awards and recognition
-   */
+    */
   private async searchAwards(personName: string): Promise<Award[]> {
     const queries = [
       `"${personName}" award winner`,
@@ -212,7 +213,7 @@ export class WebSearchAdapter {
 
   /**
    * Perform actual search using Google Custom Search API
-   */
+    */
   private async performSearch(query: string, limit: number = 10): Promise<WebSearchResult[]> {
     if (!this.searchApiKey || !this.searchEngineId) {
       logger.warn('[WEB-SEARCH-ADAPTER] Search API not configured, returning empty results');
@@ -248,7 +249,7 @@ export class WebSearchAdapter {
 
   /**
    * Calculate relevance score for search result
-   */
+    */
   private calculateRelevance(item: any, query: string): number {
     let score = 0;
     const queryTerms = query.toLowerCase().split(' ');
@@ -276,7 +277,7 @@ export class WebSearchAdapter {
 
   /**
    * Deduplicate search results by URL
-   */
+    */
   private deduplicateResults(results: WebSearchResult[]): WebSearchResult[] {
     const seen = new Set<string>();
     return results.filter(result => {
@@ -288,7 +289,7 @@ export class WebSearchAdapter {
 
   /**
    * Extract publisher from URL
-   */
+    */
   private extractPublisher(url: string): string {
     try {
       const hostname = new URL(url).hostname;
@@ -300,7 +301,7 @@ export class WebSearchAdapter {
 
   /**
    * Classify publication type
-   */
+    */
   private classifyPublicationType(url: string, title: string): WebPublication['type'] {
     if (url.includes('arxiv.org')) return 'paper';
     if (url.includes('medium.com') || url.includes('dev.to')) return 'blog';
@@ -311,7 +312,7 @@ export class WebSearchAdapter {
 
   /**
    * Check if result is a speaking engagement
-   */
+    */
   private isSpeakingEngagement(result: WebSearchResult): boolean {
     const keywords = ['conference', 'speaker', 'keynote', 'talk', 'presentation', 'summit'];
     const text = `${result.title} ${result.snippet}`.toLowerCase();
@@ -320,7 +321,7 @@ export class WebSearchAdapter {
 
   /**
    * Check if result is an award
-   */
+    */
   private isAward(result: WebSearchResult): boolean {
     const keywords = ['award', 'winner', 'recognition', 'honored', 'prize', 'achievement'];
     const text = `${result.title} ${result.snippet}`.toLowerCase();
@@ -329,7 +330,7 @@ export class WebSearchAdapter {
 
   /**
    * Extract event name from title
-   */
+    */
   private extractEventName(title: string): string {
     // Simple extraction - could be enhanced with NLP
     return title.split('-')[0].trim();
@@ -337,7 +338,7 @@ export class WebSearchAdapter {
 
   /**
    * Extract award title
-   */
+    */
   private extractAwardTitle(title: string): string {
     // Simple extraction - could be enhanced with NLP
     return title.replace(/\s*[-–]\s*.*$/, '').trim();
@@ -345,7 +346,7 @@ export class WebSearchAdapter {
 
   /**
    * Extract organization from snippet
-   */
+    */
   private extractOrganization(snippet: string): string {
     // Simple extraction - could be enhanced with NLP
     const match = snippet.match(/(?:by|from|at)\s+([A-Z][^.]+)/);

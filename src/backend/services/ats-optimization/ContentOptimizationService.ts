@@ -1,9 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Content Optimization Service
  * 
  * Specialized service for content analysis, optimization, and generation.
  * Handles basic CV analysis, content improvements, and fallback scenarios.
- */
+  */
 
 import { 
   ParsedCV, 
@@ -16,7 +17,7 @@ export class ContentOptimizationService {
 
   /**
    * Perform basic CV analysis for fallback scenarios
-   */
+    */
   async performBasicAnalysis(
     parsedCV: ParsedCV,
     targetRole?: string,
@@ -34,7 +35,7 @@ export class ContentOptimizationService {
 
   /**
    * Generate optimized content based on recommendations
-   */
+    */
   async generateOptimizedContent(
     parsedCV: ParsedCV,
     recommendations: PrioritizedRecommendation[]
@@ -67,7 +68,7 @@ export class ContentOptimizationService {
 
   /**
    * Fallback to basic analysis when advanced analysis fails
-   */
+    */
   async fallbackToBasicAnalysis(
     parsedCV: ParsedCV,
     context: OptimizationContext
@@ -141,7 +142,7 @@ export class ContentOptimizationService {
 
   /**
    * Calculate basic overall score
-   */
+    */
   private calculateBasicScore(parsedCV: ParsedCV): number {
     const parsingScore = this.calculateParsingScore(parsedCV);
     const formattingScore = this.calculateFormattingScore(parsedCV);
@@ -157,7 +158,7 @@ export class ContentOptimizationService {
 
   /**
    * Calculate parsing score for basic analysis
-   */
+    */
   private calculateParsingScore(parsedCV: ParsedCV): number {
     let score = 0;
     
@@ -174,7 +175,7 @@ export class ContentOptimizationService {
 
   /**
    * Calculate keyword score for basic analysis
-   */
+    */
   private calculateKeywordScore(parsedCV: ParsedCV, targetKeywords: string[]): number {
     if (targetKeywords.length === 0) return 60; // Default when no targets
     
@@ -186,7 +187,7 @@ export class ContentOptimizationService {
 
   /**
    * Calculate formatting score for basic analysis
-   */
+    */
   private calculateFormattingScore(parsedCV: ParsedCV): number {
     let score = 0;
     
@@ -207,7 +208,7 @@ export class ContentOptimizationService {
 
   /**
    * Calculate content score for basic analysis
-   */
+    */
   private calculateContentScore(parsedCV: ParsedCV): number {
     let score = 0;
     
@@ -234,7 +235,7 @@ export class ContentOptimizationService {
 
   /**
    * Assess basic completeness
-   */
+    */
   private assessBasicCompleteness(parsedCV: ParsedCV): number {
     const requiredFields = [
       'personalInfo.name',
@@ -256,7 +257,7 @@ export class ContentOptimizationService {
 
   /**
    * Assess basic structure
-   */
+    */
   private assessBasicStructure(parsedCV: ParsedCV): number {
     let score = 0;
     
@@ -271,7 +272,7 @@ export class ContentOptimizationService {
 
   /**
    * Assess basic content quality
-   */
+    */
   private assessBasicContent(parsedCV: ParsedCV): number {
     let score = 0;
     
@@ -297,7 +298,7 @@ export class ContentOptimizationService {
 
   /**
    * Calculate specificity score based on detailed information
-   */
+    */
   private calculateSpecificityScore(parsedCV: ParsedCV): number {
     let score = 0;
     
@@ -353,7 +354,7 @@ export class ContentOptimizationService {
 
   /**
    * Perform basic keyword analysis
-   */
+    */
   private performBasicKeywordAnalysis(parsedCV: ParsedCV, targetKeywords: string[]): any {
     const foundKeywords = this.extractFoundKeywords(parsedCV, targetKeywords);
     const missingKeywords = targetKeywords.filter(kw => 
@@ -370,7 +371,7 @@ export class ContentOptimizationService {
 
   /**
    * Extract recommended keywords from recommendations
-   */
+    */
   private extractRecommendedKeywords(recommendations: PrioritizedRecommendation[]): string[] {
     const keywords: string[] = [];
     
@@ -396,7 +397,7 @@ export class ContentOptimizationService {
 
   /**
    * Optimize text with keywords
-   */
+    */
   private optimizeTextWithKeywords(text: string, keywords: string[]): string {
     let optimizedText = text;
     
@@ -419,7 +420,7 @@ export class ContentOptimizationService {
 
   /**
    * Identify basic issues
-   */
+    */
   private identifyBasicIssues(parsedCV: ParsedCV): any[] {
     const issues: any[] = [];
     
@@ -448,7 +449,7 @@ export class ContentOptimizationService {
 
   /**
    * Generate basic suggestions
-   */
+    */
   private generateBasicSuggestions(parsedCV: ParsedCV, context: OptimizationContext): any[] {
     const suggestions: any[] = [];
     
@@ -492,7 +493,7 @@ export class ContentOptimizationService {
 
   /**
    * Extract found keywords
-   */
+    */
   private extractFoundKeywords(parsedCV: ParsedCV, targetKeywords: string[]): string[] {
     const cvText = this.cvToText(parsedCV).toLowerCase();
     
@@ -503,7 +504,7 @@ export class ContentOptimizationService {
 
   /**
    * Extract missing keywords
-   */
+    */
   private extractMissingKeywords(parsedCV: ParsedCV, targetKeywords: string[]): string[] {
     const foundKeywords = this.extractFoundKeywords(parsedCV, targetKeywords);
     
@@ -514,7 +515,7 @@ export class ContentOptimizationService {
 
   /**
    * Calculate keyword density
-   */
+    */
   private calculateKeywordDensity(parsedCV: ParsedCV, targetKeywords: string[]): number {
     const cvText = this.cvToText(parsedCV);
     const totalWords = cvText.split(/\s+/).length;
@@ -600,7 +601,7 @@ export class ContentOptimizationService {
 
   /**
    * Calculate experience score (0-100)
-   */
+    */
   private calculateExperienceScore(parsedCV: ParsedCV): number {
     if (!parsedCV.experience || parsedCV.experience.length === 0) {
       return 30;
@@ -629,7 +630,7 @@ export class ContentOptimizationService {
 
   /**
    * Calculate education score (0-100)
-   */
+    */
   private calculateEducationScore(parsedCV: ParsedCV): number {
     if (!parsedCV.education || parsedCV.education.length === 0) {
       return 40;
@@ -653,7 +654,7 @@ export class ContentOptimizationService {
 
   /**
    * Calculate skills score (0-100)
-   */
+    */
   private calculateSkillsScore(parsedCV: ParsedCV): number {
     if (!parsedCV.skills) {
       return 20;
@@ -677,7 +678,7 @@ export class ContentOptimizationService {
 
   /**
    * Calculate achievements score (0-100)
-   */
+    */
   private calculateAchievementsScore(parsedCV: ParsedCV): number {
     if (!parsedCV.achievements || parsedCV.achievements.length === 0) {
       return 40; // Neutral score if no achievements section

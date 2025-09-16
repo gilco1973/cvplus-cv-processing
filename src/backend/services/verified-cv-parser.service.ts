@@ -1,10 +1,11 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Verified CV Parser Service
  * 
  * Enhanced version of CVParsingService that uses LLM verification
  * to ensure high-quality CV parsing results. Integrates with existing
  * CVPlus codebase and provides backward compatibility.
- */
+  */
 
 import { VerifiedClaudeService, VerifiedMessageOptions } from './verified-claude.service';
 import { PIIDetector } from './piiDetector';
@@ -140,7 +141,7 @@ export class VerifiedCVParsingService {
 
   /**
    * Parse CV with verification - main entry point
-   */
+    */
   async parseCV(
     file: { buffer: Buffer; originalname: string }, 
     jobId: string,
@@ -253,7 +254,7 @@ export class VerifiedCVParsingService {
 
   /**
    * Simple text-based parsing (for testing and fallback)
-   */
+    */
   async parseText(
     text: string, 
     context?: string
@@ -283,7 +284,7 @@ export class VerifiedCVParsingService {
 
   /**
    * Health check for the service
-   */
+    */
   async healthCheck(): Promise<{
     status: 'healthy' | 'degraded' | 'unhealthy';
     details: any;
@@ -327,7 +328,7 @@ Skills: JavaScript, React, Node.js`;
 
   /**
    * Private helper methods
-   */
+    */
 
   private buildParsingPrompt(text: string, filename: string, userInstructions?: string): string {
     return `Extract and parse CV information from the following document: "${filename}"
@@ -561,7 +562,7 @@ Parse accurately and return only valid JSON.`;
 
   /**
    * Configuration management
-   */
+    */
   updateConfig(newConfig: Partial<VerifiedCVParsingConfig>): void {
     this.config = { ...this.config, ...newConfig };
     this.verifiedClaude.updateConfig(newConfig);

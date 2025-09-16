@@ -1,9 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Success Prediction Firebase Function
  * 
  * Provides ML-powered predictions for job application success
  * with comprehensive feature analysis and recommendations.
- */
+  */
 import { onCall, HttpsError } from 'firebase-functions/v2/https';
 import { CallableRequest } from 'firebase-functions/v2/https';
 // import { PredictionModelService, PredictionRequest } from '../services/prediction-model.service'; // Module not found
@@ -36,7 +37,7 @@ const db = admin.firestore();
 
 /**
  * Main success prediction endpoint
- */
+  */
 export const predictJobSuccess = onCall(
   { ...corsOptions, timeoutSeconds: 60 },
   async (request: CallableRequest) => {
@@ -112,7 +113,7 @@ export const predictJobSuccess = onCall(
 
 /**
  * Batch prediction for multiple jobs
- */
+  */
 export const predictJobSuccessBatch = onCall(
   { ...corsOptions, timeoutSeconds: 120 },
   async (request: CallableRequest) => {
@@ -202,7 +203,7 @@ export const predictJobSuccessBatch = onCall(
 
 /**
  * Get user's prediction history
- */
+  */
 export const getUserPredictionHistory = onCall(
   { ...corsOptions, timeoutSeconds: 30 },
   async (request: CallableRequest) => {
@@ -271,7 +272,7 @@ export const getUserPredictionHistory = onCall(
 
 /**
  * Update prediction with actual outcome
- */
+  */
 export const updatePredictionOutcome = onCall(
   { ...corsOptions, timeoutSeconds: 30 },
   async (request: CallableRequest) => {
@@ -345,7 +346,7 @@ export const updatePredictionOutcome = onCall(
 
 /**
  * Get model performance metrics
- */
+  */
 export const getModelMetrics = onCall(
   { ...corsOptions, timeoutSeconds: 30 },
   async (request: CallableRequest) => {

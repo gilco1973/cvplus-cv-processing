@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * ML Pipeline Types - Main Interface
  * 
  * Core ML pipeline types with imports from modular files.
@@ -6,7 +7,7 @@
  * 
  * @author Gil Klainert
  * @version 1.0.0
- */
+  */
 
 // Import and re-export modular types
 export type {

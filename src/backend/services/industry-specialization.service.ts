@@ -1,9 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Industry Specialization Service
  * 
  * Provides industry-specific CV optimization and predictions
  * for the 10 priority industries in Phase 2.
- */
+  */
 
 import * as admin from 'firebase-admin';
 import { IndustryModel, SkillDefinition, CareerPath, CompanyProfile } from '../../types/phase2-models';
@@ -74,7 +75,7 @@ export class IndustrySpecializationService {
 
   /**
    * Initialize industry models and knowledge bases
-   */
+    */
   async initialize(): Promise<void> {
     if (this.initialized) return;
 
@@ -88,7 +89,7 @@ export class IndustrySpecializationService {
 
   /**
    * Optimize CV for specific industry
-   */
+    */
   async optimizeForIndustry(request: IndustryOptimizationRequest): Promise<IndustryOptimizationResult> {
     await this.initialize();
 
@@ -143,7 +144,7 @@ export class IndustrySpecializationService {
 
   /**
    * Get supported industries
-   */
+    */
   getSupportedIndustries(): string[] {
     return [
       'Technology',
@@ -161,7 +162,7 @@ export class IndustrySpecializationService {
 
   /**
    * Load industry models from configuration
-   */
+    */
   private async loadIndustryModels(): Promise<void> {
     const industries = [
       await this.createTechnologyModel(),
@@ -185,7 +186,7 @@ export class IndustrySpecializationService {
 
   /**
    * Calculate industry-specific score
-   */
+    */
   private async calculateIndustryScore(cv: ParsedCV, model: IndustryModel): Promise<number> {
     let score = 0;
 
@@ -310,7 +311,7 @@ export class IndustrySpecializationService {
 
   /**
    * Analyze skill gaps for industry
-   */
+    */
   private async analyzeSkillGaps(cv: ParsedCV, model: IndustryModel): Promise<{
     missing: SkillDefinition[];
     critical: string[];

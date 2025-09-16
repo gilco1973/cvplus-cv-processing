@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Personal Website Scraper Adapter
  * 
  * Extracts portfolio projects, blog posts, and testimonials
@@ -7,7 +8,7 @@
  * @author Gil Klainert
  * @created 2025-08-23
  * @version 1.0
- */
+  */
 
 import * as cheerio from 'cheerio';
 import { EnhancedBaseService, EnhancedServiceConfig } from '@cvplus/core/src/services/enhanced-base-service';
@@ -52,7 +53,7 @@ export class WebsiteAdapter extends EnhancedBaseService {
 
   /**
    * Fetch and parse personal website data
-   */
+    */
   async fetchData(websiteUrl: string): Promise<PersonalWebsite> {
     try {
       this.logger.info('Fetching website data', { websiteUrl });
@@ -117,7 +118,7 @@ export class WebsiteAdapter extends EnhancedBaseService {
 
   /**
    * Fetch a web page
-   */
+    */
   private async fetchPage(url: string): Promise<string> {
     try {
       const response = await this.apiGet<string>(url, {
@@ -137,7 +138,7 @@ export class WebsiteAdapter extends EnhancedBaseService {
 
   /**
    * Extract metadata from the page
-   */
+    */
   private extractMetadata($: cheerio.Root, url: string): any {
     return {
       title: $('title').text() || $('meta[property="og:title"]').attr('content') || '',
@@ -150,7 +151,7 @@ export class WebsiteAdapter extends EnhancedBaseService {
 
   /**
    * Discover relevant pages on the website
-   */
+    */
   private async discoverPages($: cheerio.Root, baseUrl: string): Promise<Map<string, string>> {
     const pages = new Map<string, string>();
     const baseUrlObj = new URL(baseUrl);
@@ -183,7 +184,7 @@ export class WebsiteAdapter extends EnhancedBaseService {
 
   /**
    * Extract portfolio projects
-   */
+    */
   private async extractPortfolioProjects(
     $: cheerio.Root,
     pages: Map<string, string>
@@ -233,7 +234,7 @@ export class WebsiteAdapter extends EnhancedBaseService {
 
   /**
    * Parse a project element
-   */
+    */
   private parseProject(elem: any): PortfolioProject {
     const $ = elem;
     
@@ -250,7 +251,7 @@ export class WebsiteAdapter extends EnhancedBaseService {
 
   /**
    * Extract technologies from project
-   */
+    */
   private extractTechnologies($elem: any): string[] {
     const techs: string[] = [];
     
@@ -266,7 +267,7 @@ export class WebsiteAdapter extends EnhancedBaseService {
 
   /**
    * Extract blog posts
-   */
+    */
   private async extractBlogPosts(
     $: cheerio.Root,
     pages: Map<string, string>
@@ -299,7 +300,7 @@ export class WebsiteAdapter extends EnhancedBaseService {
 
   /**
    * Parse a blog post element
-   */
+    */
   private parseBlogPost(elem: any): BlogPost {
     const $ = elem;
     
@@ -326,7 +327,7 @@ export class WebsiteAdapter extends EnhancedBaseService {
 
   /**
    * Extract testimonials
-   */
+    */
   private async extractTestimonials(
     $: cheerio.Root,
     pages: Map<string, string>
@@ -366,7 +367,7 @@ export class WebsiteAdapter extends EnhancedBaseService {
 
   /**
    * Parse a testimonial element
-   */
+    */
   private parseTestimonial(elem: any): Testimonial {
     const $ = elem;
     
@@ -392,7 +393,7 @@ export class WebsiteAdapter extends EnhancedBaseService {
 
   /**
    * Validate URL
-   */
+    */
   private isValidUrl(url: string): boolean {
     try {
       const urlObj = new URL(url);
@@ -404,7 +405,7 @@ export class WebsiteAdapter extends EnhancedBaseService {
 
   /**
    * Parse date string
-   */
+    */
   private parseDate(dateStr: string): string | undefined {
     if (!dateStr) return undefined;
     
@@ -422,7 +423,7 @@ export class WebsiteAdapter extends EnhancedBaseService {
 
   /**
    * Estimate reading time
-   */
+    */
   private estimateReadTime(text: string): number {
     const wordsPerMinute = 200;
     const wordCount = text.split(/\s+/).length;

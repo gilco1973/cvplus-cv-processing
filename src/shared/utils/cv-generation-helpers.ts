@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * CV Generation Helpers
  * 
  * Helper functions for CV generation workflow including special features
@@ -6,14 +7,14 @@
  * 
  * @author Gil Klainert
  * @version 2.0.0 - Modularized Architecture
- */
+  */
 
 import * as admin from 'firebase-admin';
 
 /**
  * Handle special features that require additional processing
  * after the main CV generation (like podcast, video, etc.)
- */
+  */
 export async function handleSpecialFeatures(
   jobId: string, 
   features?: string[]
@@ -39,7 +40,7 @@ export async function handleSpecialFeatures(
 
 /**
  * Process a single special feature
- */
+  */
 async function processSpecialFeature(jobId: string, feature: string): Promise<void> {
   switch (feature) {
     case 'podcast-generation':
@@ -73,7 +74,7 @@ async function processSpecialFeature(jobId: string, feature: string): Promise<vo
 
 /**
  * Generate podcast for CV
- */
+  */
 async function generatePodcast(jobId: string): Promise<void> {
   console.log(`🎙️ Generating podcast for job ${jobId}`);
   
@@ -104,7 +105,7 @@ async function generatePodcast(jobId: string): Promise<void> {
 
 /**
  * Generate video introduction
- */
+  */
 async function generateVideoIntroduction(jobId: string): Promise<void> {
   console.log(`🎬 Generating video introduction for job ${jobId}`);
   
@@ -133,7 +134,7 @@ async function generateVideoIntroduction(jobId: string): Promise<void> {
 
 /**
  * Setup portfolio gallery
- */
+  */
 async function setupPortfolioGallery(jobId: string): Promise<void> {
   console.log(`🖼️ Setting up portfolio gallery for job ${jobId}`);
   
@@ -158,7 +159,7 @@ async function setupPortfolioGallery(jobId: string): Promise<void> {
 
 /**
  * Setup calendar integration
- */
+  */
 async function setupCalendarIntegration(jobId: string): Promise<void> {
   console.log(`📅 Setting up calendar integration for job ${jobId}`);
   
@@ -190,7 +191,7 @@ async function setupCalendarIntegration(jobId: string): Promise<void> {
 
 /**
  * Generate QR code for CV
- */
+  */
 async function generateQRCode(jobId: string): Promise<void> {
   console.log(`📱 Generating QR code for job ${jobId}`);
   
@@ -215,7 +216,7 @@ async function generateQRCode(jobId: string): Promise<void> {
 
 /**
  * Setup social sharing
- */
+  */
 async function setupSocialSharing(jobId: string): Promise<void> {
   console.log(`🌐 Setting up social sharing for job ${jobId}`);
   
@@ -239,7 +240,7 @@ async function setupSocialSharing(jobId: string): Promise<void> {
 
 /**
  * Handle generation errors and update job status
- */
+  */
 export async function handleGenerationError(
   jobId: string, 
   error: any
@@ -288,7 +289,7 @@ export async function handleGenerationError(
 
 /**
  * Validate CV data structure
- */
+  */
 export function validateCVData(cvData: any): {
   isValid: boolean;
   errors: string[];
@@ -321,7 +322,7 @@ export function validateCVData(cvData: any): {
 
 /**
  * Sanitize CV data for processing
- */
+  */
 export function sanitizeCVData(cvData: any): any {
   if (!cvData) return {};
 
@@ -357,7 +358,7 @@ export function sanitizeCVData(cvData: any): any {
 
 /**
  * Extract key metrics from CV data
- */
+  */
 export function extractCVMetrics(cvData: any): {
   experienceYears: number;
   skillsCount: number;

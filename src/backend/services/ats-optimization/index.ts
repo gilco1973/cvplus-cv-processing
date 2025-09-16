@@ -1,9 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * ATS Optimization Service - Modular Architecture
  * 
  * This module provides a modular approach to ATS optimization, breaking down
  * the monolithic service into focused, maintainable components.
- */
+  */
 
 export * from './ATSOptimizationOrchestrator';
 export * from './KeywordAnalysisService';

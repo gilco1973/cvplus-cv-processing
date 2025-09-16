@@ -1,7 +1,8 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Autonomous Admin Service
  * Provides basic admin access control for autonomous operation
- */
+  */
 import { AuthenticationError } from '../utils/autonomous-utils';
 import * as admin from 'firebase-admin';
 
@@ -10,7 +11,7 @@ export class AutonomousAdminService {
 
   /**
    * Check if user has admin access
-   */
+    */
   static async requireAdminAccess(userId: string): Promise<void> {
     try {
       const userDoc = await this.db.collection('users').doc(userId).get();
@@ -37,7 +38,7 @@ export class AutonomousAdminService {
 
   /**
    * Check if user is admin (without throwing)
-   */
+    */
   static async isAdmin(userId: string): Promise<boolean> {
     try {
       const userDoc = await this.db.collection('users').doc(userId).get();
@@ -52,7 +53,7 @@ export class AutonomousAdminService {
 
   /**
    * Get admin level for user
-   */
+    */
   static async getAdminLevel(userId: string): Promise<'none' | 'basic' | 'super'> {
     try {
       const userDoc = await this.db.collection('users').doc(userId).get();
@@ -71,7 +72,7 @@ export class AutonomousAdminService {
 
   /**
    * Log admin action
-   */
+    */
   static async logAdminAction(userId: string, action: string, details?: Record<string, any>): Promise<void> {
     try {
       await this.db.collection('admin_logs').add({

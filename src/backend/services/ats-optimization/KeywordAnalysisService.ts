@@ -1,9 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * Keyword Analysis Service
  * 
  * Specialized service for semantic keyword analysis, extraction, and optimization.
  * Delegates complex operations to focused sub-modules.
- */
+  */
 
 import { 
   ParsedCV, 
@@ -27,7 +28,7 @@ export class KeywordAnalysisService {
 
   /**
    * Perform comprehensive semantic keyword analysis
-   */
+    */
   async performSemanticKeywordAnalysis(params: KeywordAnalysisParams): Promise<SemanticKeywordAnalysis> {
     const { parsedCV, jobDescription, targetKeywords, industry } = params;
     const cvText = this.cvToText(parsedCV);
@@ -53,7 +54,7 @@ export class KeywordAnalysisService {
 
   /**
    * Generate keywords from job description
-   */
+    */
   async generateKeywords(jobDescription: string, industry?: string, role?: string): Promise<string[]> {
     try {
       const response = await this.claudeService.createVerifiedMessage({
@@ -76,7 +77,7 @@ export class KeywordAnalysisService {
 
   /**
    * Build analysis prompt for Claude
-   */
+    */
   private buildAnalysisPrompt(cvText: string, jobDescription?: string, targetKeywords?: string[], industry?: string): string {
     return `Analyze this CV for semantic keyword optimization:
 
@@ -90,7 +91,7 @@ Provide keyword analysis with frequency, context, and optimization recommendatio
 
   /**
    * Parse semantic analysis response
-   */
+    */
   private parseSemanticAnalysis(text: string, cvText: string, targetKeywords: string[], industry?: string): SemanticKeywordAnalysis {
     // Extract keywords using the modular extractor
     const matchedKeywords = this.keywordExtractor.extractKeywords(cvText, targetKeywords, industry);
@@ -124,7 +125,7 @@ Provide keyword analysis with frequency, context, and optimization recommendatio
 
   /**
    * Generate fallback analysis when API fails
-   */
+    */
   private generateFallbackSemanticAnalysis(cvText: string, targetKeywords: string[], industry?: string): SemanticKeywordAnalysis {
     const matchedKeywords = this.keywordExtractor.extractKeywords(cvText, targetKeywords, industry);
     const totalWords = cvText.split(/\s+/).length;
@@ -148,7 +149,7 @@ Provide keyword analysis with frequency, context, and optimization recommendatio
 
   /**
    * Parse extracted keywords from response
-   */
+    */
   private parseExtractedKeywords(text: string): string[] {
     return text.split('\n')
       .map(line => line.replace(/^[-•*]\s*/, '').trim())
@@ -158,7 +159,7 @@ Provide keyword analysis with frequency, context, and optimization recommendatio
 
   /**
    * Convert CV to text for analysis
-   */
+    */
   private cvToText(cv: ParsedCV): string {
     const sections: string[] = [];
     if (cv.personalInfo?.summary) sections.push(cv.personalInfo.summary);
@@ -184,7 +185,7 @@ Provide keyword analysis with frequency, context, and optimization recommendatio
 
   /**
    * Extract skills as text
-   */
+    */
   private extractSkillsText(skills: any): string {
     if (Array.isArray(skills)) return skills.join(' ');
     if (typeof skills === 'string') return skills;

@@ -1,9 +1,10 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * CV Feature Service
  * 
  * Extracts features specifically from CV content including structural,
  * content quality, and formatting characteristics.
- */
+  */
 
 import { ParsedCV } from '@cvplus/core/types';
 import { FeatureVector } from '../../types/phase2-models';
@@ -12,7 +13,7 @@ export class CVFeatureService {
   
   /**
    * Extract comprehensive features from CV structure and content
-   */
+    */
   async extractFeatures(cv: ParsedCV): Promise<FeatureVector['cvFeatures']> {
     
     const features = {
@@ -28,7 +29,7 @@ export class CVFeatureService {
 
   /**
    * Health check for CV feature service
-   */
+    */
   async healthCheck(): Promise<boolean> {
     try {
       // Test feature extraction with minimal CV

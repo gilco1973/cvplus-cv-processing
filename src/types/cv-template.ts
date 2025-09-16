@@ -1,4 +1,5 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * CV Template Types
  * 
  * Types for CV templates, themes, and customization options.
@@ -6,7 +7,7 @@
  * 
  * @author Gil Klainert
  * @version 1.0.0
- */
+  */
 
 // ============================================================================
 // TEMPLATE CATEGORY AND CONFIGURATION TYPES

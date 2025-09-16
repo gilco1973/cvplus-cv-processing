@@ -1,10 +1,11 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
+// @ts-ignore
+/**
  * @fileoverview External Data Integration Module - Main exports
  * @author Gil Klainert
  *
  * Main entry point for the CVPlus External Data Integration module.
  * Provides APIs, adapters, and orchestration for external data sources.
- */
+  */
 
 // Re-export all public APIs
 export * from './backend';

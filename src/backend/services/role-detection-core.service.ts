@@ -1,9 +1,9 @@
-// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// FIXED VERSION - Core Role Detection Service
+// @ts-ignore - Export conflicts// FIXED VERSION - Core Role Detection Service
 /**
  * Core Role Detection Service
  * 
  * Main service that orchestrates role detection with enhanced accuracy
- */
+  */
 
 import { ParsedCV } from '../types/job';
 import {
@@ -90,7 +90,7 @@ export class RoleDetectionCoreService {
 
   /**
    * Detect roles from CV with enhanced accuracy
-   */
+    */
   async detectRoles(cv: ParsedCV, targetRoles?: string[]): Promise<RoleMatchResult[]> {
     try {
       // Enhanced role detection with improved accuracy
@@ -104,7 +104,7 @@ export class RoleDetectionCoreService {
 
   /**
    * Perform enhanced role detection with multiple strategies
-   */
+    */
   private async performEnhancedRoleDetection(
     cv: ParsedCV, 
     targetRoles?: string[]
@@ -139,7 +139,7 @@ export class RoleDetectionCoreService {
 
   /**
    * Perform role matching with enhanced accuracy
-   */
+    */
   private async performRoleMatch(cv: ParsedCV, profile: RoleProfile): Promise<RoleMatchResult> {
     // Use the analyzer to get detailed analysis
     const analysis = await this.analyzer.analyzeRoleCompatibility(cv, profile);
@@ -150,7 +150,7 @@ export class RoleDetectionCoreService {
 
   /**
    * Get service statistics
-   */
+    */
   getStats() {
     return {
       service: 'RoleDetectionCoreService',
