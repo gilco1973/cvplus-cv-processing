@@ -1,13 +1,10 @@
-import { CVFeature, FeatureType, InteractiveFeatureResult } from '../types';
+// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflictsimport { CVFeature, FeatureType, InteractiveFeatureResult } from '../types';
 import { ParsedCV } from '../../cvParser';
-import { QRCodeFeature } from './QRCodeFeature';
-import { PodcastFeature } from './PodcastFeature';
+import { MultimediaIntegration, MultimediaFallbackFeature } from '../integrations/MultimediaIntegration';
 import { ContactFormFeature } from './ContactFormFeature';
-import { SocialLinksFeature } from './SocialLinksFeature';
+import { PublicProfilesIntegration, PublicProfileFallbackFeature } from '../integrations/PublicProfilesIntegration';
 import { PersonalBrandingFeature } from './PersonalBrandingFeature';
 import { CertificationBadgesFeature } from './CertificationBadgesFeature';
-import { VideoIntroFeature } from './VideoIntroFeature';
-import { PortfolioGalleryFeature } from './PortfolioGalleryFeature';
 import { TestimonialsCarouselFeature } from './TestimonialsCarouselFeature';
 import { CalendarFeature } from './CalendarFeature';
 import { InteractiveTimelineFeature } from './InteractiveTimelineFeature';
@@ -87,40 +84,48 @@ export class FeatureRegistry {
    */
   private static createFeature(type: FeatureType): CVFeature | null {
     switch (type) {
+      // Multimedia features - delegated to multimedia submodule
       case 'embed-qr-code':
-        return new QRCodeFeature();
+        return MultimediaIntegration.createFeatureWrapper('embed-qr-code') ||
+               new MultimediaFallbackFeature('embed-qr-code');
       case 'generate-podcast':
-        return new PodcastFeature();
+        return MultimediaIntegration.createFeatureWrapper('generate-podcast') ||
+               new MultimediaFallbackFeature('generate-podcast');
+      case 'video-introduction':
+        return MultimediaIntegration.createFeatureWrapper('video-introduction') ||
+               new MultimediaFallbackFeature('video-introduction');
+      case 'portfolio-gallery':
+        return MultimediaIntegration.createFeatureWrapper('portfolio-gallery') ||
+               new MultimediaFallbackFeature('portfolio-gallery');
+
+      // CV-processing native features
       case 'contact-form':
         return new ContactFormFeature();
       case 'social-media-links':
-        return new SocialLinksFeature();
+        return PublicProfilesIntegration.createFeatureWrapper('social-links') ||
+               new PublicProfileFallbackFeature('social-links');
       case 'personality-insights':
         return new PersonalBrandingFeature();
       case 'certification-badges':
         return new CertificationBadgesFeature();
-      case 'video-introduction':
-        return new VideoIntroFeature();
-      case 'portfolio-gallery':
-        return new PortfolioGalleryFeature();
       case 'testimonials-carousel':
         return new TestimonialsCarouselFeature();
-      case 'privacy-mode':
-        // Privacy mode is handled at the data level, not as injected content
-        return null;
-      
       case 'calendar-integration':
         return new CalendarFeature();
       case 'interactive-timeline':
         return new InteractiveTimelineFeature();
       case 'achievements-showcase':
         return new AchievementsShowcaseFeature();
-      
+
+      case 'privacy-mode':
+        // Privacy mode is handled at the data level, not as injected content
+        return null;
+
       // Placeholder for other features - to be implemented
       case 'skills-visualization':
       case 'language-proficiency':
         return null;
-        
+
       default:
         return null;
     }

@@ -60,7 +60,9 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.24.3",
+    "@cvplus/analytics": "*",
     "@cvplus/core": "file:../core",
+    "@cvplus/logging": "^1.0.0",
     "@types/node": "^20.0.0",
     "@types/react-dropzone": "^4.2.2",
     "axios": "^1.7.0",
@@ -80,8 +82,7 @@
     "react-dropzone": "^14.3.8",
     "sharp": "^0.32.6",
     "tailwind-merge": "^2.6.0",
-    "xml2js": "^0.6.2",
-    "@cvplus/analytics": "*"
+    "xml2js": "^0.6.2"
   },
   "peerDependencies": {
     "react": ">=18.0.0",

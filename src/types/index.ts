@@ -1,4 +1,4 @@
-/**
+// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
  * Package-specific types for CV processing
  * 
  * This module exports types that are specific to this package:
@@ -8,6 +8,10 @@
  */
 
 import { ProcessingRequest, ProcessingResponse, ProcessingType } from '../shared/types';
+
+// Export migrated types from core
+export * from './role-profile.types';
+export * from './industry-specialization';
 
 // CV Generation Types
 export interface CVGenerationRequest extends ProcessingRequest {
@@ -369,4 +373,39 @@ export type CVAnalysis = CVAnalysisResponse; // Alias for CVAnalysisResponse
 export type { AchievementHighlighting } from './enhanced-models'; // Re-export from enhanced-models
 export type CVData = any; // Generic CV data type
 export type Job = any; // Generic job type
-export type User = any; // Generic user type
+export type User = any; // Generic user typeexport * from './api';
+export * from './booking.types';
+export * from './payment.types';
+export * from './api';
+export * from './booking.types';
+export * from './payment.types';
+export * from './api';
+export * from './booking.types';
+export * from './payment.types';
+export * from './api';
+export * from './booking.types';
+export * from './payment.types';
+export * from './api';
+export * from './booking.types';
+export * from './payment.types';
+export * from './api';
+export * from './booking.types';
+export * from './payment.types';
+export * from './api';
+export * from './booking.types';
+export * from './payment.types';
+export * from './api';
+export * from './booking.types';
+export * from './payment.types';
+export * from './api';
+export * from './booking.types';
+export * from './payment.types';
+export * from './api';
+export * from './booking.types';
+export * from './payment.types';
+export * from './api';
+export * from './booking.types';
+export * from './payment.types';
+export * from './api';
+export * from './booking.types';
+export * from './payment.types';

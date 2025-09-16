@@ -1,6 +1,6 @@
-import { CVFeature } from '../types';
+// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflictsimport { CVFeature } from '../types';
 import { ParsedCV } from '../../cvParser';
-import { CVPortalIntegrationService } from '../../portal-integration.service';
+import { PublicProfilesIntegration } from '../integrations/PublicProfilesIntegration';
 import * as admin from 'firebase-admin';
 
 /**

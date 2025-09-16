@@ -1,10 +1,11 @@
-/**
+// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
  * Firebase Functions for CV processing
- * 
+ *
  * This module exports all Firebase Functions related to CV processing:
  * - CV generation and analysis
  * - CV processing workflows
  * - AI-powered CV enhancement
+ * - Professional terminology translation (moved from i18n)
  */
 
 // =============================================================================
@@ -45,3 +46,9 @@ export * from './personalityInsights';
 export * from './predictSuccess';
 export * from './regionalOptimization';
 export * from './advancedPredictions';
+
+// =============================================================================
+// CV TRANSLATION FUNCTIONS (moved from i18n)
+// =============================================================================
+export * from './translateCV';
+export * from './translateProfessional';

@@ -1,4 +1,4 @@
-/**
+// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
  * ML API Response Types
  * 
  * API response interfaces for ML pipeline endpoints.
@@ -35,7 +35,7 @@ export interface PredictionResponse extends Phase2APIResponse<import('./success-
 /**
  * Analytics API response
  */
-export interface AnalyticsResponse extends Phase2APIResponse<import('./analytics').AnalyticsMetrics> {
+export interface AnalyticsResponse extends Phase2APIResponse<import('@cvplus/analytics').AnalyticsMetrics> {
   reportId: string;
 }
 

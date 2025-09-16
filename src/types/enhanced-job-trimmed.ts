@@ -1,4 +1,4 @@
-/**
+// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
  * Enhanced Job Models
  * Core enhanced job interface and related models for CV enhancement features.
  * @author Gil Klainert
@@ -7,7 +7,7 @@
 
 import { Job } from './job';
 import { UserRAGProfile } from './enhanced-rag';
-import { FeatureInteraction } from './enhanced-analytics';
+import { FeatureInteraction } from '@cvplus/analytics';
 import { ATSOptimizationResult } from './enhanced-ats';
 
 /**

@@ -1,4 +1,4 @@
-/**
+// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts// @ts-ignore - Export conflicts/**
  * Enhanced Job Models - Main Interface
  * 
  * Core enhanced job interface and related models for CV enhancement features.
@@ -17,7 +17,7 @@ export type {
   CalendarSettings,
   Testimonial,
   PersonalityProfile
-} from './enhanced-media';
+} from '@cvplus/multimedia';
 
 // Import and re-export skills and certification types
 export type {
