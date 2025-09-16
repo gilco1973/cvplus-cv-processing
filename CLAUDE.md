@@ -1,8 +1,8 @@
-# CV Processing - CVPlus Submodule
+# Processing - CVPlus Submodule
 
-**Author**: Gil Klainert  
-**Domain**: AI-Powered CV Processing & Analysis  
-**Type**: CVPlus Git Submodule  
+**Author**: Gil Klainert
+**Domain**: AI-Powered CV Processing & Analysis
+**Type**: CVPlus Git Submodule
 **Independence**: Fully autonomous build and run capability
 
 ## Critical Requirements
@@ -16,7 +16,7 @@
 ## Dependency Resolution Strategy
 
 ### Layer Position: Layer 2 (Domain Services)
-**CV-Processing depends on Core, Auth, and I18n modules.**
+**Processing depends on Core, Auth, and I18n modules.**
 
 ### Allowed Dependencies
 ```typescript
@@ -45,7 +45,7 @@ import { PremiumService } from '@cvplus/premium'; // NEVER
 import { AdminService } from '@cvplus/admin'; // NEVER
 ```
 
-### Dependency Rules for CV-Processing
+### Dependency Rules for Processing
 1. **Foundation Access**: Can use Core, Auth, and I18n
 2. **No Peer Dependencies**: No dependencies on other Layer 2 modules
 3. **Provider Role**: Provides CV processing services to higher layers
@@ -66,9 +66,9 @@ export interface CVProcessor {
 }
 export class AnthropicCVProcessor implements CVProcessor { /* */ }
 
-// Higher layers import from CV-Processing
-// @cvplus/premium: import { CVProcessor } from '@cvplus/cv-processing';
-// @cvplus/admin: import { CVProcessor } from '@cvplus/cv-processing';
+// Higher layers import from Processing
+// @cvplus/premium: import { CVProcessor } from '@cvplus/processing';
+// @cvplus/admin: import { CVProcessor } from '@cvplus/processing';
 ```
 
 ### Build Dependencies

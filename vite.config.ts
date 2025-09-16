@@ -19,9 +19,9 @@ export default defineConfig({
     outDir: 'dist-frontend',
     lib: {
       entry: resolve(__dirname, 'src/frontend/index.ts'),
-      name: 'CVProcessingFrontend',
+      name: 'ProcessingFrontend',
       formats: ['es', 'cjs'],
-      fileName: (format) => `cv-processing-frontend.${format}.js`
+      fileName: (format) => `processing-frontend.${format}.js`
     },
     rollupOptions: {
       external: ['react', 'react-dom', 'firebase'],
@@ -61,7 +61,7 @@ export default defineConfig({
 
   // Environment variables
   define: {
-    __CV_PROCESSING_VERSION__: JSON.stringify(process.env.npm_package_version)
+    __PROCESSING_VERSION__: JSON.stringify(process.env.npm_package_version)
   },
 
   // Optimization for development

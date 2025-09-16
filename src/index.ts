@@ -144,7 +144,7 @@ export type {
 
 // Package metadata
 export const CV_PROCESSING_VERSION = '1.0.0';
-export const CV_PROCESSING_NAME = '@cvplus/cv-processing';
+export const CV_PROCESSING_NAME = '@cvplus/processing';
 
 // Migrated core CV processing services (working ones only)
 export { CVAnalysisService } from './services/cv/cv-analysis.service';
@@ -157,6 +157,11 @@ export { PiiDetector } from './services/piiDetector';
 // Newly migrated services from core
 export { RoleProfileService } from './backend/services/role-profile.service';
 export { IndustrySpecializationService } from './backend/services/industry-specialization.service';
+
+// CV Processing Services moved from recommendations
+export { CVTransformationService } from './services/cv-transformation.service';
+export { EmbeddingHelpers } from './services/cv-generator/embedding/EmbeddingHelpers';
+export { ChunkingUtils } from './services/cv-generator/chunking/ChunkingUtils';
 export { LanguageProficiencyService, languageProficiencyService } from './backend/services/language-proficiency.service';
 export { PersonalityAnalyzer } from './backend/services/personality-analyzer';
 

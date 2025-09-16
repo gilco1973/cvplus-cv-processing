@@ -1,6 +1,6 @@
-# @cvplus/cv-processing
+# @cvplus/processing
 
-CVPlus CV Processing package - Core CV analysis, generation, and processing functionality with AI integration.
+CVPlus Processing package - Core CV analysis, generation, and processing functionality with AI integration.
 
 ## Overview
 
@@ -16,7 +16,7 @@ This package provides comprehensive CV processing capabilities including:
 ## Installation
 
 ```bash
-npm install @cvplus/cv-processing
+npm install @cvplus/processing
 ```
 
 ## Usage
@@ -24,7 +24,7 @@ npm install @cvplus/cv-processing
 ### Frontend Components
 
 ```typescript
-import { CVUpload, CVEditor, ProcessingStatus } from '@cvplus/cv-processing/frontend';
+import { CVUpload, CVEditor, ProcessingStatus } from '@cvplus/processing/frontend';
 
 // Use CV processing components in your React app
 <CVUpload onUpload={handleUpload} />
@@ -35,7 +35,7 @@ import { CVUpload, CVEditor, ProcessingStatus } from '@cvplus/cv-processing/fron
 ### Backend Functions
 
 ```typescript
-import { generateCV, analyzeCV, processCV } from '@cvplus/cv-processing/backend';
+import { generateCV, analyzeCV, processCV } from '@cvplus/processing/backend';
 
 // Use Firebase Functions for CV processing
 const result = await generateCV(request, response);
@@ -50,8 +50,8 @@ import {
   CVData, 
   ProcessingType, 
   validateCVData,
-  sanitizeCVContent 
-} from '@cvplus/cv-processing/shared';
+  sanitizeCVContent
+} from '@cvplus/processing/shared';
 
 // Use shared types and utilities
 const isValid = validateCVData(cvData);
@@ -115,7 +115,7 @@ PROCESSING_TIMEOUT=30000  # 30 seconds
 ### Processing Configuration
 
 ```typescript
-import { PROCESSING_CONFIG } from '@cvplus/cv-processing/shared';
+import { PROCESSING_CONFIG } from '@cvplus/processing/shared';
 
 // Default configuration
 const config = {
