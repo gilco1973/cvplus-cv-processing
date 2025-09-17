@@ -7,24 +7,9 @@
   */
 import { onCall, HttpsError } from 'firebase-functions/v2/https';
 import { CallableRequest } from 'firebase-functions/v2/https';
-// import { PredictionModelService, PredictionRequest } from '../services/prediction-model.service'; // Module not found
-// import { MLPipelineService } from '../services/ml-pipeline.service';
+import { PredictionModelService, PredictionRequest } from '@cvplus/analytics/services/prediction-model.service';
 import { corsOptions } from '../config/cors';
-// import { AdminAccessService } from '../services/autonomous-admin.service'; // Module not found
-
-// Temporary placeholder types and services
-type PredictionRequest = {
-  cvId: string;
-  features?: string[];
-};
-
-const PredictionModelService = {
-  predict: async (request: any) => ({ success: true, predictions: [] })
-};
-
-const AdminAccessService = {
-  isAdmin: async (userId: string) => false
-};
+import { AutonomousAdminService } from '@cvplus/admin/backend/services/autonomous-admin.service';
 import * as admin from 'firebase-admin';
 import { FieldValue } from 'firebase-admin/firestore';
 

@@ -128,6 +128,33 @@ export interface CVSection {
   suggestions: string[];
 }
 
+// RAG and Embedding Types for CV Processing
+export interface RAGEmbedding {
+  id: string;
+  vector: number[];
+  metadata: {
+    section: string;
+    content: string;
+    chunkIndex: number;
+    totalChunks: number;
+    tokens: number;
+  };
+  createdAt: Date;
+}
+
+export interface EmbeddingMetadata {
+  section: string;
+  content: string;
+  chunkIndex: number;
+  totalChunks: number;
+  tokens: number;
+}
+
+export interface ContentType {
+  type: 'text' | 'section' | 'experience' | 'education' | 'skills';
+  priority: number;
+}
+
 // Service configuration types
 export interface AIServiceConfig {
   apiKey: string;
@@ -374,39 +401,10 @@ export type CVAnalysis = CVAnalysisResponse; // Alias for CVAnalysisResponse
 export type { AchievementHighlighting } from './enhanced-models'; // Re-export from enhanced-models
 export type CVData = any; // Generic CV data type
 export type Job = any; // Generic job type
-export type User = any; // Generic user typeexport * from './api';
-export * from './booking.types';
-export * from './payment.types';
-export * from './api';
-export * from './booking.types';
-export * from './payment.types';
-export * from './api';
-export * from './booking.types';
-export * from './payment.types';
-export * from './api';
-export * from './booking.types';
-export * from './payment.types';
-export * from './api';
-export * from './booking.types';
-export * from './payment.types';
-export * from './api';
-export * from './booking.types';
-export * from './payment.types';
-export * from './api';
-export * from './booking.types';
-export * from './payment.types';
-export * from './api';
-export * from './booking.types';
-export * from './payment.types';
-export * from './api';
-export * from './booking.types';
-export * from './payment.types';
-export * from './api';
-export * from './booking.types';
-export * from './payment.types';
-export * from './api';
-export * from './booking.types';
-export * from './payment.types';
-export * from './api';
-export * from './booking.types';
-export * from './payment.types';
+export type User = any; // Generic user type
+
+// NOTE: api, booking.types, and payment.types files were removed as they don't belong to CV processing module
+// If these exports are needed, they should be imported from their respective modules:
+// - API types from @cvplus/core
+// - Booking types from @cvplus/workflow
+// - Payment types from @cvplus/payments

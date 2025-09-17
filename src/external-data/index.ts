@@ -15,7 +15,8 @@ export * from './types';
 
 // No default export to avoid mixing with named exports
 // Migrated staging services
-export { ExternalDataOrchestrator } from './services/orchestrator.service';
+// ExternalDataOrchestrator moved to @cvplus/analytics/services/external-data-orchestrator.service
+// export { ExternalDataOrchestrator } from '@cvplus/analytics/services/external-data-orchestrator.service';
 export { ValidationService as ExternalDataValidationService } from './services/validation.service';
 export { CacheService as ExternalDataCacheService } from './services/cache.service';
 export * from './services/adapters/website.adapter';

@@ -8,7 +8,7 @@
  * @author Gil Klainert
   */
 
-import { EmbeddingMetadata, CVSection, ContentType } from '../../../types/portal';
+import { EmbeddingMetadata, CVSection, ContentType } from '../../../types';
 import { ChunkResult } from '../chunking/ChunkingUtils';
 
 /**

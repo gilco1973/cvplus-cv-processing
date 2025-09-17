@@ -12,13 +12,79 @@
 // Import and re-export core enhanced job interface
 export type { EnhancedJob } from './enhanced-job-core';
 
-// Import and re-export media-related types
-export type {
-  PortfolioImage,
-  CalendarSettings,
-  Testimonial,
-  PersonalityProfile
-} from '@cvplus/multimedia';
+// Media-related types - implemented locally to avoid module resolution issues
+export interface PortfolioImage {
+  /** Unique identifier for the portfolio image  */
+  id: string;
+  /** Full-size image URL  */
+  url: string;
+  /** Optimized thumbnail URL for previews  */
+  thumbnailUrl: string;
+  /** Image title for display  */
+  title: string;
+  /** Optional detailed description  */
+  description?: string;
+  /** Category for grouping (e.g., "Web Design", "Photography")  */
+  category: string;
+  /** Tags for filtering and search  */
+  tags: string[];
+  /** Optional URL to related project or case study  */
+  projectUrl?: string;
+  /** Upload timestamp  */
+  uploadedAt: Date;
+  /** Display order for sorting  */
+  order: number;
+}
+
+export interface CalendarSettings {
+  /** Whether calendar integration is enabled  */
+  enabled: boolean;
+  /** Calendar service provider  */
+  provider: 'calendly' | 'google' | 'outlook';
+  /** Calendar URL for bookings  */
+  calendarUrl?: string;
+  /** Available time slots configuration  */
+  availableSlots?: string[];
+  /** User's timezone  */
+  timeZone: string;
+  /** Available meeting types and configurations  */
+  meetingTypes: Array<{
+    /** Meeting type identifier  */
+    type: string;
+    /** Duration in minutes  */
+    duration: number;
+    /** Description of the meeting type  */
+    description: string;
+  }>;
+}
+
+export interface Testimonial {
+  /** Unique identifier  */
+  id: string;
+  /** Recommender's full name  */
+  name: string;
+  /** Recommender's job title  */
+  title: string;
+  /** Company or organization name  */
+  company: string;
+  /** Testimonial text content  */
+  content: string;
+  /** Optional star rating (1-5)  */
+  rating?: number;
+  /** Optional profile image URL  */
+  imageUrl?: string;
+  /** Optional LinkedIn profile URL  */
+  linkedinUrl?: string;
+  /** Whether this testimonial has been verified  */
+  isVerified: boolean;
+  /** Creation timestamp  */
+  createdAt: Date;
+  /** Display order for testimonials carousel  */
+  order: number;
+}
+
+// Import personality profile from modular file
+export type { PersonalityProfile } from './personality-profile';
 
 // Import and re-export skills and certification types
 export type {

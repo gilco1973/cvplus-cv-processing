@@ -8,8 +8,7 @@
  * @author Gil Klainert
   */
 
-import { ParsedCV } from '../../../types/enhanced-models';
-import { RAGEmbedding, CVSection } from '../../../types/portal';
+import { ParsedCV, RAGEmbedding, CVSection } from '../../../types/enhanced-models';
 import { ChunkResult } from '../chunking/ChunkingUtils';
 import { EmbeddingHelpers } from './EmbeddingHelpers';
 

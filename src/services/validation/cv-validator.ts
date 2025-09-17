@@ -9,8 +9,7 @@
  * @version 1.0.0
   */
 
-import { ValidationResult, ValidationError, ValidationErrorCode, ValidationOptions } from '../../../services/validation/types';
-import { TextValidator } from '../../../services/validation/text-validator';
+import { ValidationResult, ValidationError, ValidationErrorCode, ValidationOptions, TextValidator } from '../../types/validation';
 
 export class CVValidator {
   private textValidator: TextValidator;

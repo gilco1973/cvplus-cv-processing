@@ -1,183 +1,185 @@
-// @ts-ignore
 /**
- * Job type definitions (keeping existing structure)
+ * Job-related types for admin validation services
+ *
+ * @author Gil Klainert
+ * @version 1.0.0
   */
 
 export interface Job {
+  /** Unique job identifier */
   id: string;
+  /** User ID who owns this job */
   userId: string;
-  status: 'pending' | 'processing' | 'parsed' | 'analyzed' | 'generating' | 'completed' | 'failed';
-  fileUrl?: string;
-  mimeType?: string;
-  isUrl?: boolean;
-  parsedData?: ParsedCV;
-  generatedCV?: {
-    html: string;
-    htmlUrl?: string;
-    pdfUrl?: string;
-    docxUrl?: string;
-    features?: string[];
-  };
-  selectedTemplate?: string;
-  selectedFeatures?: string[];
-  error?: string;
-  createdAt: any;
-  updatedAt: any;
-  quickCreate?: boolean;
-  userInstructions?: string;
-  piiDetection?: {
-    hasPII: boolean;
-    detectedTypes: string[];
-    recommendations: string[];
-  };
+  /** CV/Resume data for this job application */
+  cvData?: ParsedCV;
+  /** Job posting this CV is targeting */
+  jobPosting?: JobPosting;
+  /** Current processing status */
+  status: 'draft' | 'processing' | 'completed' | 'failed';
+  /** Creation timestamp */
+  createdAt: Date;
+  /** Last update timestamp */
+  updatedAt: Date;
+  /** Analysis results */
+  analysisResults?: CVAnalysisResult[];
+  /** Match results against job postings */
+  matchResults?: JobMatchResult[];
 }
 
 export interface ParsedCV {
+  id?: string;
+  userId?: string;
   personalInfo?: {
     name?: string;
-    title?: string; // Professional title
     email?: string;
     phone?: string;
-    address?: string;
-    summary?: string;
-    linkedin?: string;
-    github?: string;
-    website?: string;
-    photo?: string; // Photo property
-    age?: number; // Age property
-    maritalStatus?: string; // Marital status
-    gender?: string; // Gender property
-    nationality?: string; // Nationality property
+    location?: string;
+    linkedinUrl?: string;
+    portfolioUrl?: string;
   };
-  // Alias for personalInfo for compatibility
-  personal?: {
-    name?: string;
-    title?: string; // Professional title
-    email?: string;
-    phone?: string;
-    address?: string;
-    summary?: string;
-    linkedin?: string;
-    github?: string;
-    website?: string;
-    photo?: string;
-    age?: number;
-    maritalStatus?: string;
-    gender?: string;
-    nationality?: string;
-  };
+  summary?: string;
   experience?: Array<{
-    company: string;
-    position: string;
-    role?: string; // Alias for position for compatibility
-    duration: string;
-    startDate: string;
+    jobTitle?: string;
+    company?: string;
+    location?: string;
+    startDate?: string;
     endDate?: string;
     description?: string;
     achievements?: string[];
-    technologies?: string[];
-    companyLogo?: string; // Company logo URL
   }>;
   education?: Array<{
-    institution: string;
-    degree: string;
-    field: string;
-    graduationDate: string;
-    startDate?: string; // For compatibility with formatters
-    endDate?: string; // For compatibility with formatters
+    degree?: string;
+    institution?: string;
+    location?: string;
+    graduationDate?: string;
     gpa?: string;
-    honors?: string[];
-    description?: string;
+    achievements?: string[];
   }>;
-  skills?: string[] | {
+  skills?: {
     technical?: string[];
     soft?: string[];
-    languages?: string[];
-    tools?: string[];
-    frontend?: string[];
-    backend?: string[];
-    databases?: string[];
-    cloud?: string[];
-    competencies?: string[];
-    frameworks?: string[];
-    expertise?: string[];
-    [key: string]: string[] | undefined;
+    languages?: Array<{
+      language: string;
+      proficiency: string;
+    }>;
   };
-  achievements?: string[];
   certifications?: Array<{
     name: string;
     issuer: string;
-    date: string;
+    issueDate?: string;
+    expiryDate?: string;
     credentialId?: string;
-    certificateImage?: string; // Certificate image URL
   }>;
   projects?: Array<{
     name: string;
     description: string;
-    technologies: string[];
+    technologies?: string[];
     url?: string;
-    images?: string[]; // Project image URLs
+    startDate?: string;
+    endDate?: string;
+  }>;
+  awards?: Array<{
+    title: string;
+    issuer: string;
+    date?: string;
+    description?: string;
   }>;
   publications?: Array<{
     title: string;
     publication: string;
-    date: string;
+    date?: string;
     url?: string;
   }>;
-  interests?: string[];
-  summary?: string; // Top-level summary field
-  customSections?: { [sectionName: string]: string }; // For custom sections
-  
-  // Additional properties for regional scoring
-  languages?: Array<{
-    language: string;
-    proficiency: string;
+  volunteerWork?: Array<{
+    organization: string;
+    role: string;
+    startDate?: string;
+    endDate?: string;
+    description?: string;
   }>;
-  references?: Array<{
-    name: string;
-    title?: string; // Optional for compatibility
-    position?: string; // Alternative field name
-    company: string;
-    email?: string;
-    phone?: string;
-    contact?: string; // Alternative contact field
-  }>;
+  metadata?: {
+    createdAt?: string;
+    updatedAt?: string;
+    version?: string;
+    source?: string;
+  };
 }
-// CV Improvement Types
-export interface CVRecommendation {
+
+export interface JobPosting {
   id: string;
-  type: 'content' | 'structure' | 'formatting' | 'section_addition' | 'keyword_optimization';
-  category: 'professional_summary' | 'experience' | 'skills' | 'education' | 'achievements' | 'formatting' | 'ats_optimization';
   title: string;
+  company: string;
+  location: string;
   description: string;
-  currentContent?: string;
-  suggestedContent?: string;
-  impact: 'high' | 'medium' | 'low';
-  priority: number;
-  section: string;
-  actionRequired: 'replace' | 'add' | 'modify' | 'reformat';
-  keywords?: string[];
-  estimatedScoreImprovement: number;
+  requirements: string[];
+  preferredQualifications?: string[];
+  salaryRange?: {
+    min: number;
+    max: number;
+    currency: string;
+  };
+  employmentType: 'full-time' | 'part-time' | 'contract' | 'freelance' | 'internship';
+  experienceLevel: 'entry' | 'mid' | 'senior' | 'executive';
+  industry: string;
+  skills: string[];
+  benefits?: string[];
+  postedDate: string;
+  applicationDeadline?: string;
+  remote: boolean;
+  visaSponsorship?: boolean;
 }
 
-export interface CVTransformationResult {
-  originalCV: ParsedCV;
-  improvedCV: ParsedCV;
-  appliedRecommendations: CVRecommendation[];
-  transformationSummary: {
-    totalChanges: number;
-    sectionsModified: string[];
-    newSections: string[];
-    keywordsAdded: string[];
-    estimatedScoreIncrease: number;
+export interface CVAnalysisResult {
+  id: string;
+  cvId: string;
+  jobId?: string;
+  score: number;
+  recommendations: Array<{
+    type: 'improvement' | 'strength' | 'warning';
+    category: string;
+    message: string;
+    priority: 'low' | 'medium' | 'high';
+  }>;
+  atsCompatibility: {
+    score: number;
+    issues: string[];
+    suggestions: string[];
   };
-  comparisonReport: {
-    beforeAfter: Array<{
-      section: string;
-      before: string;
-      after: string;
-      improvement: string;
-    }>;
+  skillsMatch?: {
+    matched: string[];
+    missing: string[];
+    score: number;
+  };
+  analysis: {
+    strengths: string[];
+    weaknesses: string[];
+    suggestions: string[];
+  };
+  metadata: {
+    analyzedAt: string;
+    version: string;
+    processingTime: number;
   };
 }
 
+export interface JobMatchResult {
+  jobId: string;
+  cvId: string;
+  matchScore: number;
+  skillsMatch: {
+    matched: string[];
+    missing: string[];
+    percentage: number;
+  };
+  experienceMatch: {
+    score: number;
+    details: string;
+  };
+  locationMatch: {
+    score: number;
+    distance?: number;
+  };
+  recommendations: string[];
+  ranking: number;
+  confidence: number;
+}

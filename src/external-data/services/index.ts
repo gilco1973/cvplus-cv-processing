@@ -11,7 +11,7 @@
   */
 
 // Core external data services - only export what actually exists
-export { ExternalDataOrchestrator } from './orchestrator.service';
+// ExternalDataOrchestrator moved to @cvplus/analytics/services/external-data-orchestrator.service
 export { ValidationService as ExternalDataValidationService } from './validation.service';
 export { CacheService as ExternalDataCacheService } from './cache.service';
 

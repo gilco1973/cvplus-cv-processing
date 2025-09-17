@@ -599,5 +599,4 @@ export class RecommendationService {
       .slice(0, 4)
       .map(([issue]) => `Address: ${issue}`);
   }
-   */
 }

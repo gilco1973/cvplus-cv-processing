@@ -12,7 +12,7 @@ export * from './job';
 export * from './enhanced-ats';
 
 // Portal types
-export * from './portal';
+// Portal types moved to @cvplus/public-profiles/src/types/portal-backend
 
 // Re-export shared types
 export * from '../../shared/types';

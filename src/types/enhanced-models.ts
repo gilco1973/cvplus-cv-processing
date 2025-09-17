@@ -206,7 +206,11 @@ export type {
   UserRAGProfile,
   CVChunk,
   ChatSession,
-  ChatMessage
+  ChatMessage,
+  RAGEmbedding,
+  EmbeddingMetadata,
+  ContentType,
+  CVSection
 } from './enhanced-rag';
 
 export type {
