@@ -8,7 +8,6 @@
 
 import * as admin from 'firebase-admin';
 import { IndustryModel, SkillDefinition, CareerPath, CompanyProfile } from '../../types/phase2-models';
-// import ... from "../types/job"; // TODO: Restore after job types migration
 
 // Initialize admin if not already done
 if (!admin.apps.length) {
