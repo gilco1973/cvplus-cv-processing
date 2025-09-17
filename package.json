@@ -62,7 +62,6 @@
     "@anthropic-ai/sdk": "^0.24.3",
     "@cvplus/analytics": "*",
     "@cvplus/core": "file:../core",
-    "@cvplus/enhancements": "file:../enhancements",
     "@cvplus/logging": "^1.0.0",
     "@types/node": "^20.0.0",
     "@types/react-dropzone": "^4.2.2",
@@ -127,7 +126,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cvplus/cvplus.git",
-    "directory": "packages/cv-processing"
+    "directory": "packages/processing"
   },
   "keywords": [
     "cv",

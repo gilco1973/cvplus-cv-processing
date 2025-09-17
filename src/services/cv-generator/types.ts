@@ -2,13 +2,13 @@
 /**
  * CV Generator Types - Re-export Facade
  *
- * MIGRATION NOTICE: This module has been moved to staging-for-submodules/cv-processing/
- * for future extraction to @cvplus/cv-processing submodule.
+ * MIGRATION NOTICE: This module has been moved to staging-for-submodules/processing/
+ * for future extraction to @cvplus/processing submodule.
  *
  * This file maintains backward compatibility by re-exporting from the staging area.
  * All existing imports will continue to work without changes.
  *
- * @deprecated Use import from @cvplus/cv-processing when submodule is created
+ * @deprecated Use import from @cvplus/processing when submodule is created
  * @author Gil Klainert
  * @since 2025-09-14
   */
@@ -29,5 +29,5 @@ export interface CVGeneratorResult {
   error?: string;
 }
 
-// TODO: Re-enable when @cvplus/cv-processing is built
-// export * from '@cvplus/cv-processing/cv-generator/types';
+// TODO: Re-enable when @cvplus/processing is built
+// export * from '@cvplus/processing/cv-generator/types';
